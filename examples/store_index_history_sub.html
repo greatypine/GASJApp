@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>门店历史经营指数列表页面</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<!--标准mui.css-->
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="../css/common.css" />
+		<link rel="stylesheet" type="text/css" href="../css/style.css" />
+		<link rel="stylesheet" type="text/css" href="../css/store_history.css" />
+
+		<script type="text/javascript"></script>
+	</head>
+
+	<body>
+		<div class="history_line"></div>
+		<div id="pullRefresh" class="mui-content mui-scroll-wrapper his_con" style="padding-top: 0;">
+			<div class="mui-scroll">
+				<!--数据列表-->
+				<ul id="ul_history" class="mui-table-view mui-table-view-chevron" style="background-color: transparent;">
+
+				</ul>
+			</div>
+		</div>
+	</body>
+	<script src="../js/mui.min.js"></script>
+	<script src="../js/date_util.js"></script>
+	<script src="../js/jquery-2.2.2.min.js"></script>
+	<script src="../js/custom_common.js"></script>
+	<script type="text/javascript">
+		var store = JSON.parse(localStorage.getItem("store"));
+
+		var pageInfo = {
+			currentPage: 0,
+			recordsPerPage: 10,
+			totalRecords: 0,
+			tooManySearchReturn: false
+		};
+
+		mui.plusReady(function() {
+			if (mui.os.ios) {
+				$('.his_con').css('height', '100%');
+			}
+		});
+
+		mui.init({
+			pullRefresh: {
+				container: '#pullRefresh',
+				up: {
+					auto: true, //可选,默认false.自动下拉刷新一次
+					contentup: "下拉可以刷新", //可选，在下拉可刷新状态时，下拉刷新控件上显示的标题内容
+					contentover: "释放立即刷新", //可选，在释放可刷新状态时，下拉刷新控件上显示的标题内容
+					contentrefresh: "正在刷新...", //可选，正在刷新状态时，下拉刷新控件上显示的标题内容
+					callback: initView //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+				}
+			}
+		});
+
+		function initView() {
+			setTimeout(function(){
+			mui('#pullRefresh').pullRefresh().endPullupToRefresh();
+			mui('#pullRefresh').pullRefresh().endPulldownToRefresh();
+			pageInfo.currentPage = pageInfo.currentPage + 1;
+			doManager('DailyReportManager', 'findDailyReportByPageInfo', [pageInfo, store.store_id], function(data) {
+				if (data.result == true) {
+					var map_json = JSON.parse(data.data);
+					var lst_history = map_json.data;
+					if(lst_history.length < 10){
+						mui('#pullRefresh').pullRefresh().disablePullupToRefresh();
+					}
+					for (var index in lst_history) {
+						var dayily = lst_history[index];
+						var $ul = $('#ul_history');
+						$ul.append('<li></li>');
+						var $con = $ul.find('li:last');
+						$con.append('<div class="history_every layout"></div>');
+						var $lay = $con.find('div:last');
+						$lay.append('<div class="history_every_l"></div>')
+						$lay.append('<div class="history_every_r"></div>');
+						var $content = $lay.find('div:last');
+						var reg_date = dayily.report_date == null ? "" : new Date(parseInt(dayily.report_date)).Format("yyyy-MM-dd");
+						$content.append('<div class="history_time">' + reg_date + '</div>');
+						$content.append('<div class="history_tit">门店日常</div>');
+						$content.append('<div class="history_content"></div>');
+						var $div_daily = $content.find('div:last');
+						$div_daily.append('<table cellpadding="0" cellspacing="0"></table>');
+						var $table_daily = $div_daily.find('table:last');
+						$table_daily.append('<tr></tr>');
+
+						var $tr_daily_first = $table_daily.find('tr:last');
+						$tr_daily_first.append('<td>进店客数:' + dayily.enter_num + '人</td>');
+						$tr_daily_first.append('<td>体验人数:' + dayily.test_num + '人</td>');
+						$table_daily.append('<tr></tr>');
+
+						var $tr_daily_second = $table_daily.find('tr:last');
+						$tr_daily_second.append('<td>店内注册APP:' + dayily.reg_num + '人</td>');
+						$tr_daily_second.append('<td>店内下单人数:' + dayily.purchase_num + '人</td>');
+
+						$content.append('<div class="history_tit">生活宝试用</div>');
+						$content.append('<div class="history_content"></div>');
+
+						var $div_life = $content.find('div:last');
+						$div_life.append('<table cellpadding="0" cellspacing="0"></table>');
+						var $table_life = $div_life.find('table:last');
+
+						$table_life.append('<tr></tr>');
+						var $tr_life_first = $table_life.find('tr:last');
+						$tr_life_first.append('<td>体验人数:' + dayily.life_test + '人</td>');
+						$tr_life_first.append('<td>办卡人数:' + dayily.life_card + '人</td>');
+						$table_life.append('<tr></tr>');
+						var $tr_life_second = $table_life.find('tr:last');
+						$tr_life_second.append('<td>健康屋的业务:' + dayily.health_request + '人</td>');
+						$tr_life_second.append('<td></td>');
+					}
+				}
+			});
+			},100);
+		}
+	</script>
+
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>pc登录</title>
+		<style>
+			body{background:#fcfcfc;margin: 0;padding: 0;}
+			.title{height: 50px;}
+		    .close{font-size:16px; color:#18bc9c;height:50px;display: inline-block;padding-left: 16px;padding-top: 30px;}
+		    .main{text-align: center;margin-top: 100px;}
+		    .main_pic{width:100px;height:100px;}
+		    .footer {
+				position: fixed;
+				bottom:100px;
+				left: 0;
+				width: 100%;
+				text-align: center;
+				color: #666;
+				padding-top: 5px;
+				z-index: 100;
+			}
+			.sure_but{
+				line-height: 32px;
+				border: 1px solid #18bc9c;
+				margin-left: 100px;
+				margin-right: 100px;
+				height: 32px;
+				border-radius: 2px;
+				font-size: 16px;
+				color: #18bc9c;
+			}
+			.cancel_but{
+				line-height: 40px;
+				margin-left: 120px;
+				margin-right: 120px;
+				height: 40px;
+				margin-top: 20px;
+				font-size: 14px;
+			}
+	    </style>
+	</head>
+	
+	<body>
+		<div>	
+			<div class="title">
+				<header>
+					   <span class="close" onclick="closeme()">关闭</span>
+				</header>
+			</div>
+			<div class="main">
+				<img src="../images/pc_login.png" class="main_pic"/>
+				<div style="margin-top: 26px;font-size: 20px;">电脑国安数据登录确认</div>
+			</div>
+			<div class="footer">
+				<div class="sure_but" onclick="pc_Lgoin()">登录</div>
+				<div class="cancel_but" onclick="closeme()">取消登录</div>
+			</div>
+		</div>
+	</body>
+	<script src="../js/mui.min.js"></script>
+	<script src="https://pv.sohu.com/cityjson?ie=utf-8"></script>
+	<script src="../js/custom_common.js"></script>
+	<script type="text/javascript" src="../js/jquery-2.2.2.min.js"></script>
+	<script src="../js/previewimage.js"></script>
+	<script src="../js/mui.zoom.js"></script>
+	<script type="text/javascript">
+		var employee = JSON.parse(localStorage.getItem('employee'));
+		var login_extra='';
+		if(window.plus) {
+			plusReady();
+		} else {
+			document.addEventListener('plusready', plusReady, false);
+		}
+
+		function plusReady() {
+			var self = plus.webview.currentWebview();
+			login_extra = self.login_extra;
+			if(login_extra !=''||login_extra!=null){
+				alert(login_extra);
+				
+			}
+			
+		};
+		function closeme(){
+			var ws=plus.webview.currentWebview();
+			plus.webview.close(ws);
+		}
+		function pc_Lgoin(){
+			alert("登录");
+		}
+			
+
+		
+	</script>
+</html>

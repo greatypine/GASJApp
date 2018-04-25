@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>街道商业信息</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<!--标准mui.css-->
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="../css/common.css" />
+		<link rel="stylesheet" type="text/css" href="../css/style.css" />
+		<link rel="stylesheet" type="text/css" href="../css/express.css" />
+		<link href="../css/mui.picker.css" rel="stylesheet" />
+		<link href="../css/mui.poppicker.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../css/mui.picker.min.css" />
+		<link href="../css/street_business_information.css" rel="stylesheet" />
+		<style>
+			.mui-table-view-chevron .mui-table-view-cell>a:not(.mui-btn) {
+				margin-right: -35px;
+			}
+			
+			.mui-table-view-chevron .mui-table-view-cell {
+				padding-right: 35px;
+			}
+		</style>
+
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav titleheader">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">街道商业信息</h1>
+			<div class="save">
+				<a href="#" onclick="findBusiness();">保存</a>
+			</div>
+		</header>
+
+		<div style="margin-top:1.1rem;">
+			<ul class="mui-table-view mui-table-view-chevron ul_interval">
+				<li id="province" class="mui-table-view-cell select_li">
+					<a>
+						<label><font style="color:red">*</font>省份</label>
+						<input type="text" id="province_in" name="province_in" placeholder="请选择" readonly />
+						<input type="hidden" id="province_text" name="province_text" />
+					</a>
+				</li>
+				<li id="city" class="mui-table-view-cell select_li">
+					<a>
+						<label><font style="color:red">*</font>城市</label>
+						<input type="text" id="city_in" name="city_in" placeholder="请选择" readonly />
+						<input type="hidden" id="city_text" name="city_text" />
+					</a>
+				</li>
+				<li id="county" class="mui-table-view-cell select_li">
+					<a class="mui-navigate-right">
+						<label><font style="color:red">*</font>区县</label>
+						<input type="text" id="county_in" name="county_in" placeholder="请选择" readonly />
+						<input type="hidden" id="county_text" name="county_text" />
+					</a>
+				</li>
+				<li id="street" class="mui-table-view-cell select_li">
+					<a class="mui-navigate-right">
+						<label><font style="color:red">*</font>街道</label>
+						<input type="text" id="street_in" name="street_in" placeholder="请选择" readonly />
+						<input type="hidden" id="street_text" name="street_text" />
+					</a>
+				</li>
+				<li id="village" class="mui-table-view-cell select_li">
+					<a class="mui-navigate-right">
+						<label><font style="color:red">*</font>社区</label>
+						<input type="text" id="village_in" name="village_in" placeholder="请选择" readonly />
+						<input type="hidden" id="village_text" name="village_text" />
+					</a>
+				</li>
+				<li class="mui-table-view-cell input_li">
+					<div class="input-row">
+						<label><font style="color:red">*</font>具体地址</label>
+						<input type="text" id="address" name="address" placeholder="例：南十里居41号院1号楼" />
+					</div>
+				</li>
+				<li class="mui-table-view-cell input_li">
+					<div class="input-row">
+						<label><font style="color:red">*</font>商家名称</label>
+						<input type="text" id="business_name" name="business_name" placeholder="例：克丽缇娜" />
+						<input type="hidden" id="business_id" name="business_id" />
+					</div>
+				</li>
+				<li id="two_level" class="mui-table-view-cell select_li">
+					<a class="mui-navigate-right">
+						<label><font style="color:red">*</font>二级指数</label>
+						<input type="text" id="two_level_in" name="two_level_in" placeholder="请选择" readonly />
+						<input type="hidden" id="two_level_text" name="two_level_text" />
+					</a>
+				</li>
+				<li id="three_level" class="mui-table-view-cell select_li">
+					<a class="mui-navigate-right">
+						<label><font style="color:red">*</font>三级指数</label>
+						<input type="text" id="three_level_in" name="three_level_in" placeholder="请选择" readonly />
+						<input type="hidden" id="three_level_text" name="three_level_text" />
+					</a>
+				</li>
+				<li id="four_level" class="mui-table-view-cell select_li">
+					<a class="mui-navigate-right">
+						<label><font style="color:red">*</font>四级指数</label>
+						<input type="text" id="four_level_in" name="four_level_in" placeholder="请选择" readonly />
+						<input type="hidden" id="four_level_text" name="four_level_text" />
+					</a>
+				</li>
+				<li id="five_level" class="mui-table-view-cell select_li">
+					<a class="mui-navigate-right">
+						<label><font style="color:red">*</font>五级指数</label>
+						<input type="text" id="five_level_in" name="five_level_in" placeholder="请选择" readonly />
+						<input type="hidden" id="five_level_text" name="five_level_text" />
+
+					</a>
+				</li>
+				<li class="mui-table-view-cell input_li_suffix">
+					<div class="input-row-suffix">
+						<label>经营规模</label>
+						<label class="suffix">m²</label>
+						<input type="number" pattern="\d*" id="house_area" name="house_area" bidTableFlag="true" onkeyup="value=this.value.replace(/\D+/g,'')" />
+					</div>
+				</li>
+				<li class="mui-table-view-cell input_li_suffix">
+					<div class="input-row-suffix">
+						<label>距离月店</label>
+						<label class="suffix">m</label>
+						<input type="number" pattern="\d*" id="distance" name="distance" bidTableFlag="true" onkeyup="value=this.value.replace(/\D+/g,'')" />
+					</div>
+				</li>
+				<li id="whether" class="mui-table-view-cell select_li">
+					<a class="mui-navigate-right">
+						<label>是否配送</label>
+						<input type="text" id="whether_in" name="whether_in" placeholder="请选择" readonly />
+					</a>
+				</li>
+				<li class="mui-table-view-cell time">
+					<label>营业时间</label>
+					<input class="close_time" data-options='{"type":"time"}' type="text" id="close_time" name="close_time" placeholder="00:00" readonly />
+					<span>-</span>
+					<input class="open_time" data-options='{"type":"time"}' type="text" id="open_time" name="open_time" placeholder="00:00" readonly />
+				</li>
+
+			</ul>
+		</div>
+	</body>
+	<script type="text/javascript" src="../js/mui.min.js"></script>
+	<script type="text/javascript" src="../js/jquery-2.2.2.min.js"></script>
+	<script type="text/javascript" src="../js/custom_jquery_based.js"></script>
+	<script type="text/javascript" src="../js/date_util.js"></script>
+	<script type="text/javascript" src="../js/mui.picker.js"></script>
+	<script type="text/javascript" src="../js/mui.picker.min.js"></script>
+	<script type="text/javascript" src="../js/mui.poppicker.js"></script>
+	<script type="text/javascript" src="../js/custom_common.js"></script>
+	<script type="text/javascript" src="../js/dict.js"></script>
+	<script type="text/javascript" src="../js/cityObject.js"></script>
+	<script type="text/javascript" src="../js/newcityObject.js"></script>
+	<script type="text/javascript" type="text/javascript">
+		var cityPicker = new mui.PopPicker();
+		var provincePicker = new mui.PopPicker();
+		var countyPicker = new mui.PopPicker();
+		var streetPicker = new mui.PopPicker();
+		var villagePicker = new mui.PopPicker();
+		var two_levelPicker = new mui.PopPicker();
+		var three_levelPicker = new mui.PopPicker();
+		var five_levelPicker = new mui.PopPicker();
+		var streetDictArray = null;
+		var default_city = null;
+		var provinceDictArray = null;
+		var cityDictArray = null;
+		var store = JSON.parse(localStorage.getItem('store'));
+		//      var countyDict = new cityObject('county','county_text','county_in','city_text','CountyManager','getCountyDataByCityID','county_id','county_name',county_refresh);
+		var countyDict = null;
+		var streetDict = null;
+		var villageDict = new cityObject('village', 'village_text', 'village_in', 'street_text', 'VillageManager', 'getVillageDataByTownId', 'village_id', 'village_name', village_refresh);
+		var two_levelDictArray = null;
+		var three_levelDict = new cityObject('three_level', 'three_level_text', 'three_level_in', 'two_level_text', 'BusinessTypeManager', 'getThreeCodeByCondition', 'three_level_code', 'three_level_index', three_level_refresh);
+		var four_levelDict = new cityObject('four_level', 'four_level_text', 'four_level_in', 'three_level_text', 'BusinessTypeManager', 'getFourCodeByCondition', 'four_level_code', 'four_level_index', four_level_refresh);
+		var five_levelDict = new cityObject('five_level', 'five_level_text', 'five_level_in', 'four_level_text', 'BusinessTypeManager', 'getFiveCodeByCondition', 'five_level_code', 'five_level_index', five_level_refresh);
+
+		var province_id = null;
+		var city_id = null;
+		var county_id = null;
+		var street_id = null;
+		var village_id = null;
+		var two_level_id = null;
+		var three_level_id = null;
+		var four_level_id = null;
+		var five_level_id = null;
+		var employee = JSON.parse(localStorage.getItem('employee'));
+
+		var business = null;
+		mui.plusReady(function() {
+			ininView();
+
+			time_picker('close_time');
+			time_picker('open_time');
+
+		});
+
+		function ininView() {
+			var self = plus.webview.currentWebview();
+			if(self != null && self.business != null) {
+				business = JSON.parse(self.business);
+				setBusinessInfo(business);
+			} else {
+				default_city = JSON.parse(localStorage.getItem('default_city'));
+				if(default_city != null || default_city != "") {
+					if(default_city.pro_name != null || default_city.pro_name != "") {
+						$('#province_in').val(default_city.pro_name);
+						$('#province_text').val(default_city.pro_id);
+						province_id = $('#province_text').val();
+					}
+					if(default_city.city_name != null || default_city.city_name != "") {
+						$('#city_in').val(default_city.city_name);
+						$('#city_text').val(default_city.city_id);
+						city_id = $('#city_text').val();
+					}
+					if(default_city.cou_name != null || default_city.cou_name != "") {
+						$('#county_in').val(default_city.cou_name);
+						$('#county_text').val(default_city.cou_id);
+						county_id = $('#county_text').val();
+
+					}
+					//					dod();
+					//					if(default_city.town_name!=null||default_city.town_name!=""){
+					//						$('#street_in').val(default_city.town_name);
+					//						$('#street_text').val(default_city.town_id);
+					//						
+					//						street_id=$('#street_text').val();
+					//					}
+
+					$('#whether_in').val("否");
+					$('#open_time').val("08:00");
+					$('#close_time').val("18:00");
+
+				}
+				//				streetDictArray=getStreetData('street','street_text','street_in',store,'StoreManager','getStoreCityInfoById','id','name',street_refresh,streetPicker);
+				countyDict = new newcityObject('county', 'county_text', 'county_in', 'city_text', store.store_id, 'CountyManager', 'findCountyDataByCityID', 'county_id', 'county_name', county_refresh)
+				streetDict = new newcityObject('street', 'street_text', 'street_in', 'county_text', store.store_id, 'TownManager', 'getTownDataByCountyIDAndStoreId', 'town_id', 'town_name', street_refresh);
+			}
+			getWhetherDict('whether', 'whether_in', [{
+				value: "yes",
+				text: '是'
+			}, {
+				value: "no",
+				text: '否'
+			}, {
+				value: "null",
+				text: "暂无信息"
+			}]);
+//			countyDict.refresh();
+//			streetDict.refresh();
+			villageDict.refresh();
+			three_levelDict.refresh();
+			four_levelDict.refresh();
+			five_levelDict.refresh();
+			two_levelDictArray = getData('two_level', 'two_level_text', 'two_level_in', null, 'BusinessTypeManager', 'getTwoCodeByCondition', 'two_level_code', 'two_level_index', two_level_refresh, two_levelPicker);
+
+		}
+
+		function province_refresh() {
+			province_follow_clean();
+			province_id = $('#province_text').val();
+			cityDictArray = getData('city', 'city_text', 'city_in', province_id, 'CityManager', 'getCityDataByProvinceID', 'city_id', 'city_name', city_refresh, cityPicker);
+		}
+
+//				function city_refresh(){
+//					city_follow_clean();
+//					city_id=$('#city_text').val(); 
+//		         countyDict.refresh();
+//				}
+		function county_refresh() {
+			county_follow_clean();
+			streetDict.refresh();
+		}
+
+		function street_refresh() {
+			street_follow_clean();
+			villageDict.refresh();
+
+		}
+
+		function village_refresh() {
+			//			village_follow_clean();
+		}
+
+		function two_level_refresh() {
+			two_follow_clean();
+			three_levelDict.refresh();
+		}
+
+		function three_level_refresh() {
+			three_follow_clean();
+			four_levelDict.refresh();
+		}
+
+		function four_level_refresh() {
+			four_follow_clean();
+			five_levelDict.refresh();
+		}
+
+		function five_level_refresh() {
+
+		}
+
+		//清空省份以下显示数据
+		function province_follow_clean() {
+			$('#city_in').val("");
+			$('#city_text').val("");
+			city_follow_clean();
+		}
+		//清空城市以下显示数据
+		function city_follow_clean() {
+			$('#county_in').val("");
+			$('#county_text').val("");
+			county_follow_clean();
+			countyDict.refresh();
+		}
+		//清空区县以下显示数据
+		function county_follow_clean() {
+			$('#street_in').val("");
+			$('#street_text').val("");
+			street_follow_clean();
+			streetDict.refresh();
+		}
+		//清空街道以下显示数据
+		function street_follow_clean() {
+			$('#village_in').val("");
+			$('#village_text').val("");
+			villageDict.refresh();
+		}
+		//清空二级以下显示数据
+		function two_follow_clean() {
+			$('#three_level_in').val("");
+			$('#three_level_text').val("");
+			three_follow_clean();
+			three_levelDict.refresh();
+		}
+		//清空三级以下显示数据
+		function three_follow_clean() {
+			$('#four_level_in').val("");
+			$('#four_level_text').val("");
+			four_follow_clean();
+			four_levelDict.refresh();
+
+		}
+		//清空四级以下显示数据
+		function four_follow_clean() {
+			$('#five_level_in').val("");
+			$('#five_level_text').val("");
+			five_levelDict.refresh();
+		}
+
+		function time_picker(result_id) {
+			var result = mui('#' + result_id)[0];
+			mui('#' + result_id)[0].addEventListener('tap', function() {
+				var optionsJson = this.getAttribute('data-options') || '{}';
+				var options = JSON.parse(optionsJson);
+				var id = this.getAttribute('id');
+				/*
+				 * 首次显示时实例化组件
+				 * 示例为了简洁，将 options 放在了按钮的 dom 上
+				 * 也可以直接通过代码声明 optinos 用于实例化 DtPicker
+				 */
+				var picker = new mui.DtPicker(options);
+				picker.show(function(rs) {
+					/*
+					 * rs.value 拼合后的 value
+					 * rs.text 拼合后的 text
+					 * rs.y 年，可以通过 rs.y.vaue 和 rs.y.text 获取值和文本
+					 * rs.m 月，用法同年
+					 * rs.d 日，用法同年
+					 * rs.h 时，用法同年
+					 * rs.i 分（minutes 的第二个字母），用法同年
+					 */
+					result.value = rs.text;
+					/* 
+					 * 返回 false 可以阻止选择框的关闭
+					 * return false;
+					 */
+					/*
+					 * 释放组件资源，释放后将将不能再操作组件
+					 * 通常情况下，不需要示放组件，new DtPicker(options) 后，可以一直使用。
+					 * 当前示例，因为内容较多，如不进行资原释放，在某些设备上会较慢。
+					 * 所以每次用完便立即调用 dispose 进行释放，下次用时再创建新实例。
+					 */
+					picker.hide();
+					picker.dispose();
+				});
+
+			}, false);
+		}
+        //保存时先查询商业信息是否存在
+		function findBusiness() {
+			var employee_name = employee.name;
+			var employee_no = employee.employeeId;
+			var employee_id = employee.id;
+			var province_val = $("#province_in").val();
+			var city_val = $("#city_in").val();
+			var county_val = $("#county_in").val();
+			var street_val = $("#street_in").val();
+			var street_id = $("#street_text").val();
+
+			var village_val = $("#village_in").val();
+			var village_id = $("#village_text").val();
+			var address_val = $("#address").val();
+			var business_name_val = $("#business_name").val();
+			var business_id_val = $("#business_id").val();
+
+			var two_level_val = $("#two_level_in").val();
+			var two_level_code = $("#two_level_text").val();
+			var three_level_val = $("#three_level_in").val();
+			var three_level_code = $("#three_level_text").val();
+			var four_level_val = $("#four_level_in").val();
+			var four_level_code = $("#four_level_text").val();
+			var five_level_val = $("#five_level_in").val();
+			var five_level_code = $("#five_level_text").val();
+			var house_area_val = $("#house_area").val();
+			var distance_val = $("#distance").val();
+			var whether_val = $("#whether_in").val();
+			var close_time_val = $("#close_time").val();
+			var open_time_val = $("#open_time").val();
+			if(!checkValue(province_val)) {
+				mui.toast('请选择省份！');
+				return;
+			}
+			if(!checkValue(city_val)) {
+				mui.toast('请选择城市！');
+				return;
+			}
+			if(!checkValue(county_val)) {
+				mui.toast('请选择区县！');
+				return;
+			}
+			if(!checkValue(street_val)) {
+				mui.toast('请选择街道！');
+				return;
+			}
+			if(!checkValue(village_val)) {
+				mui.toast('请选择社区！');
+				return;
+			}
+			if(!checkValue(address_val)) {
+				mui.toast('请输入具体地址！');
+				return;
+			}
+			if(!checkValue(business_name_val)) {
+				mui.toast('请输入商家名称！');
+				return;
+			}
+			if(!checkValue(two_level_val)) {
+				mui.toast('请选择二级指标！');
+				return;
+			}
+			if(!checkValue(three_level_val)) {
+				mui.toast('请选择三级指标！');
+				return;
+			}
+			if(!checkValue(four_level_val)) {
+				mui.toast('请选择四级指标！');
+				return;
+			}
+			if(!checkValue(five_level_val)) {
+				mui.toast('请选择五级指标！');
+				return;
+			}
+
+			var BusinessInfo = {
+				town_id: street_id,
+				village_id: village_id,
+				address: address_val,
+				business_name: business_name_val,
+				id: business_id_val,
+				two_level_index: two_level_val,
+				three_level_index: three_level_val,
+				four_level_index: four_level_val,
+				five_level_index: five_level_val,
+				two_level_code: two_level_code,
+				three_level_code: three_level_code,
+				four_level_code: four_level_code,
+				five_level_code: five_level_code,
+				shop_area: house_area_val,
+				range_eshop: distance_val,
+				isdistribution: whether_val,
+				start_business_house: open_time_val,
+				end_business_house: close_time_val,
+				create_user: employee_name,
+				employee_no: employee_no,
+				create_user_id: employee_id
+			};
+
+			doManager('BusinessInfoManager', 'getBussinessInfoData', BusinessInfo, function(data) {
+				if(data.result == true) {
+					var jsonData = JSON.parse(data.data);
+					if(jsonData.code == 200) {
+						doSave(BusinessInfo);
+					} else if(jsonData.code == 300) {
+						var btnArray = ['否', '是'];
+						mui.confirm('该数据已存在！确定要覆盖吗？', '提示', btnArray, function(e) {
+							if(e.index == 1) {
+								doSave(BusinessInfo);
+							}
+						});
+					} else {
+						mui.toast('保存失败');
+					}
+
+				} else {
+					mui.toast('保存失败');
+				}
+			});
+
+		}
+
+		function doSave(BusinessInfo) {
+
+			doManager('BusinessInfoManager', 'saveBussinessInfoData', BusinessInfo, function(data) {
+				if(data.result == true) {
+					var jsonData = JSON.parse(data.data);
+					if(jsonData.code == 200) {
+						mui.toast('保存成功');
+						setTimeout(function() {
+							closeMenu();
+						}, 500);
+					} else {
+						mui.toast('保存失败');
+					}
+
+				} else {
+					mui.toast('保存失败');
+				}
+			});
+
+		}
+		function closeMenu() {
+			var _current = plus.webview.currentWebview();
+			var main = _current.opener();
+			mui.fire(main, "setbusinessinput", {
+				business: {
+					business_name: $('#business_name').val(),
+					business_address: $('#address').val()
+				}
+			});
+
+			_current.close();
+
+		}
+
+		function setBusinessInfo(business) {
+			$('#province_in').val(business.province_name);
+			$('#province_text').val(business.province_id);
+
+			$('#city_in').val(business.city_name);
+			$('#city_text').val(business.city_id);
+
+			$('#county_in').val(business.county_name);
+			$('#county_text').val(business.county_id);
+
+			$('#street_in').val(business.town_name);
+			$('#street_text').val(business.town_id);
+
+			$('#village_in').val(business.village_name);
+			$('#village_text').val(business.village_id);
+
+			$('#address').val(business.address);
+			$('#business_name').val(business.business_name);
+			$('#business_id').val(business.id);
+
+			$('#two_level_in').val(business.two_level_index);
+			$('#two_level_text').val(business.two_level_code);
+
+			$('#three_level_in').val(business.three_level_index);
+			$('#three_level_text').val(business.three_level_code);
+
+			$('#four_level_in').val(business.four_level_index);
+			$('#four_level_text').val(business.four_level_code);
+
+			$('#five_level_in').val(business.five_level_index);
+			$('#five_level_text').val(business.five_level_code);
+
+			$('#house_area').val(business.shop_area);
+			$('#distance').val(business.range_eshop);
+			$('#whether_in').val(business.isdistribution);
+			$('#close_time').val(business.end_business_house);
+			$('#open_time').val(business.start_business_house);
+			$('#county').find('a').removeAttr('class');
+			var li2 = document.getElementById("county");
+			li2.id = "countytttt";
+			$('#street').find('a').removeAttr('class');
+			var li1 = document.getElementById("street");
+			li1.id = "streetttt";
+			
+		}
+	</script>
+
+</html>

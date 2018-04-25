@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>快递订单列表页面</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<!--标准mui.css-->
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<!--<link rel="stylesheet" type="text/css" href="../css/common.css" />-->
+		<link rel="stylesheet" type="text/css" href="../css/style.css" />
+		<link rel="stylesheet" type="text/css" href="../css/express.css" />
+
+		<script type="text/javascript">
+			// 扩展API加载完毕后调用onPlusReady回调函数 
+			document.addEventListener("plusready", onPlusReady, false);
+			// 扩展API加载完毕，现在可以正常调用扩展API 
+			function onPlusReady() {
+
+			}
+			var is4g = null;
+
+			function videoCapture() {
+				var cmr = plus.camera.getCamera();
+				cmr.captureImage(function(path) {
+						plus.io.resolveLocalFileSystemURL(path, function(entry) {
+							var localUrl = entry.toLocalURL();
+							plus.zip.compressImage({
+									src: localUrl,
+									dst: localUrl,
+									overwrite: true,
+									quality: 20
+								},
+								function() {
+									if(plus.networkinfo.getCurrentType() == plus.networkinfo.CONNECTION_WIFI) {
+										doSave(localUrl, true);
+									} else if(plus.networkinfo.getCurrentType() == plus.networkinfo.CONNECTION_CELL4G) {
+
+										if(is4g == null) {
+											var btnArray = ['否', '是'];
+											mui.confirm('正在使用4G网络！确定要上传数据吗？', '网络提示', btnArray, function(e) {
+												if(e.index == 1) {
+													is4g = true;
+													doSave(localUrl, true);
+
+												} else {
+													is4g = null;
+												}
+											});
+										} else if(is4g == true) {
+
+											doSave(localUrl, true);
+										}
+									} else {
+										mui.toast("网络异常！");
+									}
+
+								},
+								function(error) {
+									if(plus.networkinfo.getCurrentType() == plus.networkinfo.CONNECTION_WIFI) {
+										doSave(localUrl, true);
+									} else if(plus.networkinfo.getCurrentType() == plus.networkinfo.CONNECTION_CELL4G) {
+
+										if(is4g == null) {
+											var btnArray = ['否', '是'];
+											mui.confirm('正在使用4G网络！确定要上传数据吗？', '网络提示', btnArray, function(e) {
+												if(e.index == 1) {
+													is4g = true;
+													doSave(localUrl, true);
+
+												} else {
+													is4g = null;
+												}
+											});
+										} else if(is4g == true) {
+
+											doSave(localUrl, true);
+										}
+									} else {
+										mui.toast("网络异常！");
+									}
+								});
+						});
+					},
+					function(error) {}
+				);
+				mui('#picture').popover('toggle');
+			}
+			var lfs = null;
+			// 从相册中选择图片 
+			function galleryImg() {
+				plus.gallery.pick(function(path) {
+					lfs = path.files;
+					uploadImg();
+				}, function(e) {
+
+					console.log("取消图片！");
+				}, {
+					filter: "image",
+					multiple: true,
+					maximum: 9,
+					system: false,
+					onmaxed: function() {
+						plus.nativeUI.alert('最多只能选择9张！')
+					},
+					popover: true,
+					selected: lfs
+				});
+			}
+
+			function uploadImg() {
+				if(lfs != null && lfs.length != 0) {
+					var fpath = lfs[0];
+					lfs.splice(0, 1);
+					plus.zip.compressImage({
+							src: fpath,
+							dst: fpath,
+							quality: 20,
+							overwrite: true
+						},
+						function() {
+							if(plus.networkinfo.getCurrentType() == plus.networkinfo.CONNECTION_WIFI) {
+								doSave(fpath, false);
+							} else if(plus.networkinfo.getCurrentType() == plus.networkinfo.CONNECTION_CELL4G) {
+								sleep(500);
+								if(is4g == null) {
+									var btnArray = ['否', '是'];
+									mui.confirm('正在使用4G网络！确定要上传数据吗？', '网络提示', btnArray, function(e) {
+										if(e.index == 1) {
+											is4g = true;
+											doSave(fpath, false);
+
+										} else {
+											is4g = null;
+										}
+									});
+								} else if(is4g == true) {
+
+									doSave(fpath, false);
+								}
+							} else {
+								mui.toast("网络异常！");
+							}
+						},
+						function(error) {
+							if(plus.networkinfo.getCurrentType() == plus.networkinfo.CONNECTION_WIFI) {
+								doSave(fpath, false);
+							} else if(plus.networkinfo.getCurrentType() == plus.networkinfo.CONNECTION_CELL4G) {
+								sleep(500);
+								if(is4g == null) {
+									var btnArray = ['否', '是'];
+									mui.confirm('正在使用4G网络！确定要上传数据吗？', '网络提示', btnArray, function(e) {
+										if(e.index == 1) {
+											is4g = true;
+											doSave(fpath, false);
+
+										} else {
+											is4g = null;
+										}
+									});
+								} else if(is4g == true) {
+
+									doSave(fpath, false);
+								}
+							} else {
+								mui.toast("网络异常！");
+							}
+						});
+				} else {
+					lfs = null;
+				}
+			}
+		</script>
+	</head>
+
+	<body>
+		<div id="picture" class="mui-popover mui-popover-action mui-popover-bottom">
+			<ul class="mui-table-view">
+				<li style="border-bottom: 1px solid #dbdbdb;" onclick="videoCapture();">
+					拍照
+				</li>
+				<li onclick="galleryImg();">
+					从手机相册中选择
+				</li>
+			</ul>
+			<ul class="mui-table-view">
+				<li>
+					<a id='aCancel' href="#picture"><b>取消</b></a>
+				</li>
+			</ul>
+		</div>
+		<div class="express_count" id="express_count" style="display: none;"><span>工作统计量(本月)：<span id="month_express_count"></span>条</span></div>
+		<div id="pullRefresh" class="mui-content mui-scroll-wrapper his_con express" style="padding: 0;">
+			
+			<div class="mui-scroll">
+				<!--数据列表-->
+				<ul id="ul_history" class="mui-table-view mui-table-view-chevron" style="background-color: transparent;">
+
+				</ul>
+			</div>
+			
+		</div>
+
+	</body>
+	<script src="../js/mui.min.js"></script>
+	<script src="../js/date_util.js"></script>
+	<script src="../js/jquery-2.2.2.min.js"></script>
+	<script src="../js/custom_common.js"></script>
+	<script type="text/javascript">
+		var store = JSON.parse(localStorage.getItem("store"));
+		var employee = JSON.parse(localStorage.getItem('employee'));
+		var usergroup = JSON.parse(localStorage.getItem("usergroup"));
+		var express_count=null;
+		var express_count_type=null;
+
+		var pageInfo = {
+			currentPage: 0,
+			recordsPerPage: 10,
+			totalRecords: 0,
+			tooManySearchReturn: false
+		};
+
+		function refreshData() {
+			pageInfo = {
+				currentPage: 0,
+				recordsPerPage: 10,
+				totalRecords: 0,
+				tooManySearchReturn: false
+			};
+			mui('#pullRefresh').pullRefresh().scrollTo(0,0,100);
+			$("#ul_history").children().remove();
+			mui('#pullRefresh').pullRefresh().endPullupToRefresh(false);
+			if(express_count_type=='999'){
+				monthInitView(0);
+			}else{
+		 	    initView(0);
+		    }
+		}
+		var objExpress = {
+			store_id: store.store_id,
+			create_user_id: employee.id,
+			create_user: employee.name,
+			create_employee_no: employee.employeeId
+		}
+
+		mui.plusReady(function() {
+			var self = plus.webview.currentWebview();
+			express_count = self.express_counts;
+			express_count_type=self.express_count_types;
+			if(express_count_type =='999'){
+				var $refresh_div = $('#pullRefresh');
+				$('#express_count').show();
+				if(mui.os.ios) {
+					$refresh_div.css('margin-top','2.2rem');
+					$('.his_con').css('height', '100%');
+				}
+				mui('#month_express_count')[0].innerHTML = express_count;
+			}
+			if(mui.os.ios) {
+				$('.his_con').css('height', '100%');
+			}
+			mui.init({
+
+			pullRefresh: {
+				container: '#pullRefresh',
+				 down : {
+			      callback :pulldownRefresh //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+			   },
+				up: {
+					auto: true, //可选,默认false.自动下拉刷新一次
+					contentrefresh: "正在加载...", //可选，正在刷新状态时，下拉刷新控件上显示的标题内容
+					contentnomore:'没有更多数据了',//可选，请求完毕若没有更多数据时显示的提醒内容；
+					callback: pullupRefresh //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+				}
+			   
+			}
+		});
+		});
+		
+        //获取订单列表数据
+		function initView(flag) {
+			setTimeout(function() {
+//				mui('#pullRefresh').pullRefresh().enablePullupToRefresh();
+										
+				pageInfo.currentPage = pageInfo.currentPage + 1;
+				doManager('ExpressManager', 'qieryExpressSingleList', [pageInfo, objExpress], function(data) {
+					if(data.result == true) {
+						var map_json = JSON.parse(data.data);
+						var lst_history = map_json.expressList;
+						var $change_div = $('#ul_history');
+	
+                     
+						if(map_json.code == 200) {
+							if(lst_history == null || lst_history.length < 10) {
+//								mui('#pullRefresh').pullRefresh().disablePullupToRefresh();
+//								mui.toast("沒有更多了!");
+							}
+							
+							$(lst_history).each(function(index, express) {
+								$change_div.append('<li></li>');
+								$li = $change_div.find("li:last");
+								$li.append('<div class="list-item layout"></div>');
+								var $item_div = $li.find('div:last');
+								$item_div.append('<ul></ul>');
+								$item_div[0].addEventListener('tap', function(event) {
+									var webview = plus.webview.getWebviewById('order_detail');
+									if(webview != null){
+										webview.close();
+									}
+									mui.openWindow({
+										url: 'order_detail.html',
+										id: 'order_detail',
+										createNew: true,
+										show: {
+											aniShow: 'slide-in-right'
+										},
+										waiting: {
+											autoShow: false
+										},
+										extras: {
+											express_no: express.express_no,
+											s_id: express.id
+										}
+									});
+								});
+								var $item_ul = $('ul:last');
+								if(express.express_no == '' || express.express_no == null) {
+									$item_ul.append('<li class="item-num">订单编号：' + '暂无数据' + '</li>');
+								} else {
+									$item_ul.append('<li class="item-num">订单编号：' + express.express_no + '</li>');
+								}
+
+								if(express.rcv_name == '' || express.rcv_name == null) {
+									$item_ul.append('<li class="item-name">姓名：' + '暂无数据' + '</li>');
+								} else {
+									$item_ul.append('<li class="item-name">姓名：' + express.rcv_name + '</li>');
+								}
+
+								if(express.rcv_tel == '' || express.rcv_tel == null) {
+									$item_ul.append('<li class="item-phone">电话：' + '暂无数据' + '</li>');
+								} else {
+									$item_ul.append('<li class="item-phone">电话：' + express.rcv_tel + '</li>');
+								}
+
+								if(express.rcv_address == '' || express.rcv_address == null) {
+									$item_ul.append('<li class="item-address">地址：' + '暂无数据' + '</li>');
+								} else {
+									$item_ul.append('<li class="item-address">地址：' + express.rcv_address + '</li>');
+								}
+
+								if(express.express_company == '' || express.express_company == null) {
+									$item_ul.append('<li class="item-company">快递公司：' + '暂无数据' + '</li>');
+								} else {
+									$item_ul.append('<li class="item-company">快递公司：' + express.express_company + '</li>');
+								}
+
+								var employee_name = express.employee_name == null ? '' : express.employee_name;
+								$item_ul.append('<div class="item-time">' + new Date(parseInt(express.create_time)).Format('YYYY-MM-DD') + '<span class="fr">' + employee_name + '</span></div>');
+								//							$item_ul.append('<div class="ex-finish"></div>');
+							});
+						} else if(map_json.code == 9000003) {
+//							if(flag == 0){
+//								mui('#pullRefresh').pullRefresh().disablePullupToRefresh();
+//							}
+							
+							if($change_div.find('li').length == 0){
+								mui.toast("暂无数据!");
+							}else{
+								mui.toast("没有更多了!");
+							}
+							
+//							return;
+						}
+
+					} else {
+						mui.toast(data.message);
+					}
+					if(flag == 1){
+//						mui('#pullRefresh').pullRefresh().disablePullupToRefresh();
+                         //关闭“正在刷新”的雪花进度提示
+						mui('#pullRefresh').pullRefresh().endPulldownToRefresh();
+						//禁用上拉加载，比如在列表数据过少时，不想显示“上拉显示更多”、“没有更多数据”的提示语，
+						mui('#pullRefresh').pullRefresh().disablePullupToRefresh();
+					}
+					//方法再次启用上拉加载
+					mui('#pullRefresh').pullRefresh().enablePullupToRefresh();
+					//关闭“正在刷新”的雪花进度提示
+					mui('#pullRefresh').pullRefresh().endPullupToRefresh((lst_history == null || lst_history.length < 10));
+				}, false);
+			}, 100);
+
+		}
+		//上拉加载
+		function pullupRefresh(){
+			if(express_count_type=='999'){
+				monthInitView(0);
+			}else{
+		 	    initView(0);
+		    }
+		}
+		//下拉刷新
+		function pulldownRefresh() {
+			mui('#pullRefresh').pullRefresh().disablePullupToRefresh();
+			pageInfo = {
+				currentPage: 0,
+				recordsPerPage: 10,
+				totalRecords: 0,
+				tooManySearchReturn: false
+			};
+			mui('#pullRefresh').pullRefresh().scrollTo(0,0,100);
+			$("#ul_history").children().remove();
+			mui('#pullRefresh').pullRefresh().endPullupToRefresh(false);
+			if(express_count_type=='999'){
+				monthInitView(1);
+			}else{
+		 	    initView(1);
+		    }
+		}
+       //上传快递订单图片
+		function doSave(imgpath, isVadio) {
+			var files = [];
+			files.push({
+				name: new Date().Format('YYYYMMDDhhmmss'),
+				path: imgpath
+			});
+			var wt = plus.nativeUI.showWaiting("正在上传。。。");
+			var task = plus.uploader.createUpload(server, {
+					method: "POST"
+				},
+				function(t, status) { //上传完成
+					if(status == 200) {
+						var data = JSON.parse(t.responseText);
+						if(data.result == true) {
+							var pmsfile = JSON.parse(data.data);
+							plus.io.resolveLocalFileSystemURL(pmsfile, function(entry) {
+								entry.delete();
+							}, function(e) {});
+							imgpath = pmsfile.filePath;
+							var objExpress = {
+								expressURL: imgpath,
+								store_id: store.store_id,
+								create_user: employee.name,
+								create_user_id: employee.id,
+								create_employee_no: employee.employeeId
+							};
+							submitExpress(objExpress, isVadio);
+						}
+						wt.close();
+					} else {
+						mui.toast('上传图片失败');
+						wt.close();
+					}
+				}
+			);
+			for(var i = 0; i < files.length; i++) {
+				var f = files[i];
+				task.addFile(f.path, {
+					key: f.name
+				});
+			}
+			task.start();
+
+		}
+        //新增快递订单
+		function submitExpress(objExpress, isVadio) {
+			var methodName = '';
+			doManager('ExpressManager', "addExpressSingle", objExpress, function(data) {
+				if(data.result == true) {
+					var jsonData = JSON.parse(data.data);
+					if(jsonData.code == 200) {
+						mui.toast('保存成功');
+						if(isVadio) {
+							videoCapture();
+						} else {
+							uploadImg();
+						}
+						refreshData();
+					} else {
+						mui.toast(jsonData.message);
+					}
+
+				} else {
+					mui.toast('保存失败');
+				}
+			});
+		}
+
+		function sleep(numberMillis) {
+			var now = new Date();
+			var exitTime = now.getTime() + numberMillis;
+			while(true) {
+				now = new Date();
+				if(now.getTime() > exitTime) {
+					return;
+				}
+
+			}
+		}
+		function picClick(){
+			mui('#picture').popover('toggle');
+		}
+		//上拉加载更多数据
+		function monthInitView(flag) {
+			if(usergroup.cardtype=='0'){
+				var objExpress = {
+					create_user_id: employee.id,
+					create_user: employee.name,
+					employee_no: employee.employeeId
+		       }
+				
+			}else if(usergroup.cardtype=='1'){
+				var objExpress = {
+					store_id: store.store_id,
+					create_user_id: employee.id,
+					create_user: employee.name
+		       }
+			}
+			
+			setTimeout(function() {
+				mui('#pullRefresh').pullRefresh().enablePullupToRefresh();
+										
+				pageInfo.currentPage = pageInfo.currentPage + 1;
+				doManager('InterManager', 'getExpressListForMonth', [pageInfo, objExpress], function(data) {
+					if(data.result == true) {
+						var map_json = JSON.parse(data.data);
+						var lst_history = map_json.expressList;
+						var $change_div = $('#ul_history');
+	
+                     
+						if(map_json.code == 200) {
+							if(lst_history == null || lst_history.length < 10) {
+//								mui('#pullRefresh').pullRefresh().disablePullupToRefresh();
+//								mui.toast("沒有更多了!");
+							}
+							
+							$(lst_history).each(function(index, express) {
+								$change_div.append('<li></li>');
+								$li = $change_div.find("li:last");
+								$li.append('<div class="list-item layout"></div>');
+								var $item_div = $li.find('div:last');
+								$item_div.append('<ul></ul>');
+								$item_div[0].addEventListener('tap', function(event) {
+									var webview = plus.webview.getWebviewById('order_detail');
+									if(webview != null){
+										webview.close();
+									}
+									mui.openWindow({
+										url: 'order_detail.html',
+										id: 'order_detail',
+										createNew: true,
+										show: {
+											aniShow: 'slide-in-right'
+										},
+										waiting: {
+											autoShow: false
+										},
+										extras: {
+											express_no: express.express_no,
+											s_id: express.id
+										}
+									});
+								});
+								var $item_ul = $('ul:last');
+								if(express.express_no == '' || express.express_no == null) {
+									$item_ul.append('<li class="item-num">订单编号：' + '暂无数据' + '</li>');
+								} else {
+									$item_ul.append('<li class="item-num">订单编号：' + express.express_no + '</li>');
+								}
+
+								if(express.rcv_name == '' || express.rcv_name == null) {
+									$item_ul.append('<li class="item-name">姓名：' + '暂无数据' + '</li>');
+								} else {
+									$item_ul.append('<li class="item-name">姓名：' + express.rcv_name + '</li>');
+								}
+
+								if(express.rcv_tel == '' || express.rcv_tel == null) {
+									$item_ul.append('<li class="item-phone">电话：' + '暂无数据' + '</li>');
+								} else {
+									$item_ul.append('<li class="item-phone">电话：' + express.rcv_tel + '</li>');
+								}
+
+								if(express.rcv_address == '' || express.rcv_address == null) {
+									$item_ul.append('<li class="item-address">地址：' + '暂无数据' + '</li>');
+								} else {
+									$item_ul.append('<li class="item-address">地址：' + express.rcv_address + '</li>');
+								}
+
+								if(express.express_company == '' || express.express_company == null) {
+									$item_ul.append('<li class="item-company">快递公司：' + '暂无数据' + '</li>');
+								} else {
+									$item_ul.append('<li class="item-company">快递公司：' + express.express_company + '</li>');
+								}
+
+								var employee_name = express.employee_name == null ? '' : express.employee_name;
+								$item_ul.append('<div class="item-time">' + new Date(parseInt(express.create_time)).Format('YYYY-MM-DD') + '<span class="fr">' + employee_name + '</span></div>');
+								//							$item_ul.append('<div class="ex-finish"></div>');
+							});
+						} else if(map_json.code == 9000003) {
+//							if(flag == 0){
+//								mui('#pullRefresh').pullRefresh().disablePullupToRefresh();
+//							}
+							
+							if($change_div.find('li').length == 0){
+								mui.toast("暂无数据!");
+							}else{
+								mui.toast("没有更多了!");
+							}
+							
+//							return;
+						}
+
+					} else {
+						mui.toast(data.message);
+					}
+					if(flag == 1){
+//						mui('#pullRefresh').pullRefresh().disablePullupToRefresh();
+                         //关闭“正在刷新”的雪花进度提示
+						mui('#pullRefresh').pullRefresh().endPulldownToRefresh();
+						//禁用上拉加载，比如在列表数据过少时，不想显示“上拉显示更多”、“没有更多数据”的提示语，
+						mui('#pullRefresh').pullRefresh().disablePullupToRefresh();
+					}
+					//方法再次启用上拉加载
+					mui('#pullRefresh').pullRefresh().enablePullupToRefresh();
+					//关闭“正在刷新”的雪花进度提示
+					mui('#pullRefresh').pullRefresh().endPullupToRefresh((lst_history == null || lst_history.length < 10));
+				}, false);
+			}, 100);
+
+		}
+	</script>
+
+</html>

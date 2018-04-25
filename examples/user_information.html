@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>用户画像查询、添加页面</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<!--标准mui.css-->
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="../css/common.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/style.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/user_information.css"/>
+		<style>
+		
+		</style>
+		
+		
+	</head>
+
+	<body style="background-color: #fff;">
+		<!--<header class="mui-bar mui-bar-nav titleheader">
+			<div>用户画像</div>
+			<div class="back" id="tabbar" path="tabbar.html" onclick="jump(this)"><a></a></div>
+		</header>-->
+		<header class="mui-bar mui-bar-nav titleheader">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">用户画像</h1>
+		</header>
+		
+		
+		<div class="list-item layout" style="display: block;padding-top: 1.8rem;">
+			<ul>
+				
+				<li class="mui-input-row">
+					<input class="mui-input-clear" type="text" id="name" name="name" placeholder="姓名"/>
+				</li>
+				<li class="mui-input-row">
+					<input class="mui-input-clear" type="tel" id="mobilephone" name="mobilephonr" placeholder="电话" maxlength="11"/>
+				</li>
+				<!--<li >
+					<input type="text" id="address" name="address" placeholder="地址"/>
+				</li>-->
+				
+			</ul>
+			<div class="select_btn" style="margin-bottom: 0.5rem;">
+				<button id="btnQuery">查询</button>
+				<button id="btnAddUser">添加新用户</button>
+			</div>
+			
+			<!--预留显示查询内容-->
+				
+			<div class="mui-bar" id="customer_list" style="overflow: auto;margin-bottom:1rem;height: 50%; background-color:#fff;color:#666;-webkit-box-shadow: 0 0 0 ;">
+				
+			</div>
+		</div>
+		
+
+	</body>
+	<script src="../js/mui.min.js"></script>
+	<script src="https://pv.sohu.com/cityjson?ie=utf-8"></script>
+	<script src="../js/custom_common.js"></script>
+	<script src="../js/date_util.js"></script>
+	<script src="../js/jquery-2.2.2.min.js"></script>
+	<script type="text/javascript">
+	var customer_count=null;
+	var customer_count_type=null;
+	var employee_no=null;
+	var store_id=null;
+	var default_store_id=null;		
+		mui.init({
+			swipeBack:true //启用右滑关闭功能
+		});
+		
+		window.addEventListener('setInputText',function(event){
+			var customer = event.detail.customer;
+			if(customer != null) {
+				if(customer.customer_name != null){
+					$('#name').val(customer.customer_name);
+				}
+				if(customer.customer_mobilephone != null){
+					$('#mobilephone').val(customer.customer_mobilephone);
+				}
+				doQueryCustomer();
+			}
+		});
+		
+		
+		mui.plusReady(function(){
+			var employee = JSON.parse(localStorage.getItem('employee'));
+			var store = JSON.parse(localStorage.getItem("store"));
+			var usergroup = JSON.parse(localStorage.getItem("usergroup"));
+			default_store_id=JSON.parse(localStorage.getItem("store_id"));
+			employee_no=employee.employeeId;
+            if(store == null||store.store_id == null||store.store_id ==""){
+			    store_id=null;
+			}else{
+				store_id=store.store_id;
+			}
+			if(store!=null&&(default_store_id==null||default_store_id==""||default_store_id!=store.store_id)){
+			   getStoreAddress(store);
+		    }
+			var self = plus.webview.currentWebview();
+			customer_count = self.customer_count;
+			customer_count_type=self.customer_count_type;
+			if(customer_count_type=='888'){
+				getMonthCustomer(usergroup.cardtype);
+				var $refresh_div = $('#customer_list');
+				$refresh_div.before('<div class="customer_count" id="customer_count"><span>工作统计量(本月)：<span id="month_customer_count"></span>条</span></div>');
+				mui('#month_customer_count')[0].innerHTML =customer_count;
+				
+				
+				mui.back = function() {
+			
+					var _current = plus.webview.currentWebview();
+					var main = _current.opener();
+					mui.fire(main,"settype",{id:"1"});
+					_current.close();
+			  }
+				
+			}
+			mui('#btnAddUser')[0].addEventListener('tap',function(event){
+				var webview = plus.webview.getWebviewById('monomer_portrait');
+				if(webview != null){
+					webview.close();
+				}
+				mui.openWindow({
+					url:'monomer_portrait.html',
+					id:"monomer_portrait",
+					createNew:true,
+					show: {
+						aniShow: 'slide-in-right'
+					},
+					waiting: {
+						autoShow: false
+					}
+				});
+			});
+			
+			mui('#btnQuery')[0].addEventListener('tap',function(event){
+				doQueryCustomer();
+			});
+			
+			var self = plus.webview.currentWebview();
+			if(self != null) {
+				if(self.customer_name != null){
+					$('#name').val(self.customer_name);
+				}
+				if(self.customer_mobilephone != null){
+					$('#mobilephone').val(self.customer_mobilephone);
+				}
+				if(self.select_name != null&&self.select_phone != null){
+					$('#name').val(self.select_name);
+					$('#mobilephone').val(self.select_phone);
+					doQueryCustomer();
+				}else if(self.select_name != null&&self.select_phone == null){
+					$('#name').val(self.select_name);
+					doQueryCustomer();
+				}
+				
+			}
+			
+			
+		});
+		//用户画像查询
+		function doQueryCustomer(){
+			 $('#customer_count').hide();
+			var str_name = $('#name').val();
+			var str_mobilephone = $('#mobilephone').val(); 
+			var str_address = $('#address').val();
+			
+			if(!checkValue(str_name) && !checkValue(str_mobilephone)
+				&& !checkValue(str_address)){
+				mui.toast('查询条件请至少输入一项！');
+				return;
+			}
+			
+			if(checkValue(str_mobilephone)){
+				if(!/^\d{11}$/.test(str_mobilephone)){
+					mui("#mobilephone")[0].focus();
+					mui.toast("请输入正确的电话号码。");
+					return;
+				}
+			}
+			
+			var customer_params = {
+				name:str_name,
+				mobilephone:str_mobilephone,
+				address:str_address
+			};
+			doManager('CustomerManager','findCustomerList',customer_params,function(data){
+				if(data.result){
+					var jsonData = JSON.parse(data.data);
+					if(jsonData.code == 200){
+						var $div_clist = $('#customer_list');
+						$div_clist.children().remove();
+						if(jsonData.listCustomer.length == 0){
+							mui.toast('未查询到用户信息!');
+							return;
+						}
+						$(jsonData.listCustomer).each(function(index,customer){
+							$div_clist.append('<div class="customer_row"><div>');
+							var $div_row = $div_clist.find('div:last');
+							$div_row.click(function(){
+								var webview = plus.webview.getWebviewById('monomer_portrait');
+								if(webview != null){
+									webview.close();
+								}
+								mui.openWindow({
+									url:'monomer_portrait.html',
+									id:"monomer_portrait",
+									createNew:true,
+									show: {
+										aniShow: 'slide-in-right'
+									},
+									waiting: {
+										autoShow: false
+									},
+									extras:{
+										customer:JSON.stringify(customer)
+									}
+								});
+							});
+							$div_row.append('<ul></ul>');
+							var $ul_row = $div_row.find('ul:last');
+							$ul_row.append('<li>姓名：<span>'+customer.name+'</span></li>')
+							$ul_row.append('<li>电话：<span>'+customer.mobilephone+'</span></li>')
+						});
+						
+					}else{
+						mui.toast(jsonData.message);
+					}
+				}else{
+					mui.toast('查询失败!');
+				}
+			});
+		}
+		
+//		function getMonthCustomer(cardtype){
+//			if(cardtype=='0'){
+//				var customer_params = {
+//				   employee_no:employee_no
+//			    };
+//				
+//			}else if(cardtype=='1'){
+//				var customer_params = {
+//				    store_id:store_id,
+//			    };
+//			}
+//			
+//			
+//			doManager('InterManager','getCustomerListForMonth',customer_params,function(data){
+//				if(data.result){
+//					var jsonData = JSON.parse(data.data);
+//					if(jsonData.code == 200){
+//						var $div_clist = $('#customer_list');
+//						$div_clist.children().remove();
+//						if(jsonData.listCustomer.length == 0){
+//							mui.toast('未查询到用户信息!');
+//							return;
+//						}
+//						$(jsonData.listCustomer).each(function(index,customer){
+//							$div_clist.append('<div class="customer_row"><div>');
+//							var $div_row = $div_clist.find('div:last');
+//							$div_row.click(function(){
+//								var webview = plus.webview.getWebviewById('monomer_portrait');
+//								if(webview != null){
+//									webview.close();
+//								}
+//								mui.openWindow({
+//									url:'monomer_portrait.html',
+//									id:"monomer_portrait",
+//									createNew:true,
+//									extras:{
+//										customer:JSON.stringify(customer)
+//									}
+//								});
+//							});
+//							$div_row.append('<ul></ul>');
+//							var $ul_row = $div_row.find('ul:last');
+//							$ul_row.append('<li>姓名：<span>'+customer.name+'</span></li>')
+//							$ul_row.append('<li>电话：<span>'+customer.mobilephone+'</span></li>')
+//						});
+//						
+//					}else{
+//						mui.toast(jsonData.message);
+//					}
+//				}else{
+//					mui.toast('查询失败!');
+//				}
+//			});
+//			
+//		}
+        //数据卡跳转过来查询所有用户画像
+        function getMonthCustomer(cardtype){
+			if(cardtype=='0'){
+				var customer_params = {
+				   employee_no:employee_no
+			    };
+				
+			}else if(cardtype=='1'){
+				var customer_params = {
+				    store_id:store_id,
+			    };
+			}
+			doManager('InterManager','getCustomerListForMonthData',customer_params,function(data){
+				if(data.result){
+					var jsonData = JSON.parse(data.data);
+					if(jsonData!= null){
+						var $div_clist = $('#customer_list');
+						$div_clist.children().remove();
+						$(jsonData).each(function(index,customer){
+							$div_clist.append('<div class="customer_row"><div>');
+							var $div_row = $div_clist.find('div:last');
+							$div_row.click(function(){
+								var webview = plus.webview.getWebviewById('monomer_portrait');
+								if(webview != null){
+									webview.close();
+								}
+								selectData(customer.name,customer.mobilephone)
+								
+							});
+							$div_row.append('<ul></ul>');
+							var $ul_row = $div_row.find('ul:last');
+							$ul_row.append('<li>姓名：<span>'+customer.name+'</span></li>')
+							$ul_row.append('<li>电话：<span>'+customer.mobilephone+'</span></li>')
+						});
+						
+					}else{
+						mui.toast('未查询到用户信息!');
+//						mui.toast(jsonData.message);
+					}
+				}else{
+					mui.toast('查询失败!');
+				}
+			});
+			
+		}
+        function selectData(str_name,str_mobilephone){
+        		var customer_params = {
+				name:str_name,
+				mobilephone:str_mobilephone
+			};
+        	doManager('CustomerManager','findCustomerList',customer_params,function(data){
+				if(data.result){
+					var jsonData = JSON.parse(data.data);
+					if(jsonData.code == 200){
+						$(jsonData.listCustomer).each(function(index,customer){
+							  var webview = plus.webview.getWebviewById('monomer_portrait');
+									if(webview != null){
+										webview.close();
+									}
+						        mui.openWindow({
+									url:'monomer_portrait.html',
+									id:"monomer_portrait",
+									createNew:true,
+									show: {
+										aniShow: 'slide-in-right'
+									},
+									waiting: {
+										autoShow: false
+									},
+									extras:{
+										customer:JSON.stringify(customer)
+									}
+								});
+						});
+					}else{
+						mui.toast(jsonData.message);
+					}
+				}else{
+					mui.toast('查询失败!');
+				}
+			});
+        	
+        }
+        
+        function getStoreAddress(store) {
+			doManager('StoreManager', 'getStoreInfoById',store, function(data) {
+				if(data.result) {
+					var jsonData = JSON.parse(data.data);
+					if(jsonData == 0 || jsonData == null) {
+
+					} else {
+						window.localStorage.setItem("default_city",JSON.stringify(jsonData));
+						window.localStorage.setItem("store_id", store.store_id);
+						 
+					}
+					  
+				} else {
+					mui.toast(data.message);
+				}
+			});
+	}
+	</script>
+</html>

@@ -1,0 +1,32 @@
+.express{clear:both; overflow: hidden;margin-top:0.8rem;}
+.ex-list{background-color:#fff;width:100%;overflow: hidden;;}
+.ex-list li{float:left;width:50%;font-size:0.32rem;height:0.87rem;line-height:0.87rem; border-bottom:3px solid #fff;text-align: center;}
+.ex-list .ex_mark{border-bottom-color: #C00A12; color: #C00A12;}
+.ex-list li:first-child{border-right:1px solid #dbdbdb;margin-right:-1px;}
+.list-item{font-size:0.28rem; display: block;background-color:#fff;color:#666;padding-bottom:1.2rem;}
+.list-item li{padding-left:0.35rem;margin:0.2rem 0;overflow: hidden;}
+.item-man{background:url(../images/icon25.png) no-repeat 0 0.18rem;background-size:0.25rem;}
+.item-num{background:url(../images/icon16.png) no-repeat 0 0.17rem;background-size:0.25rem;}
+.item-name{background:url(../images/icon17.png) no-repeat 0 0.12rem;background-size:0.25rem;}
+.item-phone{background:url(../images/icon18.png) no-repeat 0 0.16rem;background-size:0.24rem;}
+.item-manphone{background:url(../images/icon18.png) no-repeat 0 0.18rem;background-size:0.24rem;}
+.item-ordername{background:url(../images/icon16.png) no-repeat 0 0.18rem;background-size:0.24rem;}
+.item-orderdate{background:url(../images/icon16.png) no-repeat 0 0.18rem;background-size:0.24rem;}
+.item-address{background:url(../images/icon19.png) no-repeat 0 0.18rem;background-size:0.27rem;}
+.item-remark{background:url(../images/icon16.png) no-repeat 0 0.1rem;background-size:0.27rem;}
+.item-radio{background:url(../images/icon16.png) no-repeat 0 0.15rem;background-size:0.27rem; padding-bottom: 0.3rem;}
+.item-company{background:url(../images/icon20.png) no-repeat 0 0.19rem;background-size:0.3rem;}
+.item-time{color:#999;font-size:0.24rem;text-align: right;padding-right: 0.2rem;}
+.list-item li input{width:3.35rem; display: inline-block;margin-left:0.26rem;border:1px solid #dbdbdb;height:0.6rem; padding: 0px 15px;}
+.list-item li span{float:left;width:1.6rem;display: inline-block;margin-top: 0.1rem;}
+.item-num input{width:2.7rem!important;}
+.item-num a{background: url(../images/icon34.png) no-repeat center center;display: inline-block;width:0.68rem;height:0.6rem;background-size: 0.4rem;border-bottom:1px solid #dbdbdb;border-top:1px solid #dbdbdb;border-right:1px solid #dbdbdb;}
+.item-address textarea{width:3.35rem; margin-left:0.26rem;display: inline-block; height: 1.5rem;border:1px solid #dbdbdb;}
+.item-remark textarea{width:3.35rem; margin-left:0.26rem;display: inline-block; height: 1.5rem;border:1px solid #dbdbdb;}
+.order_btn a{width:100%; height: 0.7rem;line-height:0.7rem;color:#fff;font-size: 0.32rem;display: block;background-color: #18bc9c; text-align: center; margin-top: 0.5rem;}
+
+.business{
+	background: url(../images/icon35.png) no-repeat 2.8rem 10px;
+	width:3.35rem; display: inline-block;margin-left:0.26rem;border:1px solid #dbdbdb;height:0.6rem;border-radius: 3px;
+}
+

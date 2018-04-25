@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>门店数据卡</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link href="../css/mui.min2.css" rel="stylesheet" />
+		<!-- Bootstrap 3.3.6 -->
+		<link rel="stylesheet" href="../css/bootstrap.min.css">
+		<!-- Font Awesome -->
+		<link rel="stylesheet" href="../css/font-awesome.min.css">
+		<!-- Ionicons -->
+		<link rel="stylesheet" href="../css/ionicons.min.css">
+		<!-- Morris charts -->
+		<!--<link rel="stylesheet" href="../css/morris.css">-->
+		<!-- Theme style -->
+		<link rel="stylesheet" href="../css/AdminLTE.min.css">
+		<!-- AdminLTE Skins. Choose a skin from the css/skins
+       folder instead of downloading all of them to reduce the load. -->
+		<link rel="stylesheet" href="../css/_all-skins.min.css">
+		<link rel="stylesheet" href="../css/web_index_search.css">
+		<link rel="stylesheet" href="../css/common.css" />
+		<link rel="stylesheet" href="../css/style.css" />
+		<link rel="stylesheet" href="../css/newmui.min.css">
+
+		<style>
+			.mui-content {
+				background-color: white;
+			}
+			
+			.share_style {
+				float: left;
+				width: 100%;
+			}
+			
+			.share_m10,
+			.share_m10_1 {
+				height: 100px;
+				border: 1px solid #ddd;
+				vertical-align: middle;
+				position: relative;
+				margin: 10px 10px;
+			}
+			
+			.share_m10:hover {
+				border-color: #d01414;
+			}
+			
+			.share_l {
+				width: 40%;
+				height: 100%;
+			}
+			
+			.share_l span {
+				background-size: 35%!important;
+			}
+			
+			.nav_user {
+				background-color: #4db1da;
+			}
+			
+			.nav_user span {
+				background: url(../images/icons1.png) no-repeat center center;
+				width: 100%;
+				height: 100%;
+				display: block;
+			}
+			
+			.nav_express {
+				background-color: #fcd12c;
+			}
+			
+			.nav_express span {
+				background: url(../images/icons2.png) no-repeat center center;
+				width: 100%;
+				height: 100%;
+				display: block;
+			}
+			
+			.nav_order {
+				background-color: #ff6d60;
+			}
+			
+			.nav_order span {
+				background: url(../images/icons3.png) no-repeat center center;
+				width: 100%;
+				height: 100%;
+				display: block;
+			}
+			
+			.nav_record {
+				background-color: #6ccac9;
+			}
+			
+			.nav_record span {
+				background: url(../images/icons5.png) no-repeat center center;
+				width: 100%;
+				height: 100%;
+				display: block;
+			}
+			
+			.share_r {
+				width: 60%;
+				font-size: 14px;
+				color: #888;
+				text-align: center;
+				padding: 20px 0 10px 0;
+			}
+			
+			.share_r .f30 {
+				font-size: 20px;
+				color: #333;
+				padding: 5px 0 10px 0;
+			}
+			
+			.change_mark {
+				border-color: #d01414;
+			}
+			
+			.change_mark .f30 {
+				color: #d01414;
+			}
+			
+			.change_mark .share_r {
+				color: #d01414;
+			}
+			
+			.modal-content {
+				margin-top: 50px;
+			}
+			
+			.box-header {
+				background-color: #fff;
+				padding: 15px 15px 5px 15px;
+			}
+		</style>
+
+	</head>
+
+	<body style="background-color: #efefef;">
+		<header class="mui-bar mui-bar-nav titleheader">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">门店数据卡</h1>
+		</header>
+
+		<div class="box box-primary" style="margin-top: 60px;">
+			<div class="box-header with-border clearfix" style="font-size: 14px;">
+				<span class="pull-left"><i class="fa fa-bar-chart" style="padding-top: 5px;"></i><b id="dataCard_name"></b></span>
+				<span class="pull-right"><select style="float:right;width:70px;height:28px;border: 1px solid #666!important;background-color:#efefef" id="crm_date" onchange="reloadByDate()"></select>
+				
+			</span>
+			</div>
+			<div class="box-body">
+				<div class="real-time text-center" id="datacard_div">
+<!--
+					<div class="col-xs-4 circle">
+						<div class="hexagon" style="font-size:14px" id="order_div"></div>
+						<h4>送单量</h4></div>
+					<div class="col-xs-4 circle" style="display: none;" id="relation_none">
+						<div class="hexagon" style="font-size:14px" id="relation_div"></div>
+						<h4>拜访记录</h4></div>
+					<div class="col-xs-4 circle" style="display: none;" id="customer_none">
+						<div class="hexagon" style="font-size:14px" id="customer_div"></div>
+						<h4>客户画像</h4>
+					</div>-->
+
+				</div>
+			</div>
+		</div>
+		
+
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/custom_common.js"></script>
+		<script type="text/javascript" src="js/common.js"></script>
+		<script type="text/javascript" src="../js/jquery-2.2.2.min.js"></script>
+		<script type="text/javascript">
+			//		mui.init();
+			var employee_id = null;
+			var employeeId = null;
+			var store_id = null;
+			var express_count = null;
+			var customer_count = null;
+			var relation_count = null;
+			var employee=null;
+			var store=null;
+			var express_count_type = '999';
+			var customer_count_type = '888';
+			var relation_count_type = '777';
+			var mDate = new Date();
+			var myear = mDate.getFullYear(); //当前年
+			var mmonth = mDate.getMonth() + 1; //本月
+			var last_mmonth = mDate.getMonth(); //上一月
+			if(window.plus) {
+				plusReady();
+			} else {
+				document.addEventListener('plusready', plusReady, false);
+			}
+
+			window.addEventListener('settype', function(event) {
+				var id = event.detail.id;
+				if(id != null) {
+					plusReady();
+				}
+			});
+			window.addEventListener('setheadimg', function(event) {
+				var headimg_type = event.detail.headimg;
+				if(headimg_type.headimg_type == 'new') {
+					plusReady();
+				}
+			});
+
+			function plusReady() {
+				 employee = JSON.parse(localStorage.getItem('employee'));
+				 store = JSON.parse(localStorage.getItem("store"));
+				var usergroup = JSON.parse(localStorage.getItem("usergroup"));
+				employee_id = employee.id;
+				employeeId = employee.employeeId;
+				if(store == null || store.store_id == null || store.store_id == "") {
+					store_id = null;
+				} else {
+					store_id = store.store_id;
+				}
+				initDate();
+				if(employee.usergroup != null) {
+					if(employee.usergroup.code == 'DZ') {
+												ShopownerOtherMonthResult(mmonth);
+					}
+				}
+				
+			}
+
+			mui.plusReady(function() {
+				 employee = JSON.parse(localStorage.getItem('employee'));
+				 store = JSON.parse(localStorage.getItem("store"));
+
+			});
+			
+			function reloadByDate() {
+				var s_date = $("#crm_date").val();
+				var last_selectmouth = $("#dataCard_name").text().split("月");
+				var myDate = new Date();
+				var c_year = myDate.getFullYear(); //当前年
+				var c_month = myDate.getMonth(); //当前月
+				var year_month = c_month + 1;
+				//				var btnArray = ['确定', '取消'];
+				//				if(s_date == year_month) {
+				//					mui.confirm('查询当月数据需数分钟时间，是否继续？', '提示', btnArray, function(e) {
+				//						if(e.index == 0) {
+				//							$("#dataCard_name").text(s_date + "月数据卡");
+				//							if(employee.zw != null) {
+				//								if(employee.zw == '店长' || employee.zw == "综合管理") {
+				//									ShopownerMonthResult();
+				//								} else if(employee.zw == '国安侠') {
+				//									GuoanxiaMonthResult();
+				//								}
+				//							}
+				//						} else {
+				//							$("#crm_date").val(last_selectmouth);
+				//						}
+				//
+				//					});
+				//				} else {
+				$("#dataCard_name").text(s_date + "月数据卡");
+				if(employee.usergroup != null) {
+					if(employee.usergroup.code == 'DZ') {
+						ShopownerOtherMonthResult(s_date);
+					}
+				}
+				//				}
+
+			}
+
+			function initDate() {
+				var myDate = new Date();
+				var c_year = myDate.getFullYear(); //当前年
+				var c_month = myDate.getMonth() + 1; //当前月
+
+				//				curMonth = c_month;
+				//				curYear = c_year;
+				//				curDate = c_year + "-" + c_month; //当前日期
+				var date_option = "";
+				var year_month = null;
+				var y_m = null;
+				if(c_month == 1) {
+					y_m = '1月'
+					date_option = date_option + "<option value='" + i + "' selected>" + y_m + "</option>";
+					$("#dataCard_name").html("1月数据卡");
+				} else {
+					for(var i = 1; i <= c_month; i++) {
+						year_month = i;
+						y_m = i + "月";
+						if(i == (c_month)) { //上一个月
+							date_option = date_option + "<option value='" + i + "' selected>" + y_m + "</option>";
+							$("#dataCard_name").html((parseInt(c_month)) + "月数据卡");
+						} else if(c_month == 1) { //当前月是一月
+							date_option = date_option + "<option value='" + i + "' selected>" + y_m + "</option>";
+							$("#dataCard_name").html("1月数据卡");
+						} else {
+							date_option = date_option + "<option value='" + i + "' >" + y_m + "</option>";
+						}
+					}
+
+				}
+
+				$("#crm_date").append(date_option);
+			}
+			//店长、综合管理非本月成绩
+			function ShopownerOtherMonthResult(c_month) {
+				var myDate = new Date();
+				var c_year = myDate.getFullYear(); //当前年
+				var store_id = "";
+				if(store == null || store == "") {
+					store_id = employee.store_id;
+				} else {
+					store_id = store.store_id;
+				}
+				var dynamicDto = {        
+					cityId: "",
+					employeeNo: employee.employeeId,
+					employeeName: employee.name,
+					        year: c_year,
+					        storeId: store_id,
+					        month: c_month,
+					        target: 2   
+				}
+				doManager('DynamicManager', 'getDataCardInfo', dynamicDto, function(data) {
+					if(data.result == true) {
+						var jsonData = JSON.parse(data.data);
+						var $div = $('.real-time');
+						$div.children().remove();
+						if(jsonData == null || jsonData == "") {
+							var html = '<div class="no_message">暂无内容</div>';
+							$div.append(html);
+						} else {
+							var html = '<div class="col-xs-4 circle">' +
+								'<div class="hexagon" style="font-size:12px">' + jsonData.newaddcus + '</div>' +
+								'<h4>付费用户</h4></div>' +
+								'<div class="col-xs-4 circle">' +
+								'<div class="hexagon" style="font-size:12px">' + jsonData.rebuycus + '</div>' +
+								'<h4>复购客户</h4></div>' +
+								'<div class="col-xs-4 circle">' +
+								'<div class="hexagon" style="font-size:12px">' + jsonData.storetrade + '</div>' +
+								'<h4>绩效GMV</h4></div>' +
+								'<div class="col-xs-4 circle">' +
+								'<div class="hexagon" style="font-size:12px">' + jsonData.sendorders + '</div>' +
+								'<h4>送单量</h4></div>' +
+								'<div class="col-xs-4 circle">' +
+								'<div class="hexagon" style="font-size:12px">' + jsonData.rewardtimes + '</div>' +
+								'<h4>好评次数</h4></div>' +
+								'<div class="col-xs-4 circle">' +
+								'<div class="hexagon">--</div>' +
+								'<h4>商业信息</h4></div>' +
+								'<div class="col-xs-4 circle">' +
+								'<div class="hexagon">--</div>' +
+								'<h4>写字楼</h4></div>' +
+								'<div class="col-xs-4 circle">' +
+								'<div class="hexagon" style="font-size:12px">' + jsonData.relation + '</div>' +
+								'<h4>拜访记录</h4></div>' +
+								'<div class="col-xs-4 circle">' +
+								'<div class="hexagon" style="font-size:12px">' + jsonData.customer + '</div>' +
+								'<h4>客户画像</h4>' +
+								'</div>';
+							$div.append(html);
+						}
+					}
+				});
+			}
+		
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,218 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>客户意见</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+
+		<link href="../css/mui.min2.css" rel="stylesheet" />
+
+		<link rel="stylesheet" href="../css/common.css" />
+		<link rel="stylesheet" href="../css/style.css" />
+		<link rel="stylesheet" href="../css/feedlist.css" />
+
+		<style type="text/css">
+			.mui-content>.mui-table-view:first-child {
+				margin-top: -1px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav titleheader">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">客户意见</h1>
+			<div class="history">
+				<a onclick="tofeedback()" id="add">添加</a>
+			</div>
+		</header>
+		<!--下拉刷新容器-->
+		<div id="pullrefresh" class="mui-content express" style="margin-bottom: 0;">
+			<!--数据列表-->
+			<ul id="feedlist" class="mui-table-view mui-table-view-chevron">
+
+			</ul>
+		</div>
+		<script src="../js/mui.min2.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript" src="../js/custom_common.js"></script>
+		<script src="../js/date_util.js"></script>
+		<script src="../js/jquery-2.2.2.min.js"></script>
+		<script>
+			var pageInfo = {
+				currentPage: 0,
+				recordsPerPage: 10,
+				totalRecords: 0,
+				tooManySearchReturn: false
+			};
+			var employee = JSON.parse(localStorage.getItem('employee'));
+			var store = JSON.parse(localStorage.getItem("store"));
+			
+			if(store == null || store == "") {
+					var objStore = {
+					   store_id:employee.store_id
+				    };
+			} else {
+					var objStore = {
+					   store_id:store.store_id
+				    };
+			}
+
+			mui.init({
+				pullRefresh: {
+					container: '#pullrefresh',
+					down: {
+						height: '50px', //可选,默认50px.下拉刷新控件的高度,
+						range: '100px', //可选 默认100px,控件可下拉拖拽的范围
+						offset: '100px',
+						style: 'circle',
+						callback: pulldownRefresh,
+
+					},
+					up: {
+						auto: true,
+						contentrefresh: '正在加载...',
+						callback: pullupRefresh
+					}
+				}
+			});
+            //初始获取客户意见列表
+			function initView() {
+
+				pageInfo.currentPage = pageInfo.currentPage + 1;
+				doManager('UserAdviceManager', 'qieryUserAdviceList', [pageInfo, objStore], function(data) {
+					if(data.result == true) {
+						var dataJson = JSON.parse(data.data);
+						var userAdviceList = dataJson.userAdviceList;
+						var $feedlist = $("#feedlist");
+						if(dataJson.code == 200) {
+							mui('#pullrefresh').pullRefresh().endPullup();
+							if(userAdviceList == null || userAdviceList.length < 10) {
+								//mui('#pullRefresh').pullRefresh().disablePullupToRefresh();
+								//mui.toast("沒有更多了!");
+								mui('#pullrefresh').pullRefresh().endPullup((userAdviceList.length < 10)); //参数为true代表没有更多数据了。	
+							}
+							$(userAdviceList).each(function(index, feedback) {
+								$feedlist.append('<li></li>');
+								$li = $feedlist.find("li:last");
+								$li.append('<div class="list-item "></div>');
+								var $item_div = $li.find('div:last');
+								$item_div.append('<ul></ul>');
+								$item_div[0].addEventListener('tap', function(event) {
+									var webview = plus.webview.getWebviewById('feedListDetail');
+									if(webview != null) {
+										webview.close();
+									}
+									mui.openWindow({
+										url: 'feedListDetail.html',
+										id: 'feedListDetail',
+										createNew: true,
+										show: {
+											aniShow: 'slide-in-right'
+										},
+										waiting: {
+											autoShow: false
+										},
+										extras: {
+											feedback: JSON.stringify(feedback)
+										}
+									});
+								});
+
+								var $item_ul = $('ul:last');
+								if(feedback.name == '' || feedback.name == null) {
+									$item_ul.append('<li class="item-num">姓名：' + '暂无数据' + '</li>');
+								} else {
+									$item_ul.append('<li class="item-num">姓名：' + feedback.name + '</li>');
+								}
+								//								alert(feedback.sex);
+								if(feedback.sex == 0) {
+									$item_ul.append('<li class="item-name">性别：' + '男' + '</li>');
+								} else if(feedback.sex == 1) {
+									$item_ul.append('<li class="item-name">性别：' + '女' + '</li>');
+								} else {
+									$item_ul.append('<li class="item-name">性别：' + '暂无数据' + '</li>');
+								}
+
+								if(feedback.mobilephone == '' || feedback.mobilephone == null) {
+									$item_ul.append('<li class="item-phone">电话：' + '暂无数据' + '</li>');
+								} else {
+									$item_ul.append('<li class="item-phone">电话：' + feedback.mobilephone + '</li>');
+								}
+
+								if(feedback.address == '' || feedback.address == null) {
+									$item_ul.append('<li class="item-address">地址：' + '暂无数据' + '</li>');
+								} else {
+									$item_ul.append('<li class="item-address">地址：' + feedback.address + '</li>');
+								}
+								var create_user = feedback.create_user == null ? '' : feedback.create_user;
+								$item_ul.append('<div class="item-time">' + new Date(parseInt(feedback.create_time)).Format('YYYY-MM-DD') + '<span class="fr" style="margin-right: 20px;">' + create_user + '</span></div>');
+							});
+
+						} else {
+							mui.toast(dataJson.message);
+							mui('#pullrefresh').pullRefresh().endPullup(true);
+						}
+					} else {
+						mui.toast(data.message);
+						mui('#pullrefresh').pullRefresh().endPullup(true);
+					}
+				})
+			}
+
+			var count = 0;
+
+			function pullupRefresh() {
+				setTimeout(function() {
+					initView();
+				}, 500);
+			}
+
+			/**
+			 * 下拉刷新具体业务实现
+			 */
+			function pulldownRefresh() {
+				setTimeout(function() {
+					pageInfo = {
+						currentPage: 0,
+						recordsPerPage: 10,
+						totalRecords: 0,
+						tooManySearchReturn: false
+					};
+					$("#feedlist").children().remove();
+					initView();
+					mui('#pullrefresh').pullRefresh().endPulldown();
+				}, 500);
+			}
+
+			//添加客户意见
+			function tofeedback() {
+				var webview = plus.webview.getWebviewById("feedback");
+				if(webview != null) {
+					webview.hide();
+					webview.close();
+				}
+				mui.openWindow({
+					url: 'feedback.html',
+					id: 'feedback',
+					createNew: true,
+					show: {
+						aniShow: "slide-in-right"
+					},
+					waiting: {
+						autoShow: false
+					}
+				});
+			};
+
+			//			window.addEventListener('add', function(e) { //执行刷新
+			//				location.reload();
+			//			});
+
+			window.addEventListener('loadView', function(event) {
+				location.reload();
+			});
+		</script>
+	</body>
+
+</html>

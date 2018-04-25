@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>社区信息</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<!--标准mui.css-->
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="../css/common.css" />
+		<link rel="stylesheet" type="text/css" href="../css/style.css" />
+		<link rel="stylesheet" type="text/css" href="../css/express.css" />
+		<link href="../css/mui.picker.css" rel="stylesheet" />
+		<link href="../css/mui.poppicker.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../css/mui.picker.min.css" />
+		<link href="../css/community_information.css" rel="stylesheet" />
+		<style>
+			.mui-table-view-chevron .mui-table-view-cell>a:not(.mui-btn) {
+                margin-right: -35px;
+            }
+            .mui-table-view-chevron .mui-table-view-cell {
+		  	    padding-right: 35px;
+		  	    
+			}
+			/*.mui-table-view-cell a{border-bottom: 1px solid #c8c7cc;}
+			.mui-table-view-cell:after{background: none;}*/
+			/*.mui-popover-bottom li{height: 0.8rem; line-height: 0.8rem; font-size: 0.32rem;}
+			.img_plus{margin-left: 10px;height: 14px;width: 14px;cursor: pointer;}
+			.office_building_img_plus{margin-left: 10px;height: 14px;width: 14px;cursor: pointer;}
+			.bungalow_img_plus{margin-left: 10px;height: 14px;width: 14px;cursor: pointer;}
+			.option_select{border: 1px solid rgba(0,0,0,.2) !important;height:40px;width: 30%;padding: 0;margin: 0;font-size: 15px;}
+			.content_input{margin: 0;margin-left: 5px;width: 60% !important;font-size: 14px;}*/
+ 
+		</style>
+	
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav titleheader">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">社区信息</h1>
+			<div class="save">
+				<a href="#" onclick="findBuilding();">保存</a>
+			</div>
+		</header>
+		
+		
+			<div style="margin-top: 1.1rem;"id="building_div">
+				<ul class="mui-table-view mui-table-view-chevron ul_interval">
+					<li id="province" class="mui-table-view-cell select_li">
+						<a>
+							<label><font style="color:red">*</font>省份</label>
+							<input type="text" id="province_in" name="province_in" placeholder="请选择" readonly />
+							<input type="hidden" id="province_text" name="province_text" />
+						</a>
+					</li>
+					<li id="city" class="mui-table-view-cell select_li">
+						<a>
+							<label><font style="color:red">*</font>城市</label>
+							<input type="text" id="city_in" name="city_in" placeholder="请选择" readonly />
+							<input type="hidden" id="city_text" name="city_text" />
+						</a>
+					</li>
+					<li id="county" class="mui-table-view-cell select_li">
+						<a >
+							<label><font style="color:red">*</font>区县</label>
+							<input type="text" id="county_in" name="county_in" placeholder="请选择" readonly />
+							<input type="hidden" id="county_text" name="county_text" />
+						</a>
+					</li>
+					<li id="street" class="mui-table-view-cell select_li">
+						<a class="mui-navigate-right">
+							<label><font style="color:red">*</font>街道</label>
+							<input type="text" id="street_in" name="street_in" placeholder="请选择" readonly />
+							<input type="hidden" id="street_text" name="street_text" />
+						</a>
+					</li>
+					<li class="mui-table-view-cell input_li_suffix">
+						<div class="input-row">
+							<label><font style="color:red">*</font>社区</label>
+							<input type="text" id="village_in" name="village_in"/>
+							<input type="hidden" id="village_text" name="village_text" />
+						</div>
+					</li>
+					<li class="mui-table-view-cell input_li">
+						<div class="input-row">
+							<label><font style="color:red">*</font>社区国标码</label>
+							<input type="tel" id="gb_code" name="gb_code" placeholder="12位数字" maxlength="12" onkeyup="value=this.value.replace(/\D+/g,'')"/>
+						</div>
+					</li>
+					
+					<li class="mui-table-view-cell input_li">
+						<div class="input-row">
+							<label style="padding-left: 0.15rem;">居委会电话</label>
+							<input type="tel" id="mobilephone" name="mobilephone" placeholder="11位电话号码或手机" maxlength="11" onkeyup="value=this.value.replace(/\D+/g,'')">
+						</div>
+					</li>
+					<li class="mui-table-view-cell input_li">
+						<div class="input-row">
+							<label style="padding-left: 0.15rem;">居委会地址</label>
+							<input type="text" id="address" name="address" placeholder="例：南十里居41号院1号楼" />
+						</div>
+					</li>
+					<li class="mui-table-view-cell input_li_suffix">
+						<div class="input-row-suffix">
+							<label style="padding-left: 0.15rem;">总户数(户)</label>
+							<input type="number" pattern="\d*" id="house_sum" name="house_sum" bidTableFlag="true">
+						</div>
+					</li>
+					<li class="mui-table-view-cell input_li_suffix">
+						<div class="input-row-suffix">
+							<label style="padding-left: 0.15rem;">常驻人口(人)</label>
+							<input type="tel" maxlength="6" onkeyup="value=this.value.replace(/\D+/g,'')" id="population_sum" name="population_sum" bidTableFlag="true" >
+						</div>
+					</li>
+					<li class="mui-table-view-cell input_li_suffix">
+						<div class="input-row-suffix">
+							<label style="padding-left: 0.15rem;">总面积(平方公里)</label>
+							<input type="number" pattern="\d*" id="area_sum" name="area_sum" bidTableFlag="true">
+						</div>
+					</li>
+				</ul>
+				
+			</div>
+	</body>
+	<script type="text/javascript" src="../js/mui.min.js"></script>
+	<script type="text/javascript" src="../js/jquery-2.2.2.min.js"></script>
+	<script type="text/javascript" src="../js/custom_jquery_based.js"></script>
+	<script type="text/javascript" src="../js/custom_common.js"></script>
+	<script type="text/javascript" src="../js/date_util.js"></script>
+	<script type="text/javascript" src="../js/mui.picker.js"></script>
+	<script type="text/javascript" src="../js/mui.picker.min.js"></script>
+	<script type="text/javascript" src="../js/mui.poppicker.js"></script>
+	<script type="text/javascript" src="../js/dict.js"></script>
+	<script type="text/javascript" src="../js/cityObject.js"></script>
+	<script type="text/javascript" type="text/javascript">
+	     var cityPicker = new mui.PopPicker();
+        var provincePicker = new mui.PopPicker();
+        var countyPicker = new mui.PopPicker();
+        var streetPicker = new mui.PopPicker();
+        var villagePicker = new mui.PopPicker();
+        var two_levelPicker = new mui.PopPicker();
+        var three_levelPicker = new mui.PopPicker();
+        var five_levelPicker = new mui.PopPicker();
+        
+		var streetDictArray = null;		
+        var default_city=null;
+        var provinceDictArray = null;
+        var cityDictArray = null;
+        var province_id=null;
+        var city_id=null;
+        var county_id=null;
+        var street_id=null;
+        var village_id=null;
+        var employee = JSON.parse(localStorage.getItem('employee'));
+        var store=JSON.parse(localStorage.getItem('store'));
+		mui.plusReady(function(){
+			ininView();
+
+		});
+		function ininView(){
+			var self = plus.webview.currentWebview();
+			if(self != null && self.community != null) {
+				community = JSON.parse(self.community);
+				setCommunityInfo(community);
+			}else{
+				default_city=JSON.parse(localStorage.getItem('default_city'));
+				if(default_city!=null||default_city!=""){
+					if(default_city.pro_name!=null||default_city.pro_name!=""){
+						$('#province_in').val(default_city.pro_name);
+						$('#province_text').val(default_city.pro_id);
+						province_id=$('#province_text').val();
+					}
+					if(default_city.city_name!=null||default_city.city_name!=""){
+						$('#city_in').val(default_city.city_name);
+						$('#city_text').val(default_city.city_id);
+						city_id=$('#city_text').val();
+					}
+					if(default_city.cou_name!=null||default_city.cou_name!=""){
+						$('#county_in').val(default_city.cou_name);
+						$('#county_text').val(default_city.cou_id);
+						county_id=$('#county_text').val();
+						
+					}
+//					if(default_city.town_name!=null||default_city.town_name!=""){
+//						$('#street_in').val(default_city.town_name);
+//						$('#street_text').val(default_city.town_id);
+//						street_id=$('#street_text').val();
+//					}
+	           }
+				streetDictArray=getStreetData('street','street_text','street_in',store,'StoreManager','getStoreCityInfoById','id','name',street_refresh,streetPicker);
+		    }	
+		    
+			
+		}
+		function street_refresh(){
+			
+		}
+		//保存时查询新建社区是否存在
+		function findBuilding(){
+			var employee_name=employee.name;
+			var employee_no=employee.employeeId;
+			var employee_id=employee.id;
+			var province_val=$("#province_in").val();
+			var province_id=$("#province_text").val();
+			var city_val=$("#city_in").val();
+			var city_id=$("#city_text").val();
+			var county_val=$("#county_in").val();
+			var county_id=$("#county_text").val();
+			var street_val=$("#street_in").val();
+			var street_id=$("#street_text").val();
+			var village_val=$("#village_in").val();
+			var village_id=$("#village_text").val();
+			var gb_code=$("#gb_code").val();
+			var phone=$("#mobilephone").val();
+			var address_val=$("#address").val();
+			var house_sum=$("#house_sum").val();
+			var population_sum=$("#population_sum").val();
+			var area_sum=$("#area_sum").val();
+		
+			
+			var village = {
+				create_user: employee_name,
+				employee_no: employee_no,
+				create_user_id:employee_id,
+				town_name:street_val,
+				town_id:street_id,
+				id:village_id,
+				name:village_val,
+				gb_code:gb_code,
+				committee_phone:phone,
+				committee_address:address_val,
+				household_number:house_sum,
+				resident_population_number:population_sum,
+				square_area:area_sum
+				
+			};
+			if(!checkValue(village_val)) {
+		        mui.toast("请填写社区名称。");
+		        return;
+		    }
+            if(!checkValue(gb_code)) {
+		        mui.toast("请填写12位数字社区国标码。");
+		        return;
+		    }
+            if(gb_code.length<12) {
+		        mui.toast("请填写12位数字社区国标码。");
+		        return;
+		    }
+			doManager('VillageManager','getVillageByVillage',village, function(data) {
+				if(data.result == true) {
+					var jsonData = JSON.parse(data.data);
+					if(jsonData.code == 200){
+						doSave(village);
+					}else if(jsonData.code == 300){
+						var btnArray = ['否', '是'];
+			            mui.confirm('该数据已存在！确定要覆盖吗？','提示', btnArray, function(e) {
+				             if (e.index == 1) {
+						        doSave(village);
+					         }
+				       });
+					}else{
+						mui.toast('保存失败');
+					}
+						
+				} else {
+					mui.toast('保存失败');
+				}
+			});
+			    
+		}
+		//保存
+		function doSave(village){
+			
+			doManager('VillageManager','saveOrUpdateVillageApp',village, function(data) {
+				if(data.result == true) {
+					var jsonData = JSON.parse(data.data);
+					if(jsonData.code == 200){
+						mui.toast('保存成功');
+						setTimeout(function() {
+							closeMenu();
+						}, 500);
+					}else{
+						mui.toast('保存失败');
+					}
+						
+				} else {
+					mui.toast('保存失败');
+				}
+			});
+			    
+		}
+		function closeMenu(){
+			var _current = plus.webview.currentWebview();
+			var main = _current.opener();
+			mui.fire(main,"setcommunityinput",{community:{
+				community_name:$('#village_in').val()
+			}});
+			
+			_current.close();
+		}
+		
+		
+		function setCommunityInfo(community){
+				$("#gb_code").attr("readonly", "readonly");
+                $("#village_in").attr("readonly", "readonly");
+                document.getElementById("province_in").style.color="#CCCCCC";
+                document.getElementById("city_in").style.color="#CCCCCC";
+                document.getElementById("county_in").style.color="#CCCCCC";
+                document.getElementById("street_in").style.color="#CCCCCC";
+                document.getElementById("village_in").style.color="#CCCCCC";
+                document.getElementById("gb_code").style.color="#CCCCCC";
+			$('#province_in').val(community.province_name);
+			$('#province_text').val(community.province_id);
+			
+			$('#city_in').val(community.city_name);
+			$('#city_text').val(community.city_id);
+			
+			$('#county_in').val(community.county_name);
+			$('#county_text').val(community.county_id);
+			
+			$('#street_in').val(community.town_name);
+			$('#street_text').val(community.town_id);
+			
+			$('#village_in').val(community.name);
+			$('#village_text').val(community.id);
+			
+			$('#gb_code').val(community.gb_code);
+			$('#mobilephone').val(community.committee_phone);
+			
+			
+			$('#address').val(community.committee_address);
+			$('#house_sum').val(community.household_number);
+			$('#population_sum').val(community.resident_population_number);
+			$('#area_sum').val(community.square_area);
+			$('#street').find('a').removeAttr('class');
+		    var li1 = document.getElementById("street");
+             li1.id = "streetttt";
+		}
+	
+		
+	</script>
+
+</html>

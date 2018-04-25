@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>更多信息</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<!--标准mui.css-->
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="../css/common.css" />
+		<link rel="stylesheet" type="text/css" href="../css/style.css" />
+		<link rel="stylesheet" type="text/css" href="../css/express.css" />
+		<link href="../css/mui.picker.css" rel="stylesheet" />
+		<link href="../css/mui.poppicker.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../css/mui.picker.min.css" />
+		<link href="../css/more_information.css" rel="stylesheet" />
+		<style>
+			.mui-table-view-chevron .mui-table-view-cell>a:not(.mui-btn) {
+                margin-right: -35px;
+            }
+            .mui-table-view-chevron .mui-table-view-cell {
+		  	    padding-right: 35px;
+			}
+			.mui-checkbox label, .mui-radio label{
+				width: 50%
+			}
+ 
+		</style>
+	
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav titleheader">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">更多信息</h1>
+			<div class="save">
+				<a href="#" onclick="doSave();">保存</a>
+			</div>
+		</header>
+		
+		
+			<div style="margin-top:1.1rem;">
+				<ul class="mui-table-view mui-table-view-chevron ul_interval">
+					<li id="nationality" class="mui-table-view-cell select_li">
+						<a class="mui-navigate-right">
+							<label>国籍</label>
+							<input  type="text"  id="nationality_text" name="nationality_text" placeholder="请选择" readonly />
+							<input type="hidden" id="nationality_val" name="nationality_val" />
+						</a>
+					</li>
+					<!--<li class="mui-table-view-cell time">
+							<label>籍贯</label>
+							<span >市</span>
+							<input class="origin_city"  type="text" id="origin_city" name="origin_city"  />
+							<span>省</span>
+							<input class="origin_province"  type="text" id="origin_province" name="origin_province" />
+					</li>-->
+					<li id="origin_city" class="mui-table-view-cell time">
+						<a class="mui-navigate-right">
+							<label>籍贯</label>
+							<input style="text-align:right;" type="text"  id="origin_province_text" name="origin_province_text" placeholder="请选择" readonly />
+							<input type="text"  id="origin_city_text" name="origin_city_text"/>
+							<input type="hidden" id="origin_city_val" name="origin_city_val" />
+						</a>
+					</li>
+					<!--<li class="mui-table-view-cell time">
+							<label>户籍所在地</label>
+							<span>市</span>
+							<input class="register_city"  type="text" id="register_city" name="register_city"  />
+							<span>省</span>
+							<input class="register_province"  type="text" id="register_province" name="register_province" />
+					</li>-->
+					<li id="register_city" class="mui-table-view-cell time">
+						<a class="mui-navigate-right">
+							<label>户籍所在地</label>
+							<input style="text-align:right;" type="text"  id="register_city_text" name="register_city_text" placeholder="请选择" readonly />
+							<input  type="text" id="register_province_text" name="register_province_text" />
+							
+							<input type="hidden" id="register_city_val" name="register_city_val" />
+						</a>
+					</li>
+					<li id="marital_status" class="mui-table-view-cell select_li">
+						<a class="mui-navigate-right">
+							<label>婚姻状况</label>
+							<input type="text"  id="marital_status_text" name="marital_status_text" placeholder="请选择" readonly />
+							<input type="hidden" id="marital_status_val" name="marital_status_val" />
+						</a>
+					</li>
+					<li id="health" class="mui-table-view-cell select_li">
+						<a class="mui-navigate-right">
+							<label>健康状况</label>
+							<input type="text"  id="health_text" name="health_text" placeholder="请选择" readonly />
+							<input type="hidden" id="health_val" name="health_val" />
+						</a>
+					</li>
+					<li id="education" class="mui-table-view-cell select_li">
+						<a class="mui-navigate-right">
+							<label>教育程度</label>
+							<input type="text"  id="education_text" name="education_text" placeholder="请选择" readonly />
+							<input type="hidden" id="education_val" name="education_val" />
+						</a>
+					</li>
+					<li class="mui-table-view-cell input_li">
+						<div class="input-row" >
+							<label>学校名称</label>
+							<input type="text" id="school_name_text" name="school_name_text"/>
+						</div>
+					</li>
+					<li class="mui-table-view-cell radio_li">
+						<div class="input-row-suffix mui-radio">
+							<label>汽车信息</label>
+							<div style="float: right;margin-right: 10px;">
+								<input name="car_type" type="radio" style="float: initial;" bidTableFlag="true" value="0" > 有
+								<input name="car_type" type="radio" style="float: initial;" bidTableFlag="true" value="1" checked>无
+							</div>
+						</div>
+					</li>
+					<li class="mui-table-view-cell input_li">
+						<div class="input-row" id="car_brand_text_div">
+							<label>汽车品牌</label>
+							<input type="text" id="car_brand_text" name="car_brand_text"/>
+						</div>
+					</li>
+					<li id="financial_habits" class="mui-table-view-cell select_li">
+						<a class="mui-navigate-right">
+							<label>理财习惯</label>
+							<input type="text"  id="financial_habits_text" name="financial_habits_text" placeholder="请选择" readonly />
+							<input type="hidden" id="financial_habits_val" name="financial_habits_val" />
+						</a>
+					</li>
+					<li id="character" class="mui-table-view-cell select_li">
+						<a class="mui-navigate-right">
+							<label>性格</label>
+							<input type="text"  id="character_text" name="character_text" placeholder="请选择" readonly />
+							<input type="hidden" id="character_val" name="character_val" />
+						</a>
+					</li>
+					<li id="family_income" class="mui-table-view-cell select_li">
+						<a class="mui-navigate-right">
+							<label>家庭年收入</label>
+							<input type="text"  id="family_income_text" name="family_income_text" placeholder="请选择" readonly />
+							<input type="hidden" id="family_income_val" name="family_income_val" />
+						</a>
+					</li>
+					<li id="shopping_habits" class="mui-table-view-cell select_li">
+						<a class="mui-navigate-right">
+							<label>购物渠道习惯</label>
+							<input type="text"  id="shopping_habits_text" name="shopping_habits_text" placeholder="请选择" readonly />
+							<input type="hidden" id="shopping_habits_val" name="shopping_habits_val" />
+						</a>
+					</li>
+					<li class="mui-table-view-cell input_li">
+						<div class="input-row">
+							<label>兴趣爱好1</label>
+							<input type="text" id="hobby_one_text" name="hobby_one_text"/>
+						</div>
+					</li>
+					<li class="mui-table-view-cell input_li">
+						<div class="input-row">
+							<label>兴趣爱好2</label>
+							<input type="text" id="hobby_two_text" name="hobby_two_text"/>
+						</div>
+					</li>
+					<li class="mui-table-view-cell input_li">
+						<div class="input-row">
+							<label>兴趣爱好3</label>
+							<input type="text" id="hobby_three_text" name="hobby_three_text"/>
+						</div>
+					</li>
+				</ul>
+			</div>
+	</body>
+	<script type="text/javascript" src="../js/mui.min.js"></script>
+	<script type="text/javascript" src="../js/jquery-2.2.2.min.js"></script>
+	<script type="text/javascript" src="../js/custom_jquery_based.js"></script>
+	<script type="text/javascript" src="../js/date_util.js"></script>
+	<script type="text/javascript" src="../js/mui.picker.js"></script>
+	<script type="text/javascript" src="../js/mui.picker.min.js"></script>
+	<script type="text/javascript" src="../js/mui.poppicker.js"></script>
+	<script type="text/javascript" src="../js/custom_common.js"></script>
+	<script type="text/javascript" src="../js/dict.js"></script>
+	<script type="text/javascript" src="../js/cityObject.js"></script>
+		<script src="../js/city.data.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" type="text/javascript">
+	
+	var employee = JSON.parse(localStorage.getItem('employee'));
+	var cus_id=null;
+	var more_data=null;
+	var cus_no=null;
+	mui.plusReady(function(){
+			ininView();
+			$(document).ready(function(){
+		        $("#car_brand_text").focus(function(){
+		            if($('input[name="car_type"]:checked').val()==1){
+		            	mui.toast('填写汽车品牌请先选择有汽车信息！');
+		            	
+		            }
+		        });
+            });
+			if($('input[name="car_type"]:checked').val()==1){
+				$("#car_brand_text").val("无");
+		        $("#car_brand_text_div input").attr("readOnly","true");
+			}
+		            	
+            $('input[name="car_type"]').click(function(){ //绑定点击事件
+				if($('input[name="car_type"]:checked').val()==1){
+		            	$("#car_brand_text").val("无");
+		            	$("#car_brand_text_div input").attr("readOnly","true");
+		        }else{
+		        	$("#car_brand_text").val("");
+		        	$("#car_brand_text_div input").attr("readOnly",false);
+		        }
+			});
+							
+	});
+	function ininView(){
+		var self = plus.webview.currentWebview();
+		cus_id = self.cus_id;
+		cus_no=self.cus_no;
+		if(cus_id !=null ||cus_id != ""){
+			selectMoreinformation(cus_id);
+		}
+		
+		//国籍
+		getMoareInformation('nationality','nationality_text',getNationData());
+		//籍贯
+		getOriginCity('origin_city','origin_city_text','origin_province_text',cityData);
+		//户籍所在地
+		getOriginPro('register_city','register_city_text','register_province_text',cityData);
+		//婚姻状况
+		getMoareInformation('marital_status','marital_status_text',[
+			{text:'已婚'},
+			{text:'未婚'},
+			{text:'离异'}]);
+		//健康状况
+		getMoareInformation('health','health_text',[
+			{text:'健康'},
+			{text:'亚健康'},
+			{text:'慢性病'},
+			{text:'重病'},
+			{text:'残疾'},
+			{text:'其它'}]);
+		//教育程度
+		getMoareInformation('education','education_text',[
+			{text:'博士'},
+			{text:'硕士'},
+			{text:'本科'},
+			{text:'大专'},
+			{text:'高中'},
+			{text:'初中'},
+			{text:'小学'},
+		    {text:'其它'}]);
+		//理财习惯
+		getMoareInformation('financial_habits','financial_habits_text',[
+			{text:'存款'},
+			{text:'购买基金'},
+			{text:'购买股票'},
+			{text:'购买黄金'},
+			{text:'购买白银'},
+			{text:'购买其他理财产品'},
+			{text:'无理财习惯'},
+			{text:'其它'}]);
+		//性格
+		getMoareInformation('character','character_text',[
+			{text:'外向开朗'},
+			{text:'热情'},
+			{text:'自信'},
+			{text:'幽默风趣'},
+			{text:'谨慎'},
+			{text:'不善言辞'},
+			{text:'其它'}]);
+		//家庭收入
+		getMoareInformation('family_income','family_income_text',[
+			{text:'1万以下'},
+			{text:'1-5万'},
+			{text:'5-10万'},
+			{text:'10-20万'},
+			{text:'20-30万'},
+			{text:'30-50万'},
+			{text:'50-100万'},
+		    {text:'100万+'}]);
+		//购物渠道习惯
+		getMoareInformation('shopping_habits','shopping_habits_text',[
+			{text:'仅在实体店购物'},
+			{text:'实体店为主'},
+			{text:'网购为主'},
+			{text:'两者结合'}]);
+//			var car_type = $('input[name="car_type"]:checked').val();
+	}
+    function getNationData(){
+		var nationData = [
+			{text:'中国'},
+			{text:'美国'},
+			{text:'英国'},
+			{text:'德国'},
+			{text:'法国'},
+			{text:'日本'},
+			{text:'韩国'},
+			{text:'澳大利亚'},
+			{text:'非洲'},
+			{text:'其他国家'}
+		];
+		return nationData;
+    }
+    
+    function doSave(){
+    	if(cus_no != employee.employeeId) {
+							var btnArray = ['否', '是'];
+							mui.confirm('正在修改其他国安侠数据，需通知审核后才能保存入数据库！', '提示', btnArray, function(e) {
+								if (e.index == 1) {
+									doSubmit();
+								}
+							});	
+			
+			        }else{
+			        	doSubmit();
+			        }
+    }
+    
+    function doSubmit(){
+			var employee_name=employee.name;
+			var employee_no=employee.employeeId;
+			var employee_id=employee.id;      
+			var nationality_val=$("#nationality_text").val();
+			var origin_province_val=$("#origin_province_text").val();
+			var origin_city_val=$("#origin_city_text").val();
+			var register_province_val=$("#register_province_text").val();
+			var register_city_val=$("#register_city_text").val();
+			var marital_status_val=$("#marital_status_text").val();
+			var health_val=$("#health_text").val();
+			var education_val=$("#education_text").val();
+			var school_name_val=$("#school_name_text").val();
+			var car_type = $('input[name="car_type"]:checked').val();
+			var car_brand_val=$("#car_brand_text").val();
+			var financial_habits_val=$("#financial_habits_text").val();
+			var character_val=$("#character_text").val();
+			var family_income_val=$("#family_income_text").val();
+			var shopping_habits_val=$("#shopping_habits_text").val();
+			var hobby_one_val=$("#hobby_one_text").val();
+			var hobby_two_val=$("#hobby_two_text").val();
+			var hobby_three_val=$("#hobby_three_text").val();
+		    
+			var CustomerData = {
+				create_user: employee_name,
+				create_user_id:employee_id,
+				employee_no:employee_no,
+				store_id:employee.store_id,
+				customer_id:cus_id,
+				nationality: nationality_val,
+				native_place_pro: origin_province_val,
+				native_place_city: origin_city_val,
+				local_pro: register_province_val,
+				local_city: register_city_val,
+				marital_status: marital_status_val,
+				health_condition:health_val,
+				degree_of_education: education_val,
+				school_name: school_name_val,
+				is_car: car_type,
+				automobile_brand: car_brand_val,
+				money_manage: financial_habits_val,
+				character_data: character_val,
+				household_income: family_income_val,
+				shopping_channel: shopping_habits_val,
+				hobby_one: hobby_one_val,
+				hobby_two: hobby_two_val,
+				hobby_three: hobby_three_val
+			};
+			doManager('CustomerDataManager','saveCustomerData', CustomerData, function(data) {
+				if(data.result == true) {
+					var jsonData = JSON.parse(data.data);
+					if(jsonData == null){
+							mui.toast('已发送消息，审核后保存入数据库！');
+							setTimeout(function(){
+								closeMenu();
+							},500)
+						}else{
+							mui.toast('保存成功！');
+							setTimeout(function(){
+								closeMenu();
+							},500)
+					}
+//					if(cus_no != employee.employeeId) {
+//							var btnArray = ['否', '是'];
+//							mui.confirm('正在修改其他国安侠数据，需通知审核后才能保存入数据库！', '提示', btnArray, function(e) {
+//								if (e.index == 1) {
+//									mui.toast('已发送消息，审核后保存入数据库！');
+//									setTimeout(function(){
+//										closeMenu();
+//									},500)
+//								}
+//							});	
+//			
+//			        }else{
+//			        	mui.toast('保存成功');
+//						setTimeout(function() {
+//							closeMenu();
+//						}, 500);
+//			        }
+					
+						
+				} else {
+					mui.toast('保存失败');
+				}
+			});
+			    
+		}
+		function closeMenu(){
+			var _current = plus.webview.currentWebview();
+			var main = _current.opener();
+			_current.close();
+		
+		}
+		//获取更多信息详情
+		function selectMoreinformation(customer_id) {
+
+			doManager('CustomerDataManager', 'getCustomerDataByCustomerId',customer_id, function(data) {
+
+				if(data.result == true) {
+					var jsonData = JSON.parse(data.data);
+					more_data=jsonData;
+					if(jsonData!=null){
+						   
+						   $("#nationality_text").val(jsonData.nationality);
+		                   $("#origin_province_text").val(jsonData.native_place_pro);
+		                   $("#origin_city_text").val(jsonData.native_place_city);
+		                   $("#register_province_text").val(jsonData.local_pro);
+		                   $("#register_city_text").val(jsonData.local_city);
+		                   $("#marital_status_text").val(jsonData.marital_status);
+		                   $("#health_text").val(jsonData.health_condition);
+		                   $("#education_text").val(jsonData.degree_of_education);
+		                   $("#school_name_text").val(jsonData.school_name);
+		                   $('input[name="car_type"][value="' + jsonData.is_car + '"]').attr('checked', 'checked');
+		                   if(jsonData.automobile_brand==null||jsonData.automobile_brand==""){
+		                   	  $("#car_brand_text").val("无");
+		                   }else{
+		                   	 $("#car_brand_text").val(jsonData.automobile_brand);
+		                   }
+		                   $("#financial_habits_text").val(jsonData.money_manage);
+		                   $("#character_text").val(jsonData.character_data);
+		                   $("#family_income_text").val(jsonData.household_income);
+		                   $("#shopping_habits_text").val(jsonData.shopping_channel);
+		                   $("#hobby_one_text").val(jsonData.hobby_one);
+		                   $("#hobby_two_text").val(jsonData.hobby_two);
+		                   $("#hobby_three_text").val(jsonData.hobby_three);
+		            }
+                   
+				}
+			});
+		}
+    
+    
+    
+    
+	</script>
+
+</html>

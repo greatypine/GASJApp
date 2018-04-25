@@ -1,0 +1,1308 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>用户画像</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<!--标准mui.css-->
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="../css/common.css" />
+		<link rel="stylesheet" type="text/css" href="../css/style.css" />
+		<link rel="stylesheet" type="text/css" href="../css/express.css" />
+		<link href="../css/mui.picker.css" rel="stylesheet" />
+		<link href="../css/mui.poppicker.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../css/mui.picker.min.css" />
+		<link href="../css/monomer_portrait.css" rel="stylesheet" />
+		
+		<style>
+			.mui-popover-bottom li{height: 0.8rem; line-height: 0.8rem; font-size: 0.32rem;}
+			.img_plus{margin-left: 10px;height: 14px;width: 14px;cursor: pointer;}
+			.img_minus{margin-left: 5px;height: 14px;width: 14px;cursor: pointer;}
+			.option_select{border: 1px solid rgba(0,0,0,.2) !important;height:40px;width: 30%;padding: 0;margin: 0;font-size: 15px;}
+			.content_input{margin: 0;margin-left: 5px;width: 60% !important;font-size: 14px;}
+			.more_information{
+				width:100%; height: 0.7rem;color:#fff;font-size: 0.32rem;background-color: #e66629; text-align: center; margin-top: 0.4rem;border-radius: 0.1rem;
+			}
+
+
+		</style>
+		
+	</head>
+
+	<body>
+		<!--<header class="mui-bar mui-bar-nav titleheader">
+			<div>用户画像</div>
+			<div class="back" id="user_information" path="user_information.html" onclick="jump(this)"><a></a></div>
+			<div class="save">
+				<a href="#" onclick="compressImg();">保存</a>
+			</div>
+		</header>-->
+		<header class="mui-bar mui-bar-nav titleheader">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">用户画像</h1>
+			<div class="save">
+				<a onclick="compressImg(true)">保存</a>
+			</div>
+		</header>
+		
+		
+		<div id="picture" class="mui-popover mui-popover-action mui-popover-bottom">
+			<ul class="mui-table-view">
+				<li style="border-bottom: 1px solid #dbdbdb;" onclick="videoCapture();">
+					拍照
+				</li>
+				<li onclick="galleryImg();">
+					从手机相册中选择
+				</li>
+			</ul>
+			<ul class="mui-table-view">
+				<li >
+					<a id='aCancel' href="#picture"><b>取消</b></a>
+				</li>
+			</ul>
+		</div>
+		
+		<div id="div_info" class="mui-content" style="margin-bottom: 0.3rem;">
+			<div style="padding: 10px">
+				<div id="segmentedControl" class="mui-segmented-control" style="border: 1px solid #e66629;">
+					<a class="mui-control-item mui-active" href="#item1">
+						基本信息
+					</a>
+					<a class="mui-control-item" href="#item2">
+						补充信息
+					</a>
+					<a class="mui-control-item" href="#item3">
+						家庭成员
+					</a>
+					<!--<a class="mui-control-item" href="#item4">
+						拜访记录
+					</a>-->
+				</div>
+			</div>
+			<div id="item1" class="mui-control-content mui-active">
+				<ul class="mui-table-view mui-table-view-chevron ul_interval">
+					<li class="mui-table-view-cell input_li">
+						<div class="input-row">
+							<label>姓名<font style="color:red">*</font></label>
+							<input type="hidden" id="id" name="id">
+							<input type="hidden" id="create_user_id" name="create_user_id">
+							<input type="hidden" id="create_user" name="create_user">
+							<input type="text" id="name" name="name">
+						</div>
+					</li>
+					<li class="mui-table-view-cell input_li">
+						<div class="input-row">
+							<label>电话<font style="color:red">*</font></label>
+							<input type="tel" id="mobilephone" name="mobilephone" placeholder="11位电话号码或手机" maxlength="11" onkeyup="value=this.value.replace(/\D+/g,'')">
+						</div>
+					</li>
+					<li class="mui-table-view-cell radio_li">
+						<div class="input-row-suffix mui-radio">
+							<label>性别</label>
+							<div style="float: right;">
+								<input id="man" name="sex" type="radio" style="float: initial;" value="0" checked> 男
+								<input id="wuman" name="sex" type="radio" style="float: initial;" value="1"> 女
+							</div>
+						</div>
+					</li>
+					<li class="mui-table-view-cell input_li">
+						<div class="input-row">
+							<label>年龄</label>
+							<input type="tel" id="age" name="age" maxlength="3" onkeyup="value=this.value.replace(/\D+/g,'')">
+						</div>
+					</li>
+					<li class="mui-table-view-cell radio_li">
+						<div class="input-row-suffix mui-radio">
+							<label>房屋类型</label>
+							<div style="float: right;">
+								<input name="house_type" type="radio" style="float: initial;" bidTableFlag="true" value="0" > 平房
+								<input name="house_type" type="radio" style="float: initial;" bidTableFlag="true" value="1" checked> 楼房
+							</div>
+						</div>
+					</li>
+					<li id="li_house_address" class="mui-table-view-cell select_li">
+						<input type="hidden" id="house_id" name="house_id" bidTableFlag="true">
+						<a id="a_address" class="mui-navigate-right">
+							<label>家庭住址</label>
+							<input id="address" name="address" type="text" placeholder="请填写" readonly="readonly">
+						</a>
+					</li>
+				</ul>
+
+				<ul id="ul_house_style" class="mui-table-view mui-table-view-chevron">
+					<li class="mui-table-view-cell radio_li" style="color: #e66629;">
+						<label style="font-weight: bolder;">|</label>&nbsp家庭信息
+						<input type="hidden" id="house_style_id" name="house_style_id" bidTableFlag="true">
+					</li>
+					<li class="mui-table-view-cell input_li_suffix">
+						<div class="input-row-suffix">
+							<label>面积</label>
+							<label class="suffix">平方米</label>
+							<input type="number" pattern="\d*" id="house_area" name="house_area" bidTableFlag="true" onkeyup="value=this.value.replace(/\D+/g,'')">
+						</div>
+					</li>
+					<li class="mui-table-view-cell input_li">
+						<div class="input-row">
+							<label>朝向</label>
+							<input type="text" id="house_toward" name="house_toward" bidTableFlag="true">
+						</div>
+					</li>
+					<li class="mui-table-view-cell input_li">
+						<div class="input-row">
+							<label>户型</label>
+							<input type="text" id="house_style" name="house_style" bidTableFlag="true">
+						</div>
+					</li>
+					<li id="li_house_pic" class="mui-table-view-cell select_li div_bottom">
+						<a id="a_house_id" class="mui-navigate-right" >
+							<label>户型图</label>
+							<input type="text" id="house_pic" name="house_pic" readonly="readonly" bidTableFlag="true">
+						</a>
+					</li>
+				</ul>
+
+			</div>
+			<div id="item2" class="mui-control-content">
+				<ul class="mui-table-view mui-table-view-chevron ul_interval">
+					<li class="mui-table-view-cell" style="line-height: 1.2rem;padding:10px 0;">
+						<a class="mui-navigate-right" href="#picture">
+							<label>照片</label>
+							<img src="" class="header_img" crossorigin="*"/>
+							<input type="hidden" id="customer_pic" name="customer_pic"/>
+						</a>
+					</li>
+					<li id="li_nationality" class="mui-table-view-cell select_li">
+						<a class="mui-navigate-right">
+							<label>民族</label>
+							<input type="text" id="nationality_text" name="nationality_text" placeholder="请选择" bidTableFlag='true' readonly />
+							<input type="hidden" id="nationality" name="nationality" />
+						</a>
+					</li>
+					<li class="mui-table-view-cell radio_li">
+						<div class="input-row-suffix mui-radio">
+							<label>住房性质</label>
+							<div style="float: right;">
+								<input name="house_property" type="radio" style="float: initial;" value="1" checked> 自有
+								<input name="house_property" type="radio" style="float: initial;" value="2"> 租住
+							</div>
+						</div>
+					</li>
+					<!--<li class="mui-table-view-cell input_li">
+						<div class="input-row">
+							<label>职业</label>
+							<input type="text" id="job" name="job" maxlength="20">
+						</div>
+					</li>-->
+					<li  class="select_li">
+						<div id="li_job" class="mui-table-view-cell" style="border: 0;">
+						<a class="mui-navigate-right">
+							<label>职业</label>
+							<input type="text" id="job_text" name="job_text" placeholder="请选择" bidTableFlag='true' readonly />
+							<input type="hidden" id="job" name="job"/>
+						</a>
+						</div>
+						<div style="border-bottom:1px solid #c8c7cc;overflow: hidden;margin: 0 15px;"><input type="text" id="other_job" placeholder="请输入职业" style="border: 1px solid #c8c7cc; margin: 10px 10px;text-align: center;display: none;"/>
+						</div>
+					</li>
+					<li id="li_income" class="mui-table-view-cell select_li">
+						<a class="mui-navigate-right">
+							<label>收入</label>
+							<input type="text" id="income" name="income" placeholder="请选择" readonly />
+						</a>
+					</li>
+					<li id="li_work_overtime" class="mui-table-view-cell select_li">
+						<a class="mui-navigate-right">
+							<label>加班频率</label>
+							<input type="text" id="work_overtime_text" name="work_overtime_text" placeholder="请选择" bidTableFlag='true' readonly />
+							<input type="hidden" id="work_overtime" name="work_overtime" />
+						</a>
+					</li>
+					<li class="mui-table-view-cell input_li">
+						<div class="input-row">
+							<label>其他信息</label>
+							<input type="text" id="other" name="other" maxlength="120" value="无"  />
+						</div>
+					</li>
+				</ul>
+				<ul class="mui-table-view mui-table-view-chevron ">
+					<li class="mui-table-view-cell radio_li" style="color: #e66629;">
+						<label style="font-weight: bolder;">|</label>&nbsp家庭信息
+					</li>
+					<li class="mui-table-view-cell input_li_suffix">
+						<div class="input-row-suffix">
+							<label>家庭人口数</label>
+							<label class="suffix">人</label>
+							<input type="number" pattern="\d*" oninput="if(value.length>2)value=value.slice(0,2)" id="family_num" name="family_num" maxlength="2" onkeyup="value=this.value.replace(/\D+/g,'')"/>
+						</div>
+					</li>
+					<li class="mui-table-view-cell input_li_suffix">
+						<div class="input-row-suffix">
+							<label>学龄前人数</label>
+							<label class="suffix">人</label>
+							<input type="number" pattern="\d*" oninput="if(value.length>2)value=value.slice(0,2)" id="preschool_num" name="preschool_num" maxlength="2" placeholder="0-6岁" onkeyup="value=this.value.replace(/\D+/g,'')">
+						</div>
+					</li>
+					<li class="mui-table-view-cell input_li_suffix">
+						<div class="input-row-suffix">
+							<label>未成年人数</label>
+							<label class="suffix">人</label>
+							<input type="number" pattern="\d*" oninput="if(value.length>2)value=value.slice(0,2)"  id="minor_num" name="minor_num" maxlength="2" placeholder="7-18岁" onkeyup="value=this.value.replace(/\D+/g,'')">
+
+						</div>
+					</li>
+					<!--<li class="mui-table-view-cell input_li div_bottom">
+						<div class="input-row">
+							<label>宠物种类</label>
+							<input type="text" id="pet_type" name="pet_type" value="无" >
+						</div>
+					</li>-->
+					<!--<li id="li_pet_type" class="mui-table-view-cell select_li">
+						<a class="mui-navigate-right">
+							<label>宠物种类</label>
+							<input type="text" id="pet_type_text" name="pet_type_text" placeholder="请选择" bidTableFlag='true' readonly />
+							<input type="hidden" id="pet_type" name="pet_type" />
+						</a>
+					</li>-->
+					
+					<li class="select_li">
+						<div id="li_pet_type" class="mui-table-view-cell" style="border: 0;">
+						<a class="mui-navigate-right">
+							<label>宠物种类</label>
+							<input type="text" id="pet_type_text" name="pet_type_text" placeholder="请选择" bidTableFlag='true' readonly />
+							<input type="hidden" id="pet_type" name="pet_type"/>
+						</a>
+						</div>
+						<div style="border-bottom:1px solid #c8c7cc;overflow: hidden;margin: 0 15px;"><input type="text" id="other_pet_type" placeholder="请输入宠物种类" style="border: 1px solid #c8c7cc; margin: 10px 10px;text-align: center;display: none;"/></div>
+					</li>
+					
+				</ul>
+				<div>
+					<button class="more_information" id="more_information_but" onclick="but_onclick()">更多信息</button>
+				</div>
+			</div>
+
+			<div id="item3" class="mui-control-content">
+
+				<div class="add_btn">
+					<button id="btnAdd" class="div_bottom">
+						<span class="mui-icon mui-icon-plusempty"></span>
+						添加成员信息
+					</button>
+				</div>
+			</div>
+			<!--<div id="item4" class="mui-control-content">
+			    
+				<div class="add_btn">
+					<button id="btnRelation">
+						<span class="mui-icon mui-icon-plusempty"></span>
+						添加拜访信息
+					</button>
+				</div>
+			</div>-->
+		</div>
+		
+	</body>
+	<script type="text/javascript" src="../js/mui.min.js"></script>
+	<script type="text/javascript" src="../js/jquery-2.2.2.min.js"></script>
+	<script type="text/javascript" src="../js/custom_jquery_based.js"></script>
+	<script src="https://pv.sohu.com/cityjson?ie=utf-8"></script>
+	<script type="text/javascript" src="../js/custom_common.js"></script>
+	<script type="text/javascript" src="../js/date_util.js"></script>
+	<script type="text/javascript" src="../js/mui.picker.js"></script>
+	<script type="text/javascript" src="../js/mui.picker.min.js"></script>
+	<script type="text/javascript" src="../js/mui.poppicker.js"></script>
+	<script type="text/javascript" src="../js/dict.js"></script>
+	<script type="text/javascript" type="text/javascript">
+		var houseWebview = null;
+		var relationPicker = new mui.PopPicker();
+		var employeePicker = new mui.PopPicker();
+		var typePicker = new mui.PopPicker();
+		var incomePicker = new mui.PopPicker();
+		
+		var workDictArray = null;
+        var nationalityDictArray = null;
+        var jobDictArray = null;
+        var petDictArray = null;
+        
+		var employee = JSON.parse(localStorage.getItem('employee'));
+		var store = JSON.parse(localStorage.getItem('store'));
+		
+	    var dict_relation_content_resource = JSON.parse(localStorage.getItem('relation_content_resource'));
+    	var dict_relation_content_option_resource = JSON.parse(localStorage.getItem('relation_content_option_resource'));
+ 
+		var menu = null;
+		var house_menu = null;
+		
+		var query_customer = null;
+//		var cus_id=null;
+		
+//		var main,menu,house_menu, mask = mui.createMask(_closeMenu);
+//		var showMenu = false,
+//		mode = 'main-move';
+		
+		var obj_addressCustomer = null;
+		var self =null;
+	
+		
+		
+		/*
+		 * 显示菜单菜单
+		 */
+		function openMenu(name) {
+//			if (!showMenu) {
+//				//解决android 4.4以下版本webview移动时，导致fixed定位元素错乱的bug;
+//				if (mui.os.android && parseFloat(mui.os.version) < 4.4) {
+//					document.querySelector("header.mui-bar").style.position = "static";
+//					//同时需要修改以下.mui-contnt的padding-top，否则会多出空白；
+//					document.querySelector(".mui-bar-nav~.mui-content").style.paddingTop = "0px";
+//				}
+//
+//				//侧滑菜单处于隐藏状态，则立即显示出来；
+//				//显示完毕后，根据不同动画效果移动窗体；
+//				menu = plus.webview.getWebviewById('select_house');
+//				house_menu = plus.webview.getWebviewById('apartment_layout_diagram');
+				if(name=="a_address"){
+					var sh_webview = plus.webview.getWebviewById('select_house');
+					if(sh_webview != null){
+						sh_webview.close();
+					}
+					mui.openWindow({
+						url:'new_select_house.html',
+						id:"new_select_house",
+						createNew:true,
+						show: {
+						aniShow: 'slide-in-right'
+					},
+					waiting: {
+						autoShow: false
+					},
+						extras:{
+							address_customer:obj_addressCustomer
+						}
+					});
+//					mui.fire(menu,'house_id_value',{
+//						address_customer:obj_addressCustomer
+//					});
+				}else if(name=="a_house_id"){
+					var house_id = $('#house_id').val();
+					if(house_id == null || house_id == ''){
+						mui.toast('请选择完整的家庭住址！');
+						return;
+					}
+					var house_style = $('#house_style').val();
+					var house_area = $('#house_area').val();
+					var house_toward = $('#house_toward').val();
+					if(!checkValue(house_style) || !checkValue(house_area) || !checkValue(house_toward)){
+						mui.toast('请填写完整的户型信息！');
+						return;
+					}
+					obj_addressCustomer.house_style = house_style;
+					obj_addressCustomer.house_toward = house_toward;
+					obj_addressCustomer.house_area = house_area;
+//					house_menu.show('pop-in', 100);
+//					mui.fire(house_menu,'house_id_value',{
+//						address_customer:obj_addressCustomer
+//					});
+					var ald_webview = plus.webview.getWebviewById('apartment_layout_diagram');
+					if(ald_webview != null){
+						ald_webview.close();
+					}
+					mui.openWindow({
+						url:'apartment_layout_diagram.html',
+						id:"apartment_layout_diagram",
+						createNew:true,
+						show: {
+						aniShow: 'slide-in-right'
+					},
+					waiting: {
+						autoShow: false
+					},
+						extras:{
+							address_customer:obj_addressCustomer
+						}
+					});
+				}
+		}
+		window.addEventListener('getHouse_id',function(event){
+			obj_addressCustomer = event.detail.address_customer;
+		
+			var address = obj_addressCustomer.tv_name 
+				+ obj_addressCustomer.building_name + "号楼";
+				if(obj_addressCustomer.house_type == 1){
+					address += obj_addressCustomer.unit_no
+							+ "单元" + obj_addressCustomer.house_no + "号";
+				}
+			$('#house_id').val(obj_addressCustomer.house_id);
+			$('#address').val(address);
+			//根据房屋id获取户型对象
+			doManager('HouseStyleManager','getHouseStyleByHouseId',obj_addressCustomer.house_id,function(data){
+				if(data.result){
+					obj_addressCustomer.house_style = data.house_style;
+					obj_addressCustomer.house_pic = data.house_pic;
+					obj_addressCustomer.house_toward = data.house_toward;
+					obj_addressCustomer.house_area = data.house_area;
+					obj_addressCustomer.house_style_id = data.id;
+					$('#house_area').val(data.house_area);
+					$('#house_style_id').val(data.id);
+					$('#house_toward').val(data.house_toward);
+					$('#house_pic').val(data.house_pic);
+					$('#house_style').val(data.house_style);
+				}
+			});
+		});
+		
+		window.addEventListener('getHouse_pic',function(event){
+			$('#house_pic').val(event.detail.pic_name);
+		});
+
+		mui.plusReady(function() {
+			mui.init();
+//			plus.webview.currentWebview().setStyle({
+//				    softinputMode: "adjustResize"  // 弹出软键盘时自动改变webview的高度
+//				});
+			if(mui.os.ios) {
+				$('.div_bottom').css('margin-bottom', '0.3rem');
+				$('.mui-content').css('margin-bottom', '0.2rem');
+//				$('.mui-content').css('height', '100%');
+//				$('.mui-content').css('overflow', 'auto');
+				$('.more_information').css('margin-top', '0.2rem');
+			}
+
+			workDictArray = getDict('li_work_overtime', 'work_overtime', 'work_overtime_text', 'work_overtime_resource');
+            nationalityDictArray=getNationalityDict('li_nationality', 'nationality', 'nationality_text', 'customer_nationality');
+            jobDictArray=getJobDict('li_job', 'job', 'job_text', 'customer_job','other_job');
+            petDictArray=getJobDict('li_pet_type', 'pet_type', 'pet_type_text', 'customer_pet','other_pet_type');
+            
+			getDictForOnlyText('li_income','income',[{
+				text: '0-6000'
+			}, {
+				text: '6001-10000'
+			}, {
+				text: '10001-15000'
+			},{
+				text: '15001-20000'
+			}, {
+				text: '20000以上'
+			}]);
+//			initEmployeeSelect();
+			relationPicker.setData([{
+				text: '配偶'
+			}, {
+				text: '祖父母'
+			}, {
+				text: '父母'
+			}, {
+				text: '子女'
+			}, {
+				text: '孙儿/孙女'
+			}, {
+				text: '其他'
+			}]);
+			
+			typePicker.setData([{
+				text: '电话'
+			}, {
+				text: '微信'
+			}, {
+				text: '客户到店'
+			},{
+				text: '面对面（上门）'
+			}, {
+				text: '面对面（混片儿）'
+			}, {
+				text: '其他'
+			}]);
+			
+			if(obj_addressCustomer == null){ 
+				obj_addressCustomer = {house_type:1};
+			}
+			
+			var self = plus.webview.currentWebview();
+			if(self != null && self.customer != null) {
+				customer = JSON.parse(self.customer);
+				setCustomer(customer);
+			}
+
+			document.getElementById('btnAdd').addEventListener('tap', function(event) {
+				addFamily();
+			});
+			
+//			document.getElementById('btnRelation').addEventListener('tap', function(event) {
+//				addRelation();
+//			});
+			
+
+			document.getElementById('name').addEventListener('blur', function(event) {
+				findCustomer();
+			});
+
+			document.getElementById('mobilephone').addEventListener('blur', function(event) {
+				findCustomer();
+			});
+			document.getElementById('a_address').addEventListener('tap', function(event) {
+				openMenu('a_address');
+			});
+
+			document.getElementById('a_house_id').addEventListener('tap', function(event) {
+				openMenu('a_house_id');
+			});
+
+			$('input[name="house_type"]').change(function() {
+				var house_type = $('input[name="house_type"]:checked').val();
+				if(house_type == 0){
+					obj_addressCustomer.house_type = 0;
+					$('#li_house_pic').hide();
+					$('#address').val("");
+					obj_addressCustomer.house_id=null;
+					obj_addressCustomer.building_id=null;
+					obj_addressCustomer.tv_id=null;
+				}else{
+					obj_addressCustomer.house_type = 1;
+					$('#li_house_pic').show();
+					$('#address').val("");
+					obj_addressCustomer.house_id=null;
+					obj_addressCustomer.building_id=null;
+					obj_addressCustomer.tv_id=null;
+				}
+			});
+			
+		});
+		function but_onclick() {
+			if($('#id').val()==null||$('#id').val()==""){
+				compressImg(false);
+			}else{
+				var webview = plus.webview.getWebviewById('more_information');
+					if(webview != null){
+						webview.close();
+					}
+					mui.openWindow({
+						url:'more_information.html',
+						id:'more_information',
+						extras:{
+						    cus_id:$('#id').val(),
+						    cus_no:employee.employeeId
+	    				},
+	    				createNew:true,
+	    				show: {
+						aniShow: 'slide-in-right'
+						},
+						waiting: {
+							autoShow: false
+						}
+    				
+					});
+			}
+		}
+		
+					
+         //获取用户画像实现自动带出功能
+		function findCustomer() {
+			var customer_parameter = {
+				name: $('#name').val(),
+				mobilephone: $('#mobilephone').val()
+			}
+			if(customer_parameter.name != null && customer_parameter.name != '' &&
+				customer_parameter.mobilephone != null && customer_parameter.mobilephone != '') {
+				doManager('CustomerManager', 'findCustomerInfo', customer_parameter, function(data) {
+					if(data.result) {
+						var customer = JSON.parse(data.data);
+						if(customer != null) {
+							setCustomer(customer);
+						}
+					}
+				});
+			}
+
+		}
+		
+		function setCustomer(customer){
+			query_customer = customer;
+			setFormSimpleData(customer);
+			if(customer.job!=null){
+				if(customer.job.indexOf("99_")==0){
+					$("#other_job").show();
+					$("#job_text").val("其他");
+					$("#other_job").val(customer.job.slice(3));
+				}else{
+					$("#job_text").val(customer.job);
+					$("#other_job").hide();
+				}
+			
+				if(customer.pet_type.indexOf("99_")==0){
+					$("#other_pet_type").show();
+					$("#pet_type_text").val("其他");
+					$("#other_pet_type").val(customer.pet_type.slice(3));
+				}else{
+					$("#pet_type_text").val(customer.pet_type);
+					$("#other_pet_type").hide();
+				}
+			}
+			
+			$("#nationality_text").val(customer.nationality);
+			$('input[name="sex"][value="' + customer.sex + '"]').attr('checked', 'checked');
+			$('input[name="house_property"][value="' + customer.house_property + '"]').attr('checked', 'checked');
+			if(customer.customer_address != null){
+				obj_addressCustomer = customer.customer_address;
+				$('input[name="house_type"][value="' + customer.customer_address.house_type + '"]').attr('checked', 'checked');
+				if(customer.customer_address.house_type == 0){
+					$('#li_house_pic').hide();
+				}else{
+					$('#li_house_pic').show();
+				}
+				$('#house_area').val(customer.customer_address.house_area);
+				$('#house_style').val(customer.customer_address.house_style);
+				$('#house_toward').val(customer.customer_address.house_toward);
+				$('#house_pic').val(customer.customer_address.house_pic);
+				$('#house_id').val(customer.customer_address.house_id);
+				$('#house_style_id').val(customer.customer_address.house_style_id);
+			}
+			if(customer.cus_pic != null){
+				$('.header_img').attr('src',decodeURI(customer.cus_pic));
+			}
+//			alert(workDictArray);
+//			for(var index in workDictArray) {
+//				if(workDictArray[index].value == customer.work_overtime) {
+//					$('#work_overtime_text').val(workDictArray[index].text);
+//					break;
+//				}
+//			}
+//			alert("3");
+//			alert(nationalityDictArray);
+//			for(var index in nationalityDictArray) {
+//				alert("2");
+//				if(nationalityDictArray[index].value == customer.nationality) {
+//					alert("1");
+//					$('#nationality_text').val(nationalityDictArray[index].text);
+//					break;
+//				}
+//			}
+			$(customer.childs).each(function(i, family) {
+				addFamily(family);
+			});
+
+//			$(customer.relations).each(function(i, relation) {
+//				addRelation(relation);
+//			});
+		
+		}
+		
+		function addFamily(family) {
+			if(typeof(family) == 'undefined') {
+				family = {
+					family_relation: '',
+					family_name: '',
+					family_phone: '',
+					family_age: ''
+				};
+			}
+			var $div_parent = $('#item3');
+			var $div_btn = $div_parent.find('.add_btn');
+			$div_btn.before('<ul class="mui-table-view mui-table-view-chevron ul_interval"></ul>')
+			var $ul = $div_parent.find('ul:last');
+			$ul.append('<li class="mui-table-view-cell select_li"></li>');
+			var $li = $ul.find('li:last');
+			$li.append('<a class="mui-navigate-right" href="#"></a>');
+			var $a = $li.find('a:last');
+			$a.append('<label>成员称谓<font style="color:red">*</font></label>');
+			$a.append('<input type="text" name="family_relation" placeholder="请选择" value="' + family.family_relation + '" bidTableFlag="true" readonly />');
+			$li.click(function() {
+				var $input = $(this).find('input[name="family_relation"]');
+				relationPicker.show(function(items) {
+					$input.val(items[0].text)
+				});
+			});
+
+			$ul.append('<li class="mui-table-view-cell input_li"></li>');
+			$ul.find('li:last').append('<div class="input-row"></div>');
+			$div = $ul.find('li:last').find('div:last');
+			$div.append('<label>成员姓名<font style="color:red">*</font></label>');
+			$div.append('<input type="text" name="family_name" value="' + family.family_name + '"  bidTableFlag="true"/>');
+
+			$ul.append('<li class="mui-table-view-cell input_li"></li>');
+			$ul.find('li:last').append('<div class="input-row"></div>');
+			$div = $ul.find('li:last').find('div:last');
+			$div.append('<label>成员电话</label>');
+			$div.append('<input type="number" pattern="\d*" name="family_phone" maxlength="11" oninput="if(value.length>11)value=value.slice(0,11)" value="' + family.family_phone + '"  bidTableFlag="true"/>');
+			$ul.append('<li class="mui-table-view-cell input_li"></li>');
+			$ul.find('li:last').append('<div class="input-row"></div>');
+			$div = $ul.find('li:last').find('div:last');
+			$div.append('<label>成员年龄<font style="color:red">*</font></label>');
+			$div.append('<input type="number" pattern="\d*" name="family_age" maxlength="3" oninput="if(value.length>3)value=value.slice(0,3)" value="' + family.family_age + '"  bidTableFlag="true"/>');
+
+			$ul.append('<li class="mui-table-view-cell input_li" style="style="text-align: right;"></li>')
+			$li = $ul.find('li:last');
+			$li.append('<button class="btnDelete">删除</button>');
+			var $button = $li.find('button:last');
+			$button.click(function() {
+				var btnArray = ['否', '是'];
+				mui.confirm('确认删除吗？', '提示', btnArray, function(e) {
+					if (e.index == 1) {
+						$ul.remove();
+					}
+				});	
+				
+			});
+		}
+
+		
+		var isSaving = false;
+		
+		function compressImg(_type){
+			if(isSaving){
+				mui.toast('保存中，请稍后。。。。');
+				return;
+			}
+			isSaving = true;
+			if(query_customer != null && query_customer.employee_no != employee.employeeId) {
+				var btnArray = ['否', '是'];
+				mui.confirm('正在修改其他国安侠数据，需通知审核后才能保存入数据库！', '提示', btnArray, function(e) {
+					if (e.index == 1) {
+						var localUrl = $('.header_img').attr('src');
+						if(localUrl.indexOf('file:') == -1){
+							doSubmit(_type);
+							return;
+						}else{
+								plus.zip.compressImage({
+									src:localUrl,
+									dst:localUrl,
+									overwrite:true,
+									quality:20
+								},
+								function() {
+									uploadImg(localUrl,_type);
+								},function(error) {
+									uploadImg(localUrl,_type);
+							});
+						}
+					}else{
+						isSaving = false;
+					}
+				});	
+			
+			}else{
+		        var localUrl = $('.header_img').attr('src');
+				if(localUrl.indexOf('file:') == -1 || localUrl == '' || localUrl == null){
+					doSubmit(_type);
+					return;
+				}else{
+						plus.zip.compressImage({
+							src:localUrl,
+							dst:localUrl,
+							overwrite:true,
+							quality:20
+						},
+						function() {
+							uploadImg(localUrl,_type);
+						},function(error) {
+							uploadImg(localUrl,_type);
+					});
+				}
+			}
+			
+		}
+		
+		function uploadImg(localUrl,_type){
+			if(plus.networkinfo.getCurrentType() == plus.networkinfo.CONNECTION_CELL4G) {
+				var btnArray = ['否', '是'];
+				mui.confirm('正在使用4G网络！确定要上传数据吗？', '网络提示', btnArray, function(e) {
+					if (e.index == 1) {
+						doSave(localUrl,_type);
+					}
+				});	
+			}else{
+		        doSave(localUrl,_type);
+			}
+		}
+		var wt= null;
+//		function addRelation(relation) {
+//			var isedit = false;
+//			if(typeof(relation) == 'undefined') {
+//				isedit = true;
+//				 relation = {
+//	                id:'',
+//	                employee_no:employee.employeeId,
+//	                employee_name:employee.name,
+//               	relation_type:'',
+//	                relation_date:new Date().Format('YYYY-MM-dd'),
+//					childs:[]
+//	            }
+//			}else{
+//				relation.relation_date = new Date(relation.relation_date).Format('YYYY-MM-dd');
+//			}
+//			var $div_parent = $('#item4');
+//			var $div_btn = $div_parent.find('.add_btn');
+//			var html = '<ul class="mui-table-view mui-table-view-chevron ul_interval">'+
+//					   '<li class="mui-table-view-cell select_li emp">'+
+//					   '<a class="mui-navigate-right" href="#">'+
+//					   '<label>拜访国安侠</label>'+
+//					   '<input type="hidden" name="relation_id" value="'+relation.id+'" bidtableflag="true">'+
+//					   '<input type="hidden" name="employee_no" value="'+relation.employee_no+'" bidtableflag="true">'+
+//					   '<input type="text" name="employee_name" placeholder="请选择" value="'+relation.employee_name+'" bidtableflag="true" readonly>'+
+//					   '</a>'+
+//					   '</li>'+
+//					   
+// 					   '<li class="mui-table-view-cell select_li type">'+
+//					   '<a class="mui-navigate-right" href="#">'+
+//					   '<label>拜访方式<font style="color:red">*</font></label>'+
+//					   '<input type="text" name="relation_type" placeholder="请选择" value="'+(relation.relation_type == null?'':relation.relation_type)+'" bidtableflag="true" readonly>'+
+//					   '</a>'+
+//					   '</li>'+
+//					   
+//				   	   '<li class="mui-table-view-cell select_li date">'+
+//					   '<a class="mui-navigate-right" href="#">'+
+//					   '<label>拜访时间</label>'+
+//					   '<input type="text" name="relation_date" placeholder="请选择" value="'+relation.relation_date+'" bidtableflag="true" readonly>'+
+//					   '</a>'+
+//					   '</li>';
+//					   html+= (isedit == true?'<li class="mui-table-view-cell input_li" style="text-align: right;"><button class="btnDelete">删除</button></li>':'')+
+//					   '</ul>';
+//			$div_btn.before(html);
+//			var $ul = $div_parent.find('ul:last');
+//			var $li_date = $ul.find('.date');
+//			var $ul_content = $div_parent.find('ul:last');
+//  		if(dict_relation_content_resource != null){
+//				dict_relation_content_resource.sort(function(a,b){
+//	                return b.dictCode-a.dictCode
+//	            });
+//  		}
+//			$(dict_relation_content_resource).each(function(index,element){
+//	            $li_date.after('<li class="mui-table-view-cell" style="padding-right: 0;">'+
+//	            		'<label>'+element.dictText+'</label>'+
+//	            		(isedit == true?'<img src="../images/badge_plus_16px.png" class="img_plus"/>':'')+
+//	            		'<input type="hidden" name="dictCode" value="'+element.dictCode+'" bidtableflag="true"/><ul></ul></li>');
+//				var $li_content = $li_date.next('li');
+//				var $option_ul = $li_content.find('ul');
+//	 			$(relation.childs).each(function(i,content){
+//	                if(content.content_code != element.dictCode){
+//	                    return;
+//	                }
+//	                addRow($option_ul,isedit,element.dictCode,content);
+//	           });
+//	            if(isedit){
+//	            	var $img = $li_content.find('.img_plus:last');
+//	                $img.click(function(){
+//	                    var dcode = $img.next('input').val();
+//	                    addRow($option_ul,isedit,dcode,null,null);
+//	                });
+//	            }
+//	        });
+//	        
+//	        
+//			if(isedit){
+//				$ul_content.find('.emp')[0].addEventListener('tap',function(event){
+//					var $input_name = $(this).find('input[name="employee_name"]');
+//					var $input_no = $(this).find('input[name="employee_no"]');
+//					employeePicker.show(function(items) {
+//						$input_name.val(items[0].text);
+//						$input_no.val(items[0].value);
+//					});
+//				});
+//				
+//				$ul_content.find('.type')[0].addEventListener('tap',function(event){
+//					var $input_type = $(this).find('input[name="relation_type"]');
+//					typePicker.show(function(items) {
+//						$input_type.val(items[0].text);
+//					});
+//				});
+//	
+//				$ul_content.find('.date')[0].addEventListener('tap', function() {
+//					var datePicker = new mui.DtPicker({type:"date",endDate:new Date()});
+//					var input_relation_date = $(this).find('input[name="relation_date"]')[0];
+//						datePicker.show(function(rs) {
+//							input_relation_date.value = rs.text;
+//							datePicker.dispose();
+//						});
+//					}, false);
+//				$ul_content.find('.btnDelete').click(function(){
+//					var btnArray = ['否','是'];
+//					mui.confirm('确认删除吗？', '提示', btnArray, function(e) {
+//						if (e.index == 1) {
+//							$ul_content.remove();
+//						}
+//					});	
+//					
+//				});
+//			}
+//			
+//		}
+		
+//		function addRow($ul,isedit,dictCode,content){
+//          if(content == null){
+//              content = {
+//                  id : '',
+//                  option_code : '',
+//                  content : ''
+//              };
+//          }
+//          var str_select_name = 'option'+dictCode;
+//          var str_input_name = 'input'+dictCode;
+//
+//          var html = '<li><input type="hidden" name="content_id" value="'+content.id+'" bidtableflag="true">'+
+//          				'<select class="option_select" name="'+str_select_name+'" bidtableflag="true"'+
+//          				(isedit == true?'':'disabled')+' ></select>'+
+//          				'<input type="text" name="'+str_input_name+'" class="content_input" value="'+content.content+'" bidtableflag="true"'+
+//          				(isedit == true?'':'disabled')+' >'+
+//          				(isedit == true?'<img src="../images/minus_16px.png" class="img_minus"/>':'')+
+//          				'</li>';
+//		
+//          $ul.append(html);
+//          var $select_option = $ul.find('select[name="'+str_select_name+'"]:last'); 
+//          var $current_li = $ul.find('li:last');
+//          var first_code = null;
+//          $(dict_relation_content_option_resource).each(function(j,dict){
+//              if(dict.serialNumber == dictCode){
+//              	if(first_code == null){
+//              		first_code = dict.dictCode;
+//              	}
+//                  $select_option.append('<option value="'+dict.dictCode+'">'+dict.dictText+'</option>');
+//              }
+//          });
+//          if(isedit){
+//              var $img_minus = $current_li.find('.img_minus:last');
+//              $img_minus.click(function(){
+//                  $current_li.remove();
+//              });
+//          }
+//
+//          if(content.option_code != ''){
+//              $select_option.val(content.option_code);
+//          }
+//      }
+		
+		function doSave(imgpath,_type){
+			var files = [];
+			files.push({name:new Date().Format('YYYYMMDDhhmmss'),path:imgpath});
+			wt=plus.nativeUI.showWaiting("正在上传。。。");
+			var task=plus.uploader.createUpload(file_server+"?img_type=1&file_name=user_image",
+				{method:"POST"},
+				function(t,status){ //上传完成
+					if(status==200){
+						var data = JSON.parse(t.responseText);
+						if(data.result == true){
+							var pmsfile = JSON.parse(data.data);
+							$('#customer_pic').val(pmsfile.name)
+							wt.close();
+							doSubmit(_type);
+						}else{
+							wt.close();
+							mui.toast(data.message);
+						}
+					}else{
+						mui.toast('上传图片失败');
+					}
+				}
+			);
+			for(var i=0;i<files.length;i++){
+				var f=files[i];
+				task.addFile(f.path,{key:f.name});
+			}
+			task.start();
+				
+		}
+
+		function doSubmit(_type) {
+			
+			var ulArray = $('#item3').find('ul');
+//			var relationElementArray = $('#item4').children('ul');
+			var familyArray = new Array();
+//			var relationArray = new Array();
+			for(var i = 0;i < ulArray.length;i++){
+				var str_family_relation = $(ulArray[i]).find('input[name="family_relation"]').val();
+				var str_family_name = $(ulArray[i]).find('input[name="family_name"]').val();
+				var str_family_phone = $(ulArray[i]).find('input[name="family_phone"]').val();
+				var str_family_age = $(ulArray[i]).find('input[name="family_age"]').val();
+
+				if(!checkValue(str_family_relation) || !checkValue(str_family_name) ||
+					!checkValue(str_family_age)) {
+					isSaving = false;
+					mui.toast('请输入完整的家庭成员信息，或删除不完整的信息');
+					return;
+				}
+				if(checkValue(str_family_phone)) {
+					if(!/^\d{11}$/.test(str_family_phone)) {
+						isSaving = false;
+						mui.toast("请输入正确的家庭成员电话。");
+						return;
+					}
+				}
+
+				var family = {
+					family_relation: str_family_relation,
+					family_name: str_family_name,
+					family_phone: str_family_phone,
+					family_age: str_family_age
+				};
+				familyArray.push(family);
+			}
+			
+			var customer = getFormSimpleData('div_info');
+			if($("#job_text").val()=="其他"){
+				if($("#other_job").val()==null||$("#other_job").val()==""){
+					mui.toast("请输入职业");
+					isSaving = false;
+					return;
+				}else{
+					customer.job="99_"+$("#other_job").val();
+				}
+				
+			}else{
+				customer.job=$("#job_text").val();
+			}
+			
+			
+			if($("#pet_type_text").val()=="其他"){
+				if($("#other_pet_type").val()==null||$("#other_pet_type").val()==""){
+					mui.toast("请输入宠物种类");
+					isSaving = false;
+					return;
+				}else{
+					customer.pet_type="99_"+$("#other_pet_type").val();
+				}
+			}else{
+				customer.pet_type=$("#pet_type_text").val();
+			}
+
+			if(checkValue(customer.family_num)){
+				if(checkValue(customer.preschool_num) && parseInt(customer.family_num) < parseInt(customer.preschool_num)){
+					isSaving = false;
+					mui.toast('家庭人员人口数必须大于学龄前人数和未成年人数的总和');
+					return;
+				}
+				if(checkValue(customer.minor_num) && parseInt(customer.family_num) < parseInt(customer.minor_num)){
+					isSaving = false;
+					mui.toast('家庭人员人口数必须大于学龄前人数和未成年人数的总和');
+					return;
+				}
+				if(checkValue(customer.preschool_num) && checkValue(customer.minor_num) && parseInt(customer.family_num) 
+					< (parseInt(customer.preschool_num) + parseInt(customer.minor_num))){
+					isSaving = false;
+					mui.toast('家庭人员人口数必须大于学龄前人数和未成年人数的总和');
+					return;
+				}
+			}
+			customer.childs = familyArray;
+//			customer.relations = relationArray;
+			
+			if(customer.create_user_id == null){
+				customer.create_user_id = employee.id;
+				customer.create_user = employee.name;
+			}
+			customer.employee_no = employee.employeeId;
+			customer.update_user_id = employee.id;
+			customer.update_user = employee.name;
+			customer.nationality=$('#nationality_text').val();	
+			if(checkValue(customer.id)) {
+				customer.update_user_id = employee.id;
+				customer.update_user = employee.name;
+			} else {
+				customer.create_user_id = employee.id;
+				customer.create_user = employee.name;
+			}
+			if(customer.name == '' || customer.name == null||customer.name.toString().trim().length==0) {
+				isSaving = false;
+				mui.toast('请输入用户名称');
+				return;
+			}
+			if(customer.mobilephone==''||customer.mobilephone==null){
+				isSaving = false;
+				mui.toast("请输电话号码。");
+				return;
+			}
+			if(!/^\d{11}$/.test(customer.mobilephone)) {
+				isSaving = false;
+				mui.toast("请输入正确的电话号码。");
+				return;
+			}
+
+//			if(checkValue(customer.mobilephone)) {
+//				if(!/^((0\d{2,3}-\d{7,8})|(1[35784]\d{9}))$/.test(customer.mobilephone)) {
+//					mui.toast("请输入正确的电话号码。");
+//					return;
+//				}
+//			}
+			var house_id = $('#house_id').val()
+			customer.customer_address = {
+				house_id:$('#house_id').val(),
+				house_style_id:$('#house_style_id').val(),
+				house_toward:$('#house_toward').val(),
+				house_area:$('#house_area').val(),
+				house_pic:$('#house_pic').val(),
+				house_style:$('#house_style').val(),
+				house_type:$('input[name="house_type"]:checked').val()
+				
+			}
+		 	if(customer.customer_address.house_type == 0){
+				customer.customer_address.house_pic = null;
+			}
+			if(!checkValue(house_id) && (checkValue(customer.customer_address.house_style_id) 
+				|| checkValue(customer.customer_address.house_toward) || checkValue(customer.customer_address.house_area) || checkValue(customer.customer_address.house_pic) 
+					||  checkValue(customer.customer_address.house_style))){
+				isSaving = false;
+				mui.toast('填写户型信息后，请选择地址信息');
+				return;
+			}
+				
+			doManager('CustomerManager', 'saveOrUpdateCustomerAndHouse', customer, function(data) {
+				if(data.result){
+					isSaving = false;
+					var jsonData = JSON.parse(data.data);
+					if(_type){
+						
+						if(jsonData == null){
+							mui.toast('已发送消息，审核后保存入数据库！');
+							setTimeout(function(){
+								closeMenu();
+							},500)
+						}else{
+							$('#id').val(jsonData.id);
+							mui.toast('保存成功！');
+							setTimeout(function(){
+								closeMenu();
+							},500)
+						}
+					}else{
+						    $('#id').val(jsonData.id);
+						    var cust_id=$('#id').val();
+						    var cust_no=jsonData.employee_no;
+							var webview = plus.webview.getWebviewById('more_information');
+							if(webview != null){
+								webview.close();
+							}
+							mui.openWindow({
+								url:'more_information.html',
+								id:"more_information",
+								extras:{
+								    cus_id:cust_id,
+								    cus_no:cust_no
+			    				},
+			    				createNew:true,
+			    				show: {
+									aniShow: 'slide-in-right'
+								},
+								waiting: {
+									autoShow: false
+								}
+		    				
+							});
+							
+					}
+				}else{
+					isSaving = false;
+					mui.toast('保存失败');
+				}
+			},true,function(){
+				isSaving = false;
+			});
+			
+		}
+		
+		function closeMenu(){
+//			//不使用父子模板方案的页面
+//			var webview = plus.webview.getWebviewById('user_information');
+//			if(webview != null){
+//				webview.hide();
+//				webview.close();
+//			}
+//			mui.openWindow({
+//				id: 'user_information',
+//				url: 'user_information.html',
+//				createNew:true,
+//				show: {
+//					aniShow: "pop-in"
+//					},
+//				waiting: {
+//					autoShow: false
+//				},
+//				extras:{
+//					customer_name:$('#name').val(),
+//					customer_mobilephone:$('#mobilephone').val()
+//				}
+//			});
+			
+			var _current = plus.webview.currentWebview();
+			var main = _current.opener();
+			mui.fire(main,"setInputText",{customer:{
+				customer_name:$('#name').val(),
+				customer_mobilephone:$('#mobilephone').val()
+			}});
+//			main.show();
+			_current.close();
+		}
+		
+		function videoCapture(){
+			var cmr = plus.camera.getCamera();
+			cmr.captureImage(
+				function(path){
+					plus.io.resolveLocalFileSystemURL( path, function ( entry ) {
+						$('.header_img').attr('src',entry.toLocalURL());
+					}, function ( e ) {
+						mui.toast( "读取拍照文件错误："+e.message );
+					} );
+				},
+				function(error) {
+				}
+			);
+			mui('#picture').popover('toggle');
+		}
+		
+		function galleryImg() {
+			var lfs = null;
+		    plus.gallery.pick( 
+			    function(path){
+			    	lfs = path.files[0];
+	            	$('.header_img').attr('src',lfs);
+			    }, 
+			    function (e) {
+	      			 mui.toast("取消图片！");
+	            },
+	            {
+	            	filter:"image",multiple:true,maximum:1,system:false,onmaxed:function(){
+	                	plus.nativeUI.alert('最多只能选择1张！')
+	            	},
+	            	popover:true,selected:lfs
+	            }
+            );
+            mui('#picture').popover('toggle');
+		}
+		
+//		function initEmployeeSelect() {
+//          if(store==null){
+//          	 mui.toast("此用户没有该权限，请联系管理员添加门店信息");
+//          	 return;
+//          }
+//			doManager('UserManager', 'findNamesBySid', store.store_id, function(data) {
+//
+//				if(data.result == true) {
+//					var employeeData = new Array();
+//					var jsonData = JSON.parse(data.data);
+//
+//					for(var index in jsonData.userList) {
+//						var itemData = {
+//							value: jsonData.userList[index].employeeId,
+//							text: jsonData.userList[index].name
+//						};
+//						employeeData.push(itemData);
+//					}
+//					employeePicker.setData(employeeData);
+//				}
+//			});
+//		}
+		
+		function checkValue(value){
+			if(value == null || value == ''){
+				return false;
+			}
+			return true;
+		}
+		function doBack(){
+			var main = plus.webview.currentWebview().opener();
+			main.evalJS('doback_true()');
+			mui.back();
+			
+		}
+	</script>
+
+</html>

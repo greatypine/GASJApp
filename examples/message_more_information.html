@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>消息更多信息</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<!--标准mui.css-->
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="../css/common.css" />
+		<link rel="stylesheet" type="text/css" href="../css/style.css" />
+		<link rel="stylesheet" type="text/css" href="../css/express.css" />
+		<link href="../css/mui.picker.css" rel="stylesheet" />
+		<link href="../css/mui.poppicker.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../css/mui.picker.min.css" />
+		<link href="../css/more_information.css" rel="stylesheet" />
+		<style>
+		    .but_div {
+				text-align: center;
+			}
+		    .cancel {
+				padding: 0.15rem 0.5rem;
+				font-size: 0.3rem;
+				background-color: #18bc9c;
+				border-radius: 0.1rem;
+				margin-right: 0.8rem;
+				color: #FFFFFF;
+			}
+			
+			.sure {
+				padding: 0.15rem 0.5rem;
+				font-size: 0.3rem;
+				background-color: #18bc9c;
+				border-radius: 0.1rem;
+				color: #FFFFFF;
+			}
+			.mui-table-view-chevron .mui-table-view-cell>a:not(.mui-btn) {
+                margin-right: -35px;
+            }
+            .mui-table-view-chevron .mui-table-view-cell {
+		  	    padding-right: 35px;
+			}
+			.mui-checkbox label, .mui-radio label{
+				width: 50%
+			}
+ 
+		</style>
+	
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav titleheader">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">更多信息</h1>
+		</header>
+		
+		
+			<div style="margin-top: 1.1rem;">
+				<ul class="mui-table-view mui-table-view-chevron ul_interval">
+					<li id="nationality" class="mui-table-view-cell select_li">
+						<a>
+							<label>国籍</label>
+							<input  type="text"  id="nationality_text" name="nationality_text" bidTableFlag="true" readonly="readonly" />
+							<input type="hidden" id="nationality_val" name="nationality_val" bidTableFlag="true" readonly="readonly"/>
+						</a>
+					</li>
+					<!--<li class="mui-table-view-cell time">
+							<label>籍贯</label>
+							<span >市</span>
+							<input class="origin_city"  type="text" id="origin_city" name="origin_city" readonly="readonly" />
+							<span>省</span>
+							<input class="origin_province"  type="text" id="origin_province" name="origin_province"readonly="readonly" />
+					</li>
+					<li class="mui-table-view-cell time">
+							<label>户籍所在地</label>
+							<span>市</span>
+							<input class="register_city"  type="text" id="register_city" name="register_city" readonly="readonly" />
+							<span>省</span>
+							<input class="register_province"  type="text" id="register_province" name="register_province" readonly="readonly" />
+					</li>-->
+					<li id="origin_city" class="mui-table-view-cell time">
+						<a class="mui-navigate-right">
+							<label>籍贯</label>
+							<input style="text-align:right;" type="text"  id="origin_province_text" name="origin_province_text" placeholder="请选择" readonly="readonly" />
+							<input type="text"  id="origin_city_text" name="origin_city_text" readonly="readonly"/>
+							<input type="hidden" id="origin_city_val" name="origin_city_val" />
+						</a>
+					</li>
+					<li id="register_city" class="mui-table-view-cell time">
+						<a class="mui-navigate-right">
+							<label>户籍所在地</label>
+							<input style="text-align:right;" type="text"  id="register_province_text" name="register_province_text" placeholder="请选择" readonly="readonly" />
+							<input type="text"  id="register_city_text" name="register_city_text" readonly="readonly"/>
+							<input type="hidden" id="register_city_val" name="register_city_val" />
+						</a>
+					</li>
+					<li id="marital_status" class="mui-table-view-cell select_li">
+						<a >
+							<label>婚姻状况</label>
+							<input type="text"  id="marital_status_text" name="marital_status_text"  readonly="readonly" />
+							<input type="hidden" id="marital_status_val" name="marital_status_val" readonly="readonly"/>
+						</a>
+					</li>
+					<li id="health" class="mui-table-view-cell select_li">
+						<a >
+							<label>健康状况</label>
+							<input type="text"  id="health_text" name="health_text"  readonly="readonly" />
+							<input type="hidden" id="health_val" name="health_val" readonly="readonly"/>
+						</a>
+					</li>
+					<li id="education" class="mui-table-view-cell select_li">
+						<a >
+							<label>教育程度</label>
+							<input type="text"  id="education_text" name="education_text" readonly="readonly" />
+							<input type="hidden" id="education_val" name="education_val" readonly="readonly"/>
+						</a>
+					</li>
+					<li class="mui-table-view-cell input_li">
+						<div class="input-row">
+							<label>学校名称</label>
+							<input type="text" id="school_name_text" name="school_name_text" readonly="readonly"/>
+						</div>
+					</li>
+					<li class="mui-table-view-cell radio_li">
+						<div class="input-row-suffix mui-radio">
+							<label>汽车信息</label>
+							<div style="float: right;">
+								<input name="car_type" type="radio" style="float: initial;" bidTableFlag="true" value="0" disabled > 有
+								<input name="car_type" type="radio" style="float: initial;" bidTableFlag="true" value="1" checked disabled>无
+							</div>
+						</div>
+					</li>
+					<li class="mui-table-view-cell input_li">
+						<div class="input-row">
+							<label>汽车品牌</label>
+							<input type="text" id="car_brand_text" name="car_brand_text" readonly="readonly"/>
+						</div>
+					</li>
+					<li id="financial_habits" class="mui-table-view-cell select_li">
+						<a>
+							<label>理财习惯</label>
+							<input type="text"  id="financial_habits_text" name="financial_habits_text" readonly="readonly" />
+							<input type="hidden" id="financial_habits_val" name="financial_habits_val" readonly="readonly"/>
+						</a>
+					</li>
+					<li id="character" class="mui-table-view-cell select_li">
+						<a>
+							<label>性格</label>
+							<input type="text"  id="character_text" name="character_text" readonly="readonly" />
+							<input type="hidden" id="character_val" name="character_val" readonly="readonly"/>
+						</a>
+					</li>
+					<li id="family_income" class="mui-table-view-cell select_li">
+						<a>
+							<label>家庭收入</label>
+							<input type="text"  id="family_income_text" name="family_income_text"  readonly="readonly" />
+							<input type="hidden" id="family_income_val" name="family_income_val" readonly="readonly"/>
+						</a>
+					</li>
+					<li id="shopping_habits" class="mui-table-view-cell select_li">
+						<a>
+							<label>购物渠道习惯</label>
+							<input type="text"  id="shopping_habits_text" name="shopping_habits_text" readonly="readonly" />
+							<input type="hidden" id="shopping_habits_val" name="shopping_habits_val" readonly="readonly" />
+						</a>
+					</li>
+					<li class="mui-table-view-cell input_li">
+						<div class="input-row">
+							<label>兴趣爱好1</label>
+							<input type="text" id="hobby_one_text" name="hobby_one_text" readonly="readonly"/>
+						</div>
+					</li>
+					<li class="mui-table-view-cell input_li">
+						<div class="input-row">
+							<label>兴趣爱好2</label>
+							<input type="text" id="hobby_two_text" name="hobby_two_text" readonly="readonly"/>
+						</div>
+					</li>
+					<li class="mui-table-view-cell input_li">
+						<div class="input-row">
+							<label>兴趣爱好3</label>
+							<input type="text" id="hobby_three_text" name="hobby_three_text" readonly="readonly"/>
+						</div>
+					</li>
+				</ul>
+			</div>
+			<div class="but_div">
+				<a class="cancel" onclick="cancel_but()">拒绝</a> 
+				<a class="sure" onclick="sure_but()">确定</a>
+			</div>
+	</body>
+	<script type="text/javascript" src="../js/mui.min.js"></script>
+	<script type="text/javascript" src="../js/jquery-2.2.2.min.js"></script>
+	<script type="text/javascript" src="../js/custom_jquery_based.js"></script>
+	<script type="text/javascript" src="../js/date_util.js"></script>
+	<script type="text/javascript" src="../js/mui.picker.js"></script>
+	<script type="text/javascript" src="../js/mui.picker.min.js"></script>
+	<script type="text/javascript" src="../js/mui.poppicker.js"></script>
+	<script type="text/javascript" src="../js/custom_common.js"></script>
+	<script type="text/javascript" src="../js/dict.js"></script>
+	<script type="text/javascript" src="../js/cityObject.js"></script>
+	<script type="text/javascript" type="text/javascript">
+	
+	var employee = JSON.parse(localStorage.getItem('employee'));
+	var cus_id=null;
+	var more_data=null;
+	var cus_no=null;
+	var message_to=null;
+	var message_id = null;
+	mui.plusReady(function(){
+		getdata();
+			
+	});
+       //获取消息内容
+        function getdata(){
+			 var self = plus.webview.currentWebview();
+			 
+			cus_id = self.pk_id;
+			message_id = self.message_id;
+			message_to=self.message_to;
+			if(cus_id == null || cus_id == '') {
+				return;
+			}
+			doManager('CustomerDataTemporaryManager', 'findCustomerDataTemporaryForById', cus_id, function(data) {
+				if(data.result) {
+					var jsonData = JSON.parse(data.data);
+					if(jsonData != null) {
+						setCustomer(jsonData);
+					}
+				}
+			});
+		}
+        function setCustomer(jsonData){
+		   $("#nationality_text").val(jsonData.nationality);
+           $("#origin_province_text").val(jsonData.native_place_pro);
+           $("#origin_city_text").val(jsonData.native_place_city);
+           $("#register_province_text").val(jsonData.local_pro);
+           $("#register_city_text").val(jsonData.local_city);
+           $("#marital_status_text").val(jsonData.marital_status);
+           $("#health_text").val(jsonData.health_condition);
+           $("#education_text").val(jsonData.degree_of_education);
+           $("#school_name_text").val(jsonData.school_name);
+           $('input[name="car_type"][value="' + jsonData.is_car + '"]').attr('checked', 'checked');
+           $("#car_brand_text").val(jsonData.automobile_brand);
+           $("#financial_habits_text").val(jsonData.money_manage);
+           $("#character_text").val(jsonData.character_data);
+           $("#family_income_text").val(jsonData.household_income);
+           $("#shopping_habits_text").val(jsonData.shopping_channel);
+           $("#hobby_one_text").val(jsonData.hobby_one);
+           $("#hobby_two_text").val(jsonData.hobby_two);
+           $("#hobby_three_text").val(jsonData.hobby_three);
+			
+		}
+		function closeMenu(){
+			//不使用父子模板方案的页面
+			
+			if(message_to=="main"){
+				var webview = plus.webview.getWebviewById('web_new_main');
+				if(webview != null){
+					webview.close();
+				}
+				mui.openWindow({
+					id: 'web_new_main',
+					url: 'web_new_main.html',
+					createNew:true,
+					show: {
+						aniShow: "slide-in-right"
+						},
+					waiting: {
+						autoShow: false
+					},
+					extras:{
+						messagepk_id: cus_id
+					}
+				});
+				
+			}else{
+				var webview = plus.webview.getWebviewById('web_message');
+				if(webview != null){
+					webview.close();
+				}
+				mui.openWindow({
+					id: 'web_message',
+					url: 'web_message.html',
+					createNew:true,
+					show: {
+						aniShow: "slide-in-right"
+						},
+					waiting: {
+						autoShow: false
+					},
+					extras:{
+						messagepk_id: cus_id
+					}
+				});
+			}
+			
+		}
+		//确定审核通过消息
+		function sure_but() {
+
+			var btnArray = ['否', '是'];
+			mui.confirm('确定要审核当前数据吗？', '系统提示', btnArray, function(e) {
+				if(e.index == 1) {
+					doManager('CustomerDataTemporaryManager', 'saveReceiveData', cus_id, function(data) {
+						if(data.result) {
+							mui.toast('审核成功');
+							newDeleteMessage();
+
+						} else {
+							mui.toast(data.message);
+						}
+					});
+				}
+			});
+
+		}
+		//决绝审核通过消息
+		function cancel_but(){
+			var btnArray = ['否', '是'];
+			mui.confirm('确定拒绝审核当前数据吗？', '系统提示', btnArray, function(e) {
+				if(e.index == 1) {
+					doManager('CustomerDataTemporaryManager', 'deleteCustomerDataTemporaryForId', cus_id, function(data) {
+						if(data.result) {
+							mui.toast('拒绝审核');
+							newDeleteMessage();
+
+						} else {
+							mui.toast(data.message);
+						}
+					});
+				}
+			});
+			
+		}
+//删除消息
+		function newDeleteMessage() {
+
+			if(message_id == null || message_id == '') {
+				return;
+			}
+			var	message = {
+				id:message_id
+			};
+
+			doManager('MessageNewManager', 'delateMessage', message, function(data) {
+				setTimeout(function() {
+					if(data.result) {
+						var jsonData = JSON.parse(data.data);
+					    setTimeout(function(){
+							closeMenu();
+						},500)
+
+					} else {
+						mui.toast(data.message);
+					}
+				}, 300);
+			});
+
+		}
+    
+    
+    
+    
+	</script>
+
+</html>

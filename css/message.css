@@ -1,0 +1,26 @@
+.message-div{
+	/*border-bottom: 1px solid #dbdbdb;*/font-size: 0.25rem;margin: 0.3rem 0 0 0;padding-bottom: 0.15rem;
+}
+.mui-btn-green{background-color:#c1c1c1!important;font-size: 0.3rem;}
+.mui-btn-red{font-size: 0.3rem;}
+.message-context{
+	/*overflow: hidden;white-space:nowrap; text-overflow:ellipsis; -o-text-overflow:ellipsis;*/
+}
+.message-div a{
+	color: #666;
+}
+.message-div a h4{
+	font-size: 0.3rem;
+	color: #333;
+	padding-top: 0.15rem;
+}
+.message-time{
+	font-size: 0.22rem;
+	color: #999;
+	
+}
+.message-img{width: 1.2rem; height: 1.2rem;margin-right: 0.3rem;}
+.message-img img{width: 100%;}
+.history a{position:absolute;right:0.2rem;top:0.3rem;;width: 3em;font-size: 0.3rem;display: inline-block;color: #fff;}
+
+.num_on{position: absolute;bottom:25%;left: 93%;width:10px; height:10px; color:#fff;margin: -7px 0 0 2px; background-color: #c00a12; border: 1px solid #c00a12;border-radius: 50%; font-size: 0.18rem;}

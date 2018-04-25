@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>小区信息</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<!--标准mui.css-->
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="../css/common.css" />
+		<link rel="stylesheet" type="text/css" href="../css/style.css" />
+		<link rel="stylesheet" type="text/css" href="../css/express.css" />
+		<link href="../css/mui.picker.css" rel="stylesheet" />
+		<link href="../css/mui.poppicker.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../css/mui.picker.min.css" />
+		<link href="../css/residential_area_information.css" rel="stylesheet" />
+		<style>
+			.mui-table-view-chevron .mui-table-view-cell>a:not(.mui-btn) {
+                margin-right: -35px;
+            }
+            .mui-table-view-chevron .mui-table-view-cell {
+		  	    padding-right: 35px;
+			}
+			.mui-popover-bottom li{height: 0.8rem; line-height: 0.8rem; font-size: 0.32rem;}
+			.img_plus{margin-left: 10px;height: 14px;width: 14px;cursor: pointer;}
+			.office_building_img_plus{margin-left: 10px;height: 14px;width: 14px;cursor: pointer;}
+			.bungalow_img_plus{margin-left: 10px;height: 14px;width: 14px;cursor: pointer;}
+			.option_select{border: 1px solid rgba(0,0,0,.2) !important;height:40px;width: 30%;padding: 0;margin: 0;font-size: 15px;}
+			.content_input{margin: 0;margin-left: 5px;width: 60% !important;font-size: 14px;}
+            .mui-checkbox label, .mui-radio label{
+				width: 40%
+			}
+		</style>
+	
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav titleheader">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">小区信息</h1>
+			<div class="save">
+				<a href="#" onclick="findBuilding();">保存</a>
+			</div>
+		</header>
+		
+		
+			<div style="margin-top: 1.1rem;"id="building_div">
+				<ul class="mui-table-view mui-table-view-chevron ul_interval">
+					<li id="province" class="mui-table-view-cell select_li">
+						<a>
+							<label><font style="color:red">*</font>省份</label>
+							<input type="text" id="province_in" name="province_in" placeholder="请选择" readonly />
+							<input type="hidden" id="province_text" name="province_text" />
+						</a>
+					</li>
+					<li id="city" class="mui-table-view-cell select_li">
+						<a>
+							<label><font style="color:red">*</font>城市</label>
+							<input type="text" id="city_in" name="city_in" placeholder="请选择" readonly />
+							<input type="hidden" id="city_text" name="city_text" />
+						</a>
+					</li>
+					<li id="county" class="mui-table-view-cell select_li">
+						<a class="mui-navigate-right">
+							<label><font style="color:red">*</font>区县</label>
+							<input type="text" id="county_in" name="county_in" placeholder="请选择" readonly />
+							<input type="hidden" id="county_text" name="county_text" />
+						</a>
+					</li>
+					<li id="street" class="mui-table-view-cell select_li">
+						<a class="mui-navigate-right">
+							<label><font style="color:red">*</font>街道</label>
+							<input type="text" id="street_in" name="street_in" placeholder="请选择" readonly />
+							<input type="hidden" id="street_text" name="street_text" />
+						</a>
+					</li>
+					<li id="village" class="mui-table-view-cell select_li">
+						<a class="mui-navigate-right" >
+							<label><font style="color:red">*</font>社区</label>
+							<input type="text" id="village_in" name="village_in" placeholder="请选择" readonly />
+							<input type="hidden" id="village_text" name="village_text" />
+						</a>
+					</li>
+					
+					<li class="mui-table-view-cell input_li">
+						<div class="input-row">
+							<label><font style="color:red">*</font>小区名称</label>
+							<input type="text" id="residential_area_name" name="residential_area_name" placeholder="例：南十里居41号院1号楼" />                      
+							<input type="hidden" id="residential_area_id" name="residential_area_id" />
+						</div>
+					</li>
+					<li id="whether" class="mui-table-view-cell select_li">
+					<a class="mui-navigate-right">
+						<label><font style="color:red">*</font>小区类别</label>
+						<input type="hidden" id="building_type" name="building_type" />
+						<input type="text" id="whether_in" name="whether_in" placeholder="请选择" readonly />
+					</a>
+				   </li> 
+					<li class="mui-table-view-cell input_li" id="area_address">
+						<div class="input-row">
+							<label><font style="color:red">*</font>小区地址</label>
+							<input type="text" id="residential_area_address" name="residential_area_address" placeholder="例：南十里居100号" />
+						</div>
+					</li>
+					<li class="mui-table-view-cell input_li" >
+						<div class="input-row">
+							<label>&nbsp;居民用户数</label>
+							<input type="number" pattern="\d*" id="resident_num" name="resident_num" placeholder="只能填写数字" onkeyup="value=this.value.replace(/\D+/g,'')"/>
+						</div>
+					</li>
+					
+				</ul>
+				
+			</div>
+	</body>
+	<script type="text/javascript" src="../js/mui.min.js"></script>
+	<script type="text/javascript" src="../js/jquery-2.2.2.min.js"></script>
+	<script type="text/javascript" src="../js/custom_jquery_based.js"></script>
+	<script type="text/javascript" src="../js/custom_common.js"></script>
+	<script type="text/javascript" src="../js/date_util.js"></script>
+	<script type="text/javascript" src="../js/mui.picker.js"></script>
+	<script type="text/javascript" src="../js/mui.picker.min.js"></script>
+	<script type="text/javascript" src="../js/mui.poppicker.js"></script>
+	<script type="text/javascript" src="../js/dict.js"></script>
+	<script type="text/javascript" src="../js/cityObject.js"></script>
+	<script type="text/javascript" src="../js/newcityObject.js"></script>
+	<script type="text/javascript" type="text/javascript">
+	    var cityPicker = new mui.PopPicker();
+        var provincePicker = new mui.PopPicker();
+        var countyPicker = new mui.PopPicker();
+        var streetPicker = new mui.PopPicker();
+        var villagePicker = new mui.PopPicker();
+        var two_levelPicker = new mui.PopPicker();
+        var three_levelPicker = new mui.PopPicker();
+        var five_levelPicker = new mui.PopPicker();
+		var streetDictArray = null;		
+        var default_city=null;
+        var provinceDictArray = null;
+        var cityDictArray = null;
+        var countyDict = null;
+        var streetDict = null;
+        var store=JSON.parse(localStorage.getItem('store'));
+//      var countyDict = new newcityObject('county','county_text','county_in','city_text',store.store_id,'CountyManager','findCountyDataByCityID','county_id','county_name',county_refresh);
+//      var countyDict = new cityObject('county','county_text','county_in','city_text','CountyManager','getCountyDataByCityID','county_id','county_name',county_refresh);
+//      var streetDict = new cityObject('street','street_text','street_in','county_text','TownManager','getTownDataByCountyID','town_id','town_name',street_refresh);
+        var villageDict= new cityObject('village','village_text','village_in','street_text','VillageManager','getVillageDataByTownId','village_id','village_name',village_refresh);
+   
+        
+        
+        var province_id=null;
+        var city_id=null;
+        var county_id=null;
+        var street_id=null;
+        var village_id=null;
+        var two_level_id=null;
+        var three_level_id=null;
+        var four_level_id=null;
+        var five_level_id=null;
+        var employee = JSON.parse(localStorage.getItem('employee'));
+        var store=JSON.parse(localStorage.getItem('store'));
+		mui.plusReady(function(){
+			
+			
+			ininView();
+		});
+		function ininView(){
+			var self = plus.webview.currentWebview();
+			if(self != null && self.residentialarea != null) {
+				residentialarea = JSON.parse(self.residentialarea);
+				setResidentialAreaInfo(residentialarea);
+			}else{
+				default_city=JSON.parse(localStorage.getItem('default_city'));
+				if(default_city!=null||default_city!=""){
+					if(default_city.pro_name!=null||default_city.pro_name!=""){
+						$('#province_in').val(default_city.pro_name);
+						$('#province_text').val(default_city.pro_id);
+						province_id=$('#province_text').val();
+					}
+					if(default_city.city_name!=null||default_city.city_name!=""){
+						$('#city_in').val(default_city.city_name);
+						$('#city_text').val(default_city.city_id);
+						city_id=$('#city_text').val();
+					}
+					if(default_city.cou_name!=null||default_city.cou_name!=""){
+						$('#county_in').val(default_city.cou_name);
+						$('#county_text').val(default_city.cou_id);
+						county_id=$('#county_text').val();
+						
+					}
+				}
+				
+//				streetDictArray=getStreetData('street','street_text','street_in',store,'StoreManager','getStoreCityInfoById','id','name',street_refresh,streetPicker);
+				countyDict = new newcityObject('county', 'county_text', 'county_in', 'city_text', store.store_id, 'CountyManager', 'findCountyDataByCityID', 'county_id', 'county_name', county_refresh)
+				streetDict = new newcityObject('street','street_text','street_in','county_text',store.store_id,'TownManager','getTownDataByCountyIDAndStoreId','town_id','town_name',street_refresh);
+			}
+			getBuildingDict('whether', 'whether_in','building_type',[{
+				value: "1",
+				text: '楼房'
+			}, {
+				value: "0",
+				text: '平房'
+			}, {
+				value: "2",
+				text: "商业(商业设施/写字楼)"
+			}, {
+				value: "3",
+				text: "公园/广场"
+			}, {
+				value: "4",
+				text: "混合类型(包含两种类型及以上)"
+			}, {
+				value: "5",
+				text: "其他"
+			}]);
+			
+			villageDict.refresh();
+		}
+		
+		function county_refresh(){
+			county_follow_clean();
+			streetDict.refresh();
+		}
+		function village_refresh(){
+		}
+		function street_refresh(){
+			street_follow_clean();
+		}
+		//清空区县以下显示数据
+		function county_follow_clean(){
+			$('#street_in').val("");
+			$('#street_text').val("");
+		    street_follow_clean();
+		    streetDict.refresh();
+		}
+		//清空街道以下显示数据
+		function street_follow_clean(){
+			$('#village_in').val("");
+			$('#village_text').val("");
+		    villageDict.refresh();
+		}
+	
+		function findBuilding(){
+			var employee_name=employee.name;
+			var employee_no=employee.employeeId;
+			var employee_id=employee.id;
+			var province_val=$("#province_in").val();
+			var province_id=$("#province_text").val();
+			var city_val=$("#city_in").val();
+			var city_id=$("#city_text").val();
+			var county_val=$("#county_in").val();
+			var county_id=$("#county_text").val();
+			var street_val=$("#street_in").val();
+			var street_id=$("#street_text").val();
+			var village_val=$("#village_in").val();
+			var village_id=$("#village_text").val();
+			
+			var name=$("#residential_area_name").val();
+			var id=$("#residential_area_id").val();
+			var address=$("#residential_area_address").val();
+			var residential_area_type = $("#building_type").val();
+			var resident_number=$("#resident_num").val();
+			var residential_area = {
+				create_user: employee_name,
+				employee_no: employee_no,
+				create_user_id:employee_id,
+				town_name:street_val,
+				town_id:street_id,
+				village_id:village_id,
+				village_name:village_val,
+				name:name,
+				id:id,
+				address:address,
+				tinyvillage_type:residential_area_type,
+				residents_number:resident_number
+				
+			};
+			
+			 if(!checkValue(village_val)) {
+		        mui.toast("请选择社区。");
+		        return;
+		    }
+            if(!checkValue(name)) {
+		        mui.toast("请填写小区名称。");
+		        return;
+		    }
+            if(!checkValue(residential_area_type)) {
+		        mui.toast("请选择小区类型。");
+		        return;
+		    }
+            if(!checkValue(address)) {
+			    mui.toast("请填写小区地址。");
+			    return;
+		    }
+            
+           //查询小区是否存在
+			doManager('TinyVillageManager','getAppRepeatTinyVillageInfo', residential_area, function(data) {
+				if(data.result == true) {
+					var jsonData = JSON.parse(data.data);
+					if(jsonData.code == 200){
+						doSave(residential_area);
+					}else if(jsonData.code == 300){
+						var btnArray = ['否', '是'];
+			            mui.confirm('该数据已存在！确定要覆盖吗？','提示', btnArray, function(e) {
+				             if (e.index == 1) {
+						        doSave(residential_area);
+					         }
+				       });
+					}else{
+						mui.toast('保存失败');
+					}
+						
+				} else {
+					mui.toast('保存失败');
+				}
+			});
+			    
+		}
+		//保存
+		function doSave(residential_area){
+			
+			doManager('TinyVillageManager','saveOrUpdateTinyVillageApp', residential_area, function(data) {
+				if(data.result == true) {
+					var jsonData = JSON.parse(data.data);
+					if(jsonData.code == 200){
+						mui.toast('保存成功');
+						setTimeout(function() {
+							closeMenu();
+						}, 500);
+					}else if(jsonData.code ==300){
+						mui.toast('该小区已被绑定划片,请到PC端解除划片后再修改小区中的社区！');
+					}else{
+						mui.toast('保存失败');
+					}
+						
+				} else {
+					mui.toast('保存失败');
+				}
+			});
+			    
+		}
+		function closeMenu(){
+			var _current = plus.webview.currentWebview();
+			var main = _current.opener();
+			mui.fire(main,"setresidentialareainput",{residentialarea:{
+				residentialarea_name:$('#residential_area_name').val()
+			}});
+			_current.close();
+		}
+		
+		function addRow($li){
+         if($li.selector=="#building_li"){
+	         	 var html ='<span>'+
+	         	            '<div>'+
+	            			  '<input type="text" class="building_name" name="building_name" placeholder="小区名" style="width:95%">'+
+	            			'</div>'+
+							'<div>'+
+	            			  '<input type="text" class="building_address" name="building_address" placeholder="小区地址" style="width:95%">'+
+	            			'</div>'+
+	            			'<div>'+
+	            			  '<input type="text" class="building_no" name="building_no" placeholder="楼号" style="width:46%">'+
+	            			  '<input type="text" class="building_nuit" name="building_nuit" placeholder="单元" style="width:46%">'+
+	            			'</div>'+
+	            			'<div>'+
+	            			  '<input type="text" class="building_floor" name="building_floor" placeholder="楼层" style="width:46%">'+
+	            			  '<input type="text" class="building_room" name="building_room" placeholder="房号" style="width:46%">'+
+	            			'</div>'+
+	            			'<div style="float: right; margin-right: 0.5rem;">'+
+	            			  '<img src="../images/minus_16px.png" id="remove_piv"/>'+
+	            			'</div>'+
+						  '</span>';
+         }else if($li.selector=="#office_building_li"){
+		         	var html ='<span>'+
+								'<div>'+
+		            			  '<input type="text" class="office_building_name" name="office_building_name" placeholder="商业楼宇名" style="width:95%">'+
+		            			'</div>'+
+		            			'<div>'+
+		            			  '<input type="text" class="office_building_address" name="office_building_address" placeholder="地址" style="width:95%">'+
+		            			'</div>'+
+		            			'<div>'+
+		            			  '<input type="text" class="office_building_floor" name="office_building_floor" placeholder="楼层数" style="width:95%">'+
+		            			'</div>'+
+		            			'<div style="float: right; margin-right: 0.5rem;">'+
+		            			  '<img src="../images/minus_16px.png" id="remove_piv"/>'+
+		            			'</div>'+
+							  '</span>';
+         	
+         }else if($li.selector=="#bungalow_li"){
+	         	  var html ='<span>'+
+							'<div>'+
+	            			  '<input type="text" class="bungalow_address" name="bungalow_address" placeholder="街/路/胡同" style="width:95%">'+
+	            			'</div>'+
+	            			'<div>'+
+	            			  '<input type="text" class="bungalow_no" name="bungalow_no" placeholder="门牌号" style="width:95%">'+
+	            			'</div>'+
+	            			'<div style="float: right; margin-right: 0.5rem;">'+
+	            			  '<img src="../images/minus_16px.png" id="remove_piv"/>'+
+	            			'</div>'+
+						  '</span>';
+         	
+         }
+           
+		
+            $li.append(html);
+            var div = document.getElementById('building_div');
+            window.scrollTo(0,div.scrollHeight);
+            var $current_span = $li.find('span:last');
+                var $img_minus = $current_span.find('#remove_piv:last');
+                $img_minus.click(function(){
+                    $current_span.remove();
+                });
+        }
+		
+		function setResidentialAreaInfo(residentialarea){
+			$('#province_in').val(residentialarea.province_name);
+			$('#province_text').val(residentialarea.province_id);
+			
+			$('#city_in').val(residentialarea.city_name);
+			$('#city_text').val(residentialarea.city_id);
+			
+			$('#county_in').val(residentialarea.county_name);
+			$('#county_text').val(residentialarea.county_id);
+			
+			$('#street_in').val(residentialarea.town_name);
+			$('#street_text').val(residentialarea.town_id);
+			
+			$('#village_in').val(residentialarea.village_name);
+			$('#village_text').val(residentialarea.village_id);
+			
+			$('#residential_area_name').val(residentialarea.name);
+			$('#residential_area_id').val(residentialarea.id);
+			$('#residential_area_address').val(residentialarea.address);
+			$('#resident_num').val(residentialarea.residents_number);
+			$('#county').find('a').removeAttr('class');
+			var li2 = document.getElementById("county");
+			li2.id = "countytttt";
+			$('#street').find('a').removeAttr('class');
+			var li1 = document.getElementById("street");
+			li1.id = "streetttt";
+			$('#building_type').val(residentialarea.tinyvillage_type);
+			switch(residentialarea.tinyvillage_type){
+				case 0:
+					$('#whether_in').val("平房");
+					break;
+				case 1:
+					$('#whether_in').val("楼房");
+					break;
+				case 2:
+					$('#whether_in').val("商业(商业设施/写字楼)");
+					break;
+				case 3:
+					$('#whether_in').val("公园/广场");
+					break;
+				case 4:
+					$('#whether_in').val("混合类型(包含两种类型及以上)");
+					break;
+				case 5:
+					$('#whether_in').val("其他");
+					break;
+			}
+			
+			
+		}
+	
+		
+	</script>
+
+</html>

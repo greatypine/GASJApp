@@ -1,0 +1,14 @@
+.select_btn_button{width:100%; height: 0.7rem;color:#fff;font-size: 0.32rem;background-color: #70bc24; text-align: center; margin-top: 0.5rem;border-radius: 0.1rem;border-color:#70bc24;}
+.select_btn{padding-left: 0.6rem;padding-right: 0.6rem;margin-top: 2rem;}
+
+
+
+
+.address_information{ height: 0.7rem;font-size: 0.32rem;background-color: #70bc24;border-radius: 0.1rem;text-align: center; }
+
+
+.community_information{width:80%; height: 0.7rem;font-size: 0.32rem;background-color: #0062CC;border-radius: 0.1rem;text-align: center;color: #FFFFFF; padding-top:0.15rem;margin-left: 0.5rem;}
+
+
+.residential_area_information{width:80%; height: 0.7rem;font-size: 0.32rem;background-color: #0062CC;border-radius: 0.1rem;text-align: center;color: #FFFFFF; padding-top:0.15rem;margin-left: 0.5rem;}
+.house_information{width:80%; height: 0.7rem;font-size: 0.32rem;background-color: #0062CC;border-radius: 0.1rem;text-align: center;color: #FFFFFF; padding-top:0.15rem;margin-left: 0.5rem;}

@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>Hello MUI</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<!--标准mui.css-->
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="../css/common.css" />
+		<link rel="stylesheet" type="text/css" href="../css/style.css" />
+		<link rel="stylesheet" type="text/css" href="../css/qq.css" />
+		<link rel="stylesheet" type="text/css" href="../css/express.css" />
+		<link href="../css/mui.picker.css" rel="stylesheet" />
+		<link href="../css/mui.poppicker.css" rel="stylesheet" />
+		<link href="../css/monomer_portrait.css" rel="stylesheet" />
+		<style>
+			.mui-popover-bottom li{height: 0.8rem; line-height: 0.8rem; font-size: 0.32rem;}
+			.mui-col-xs-6{width: 45%;}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav titleheader">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">户型图选择</h1>
+			<div class="camera"><a href="#picture"></a></div>
+		</header>
+		
+		<div id="picture" class="mui-popover mui-popover-action mui-popover-bottom" >
+			<ul class="mui-table-view">
+				<li style="border-bottom: 1px solid #dbdbdb;" onclick="videoCapture();">
+					拍照
+				</li>
+				<li onclick="galleryImg();">
+					从手机相册中选择
+				</li>
+			</ul>
+			<ul class="mui-table-view">
+				<li >
+					<a id='aCancel' href="#picture"><b>取消</b></a>
+				</li>
+			</ul>
+		</div>
+
+		<div class="mui-content">
+			<ul class="mui-table-view mui-grid-view" style="margin-top: 0">
+			</ul>
+
+		</div>
+	</body>
+	<script type="text/javascript" src="../js/mui.min.js"></script>
+	<script type="text/javascript" src="../js/jquery-2.2.2.min.js"></script>
+	<script type="text/javascript" src="../js/custom_common.js"></script>
+	<script type="text/javascript" src="../js/custom_jquery_based.js"></script>
+	<script type="text/javascript" src="../js/date_util.js"></script>
+	<script type="text/javascript" src="../js/mui.picker.js"></script>
+	<script type="text/javascript" src="../js/mui.poppicker.js"></script>
+	<script type="text/javascript">
+		var main = null;
+		var house_pic=null;
+		var address_customer = null;
+		mui.init({
+			keyEventBind: {
+				backbutton: false,
+				menubutton: false
+			}
+		
+		});
+		mui.plusReady(function() {
+			main = plus.webview.currentWebview().opener();
+			var self = plus.webview.currentWebview();
+			if(self != null && self.address_customer != null) {
+				 address_customer = self.address_customer;
+				 if(house_pic == null || house_pic.tv_id != address_customer.tv_id){
+				 	house_pic = address_customer;
+				 	get_piclist();
+				 }
+			}
+		})
+		function click_pic(_this) {
+			$('.mui-table-view-cell').removeClass('selected');
+			_this.toggleClass('selected');
+			var pic_name = _this.find('.mui-media-body').html();
+			mui.fire(main, 'getHouse_pic', {
+				pic_name: pic_name
+			});
+			
+			closeMenu();
+			
+				
+		};
+
+		function closeMenu() {
+//			main.evalJS("closeMenu()");
+			setTimeout(function(){
+				mui.back();
+			},'500');
+		}
+//		window.addEventListener('house_id_value',function(event){
+//			 var address_customer = event.detail.address_customer;
+//			 if(house_pic == null || house_pic.tv_id != address_customer.tv_id){
+//			 	
+//			 	house_pic = address_customer;
+//			 	get_piclist();
+//			 }
+//			 
+//		});
+
+//		function get_piclist() {
+//			doManager('HouseStyleManager', 'getTinyVillageHousePic', house_pic, function(data) {
+//				if(data.result) {
+//					$('.mui-grid-view').children().remove();
+//					var jsonData = JSON.parse(data.data);
+//					if(jsonData.length==0){
+//						mui.toast("暂无数据！");
+//						return;
+//					}
+//					$(jsonData).each(function(index,element){
+//						var html = '<li class="mui-table-view-cell mui-media mui-col-xs-6">'+
+//								   '<a href="#">'+
+//								   '<img class="mui-media-object" src="'+element['path']+'">'+
+//								   '<div class="mui-media-body">'+element['name']+'</div>'+
+//								   '</a></li>';
+//						$('.mui-grid-view').append(html);
+//						var $li_pic = $('.mui-grid-view').find('li:last');
+//						$li_pic.click(function(){
+//							click_pic($(this));
+//						});
+//					});
+//				} else {
+//					mui.toast("加载失败");
+//				}
+//			});
+//		}
+         //获取小区内的所有户型图
+        function get_piclist() {
+			doManager('HouseStyleManager', 'getnewTinyVillageHousePic', house_pic, function(data) {
+				if(data.result) {
+					$('.mui-grid-view').children().remove();
+					var jsonData = JSON.parse(data.data);
+					if(jsonData.length==0){
+						mui.toast("暂无数据！");
+						return;
+					}
+					$(jsonData).each(function(index,element){
+						var html = '<li class="mui-table-view-cell mui-media mui-col-xs-6">'+
+								   '<a href="#">'+
+								   '<img class="mui-media-object" style="height: 3.5rem;" src="'+element['path']+'">'+
+								   '<div class="mui-media-body">'+element['name']+'</div>'+
+								   '</a></li>';
+						$('.mui-grid-view').append(html);
+						var $li_pic = $('.mui-grid-view').find('li:last');
+						$li_pic.click(function(){
+							click_pic($(this));
+						});
+					});
+				} else {
+					mui.toast("加载失败");
+				}
+			});
+		}
+		
+		function videoCapture(){
+			var cmr = plus.camera.getCamera();
+			cmr.captureImage(
+				function(path){
+					plus.io.resolveLocalFileSystemURL( path, function ( entry ) {
+//						$('.header_img').attr('src',entry.toLocalURL());
+						compressImg(entry.toLocalURL());
+						
+					}, function ( e ) {
+						mui.toast( "读取拍照文件错误："+e.message );
+					} );
+				},
+				function(error) {
+				}
+			);
+			mui('#picture').popover('toggle');
+		}
+		
+		function galleryImg() {
+			var lfs = null;
+		    plus.gallery.pick( 
+			    function(path){
+			    	lfs = path.files[0];
+//	            	$('.header_img').attr('src',lfs);
+	            	compressImg(lfs);
+			    }, 
+			    function (e) {
+	      			 mui.toast("取消图片！");
+	            },
+	            {
+	            	filter:"image",multiple:true,maximum:1,system:false,onmaxed:function(){
+	                	plus.nativeUI.alert('最多只能选择1张！')
+	            	},
+	            	popover:true,selected:lfs
+	            }
+            );
+            mui('#picture').popover('toggle');
+		}
+		
+		function compressImg(localUrl){
+
+					plus.zip.compressImage({
+						src:localUrl,
+						dst:localUrl,
+						overwrite:true,
+						quality:20
+					},
+					function() {
+						uploadImg(localUrl);
+					},function(error) {
+						uploadImg(localUrl);
+				});
+		
+		}
+		
+		function uploadImg(localUrl){
+			if(plus.networkinfo.getCurrentType() == plus.networkinfo.CONNECTION_CELL4G) {
+				var btnArray = ['否', '是'];
+				mui.confirm('正在使用4G网络！确定要上传数据吗？', '网络提示', btnArray, function(e) {
+					if (e.index == 1) {
+						doSave(localUrl);
+					}
+				});	
+			}else if (plus.networkinfo.getCurrentType() == plus.networkinfo.CONNECTION_WIFI) {
+			        doSave(localUrl);
+			}
+		}
+		//保存户型图
+		function doSave(imgpath){
+			var files = [];
+			files.push({name:new Date().Format('YYYYMMDDhhmmss'),path:imgpath});
+			var wt=plus.nativeUI.showWaiting("正在上传。。。");
+			var task=plus.uploader.createUpload(file_server+'?img_type=1&file_name=house_type_image',
+				{method:"POST"},
+				function(t,status){ //上传完成
+					if(status==200){
+						var data = JSON.parse(t.responseText);
+						if(data.result == true){ 
+							var pmsfile = JSON.parse(data.data);
+							imgpath = pmsfile.name;
+							mui.fire(main, 'getHouse_pic', {
+								pic_name: imgpath
+							});
+							setTimeout(closeMenu(), '500');
+						}
+						wt.close();
+					}else{
+						mui.toast('上传图片失败');
+						wt.close();
+					}
+				}
+			);
+			for(var i=0;i<files.length;i++){
+				var f=files[i];
+				task.addFile(f.path,{key:f.name});
+			}
+//			task.addData('img_type','1');
+//			task.addData('file_name','house_type_image');
+			task.addData('fname',address_customer.tv_name + 
+				"_" + address_customer.building_name + "_" + address_customer.house_no + 
+				"_" + address_customer.house_style + "_" + address_customer.house_toward);
+			task.start();
+				
+		}
+	</script>
+
+</html>

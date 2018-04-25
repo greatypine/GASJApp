@@ -1,0 +1,60 @@
+.xiaoqu {
+	font-size: 14px;
+	padding: 0px 15px;
+	margin-top: 10px;
+}
+
+.xiaoqu li {
+	clear: both;
+	overflow: hidden;
+	margin: 10px 0;
+	border-bottom: 1px solid #efefef;
+	padding-bottom: 8px;
+}
+
+.xiaoqu li span {
+	display: inline-block;
+	max-width: 72%;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	-o-text-overflow: ellipsis;
+	overflow: hidden;
+	float: left;
+	margin-right: 3%;
+	color: #FF7100;
+}
+
+.xiaoqu li b {
+	display: inline-block;
+	float: right;
+	font-weight: normal;
+	width: 25%;
+	text-align: right;
+}
+
+.xiaoqu_right {
+	position: fixed;
+	bottom: 0;
+	right: 0;
+	height: 45px;
+	line-height: 45px;
+	border-top: 1px solid #dfdfdf;
+	width: 100%;
+	clear: both;
+	overflow: hidden;
+	font-size: 14px;
+}
+
+.xiaoqu_right span {
+	float: left;
+	padding-left: 15px;
+}
+
+.xiaoqu_right b {
+	float: right;
+	padding-right: 15px;
+	color: #D01414;
+}
+/*.notdata{
+	text-align: center;display: none;
+}*/

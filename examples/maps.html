@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>地图</title>
+		<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+		<!-- Bootstrap 3.3.6 -->
+		<link rel="stylesheet" href="../css/bootstrap.min.css">
+		<!-- Font Awesome -->
+		<link rel="stylesheet" href="../css/font-awesome.min.css">
+		<!-- Ionicons -->
+		<link rel="stylesheet" href="../css/ionicons.min.css">
+		<!-- Theme style -->
+		<link rel="stylesheet" href="../css/AdminLTE.min.css">
+		<!-- AdminLTE Skins. Choose a skin from the css/skins
+       folder instead of downloading all of them to reduce the load. -->
+		<link rel="stylesheet" href="../css/_all-skins.min.css">
+		<link rel="stylesheet" href="../css/img_preview.css">
+		<link rel="stylesheet" href="../css/newmui.min.css">
+		<script type="text/javascript" src="../js/common.js"></script>
+		<style>
+			html,
+			body {
+				height: 100%;
+				background-size: cover;
+				min-height: 100%;
+			}
+			
+			.select {
+				height: 3rem;
+				width: 50%;
+				margin-left: 20px;
+				background: #000;
+			}
+			
+			.navbar-nav>.user-menu>.dropdown-menu>li.user-header>p {
+				line-height: 22px;
+			}
+			
+			header {
+				position: fixed!important;
+				width: 100%;
+			}
+			
+			.mui-scroll-wrapper {
+				padding-top: 15px;
+			}
+			
+			ul {
+				margin-top: 70px;
+				margin-bottom: 60px;
+				font-size: 16px;
+			}
+			/*ul a {
+				display: block;
+				overflow: hidden;
+				margin: 0 0 20px 10px;
+				border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+				padding-bottom: 10px;
+			}*/
+			
+			ul a:nth-last-child(1) {
+				border: none;
+			}
+			
+			ul .col-xs-2 div {
+				width: 48px;
+				height: 48px;
+				line-height: 48px;
+				border-radius: 8px;
+				font-size: 30px;
+				text-align: center;
+				color: #fff;
+				margin: 0 auto;
+			}
+			
+			ul .col-xs-10 {
+				position: relative;
+			}
+			
+			ul h5 {
+				color: #333;
+				margin: 6px 0;
+				font-size: 16px;
+			}
+			
+			ul h5 span {
+				font-size: 14px;
+			}
+			
+			.baifang {
+				background-color: #d8505c;
+			}
+			
+			.yonghu {
+				background-color: #ffb220;
+			}
+			
+			.mima {
+				background-color: #76bd3d;
+			}
+			
+			.kaoqin {
+				background-color: #538ef1;
+			}
+			
+			.gonggao {
+				background-color: #ff7100;
+			}
+			
+			footer {
+				position: fixed;
+				bottom: 0;
+				left: 0;
+				width: 100%;
+				border-top: 1px solid #c3c3c3;
+				background-color: #fff;
+				text-align: center;
+				color: #666;
+				height: 50px;
+				padding-top: 2px;
+				z-index: 100;
+			}
+			
+			footer p {
+				font-size: 20px;
+				margin: 0 0 -3px 0;
+			}
+			
+			footer a,
+			footer a:hover,
+			footer a:active,
+			footer a:visited {
+				color: #666;
+			}
+			
+			.mark-green {
+				color: #169a80!important;
+			}
+			
+			.barcode_scan {
+				background: url(../images/icon38.png) no-repeat center center;
+				display: inline-block;
+				width: 20px;
+				height: 20px;
+				background-size: 100%;
+				position: absolute;
+				right: 20px;
+				top: 30px;
+			}
+			
+		</style>
+	</head>
+
+	<body class="hold-transition skin-blue sidebar-mini">
+		<!-- Site wrapper -->
+		<!--主页部分-->
+		<div class=" mui-off-canvas-wrap mui-slide-in" id="offCanvasWrapper">
+
+			<div class="mui-inner-wrap wrapper">
+				<header class="main-header">
+					<!-- Logo -->
+					<nav class="navbar navbar-static-top text-center">
+						<a href="#offCanvasSide" class="sidebar-toggle fa fa-navicon mui-icon-bars"></a>
+						<span>数据地图</span>
+						<!--<a href="#" class="barcode_scan" onclick="clicked('scan_login.html',true,true);"></a>-->
+
+					</nav>
+
+				</header>
+
+				<div class="mui-content mui-scroll-wrapper">
+					<div style="margin-top: 80px;text-align: center;">地图加载中...</div>
+				</div>
+				<div class="mui-off-canvas-backdrop" id="backdrop"></div>
+				<footer style="display: none;">
+					<a class="col-xs-3 mark-green" id="maps" href="javascript:void(0)">
+						<p><i class="fa fa-globe"></i></p>地图</a>
+					<a class="col-xs-3" id="areaState" onclick="selectherf()">
+						<p><i class="fa fa-user"></i></p>混片儿</a>
+					<a class="col-xs-3" id="web_message" path="web_message.html" onclick="jump(this)">
+						<p><i class="fa fa-envelope-o"></i></p>消息
+						<div id="message_state_div"></div>
+					</a>
+					<a class="col-xs-3" id="tabbar" path="tabbar.html" onclick="jump(this)">
+						<p><i class="fa fa-file-text-o"></i></p>录入</a>
+
+				</footer>
+			</div>
+			<!--侧滑部分-->
+			<aside id="offCanvasSide" class="main-sidebar mui-off-canvas-left">
+				<section id="offCanvasSideScroll" class="sidebar">
+					<!-- Sidebar user panel -->
+					<div class="user-panel">
+						<div class="text-center image">
+							<img src="" class="img-circle" data-preview-src="" data-preview-group="1">
+							<p style="margin-top: 10px;"><strong id="user_name"></strong></p>
+							<p><span id="user_zw"></span><span id="user_employeeid"></span></p>
+							<!--<span id="div_title" style="display: block;margin-top:10px;"></span>
+							<select class="select" id="select">
+							</select>
+							<p id="store_num" style="display: block;margin-top:10px;"><span>门店编号：</span><span id="storeid"></span></p>-->
+						</div>
+					</div>
+					<!-- sidebar menu: : style can be found in sidebar.less -->
+					<ul class="sidebar-menu" style="font-size: 14px;">
+						<div style="padding:0px 0px 0px 18px;">
+							<a>
+								<span>所属门店：</span>
+								<span id="div_title"></span>
+								<select class="select" id="select" style="margin-left: 0px;">
+								</select>
+							</a>
+						</div>
+						<div id="store_num" style="padding:18px 0px 0px 18px;">
+							<a><span>门店编号：</span><span id="storeid" style="margin-left: 4px;"></span>
+							</a>
+						</div>
+						<li class="treeview" style="display: none; padding-top: 10px;" id="store_datacard">
+							<a onclick="toStoreDataCard()">
+								<span>门店数据卡</span> <i class="fa  fa-angle-right pull-right"></i>
+							</a>
+						</li>
+						<li class="treeview" style="display: none;" id="shopkeeper_information">
+							<a onclick="toInfromation()">
+								<span>个人信息</span> <i class="fa  fa-angle-right pull-right"></i>
+							</a>
+						</li>
+						<li class="treeview" style="display: none;" id="shopuser_information">
+							<a onclick="toGuoAnXiaList()">
+								<span>门店人员</span> <i class="fa  fa-angle-right pull-right"></i>
+							</a>
+						</li>
+						<li class="treeview" style="display: none; padding-top: 10px;" id="datacard">
+							<a onclick="toCard()">
+								<span>国安侠数据卡</span> <i class="fa  fa-angle-right pull-right"></i>
+							</a>
+						</li>
+						<li class="treeview" style="display: none;" id="my_area">
+							<a onclick="toUser()">
+								<span>我的片区</span> <i class="fa  fa-angle-right pull-right"></i>
+							</a>
+						</li>
+						<li class="treeview">
+							<a onclick="toUpdatePassword()">
+								<span>修改密码</span> <i class="fa  fa-angle-right pull-right"></i>
+							</a>
+						</li>
+
+						<li class="text-center" style="margin-top: 2rem;">
+							<a id="btnLogout">退出登录</a>
+						</li>
+
+					</ul>
+
+				</section>
+			</aside>
+
+		</div>
+		<script src="../js/jQuery-2.2.0.min.js"></script>
+		<script src="https://pv.sohu.com/cityjson?ie=utf-8"></script>
+		<script type="text/javascript" src="../js/custom_common.js"></script>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/previewimage.js"></script>
+		<script src="../js/mui.zoom.js"></script>
+		<script>
+			var employee = JSON.parse(localStorage.getItem('employee'));
+			var selectArea_list = JSON.parse(localStorage.getItem('selectArea_list'));
+			var store_list = JSON.parse(localStorage.getItem('storelist'));
+			var employee_pic = JSON.parse(localStorage.getItem('employee_pic'));
+			var store = null;
+			var storelist = null;
+			var v = employee.employeeId;
+			//			var s = employee.store_id;
+			var w = null;
+			var store_no = null;
+			var zw = employee.usergroup.code;
+			var lat = null;
+			var lon = null;
+			mui.previewImage();
+
+			if(window.plus) {
+				plusReady();
+			} else {
+				document.addEventListener('plusready', plusReady, false);
+			}
+
+			function plusReady() {
+				//获取定位坐标
+				plus.geolocation.getCurrentPosition(function(p) {
+					lat = p.coords.latitude;
+					lon = p.coords.longitude;
+					initStore();
+				}, function(e) {
+					initStore();
+				});
+
+				if(employee.usergroup != null) {
+					if(employee.usergroup.code == 'ZHGLY' || employee.usergroup.code == 'DZ' || employee.usergroup.code == 'GAX' || employee.usergroup.code == 'FDZJSZ') {
+						$("footer").css("display", "");
+					} else {
+						$("footer").css("display", "");
+						$("#tabbar").attr("style", "display:none;");
+						$("#maps").attr("class", "col-xs-4 mark-green");
+						$("#areaState").attr("class", "col-xs-4 ");
+						$("#web_message").attr("class", "col-xs-4");
+					}
+					if(employee.usergroup.code == 'GAX') {
+						$("#datacard").css("display", "");
+						$("#my_area").css("display", "");
+					} else if(employee.usergroup.code == 'DZ') {
+						$("#store_datacard").css("display", "");
+						$("#shopkeeper_information").css("display", "");
+						$("#shopuser_information").css("display", "");
+
+					}
+				}
+
+				initView();
+				//				if(store==null){
+				//					initStore();
+				//				}
+
+				//				getmaps();
+				document.querySelector('.mui-icon-bars').addEventListener('tap', function(e) {
+					plus.webview.getWebviewById('maps_web').setStyle({
+						zindex: -1
+					});
+
+				});
+				//				监听点击遮罩关闭事件
+				document.getElementById("backdrop").addEventListener('tap', function(e) {
+
+					getmaps(store_no);
+
+				});
+
+				//退出
+				var t_username = localStorage.getItem("employee_key");
+				mui('#btnLogout')[0].addEventListener('click', function(event) {
+					setTimeout(function() {
+						var webview = plus.webview.getWebviewById('login');
+						if(webview != null) {
+							webview.close();
+						}
+						localStorage.clear();
+						localStorage.setItem("employee_key", t_username);
+						mui.openWindow({
+							url: '../login.html',
+							id: 'login',
+							createNew: true,
+							show: {
+								aniShow: "slide-in-right"
+							},
+							waiting: {
+								autoShow: false
+							}
+						});
+					}, 50);
+				});
+
+			}
+			function scaned(t, r, f) {
+				scan_login(r)
+			   
+		    }
+
+			function getmaps(s) {
+
+				setTimeout(function() {
+					var maps_webview = plus.webview.getWebviewById('maps_web');
+					if(maps_webview != null) {
+						maps_webview.close();
+					}
+					mui.openWindow({
+						url: "https://data.guoanshequ.com/daqWeb/app_webview/app_maps.html?e=" + v + "&s=" + s + "&zw=" + zw + "&lat=" + lat + "&lon=" + lon,
+						id: 'maps_web',
+						createNew: true,
+						styles: {
+							top: '65px',
+							bottom: '50px'
+						},
+						show: {
+							aniShow: "none"
+						},
+						waiting: {
+							autoShow: false
+						}
+					});
+				}, 0);
+				plus.nativeUI.showWaiting().close();
+
+			}
+
+			//			function getmaps(s) {
+			//				if(w != null){
+			//					w.hide();
+			//					w.close();
+			//				}
+			//				if(mui.os.ios) {
+			//						setTimeout(function() {
+			//						w = plus.webview.create("http://10.16.42.83:8080/daqWeb/app_webview/app_maps.html?e=" + v + "&s=" + s + "&zw=" + zw+"&lat=" + lat+"&lon=" + lon, "", {
+			//						top: '65px',
+			//						bottom: '50px'
+			//					}, "");
+			//					w.show();
+			//						}, 300);
+			//					} else {
+			//						w = plus.webview.create("http://10.16.42.83:8080/daqWeb/app_webview/app_maps.html?e=" + v + "&s=" + s + "&zw=" + zw +"&lat=" + lat+"&lon=" + lon, "", {
+			//						top: '65px',
+			//						bottom: '50px'
+			//					}, "");
+			//					w.show();
+			//					}
+			//				
+			//					
+			//			}
+			function selectherf() {
+				if(employee.usergroup != null) {
+					if(employee.usergroup.code == 'DZ') {
+						tojump("web_shopkeeper_new", "web_shopkeeper_new.html");
+					}else{
+						if(selectArea_list == null || selectArea_list == "" || selectArea_list.length == 0) {
+							mui.toast("暂无划片区域");
+						} else {
+							tojump("web_index", "web_index.html");
+						}
+					}
+				}
+//				if(employee.zw == '店长') {
+//					tojump("web_shopkeeper_new", "web_shopkeeper_new.html");
+//
+//				} else {
+//					if(selectArea_list == null || selectArea_list == "" || selectArea_list.length == 0) {
+//						mui.toast("暂无划片区域");
+//					} else {
+//						tojump("web_index", "web_index.html");
+//					}
+//				}
+			}
+
+			function initView() {
+				if(employee != null) {
+					if(employee.name == null || employee.name == "") {
+						$("#user_name").html("无数据");
+					} else {
+						$("#user_name").html(employee.name);
+					}
+					if(employee.zw == null || employee.zw == "") {
+						$("#user_zw").text("无数据");
+					} else {
+						$("#user_zw").text(employee.zw);
+					}
+
+					if(employee.employeeId == null || employee.employeeId == "") {
+						$("#user_employeeid").text("无数据");
+					} else {
+						$("#user_employeeid").text(employee.employeeId);
+					}
+					if(employee_pic != null) {
+						if(employee_pic.pngUrl != null && employee_pic.pngUrl != "" && employee_pic.pngUrl != "https://imgcdn.guoanshequ.com/") {
+							$(".img-circle").attr("src", decodeURI(employee_pic.pngUrl));
+						} else {
+							$(".img-circle").attr("src", "../images/my_card_head.png");
+						}
+
+					} else {
+						$(".img-circle").attr("src", "../images/my_card_head.png");
+					}
+
+				}
+			}
+
+			//跳转到修改密码
+			function toUpdatePassword() {
+				setTimeout(function() {
+					var webview = plus.webview.getWebviewById('update_password');
+					if(webview != null) {
+						webview.close();
+					}
+					mui.openWindow({
+						url: 'update_password.html',
+						id: 'update_password',
+						createNew: true,
+						show: {
+							aniShow: 'slide-in-right'
+						},
+						waiting: {
+							autoShow: false
+						}
+					});
+				}, 0);
+			};
+			//跳转本月数据动态
+			function toCard() {
+				setTimeout(function() {
+					var webview = plus.webview.getWebviewById('dataCard');
+					if(webview != null) {
+						webview.close();
+					}
+					mui.openWindow({
+						url: 'dataCard.html',
+						id: 'dataCard',
+						createNew: true,
+						show: {
+							aniShow: 'slide-in-right'
+						},
+						waiting: {
+							autoShow: false
+						}
+					});
+				}, 0);
+			};
+			//跳转到门店数据卡
+			function toStoreDataCard() {
+				setTimeout(function() {
+					var webview = plus.webview.getWebviewById('storeDataCard');
+					if(webview != null) {
+						webview.close();
+					}
+					mui.openWindow({
+						url: 'storeDataCard.html',
+						id: 'storeDataCard',
+						createNew: true,
+						show: {
+							aniShow: 'slide-in-right'
+						},
+						waiting: {
+							autoShow: false
+						}
+					});
+				}, 0);
+			};
+			//跳转到店长个人信息
+			function toInfromation() {
+				setTimeout(function() {
+					var webview = plus.webview.getWebviewById('web_information');
+					if(webview != null) {
+						webview.close();
+					}
+					mui.openWindow({
+						url: 'web_information.html',
+						id: 'web_information',
+						createNew: true,
+						show: {
+							aniShow: 'slide-in-right'
+						},
+						waiting: {
+							autoShow: false
+						}
+					});
+				}, 0);
+			};
+			//跳转到国安侠列表
+			function toGuoAnXiaList() {
+				setTimeout(function() {
+					var webview = plus.webview.getWebviewById('web_guoanxialist');
+					if(webview != null) {
+						webview.close();
+					}
+					mui.openWindow({
+						url: 'web_guoanxialist.html',
+						id: 'web_guoanxialist',
+						createNew: true,
+						show: {
+							aniShow: 'slide-in-right'
+						},
+						waiting: {
+							autoShow: false
+						}
+					});
+				}, 0);
+			};
+			//跳转到片区信息
+			function toUser() {
+				if(selectArea_list == null || selectArea_list == "" || selectArea_list.length == 0) {
+					mui.toast("暂无划片区域");
+				} else {
+					setTimeout(function() {
+						var webview = plus.webview.getWebviewById('web_user');
+						if(webview != null) {
+							webview.close();
+						}
+						mui.openWindow({
+							url: 'web_user.html',
+							id: 'web_user',
+							createNew: true,
+							show: {
+								aniShow: 'slide-in-right'
+							},
+							waiting: {
+								autoShow: false
+							}
+						});
+					}, 100);
+				}
+
+			};
+			//跳转到电脑登录页面
+			function toPcLogin(r) {
+				setTimeout(function() {
+					var webview = plus.webview.getWebviewById('pc_login');
+					if(webview != null) {
+						webview.close();
+					}
+					mui.openWindow({
+						url: 'pc_login.html',
+						id: 'pc_login',
+						createNew: true,
+						show: {
+							aniShow: 'slide-in-bottom'
+						},
+						waiting: {
+							autoShow: false
+						},extras:{
+							login_extra:r
+                        }
+					});
+				}, 0);
+			};
+
+			function initStore() {
+				store = JSON.parse(localStorage.getItem("store"));
+				storelist = JSON.parse(localStorage.getItem("storelist"));
+				getStorelist();
+				if(store != null) {
+					if(storelist.length <= 1) {
+						mui("#div_title")[0].innerHTML = store.name;
+						mui("#storeid")[0].innerHTML = store.storeno;
+						store_no = store.storeno;
+						getmaps(store_no);
+						$("#select").hide();
+					} else {
+						$("#select").show();
+						$("div_title").hide();
+						mui("#storeid")[0].innerHTML = store.storeno;
+						store_no = store.storeno;
+						getmaps(store_no);
+					}
+
+				} else {
+					getStore($('.select option:selected').val());
+				}
+
+			}
+
+			function getStorelist() {
+				if(storelist != null || storelist != "") {
+
+					$(storelist).each(function(index, element) {
+						if(index == 0) {
+							$('#select').append('<option selected="selected" value=' + element.store_id + '>' + element.name + '</option>');
+						} else {
+							$('#select').append('<option value=' + element.store_id + '>' + element.name + '</option>');
+						}
+					});
+					if(store != null) {
+						$('#select').val(store.store_id);
+					}
+
+				} else {
+					mui("#div_title")[0].innerHTML = "国安社区";
+					$('#select').hide();
+					$('#store_num').hide();
+				}
+
+			}
+			//获取门店信息
+			function getStore(store_id) {
+				if(store_id == null || store_id == "" || store_id == "null") {
+					mui("#div_title")[0].innerHTML = "国安社区";
+					$("#select").hide();
+					$("#store_num").hide();
+					getmaps(null);
+					return;
+				}
+				doManager("StoreManager", "findStore", store_id, function(data) {
+					if(data.result == true) {
+						var jsonStore = JSON.parse(data.data);
+						localStorage.setItem("store", JSON.stringify(jsonStore));
+						mui("#div_title")[0].innerHTML = jsonStore.name;
+						mui("#storeid")[0].innerHTML = jsonStore.storeno;
+						store_no = jsonStore.storeno;
+						getmaps(store_no);
+						if(storelist.length <= 1) {
+							$("#select").hide();
+						} else {
+							$("#select").show();
+							$("#div_title").hide();
+						}
+
+					} else {
+						$("#select").hide();
+						$("#store_num").hide();
+						mui("#div_title")[0].innerHTML = "国安社区";
+
+					}
+				});
+
+			}
+
+			//获取门店信息
+			function getStore_change(store_id) {
+				if(store_id == null || store_id == "" || store_id == "null") {
+					mui("#div_title")[0].innerHTML = "国安社区";
+					$("#select").hide();
+					$("#store_num").hide();
+					getmaps(null);
+					return;
+				}
+				doManager("StoreManager", "findStore", store_id, function(data) {
+					if(data.result == true) {
+						var jsonStore = JSON.parse(data.data);
+						localStorage.setItem("store", JSON.stringify(jsonStore));
+						mui("#div_title")[0].innerHTML = jsonStore.name;
+						mui("#storeid")[0].innerHTML = jsonStore.storeno;
+						store_no = jsonStore.storeno;
+						if(storelist.length <= 1) {
+							$("#select").hide();
+						} else {
+							$("#select").show();
+							$("#div_title").hide();
+						}
+
+					} else {
+						$("#select").hide();
+						$("#store_num").hide();
+						mui("#div_title")[0].innerHTML = "国安社区";
+
+					}
+				}, false);
+
+			}
+			
+			$(document).ready(function() {
+				$('#select').change(function() {
+					var a = $('#select option:selected').text();
+					$('#select span').text(a);
+					getStore_change($('#select option:selected').val());
+					if(mui.os.ios) {
+						setTimeout(function() {
+							window.location.reload();
+						}, 350);
+					} else {
+						window.location.reload();
+					}
+				})
+			});
+			//扫码确认登录
+			function scan_login(r){
+				toPcLogin(r);
+//				var btnArray = ['是','否'];
+//					mui.confirm('是否登录PC端国安数据', '登录', btnArray, function(e) {
+//						if (e.index == 0) {
+//							alert(r);
+//						} 
+//					}  );
+			
+			}
+
+			//			function getdatademo(storeno) {
+			//				alert(storeno);
+			//				doManager("InterManager", "selecTinyVillageCoordByEmployeeNo", [v,storeno], function(data) {
+			//					if(data.result == true) {
+			//						var jsonStore = JSON.parse(data.data);
+			//						alert(JSON.stringify(jsonStore));
+			//						
+			//
+			//					} else {
+			//						
+			//					}
+			//				});
+			//
+			//			}
+
+			//url传参加密
+			/*var keyStr = "ABCDEFGHIJKLMNOP" +  
+		    "QRSTUVWXYZabcdef" +  
+		    "ghijklmnopqrstuv" +  
+		    "wxyz0123456789+/" +  
+		    "=";  
+			
+			function encode64(input) { 
+				var output = "";  
+				if(input!=null){
+					input = escape(input);  
+					var chr1, chr2, chr3 = "";  
+					var enc1, enc2, enc3, enc4 = "";  
+					var i = 0;  
+					
+					do {  
+					chr1 = input.charCodeAt(i++);  
+					chr2 = input.charCodeAt(i++);  
+					chr3 = input.charCodeAt(i++);  
+					
+					enc1 = chr1 >> 2;  
+					enc2 = ((chr1 & 3) << 4) | (chr2 >> 4);  
+					enc3 = ((chr2 & 15) << 2) | (chr3 >> 6);  
+					enc4 = chr3 & 63;  
+					
+					if (isNaN(chr2)) {  
+					enc3 = enc4 = 64;  
+					} else if (isNaN(chr3)) {  
+					enc4 = 64;  
+					}  
+					
+					output = output +   
+					keyStr.charAt(enc1) +   
+					keyStr.charAt(enc2) +   
+					keyStr.charAt(enc3) +   
+					keyStr.charAt(enc4);  
+					chr1 = chr2 = chr3 = "";  
+					enc1 = enc2 = enc3 = enc4 = "";  
+					} while (i < input.length);  
+					
+					
+				}else{
+					output = input;
+				}
+				
+				return output;  
+			}  */
+		</script>
+	</body>
+
+</html>

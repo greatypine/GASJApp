@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>个人基本信息、门店信息页面</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <!-- Bootstrap 3.3.6 -->
+  <link rel="stylesheet" href="../css/bootstrap.min.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="../css/font-awesome.min.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="../css/ionicons.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="../css/AdminLTE.min.css">
+  <!-- AdminLTE Skins. Choose a skin from the css/skins
+       folder instead of downloading all of them to reduce the load. -->
+  <link rel="stylesheet" href="../css/_all-skins.min.css">
+  <link rel="stylesheet" href="../css/newmui.min.css">
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="IE 9/html5shiv.min.js"></script>
+  <script src="IE 9/respond.min.js"></script>
+  <![endif]-->
+  <style>
+    .wrapper,.content-wrapper{background-color: transparent!important;}
+    .modal-content{ margin-bottom: 15px;}
+    .box-body img{width: 100%}
+
+    .bg-head-green{background-color:#18bc9c; color: #fff; border-radius: 0;}
+    .bg-head-green .col-xs-4 img{border-radius: 50%; max-height: 150px; border: 2px solid #fff; box-shadow: 0px 3px 5px rgba(0,0,0,0.3);}
+    .return-arrow a{color: #fff; padding: 20px; font-size: 26px;width: 100%;}
+    .bg-shade{background-color: rgba(0,0,0,0.1); padding: 10px 0; margin-top: 10px;}
+
+  </style>
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+<!-- Site wrapper -->
+<div class="wrapper mui-off-canvas-wrap mui-slide-in" id="offCanvasWrapper">
+
+  <aside id="offCanvasSide" class="main-sidebar mui-off-canvas-left">
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section id="offCanvasSideScroll" class="sidebar">
+      <!-- Sidebar user panel -->
+      <div class="user-panel">
+        <div class="text-center image">
+          <img src="../images/user2-160x160.jpg" class="img-circle" alt="User Image">
+          <p><strong id="user_name"></strong></p>
+          <p><span id="user_zw"></span><span id="user_employeeid"></span></p>
+          <p id="store_name"></p>
+        </div>
+      </div>
+      <!-- sidebar menu: : style can be found in sidebar.less -->
+      <ul class="sidebar-menu">
+
+        <li class="treeview ">
+          <a onclick="toStore()">
+            <span>门店动态</span> <i class="fa  fa-angle-right pull-right"></i>
+          </a>
+        </li>
+        <li class="treeview active">
+          <a href="javascript:void(0);">
+            <span>个人信息</span> <i class="fa  fa-angle-right pull-right"></i>
+          </a>
+        </li>
+        <li class="treeview">
+          <a onclick="toGuoAnXiaList()">
+            <span>门店人员</span> <i class="fa  fa-angle-right pull-right"></i>
+          </a>
+        </li>
+        <li class="treeview">
+          <a onclick="toMain()">
+            <span>国安数据首页</span> <i class="fa  fa-angle-right pull-right"></i>
+          </a>
+        </li>
+        <li class="text-center" style="margin-top: 2rem;">
+        	<a id="btnLogout">退出登录</a>
+        </li>
+
+      </ul>
+    </section>
+    <!-- /.sidebar -->
+  </aside>
+  <!-- Content Wrapper. Contains page content -->
+  <div class="mui-inner-wrap">
+    <section class="mui-content mui-scroll-wrapper">
+
+        <header class="main-header" >
+     		 <nav class="navbar navbar-static-top text-center">
+					<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+				</nav>
+   		 </header>
+        <div class="content-wrapper">
+          <div class="box-body no-padding bg-head-green text-center">
+            <div class="clearfix">
+              <div class="col-xs-4"></div>
+              <div class="col-xs-4"><img src="../images/my_card_head.png"> <p class="h4" id="employee_name"></p></div>
+              <div class="col-xs-4"></div>
+            </div>
+            <!--<div class="clearfix bg-shade">
+              <div class="col-xs-4">订单派送总量<br><p id="oreder_sum"></p></div>
+              <div class="col-xs-4">拜访记录总量<br><p id="relation_sum"></p></div>
+              <div class="col-xs-4">单体画像总量<br><p id="customer_sum"></p></div>
+            </div>-->
+          </div>
+          <div class="box-header with-border"><i class="fa fa-file-zip-o"></i><b>基本信息</b></div>
+          <div class="modal-content">
+            <div class="box-body">
+              <p id="employee_zw"></p>
+	            <p id="employee_no"></p>
+	            <p id="phome"></p>
+	            <!--<p class="no-margin" id="store_name_"></p>-->
+            </div>
+          </div>
+          <div class="box-header with-border"><i class="fa fa-file-zip-o"></i><b>门店信息</b></div>
+          <div class="modal-content">
+            <div class="box-body" id="itemdiv">
+              
+            </div>
+          </div>
+
+        </div>
+
+    </section>
+    <!-- /.content -->
+    <div class="mui-off-canvas-backdrop"></div>
+  </div>
+
+</div>
+<!-- ./wrapper -->
+
+<!-- jQuery 2.2.0 -->
+<script src="../js/jQuery-2.2.0.min.js"></script>
+<!-- Bootstrap 3.3.6 -->
+<script src="../js/bootstrap.min.js"></script>
+<!-- Morris.js charts -->
+<script src="../js/raphael-min.js"></script>
+<!--<script src="plugins/morris/morris.min.js"></script>-->
+<!-- FastClick -->
+<script src="../js/fastclick.js"></script>
+<!-- AdminLTE App -->
+<script src="../js/app.min.js"></script>
+<!-- 滑动js -->
+<script src="../js/mui.min.js"></script>
+<script>
+	
+	var employee = JSON.parse(localStorage.getItem('employee'));
+	var storelist = JSON.parse(localStorage.getItem('storelist'));
+//	var relation_sum = JSON.parse(localStorage.getItem('relation_sum'));
+//	var customer_sum = JSON.parse(localStorage.getItem('customer_sum'));
+//	var order_sum = JSON.parse(localStorage.getItem('order_sum'));
+	var default_storename = localStorage.getItem('default_storename');
+	mui.init({
+    swipeBack: false
+  });
+   mui.plusReady(function (){
+     initView();
+     getStore();
+     
+     //退出
+    var t_username=localStorage.getItem("employee_key");
+    mui('#btnLogout')[0].addEventListener('click',function(event){
+    	 setTimeout(function() {
+    	 	var webview = plus.webview.getWebviewById('login');
+			if(webview != null){
+				webview.close();
+			}
+      localStorage.clear();
+			localStorage.setItem("employee_key",t_username);
+			mui.openWindow({
+				url:'../login.html',
+				id:'login',
+				createNew:true,
+				show: {
+						aniShow: "slide-in-right"
+						},
+						waiting: {
+							autoShow: false
+					}
+			});
+          }, 50);
+			  
+		});
+     
+     
+  });
+  function initView(){
+  	if(employee !=null){
+  		if(employee.name ==null||employee.name ==""){
+  			$("#user_name").html("无数据");
+  			$('#employee_name').html("无数据");
+  		}else{
+  			$("#user_name").html(employee.name);
+  			$('#employee_name').html(employee.name);
+  		}
+  		if(employee.zw ==null||employee.zw==""){
+  			$("#user_zw").text("无数据");
+  			$("#employee_zw").text("职务:"+"无数据");
+  		}else{
+  			$("#user_zw").text(employee.zw);
+  			$("#employee_zw").text("职务:"+employee.zw);
+  			
+  		}
+  		if(employee.employeeId==null||employee.employeeId==""){
+  			$("#user_employeeid").text("无数据");
+  			$('#employee_no').html("员工号:"+"无数据");
+  		}else{
+  			$("#user_employeeid").text(employee.employeeId);
+  			$('#employee_no').html("员工号:"+employee.employeeId);
+  			
+  		}
+//		if(default_storename !=null){
+//    	$("#store_name").html(default_storename);
+//		    $('#store_name_').html("所属门店:"+default_storename);
+//   }else{
+//	     	if(employee.store_name==null ||employee.store_name==""){
+//		    	$("#store_name").html("无数据");
+//		    	$('#store_name_').html("所属门店:"+"无数据");
+//		    }else{
+//		    	$("#store_name").html(employee.store_name);
+//		    	$('#store_name_').html("所属门店:"+employee.store_name);
+//		    }
+//   }
+	    
+	    if(employee.mobilephone==null ||employee.mobilephone==""){
+	    	$('#phome').html("电话:"+"无数据");
+	    }else{
+	    	$('#phome').html("电话:"+employee.mobilephone);
+	    }
+//	    if(relation_sum!=null){
+//				$('#relation_sum').html(relation_sum);
+//			}else{
+//				$('#relation_sum').html("0");
+//			}
+//	    if(customer_sum!=null){
+//				$('#customer_sum').html(customer_sum);
+//			}else{
+//				$('#customer_sum').html("0");
+//			}
+//	    if(order_sum!=null){
+//				$('#oreder_sum').html(order_sum);
+//			}else{
+//				$('#oreder_sum').html("0");
+//			}
+  	}
+  	
+  }
+  //跳转到国安侠列表
+    function toStore() {
+			setTimeout(function() {
+				var webview = plus.webview.getWebviewById('web_shopkeeper_new');
+				if(webview != null){
+					webview.close();
+				}
+				mui.openWindow({
+					url:'web_shopkeeper_new.html',
+					id: 'web_shopkeeper_new',
+					createNew:true,
+					show: {
+						aniShow: 'slide-in-right'
+					},
+					waiting: {
+						autoShow: false
+					}
+				});
+			}, 50);
+		};
+		//跳转到国安侠列表
+    function toStore() {
+			setTimeout(function() {
+				var webview = plus.webview.getWebviewById('web_shopkeeper');
+				if(webview != null){
+					webview.close();
+				}
+				mui.openWindow({
+					url:'web_shopkeeper.html',
+					id: 'web_shopkeeper',
+					createNew:true,
+					show: {
+						aniShow: 'slide-in-right'
+					},
+					waiting: {
+						autoShow: false
+					}
+				});
+			}, 50);
+		};
+		//跳转到国安侠列表
+    function toGuoAnXiaList() {
+			setTimeout(function() {
+				var webview = plus.webview.getWebviewById('web_guoanxialist');
+				if(webview != null){
+					webview.close();
+				}
+				mui.openWindow({
+					url:'web_guoanxialist.html',
+					id: 'web_guoanxialist',
+					createNew:true,
+					show: {
+						aniShow: 'slide-in-right'
+					},
+					waiting: {
+						autoShow: false
+					}
+				});
+			}, 50);
+		};
+	
+		//跳转到选择页面
+    function toMain() {
+			setTimeout(function() {
+			var webview = plus.webview.getWebviewById('new_main');
+			if(webview != null){
+				webview.close();
+			}
+				mui.openWindow({
+					url:'new_main.html',
+					id: 'new_main',
+					createNew:true,
+					show: {
+						aniShow: 'slide-in-right'
+					},
+					waiting: {
+						autoShow: false
+					}
+				});
+			}, 50);
+		};
+		
+		//获取门店信息数据
+		function getStore() {
+			var $div = $('#itemdiv');
+						if(storelist!=null&&storelist.length>0){
+							$(storelist).each(function(index,store){
+								if(store.address==null||store.address==""){
+									store.address='无地址信息'
+								}
+								var html='<p>'+
+									          '<span class="margin-r-5">'+store.name+'</span>'+
+									          '<span class="margin-r-5">'+store.address+'</span></p>';
+									          
+									$div.append(html);
+							});
+							  
+			}
+		}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</script>
+
+</body>
+</html>

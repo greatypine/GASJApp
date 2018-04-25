@@ -1,0 +1,15 @@
+.login-page{background:url(../images/timg.jpg) no-repeat center center;}
+.hold-transition{ -webkit-transition: none; -o-transition: none;transition: none}
+.clearfix{width: 100%;}
+.pull-left{width: 100%;background-color:rgba(0,0,0,0.5);float: none!important;}
+.pull-right{width: 100%;background-color:rgba(0,0,0,0.5);float: none!important;}
+.login-box{margin: 0 auto;}
+.login-box-body{padding: 0px;border-top: 0;color: #fff;}
+.login-box-msg{text-align: center;margin: 0;}
+.login-logo{font-size: 22px;margin-top: 0;}
+.btn-block {display: block;width: 100%}
+.btn-flat {border-radius: 0;box-shadow:none;border-width:1px;}
+.login-box-body button {font-size: 18px;}
+.bg-green{color: #fff;background-color: #00a65a;border-color: #00a65a;}
+.btn {padding: 6px 12px;}
+.btn-primary {color: #fff;background-color: rgb(191,10,17);border-color: rgb(191,10,17);}

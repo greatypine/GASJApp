@@ -1,0 +1,133 @@
+.input-row-suffix input{
+	width: 50%;
+	margin-right: 10px;
+	margin-bottom: 2px;
+	border: 0;
+	float: right;
+	text-align: right;
+}
+
+.input-row input{
+	width: 70%;
+	margin-right: 10px;
+	/*height: 40px;*/
+	margin-bottom: 2px;
+	border: 0;
+	text-align: right;
+	float: right;
+}
+
+
+.input-row-suffix .suffix{
+	font-size: 0.25rem;
+	float: right;
+	color: #929292;
+	padding-right: 0.2rem;
+}
+
+.input_li_suffix{
+	/*height: 1rem;*/
+	padding-right: 10px !important;
+	padding: 10px 10px 0 15px;
+}
+
+.input_li{
+	/*height: 1rem;*/
+	padding-right: 0 !important;
+	padding: 10px 0 0 15px;
+}
+.input_li input{
+	font-size: 0.25rem;
+	width: 60%;
+	margin-bottom:0.1rem;
+	border: 0;
+	text-align: right;
+	float: right;
+	right: 0;
+}
+
+
+.mui-table-view-cell label{
+	font-size: 0.28rem;
+	font-weight: bold;
+}
+
+.select_li{
+	line-height: 1rem;
+}
+
+
+.select_li input{
+	font-size: 0.25rem;
+	width: 60%;
+	padding: 20px 0 0 0;
+	margin-bottom: 0;
+	border: 0;
+	text-align: right;
+	float: right;
+	right: 0;
+}
+
+.select_li a{
+	padding-top:0 !important;
+	padding-bottom: 0 !important;
+}
+
+li{
+	font-size: 14px;
+	line-height: 0.7rem;
+}
+.time input{
+	font-size: 0.25rem;
+	width: 20%;
+	padding: 10px 0 10px 5px;
+	border: 0;
+	margin-bottom: 0;
+	text-align: center;
+	float: right;
+	
+}
+.time span{
+	font-size: 0.25rem;
+	width: 5%;
+	padding: 0;
+	border: 0;
+	text-align: center;
+	float: right ;
+	display: block;
+	
+}
+.time label{
+		font-size: 0.28rem;
+	font-weight: bold;
+}
+.floor_company{width: 30%;margin-right: 5px;}
+.company_name{width: 60%; margin-left: 5px;}
+/*.open_time{
+		font-size: 0.25rem;
+	width: 20%;
+	padding: 10px 0 10px 20px;
+	border: 0;
+	text-align: center;
+	
+}
+.close_time{
+		font-size: 0.25rem;
+	width: 20%;
+	padding: 10px 0 10px 20px;
+	border: 0;
+	text-align: center;
+	
+}*/
+.add_btn {
+	width:91%; 
+	height: 0.7rem;
+	color:#06c003;
+	font-size: 0.32rem;
+	background-color: #FFFFFF; 
+	text-align: center;
+	border-radius: 0.1rem;
+	/*margin: 0 0.2rem 0.2rem 0;*/
+	border: 1px solid #06c003;
+}
+

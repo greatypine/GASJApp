@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>Hello MUI</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<!--标准mui.css-->
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="../css/common.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/style.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/my.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/my_card.css"/>
+		
+		<style>
+			
+			
+			.mui-page.mui-transitioning {
+				-webkit-transition: -webkit-transform 300ms ease;
+				transition: transform 300ms ease;
+			}
+			.mui-page-left {
+				-webkit-transform: translate3d(0, 0, 0);
+				transform: translate3d(0, 0, 0);
+			}
+			.mui-ios .mui-page-left {
+				-webkit-transform: translate3d(-20%, 0, 0);
+				transform: translate3d(-20%, 0, 0);
+			}
+			
+/*			.mui-navbar .mui-bar {*/
+			
+			.mui-android .mui-navbar-inner.mui-navbar-left {
+				opacity: 0;
+			}
+			.mui-ios .mui-navbar-left .mui-left,
+			.mui-ios .mui-navbar-left .mui-center,
+			.mui-ios .mui-navbar-left .mui-right {
+				opacity: 0;
+			}
+			.mui-navbar .mui-btn-nav {
+				-webkit-transition: none;
+				transition: none;
+				-webkit-transition-duration: .0s;
+				transition-duration: .0s;
+			}
+			.mui-navbar .mui-bar .mui-title {
+				display: inline-block;
+				width: auto;
+			}
+			.mui-page-shadow {
+				position: absolute;
+				right: 100%;
+				top: 0;
+				width: 16px;
+				height: 100%;
+				z-index: -1;
+				content: '';
+			}
+			.mui-page-shadow {
+				background: -webkit-linear-gradient(left, rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, 0) 10%, rgba(0, 0, 0, .01) 50%, rgba(0, 0, 0, .2) 100%);
+				background: linear-gradient(to right, rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, 0) 10%, rgba(0, 0, 0, .01) 50%, rgba(0, 0, 0, .2) 100%);
+			}
+			.mui-navbar-inner.mui-transitioning,
+			.mui-navbar-inner .mui-transitioning {
+				-webkit-transition: opacity 300ms ease, -webkit-transform 300ms ease;
+				transition: opacity 300ms ease, transform 300ms ease;
+			}
+			.mui-page {
+				display: none;
+			}
+			.mui-pages .mui-page {
+				display: block;
+			}
+			.mui-page .mui-table-view:first-child {
+				margin-top: 15px;
+			}
+			.mui-page .mui-table-view:last-child {
+				margin-bottom: 30px;
+			}
+			.mui-table-view {
+				margin-top: 20px;
+			}
+			
+			.mui-table-view span.mui-pull-right {
+				color: #999;
+			}
+			.mui-table-view-divider {
+				background-color: #efeff4;
+				font-size: 14px;
+			}
+			.mui-table-view-divider:before,
+			.mui-table-view-divider:after {
+				height: 0;
+			}
+			.head {
+				height: 40px;
+			}
+			#head {
+				line-height: 40px;
+			}
+			.head-img {
+				width: 40px;
+				height: 40px;
+			}
+			#head-img1 {
+				position: absolute;
+				bottom: 10px;
+				right: 40px;
+				width: 40px;
+				height: 40px;
+			}
+			.update {
+				font-style: normal;
+				color: #999999;
+				margin-right: -25px;
+				font-size: 15px
+			}
+			.mui-fullscreen {
+				position: fixed;
+				z-index: 20;
+				background-color: #000;
+			}
+			.mui-ios .mui-navbar .mui-bar .mui-title {
+				position: static;
+			}
+			/*问题反馈在setting页面单独的css*/
+			#feedback .mui-popover{
+				position: fixed;
+			}
+			#feedback .mui-table-view:last-child {
+			    margin-bottom: 0px;
+			}
+			#feedback .mui-table-view:first-child {
+			    margin-top: 0px;
+			}
+		</style>
+		
+		
+	</head>
+
+	<body style="background-color: #fff;">
+		<header class="mui-bar mui-bar-nav titleheader">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">本月数据动态</h1>
+		</header>
+		<div class="my-photo " style="padding-top: 1.2rem;">
+			<div class="my-card_bg" align="center">
+				<img src="../images/my_card_bg.jpg"/></div>
+			<div class="my_card_title"><span id="card_title_text"></span></div>
+			<div class="my_card_context">
+				<div class="my_card_text fl">
+					<ul>
+						<li>
+							<span>姓名</span>
+							<span class="card_name" id="employee_name"></span>
+						</li>
+						<li>
+							<span>工号</span>
+							<span class="card_id" id="employee_id"></span>
+						</li>
+						<li>
+							<span>电话</span>
+							<span class="card_phone" id="card_phone"></span>
+						</li>
+						<li>
+							<span>门店</span>
+							<span class="card_store" id="card_store"></span>
+						</li>
+					</ul>
+				</div>
+				<!--<div class="my_card_img fr" onclick="toSetHeadimg();">-->
+				<div class="my_card_img fr">
+					<a href="#"><img id="headimg" src="../images/my_card_head.png"/></a>
+				</div>
+			</div>
+			<div class="my_card_sum_title"><span>工作统计量(本月)</span></div>
+			<div class="my_card_sum">
+				<div class="my_card_text fl">
+					<ul>
+						<li onclick="toCustomer()">
+							<span class="user_portrait">用户画像(<span class="user_portrait_num" id="user_portrait_num"></span>)</span>
+						</li>
+						<li>
+							<span class="order">订单(<span class="order_num" id="order_num"></span>)</span>
+						</li>
+					</ul>
+				</div>
+				<div class="my_card_text fr"style="margin-right: 1rem;">
+					<ul>
+						<li onclick="toExpress()">
+							<span class="express">快递代送(<span class="express_num" id="express_num"></span>)</span>
+						</li>
+						<li onclick="toRelation();">
+							<span class="relation">拜访记录(<span class="relation_num" id="relation_num"></span>)</span>
+						</li>
+					</ul>
+				</div>
+			</div>	
+			
+		</div>
+
+	</body>
+	<script src="../js/mui.min.js"></script>
+	<script src="../js/custom_common.js"></script>
+	<script type="text/javascript" src="js/common.js" ></script>
+	<script type="text/javascript" src="../js/jquery-2.2.2.min.js"></script>
+	<script type="text/javascript">
+	
+//		mui.init();
+		var employee_id=null;
+		var employeeId=null;
+		var store_id=null;
+		var express_count=null;
+		var customer_count=null;
+		var relation_count=null;
+		var express_count_type='999';
+		var customer_count_type='888';
+		var relation_count_type='777';
+		var headimg_null="../images/my_card_head.png";
+		if(window.plus){
+			plusReady();
+		}else{
+			document.addEventListener('plusready',plusReady,false);
+		}
+		
+		window.addEventListener('settype',function(event){
+			var id = event.detail.id;
+			if(id != null) {
+			  plusReady();
+			}
+		});
+		window.addEventListener('setheadimg',function(event){
+			var headimg_type = event.detail.headimg;
+			if(headimg_type.headimg_type == 'new') {
+			  plusReady();
+			}
+		});
+//		function setInitView(){
+//			
+//			//接口获取头像地址
+//			 $("#headimg").attr("src", headimg_null);  
+//		}
+		function plusReady(){
+			var employee = JSON.parse(localStorage.getItem('employee'));
+			var store = JSON.parse(localStorage.getItem("store"));
+			var usergroup = JSON.parse(localStorage.getItem("usergroup"));
+//			var headimg=JSON.parse(localStorage.getItem("headimg"));
+//			setInitView();
+//			if(headimg==null||headimg==""){
+//				$('#headimg').attr('src',decodeURI('http://10.16.31.242/file_manager/user_image/1490345412013.jpg'));
+////				 $("#headimg").attr("src", headimg_null);  
+//			}else{
+//				 $("#headimg").attr("src", headimg);  
+//			}
+			
+			
+			employee_id=employee.id;
+			employeeId=employee.employeeId;
+			if(store == null||store.store_id == null||store.store_id ==""){
+			    store_id=null;
+			}else{
+				store_id=store.store_id;
+			}
+			getMessageCount(employee_id);
+			if((employeeId==null||employeeId=="")&&(store_id==null||store_id=="")){
+				mui('#relation_num')[0].innerHTML ="暂无";
+				mui('#express_num')[0].innerHTML ="暂无";
+				mui('#user_portrait_num')[0].innerHTML ="暂无";
+				mui('#order_num')[0].innerHTML ="暂无";
+			}
+			
+			if(usergroup.cardtype=='0'){
+				mui('#card_title_text')[0].innerHTML="国安侠数据卡";
+//				getWorkingNum(employeeId);
+			}else if(usergroup.cardtype=='1'){
+				mui('#card_title_text')[0].innerHTML="门店数据卡";
+//				getStoreNum(store_id);
+			}else{
+				mui('#card_title_text')[0].innerHTML="个人资料";
+				$('.my_card_sum_title').hide();
+				$('.my_card_sum').hide();
+				$('.my-card_bg').css('height', '5rem');
+			}
+		} 
+		
+		mui.plusReady(function(){
+			var employee = JSON.parse(localStorage.getItem('employee'));
+			var store = JSON.parse(localStorage.getItem("store"));
+			if(employee==null||employee.name==null||employee.name==""){
+				mui('#employee_name')[0].innerHTML = "暂无";
+			}else{
+				mui('#employee_name')[0].innerHTML = employee.name;
+			}
+			
+			if(employee==null||employee.employeeId==null||employee.employeeId==""){
+				mui('#employee_id')[0].innerHTML = "暂无";
+			}else{
+				mui('#employee_id')[0].innerHTML = employee.employeeId;
+			}
+			
+			if(employee==null||employee.mobilephone==null||employee.mobilephone==""){
+				mui('#card_phone')[0].innerHTML = "暂无";
+			}else{
+				mui('#card_phone')[0].innerHTML = employee.mobilephone;
+			}
+			
+			if(store==null||store.name==null||store.name==""){
+				mui('#card_store')[0].innerHTML = "暂无";
+			}else{
+				mui('#card_store')[0].innerHTML = store.name;
+			}
+		});
+		
+		function getmessagecount(){
+			var message_count=window.localStorage.getItem("message_count");
+				if(message_count==0||message_count==null){
+//						$('#message_id').deleteClass("foot2_num");
+						return;
+					}else{
+						$('#message_id').addClass("foot2_num");
+						$('.foot2_num').html(message_count);
+					}
+			
+		}
+		function getMessageCount(employee_id){
+			doManager('AppMessageManager', 'getAppMessageCount',employee_id, function(data) {
+				if(data.result) {
+					var jsonData = JSON.parse(data.data);
+					if(jsonData==0||jsonData==null){
+					}else{
+						$('#message_id').addClass("foot2_num")
+					}
+					window.localStorage.setItem("message_count",jsonData);
+				} else {
+					mui.toast(data.message);
+				}
+			});
+		}
+		function getWorkingNum(employee_id){
+			doManager('InterManager', 'getExpressAndCustomerCount',employee_id, function(data) {
+				if(data.result) {
+					var jsonData = JSON.parse(data.data);
+					express_count=JSON.stringify(jsonData.Express);
+					customer_count=JSON.stringify(jsonData.Customer);
+					relation_count=JSON.stringify(jsonData.Relation);
+					mui('#express_num')[0].innerHTML =JSON.stringify(jsonData.Express);
+					mui('#relation_num')[0].innerHTML =JSON.stringify(jsonData.Relation);
+					mui('#user_portrait_num')[0].innerHTML =JSON.stringify(jsonData.Customer);
+					mui('#order_num')[0].innerHTML =JSON.stringify(jsonData.Order);
+				} else {
+					mui.toast(data.message);
+				}
+			});
+		}
+		function getStoreNum(store_id){
+			doManager('InterManager', 'getExpressAndCustomerStoreCount',store_id, function(data) {
+				if(data.result) {
+					var jsonData = JSON.parse(data.data);
+					express_count=JSON.stringify(jsonData.Express);
+					customer_count=JSON.stringify(jsonData.Customer);
+					relation_count=JSON.stringify(jsonData.Relation);
+					mui('#express_num')[0].innerHTML =JSON.stringify(jsonData.Express);
+					mui('#relation_num')[0].innerHTML =JSON.stringify(jsonData.Relation);
+					mui('#user_portrait_num')[0].innerHTML =JSON.stringify(jsonData.Customer);
+					mui('#order_num')[0].innerHTML =JSON.stringify(jsonData.Order);
+				} else {
+					mui.toast(data.message);
+				}
+			});
+		}
+		function usermessage() {
+			mui.toast("正在建设中。。。")
+		}
+		function toExpress(){
+			var webview = plus.webview.getWebviewById('express_list');
+									if(webview != null){
+										webview.hide();
+										webview.close();
+									}
+									mui.openWindow({
+										url: 'express_list.html',
+										id: 'express_list',
+										createNew: true,
+										show: {
+										aniShow: "slide-in-right"
+										},
+										waiting: {
+											autoShow: false
+										},
+										extras: {
+											express_count:express_count,
+											express_count_type:express_count_type
+										}
+									});
+		}
+		function toCustomer(){
+			var webview = plus.webview.getWebviewById('user_information');
+				if(webview != null){
+					webview.hide();
+					webview.close();
+				}
+				mui.openWindow({
+					url: 'user_information.html',
+					id: 'user_information',
+					createNew: true,
+					show: {
+					aniShow: "slide-in-right"
+					},
+					waiting: {
+						autoShow: false
+					},
+					extras: {
+						customer_count:customer_count,
+						customer_count_type:customer_count_type
+					}
+				});
+		}
+		
+		function toMore_datacard(){
+			var webview = plus.webview.getWebviewById('more_datacard');
+				if(webview != null){
+					webview.hide();
+					webview.close();
+				}
+				mui.openWindow({
+					url: 'more_datacard.html',
+					id: 'more_datacard',
+					createNew: true,
+					show: {
+					aniShow: "slide-in-right"
+					},
+					waiting: {
+						autoShow: false
+					},
+					extras: {
+						express_count:express_count,
+						express_count_type:express_count_type,
+						customer_count:customer_count,
+						customer_count_type:customer_count_type,
+						relation_count:relation_count,
+						relation_count_type:relation_count_type
+					}
+				});
+		}
+		function toRelation(){
+		var webview = plus.webview.getWebviewById('visiting_information');
+								if(webview != null){
+									webview.hide();
+									webview.close();
+								}
+								mui.openWindow({
+									url: 'visiting_information.html',
+									id: 'visiting_information',
+									createNew: true,
+									show: {
+										aniShow: "slide-in-right"
+										},
+										waiting: {
+											autoShow: false
+									},
+									extras: {
+										relation_count:relation_count,
+										relation_count_type:relation_count_type
+									}
+								});
+	    }
+		function toSetHeadimg(){
+		var webview = plus.webview.getWebviewById('set_headimg');
+								if(webview != null){
+									webview.hide();
+									webview.close();
+								}
+								mui.openWindow({
+									url: 'set_headimg.html',
+									id: 'set_headimg',
+									createNew: true,
+									show: {
+										aniShow: "slide-in-right"
+										},
+										waiting: {
+											autoShow: false
+									}
+									
+								});
+	    }
+		function toCrmMain() {
+			setTimeout(function() {
+				var webview = plus.webview.getWebviewById('new_main');
+					if(webview != null){
+						webview.close();
+					}
+				
+				mui.openWindow({
+					url:'new_main.html',
+					id: 'new_main',
+					createNew:true,
+					show: {
+						aniShow: "slide-in-right"
+						},
+						waiting: {
+							autoShow: false
+					}
+				});
+			}, 0);
+		};
+	</script>
+</html>

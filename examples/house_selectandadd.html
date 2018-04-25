@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>房屋信息查询添加</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<!--标准mui.css-->
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="../css/common.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/style.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/house_selectandadd.css"/>
+		<style>
+			.mui-checkbox label, .mui-radio label{
+					width: 40%
+				}
+		</style>
+		
+		
+	</head>
+
+	<body style="background-color: #fff;">
+		<header class="mui-bar mui-bar-nav titleheader">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title"></h1>
+		</header>
+		
+		
+		<div class="list-item layout" style="display: block;padding-top: 1.2rem;">
+			<ul>
+				<li class="radio_li">
+						<div class="input-row-suffix mui-radio">
+							<div>
+								<input name="house_type" type="radio" style="float: initial;" bidTableFlag="true" value="0" checked>平房
+								<input name="house_type" type="radio" style="float: initial;" bidTableFlag="true" value="1" >楼房
+								<input name="house_type" type="radio" style="float: initial;" bidTableFlag="true" value="2" >商业楼宇
+							</div>
+						</div>
+				</li>
+				<div id="building_div">
+					<li class="mui-input-row">
+						<input class="mui-input-clear" type="text" id="building_name" name="building_name" placeholder="小区名称(必填)"/>
+					</li>
+					<li>
+	            		<input type="text" class="building_no" name="building_no" id="building_no" placeholder="楼号(必填)" style="width:48%">
+	            		<input type="text" class="building_nuit" name="building_nuit" id="building_nuit" placeholder="单元" style="width:48%">
+	            	</li>
+	            	<li>
+	            		<input type="text" class="building_floor" name="building_floor" id="building_floor" placeholder="楼层" style="width:48%">
+	            		<input type="text" class="building_room" name="building_room" id="building_room" placeholder="房号" style="width:48%">
+	            	</li>
+				</div>
+				<div id="house_div">
+					<li class="mui-input-row">
+						<input class="mui-input-clear" type="text" id="house_name" name="house_name" placeholder="街/路/胡同(必填)"/>
+					</li>
+					<li class="mui-input-row">
+						<input class="mui-input-clear" type="text" id="house_number" name="house_number" placeholder="门牌号(必填)"/>
+					</li>
+				</div>
+				<div id="Officebuilding_div">
+					<li class="mui-input-row">
+						<input class="mui-input-clear" type="text" id="officebuilding_name" name="officebuilding_name" placeholder="商业楼宇名称"/>
+					</li>
+					<li class="mui-input-row">
+						<input class="mui-input-clear" type="text" id="officebuilding_address" name="officebuilding_address" placeholder="地址"/>
+					</li>
+				</div>
+				
+				
+			</ul>
+			<div class="select_btn" style="margin-bottom: 0.5rem;">
+				<button id="btnQuery">查询</button>
+				<button id="btnAdd">添加</button>
+			</div>
+			
+			<!--预留显示查询内容-->
+				
+			<div class="mui-bar" id="building_list" style="overflow: auto;margin-bottom:0.5rem;height: 50%; background-color:#fff;color:#666;-webkit-box-shadow: 0 0 0 ;">
+				
+			</div>
+		</div>
+		
+
+	</body>
+	<script src="../js/mui.min.js"></script>
+	<script src="../js/custom_common.js"></script>
+	<script src="../js/date_util.js"></script>
+	<script src="../js/jquery-2.2.2.min.js"></script>
+	<script type="text/javascript">
+//	var customer_count=null;
+	var customer_count_type=null;
+	var employee_no=null;
+	var store_id=null;
+	
+	
+	var matching_title=null;
+	var matching_type=null;
+			
+		mui.init({
+			swipeBack:true //启用右滑关闭功能
+		});
+		//楼房信息查询刷新
+//		window.addEventListener('sethousebuildinginput',function(event){
+//			var housebuilding = event.detail.housebuilding;
+//			if(housebuilding != null) {
+//				$('input[name="house_type"][value="1"]').attr('checked', 'checked');
+//				if(housebuilding.housebuilding_name != null){
+//					$('#building_name').val(housebuilding.housebuilding_name);
+//				}
+//				if(building.address != null){
+//					$('#building_no').val(housebuilding.housebuilding_no);
+//				}
+//				doQueryBuilding();
+//			}
+//		});
+		//商业信息查询刷新
+//		window.addEventListener('setbusinessinput',function(event){
+//			var business = event.detail.business;
+//			if(business != null) {
+//				if(business.business_name != null){
+//					$('#building_name').val(business.business_name);
+//				}
+//				if(business.address != null){
+//					$('#store_address').val(business.address);
+//				}
+//				doQueryBusiness();
+//			}
+//		});
+		
+		mui.plusReady(function(){
+			var house_type = $('input[name="house_type"]:checked').val();
+			if(house_type == 0){
+				    $('h1').html('平房信息');
+					$('#building_div').hide();
+					$('#house_div').show();
+					$('#Officebuilding_div').hide();
+				}else if(house_type == 1){
+					$('h1').html('楼房信息');
+					$('#building_div').show();
+					$('#house_div').hide();
+					$('#Officebuilding_div').hide();
+				}else if(house_type == 2){
+					$('h1').html('商业楼宇信息');
+					$('#building_div').hide();
+					$('#house_div').hide();
+					$('#Officebuilding_div').show();
+				}
+			$('input[name="house_type"]').change(function() {
+				var house_type = $('input[name="house_type"]:checked').val();
+				if(house_type == 0){
+				    $('h1').html('平房信息');
+					$('#building_div').hide();
+					$('#house_div').show();
+					$('#Officebuilding_div').hide();
+					$('#building_list').empty();
+				}else if(house_type == 1){
+					$('h1').html('楼房信息');
+					$('#building_div').show();
+					$('#house_div').hide();
+					$('#Officebuilding_div').hide();
+					$('#building_list').empty();
+				}else if(house_type == 2){
+					$('h1').html('商业楼宇信息');
+					$('#building_div').hide();
+					$('#house_div').hide();
+					$('#Officebuilding_div').show();
+					$('#building_list').empty();
+				}
+			});
+//		
+			var employee = JSON.parse(localStorage.getItem('employee'));
+			var store = JSON.parse(localStorage.getItem("store"));
+			var usergroup = JSON.parse(localStorage.getItem("usergroup"));
+			employee_no=employee.employeeId;
+            if(store == null||store.store_id == null||store.store_id ==""){
+			    store_id=null;
+			}else{
+				store_id=store.store_id;
+			}
+			mui('#btnAdd')[0].addEventListener('tap',function(event){
+				if(store==null||store==""){
+					mui.toast('没有所属门店不能添加信息！');
+					return;
+				}
+				var house_type = $('input[name="house_type"]:checked').val();
+				if(house_type == 0){
+					toContent('house_information');
+				}else if(house_type == 1){
+					toContent('housebuilding_information');
+				}else if(house_type == 2){
+					toContent('houseofficebuilding_information');
+				}
+				
+				
+			});
+			
+			mui('#btnQuery')[0].addEventListener('tap',function(event){
+				var house_type = $('input[name="house_type"]:checked').val();
+				if(house_type == 0){
+					doQueryHouse();
+				}else if(house_type == 1){
+					doQueryBuilding();
+				}else if(house_type == 2){
+					doQueryOfficeBuilding();
+				}
+				
+			});
+			
+		});
+		
+		function toContent(to_id){
+			var webview = plus.webview.getWebviewById(to_id);
+				if(webview != null){
+					webview.close();
+				}
+				mui.openWindow({
+					url:to_id+'.html',
+					id:to_id,
+					createNew:true,
+					show: {
+						aniShow: 'slide-in-right'
+					},
+					waiting: {
+						autoShow: false
+					}
+				});
+		}
+		//楼房查询
+		function doQueryBuilding(){
+			var house_type = $('input[name="house_type"]:checked').val();
+			var str_name = $('#building_name').val();
+			var str_no = $('#building_no').val(); 
+			var str_nuit = $('#building_nuit').val(); 
+			var str_floor = $('#building_floor').val(); 
+			var str_room = $('#building_room').val(); 
+			
+			if(!checkValue(str_name)){
+				mui.toast('请输入查询小区名称！');
+				return;
+			}
+			if(!checkValue(str_no)){
+				mui.toast('请输入查询楼号！');
+				return;
+			}
+			
+			var building_params = {
+				tinyvillage_name:str_name,
+				building_name:str_no,
+				building_unit_no:str_nuit,
+				house_no:str_floor,
+				building_house_no:str_room,
+				house_type:house_type
+				
+			};
+			doManager('HouseManager','getHouseApp',building_params,function(data){
+				if(data.result){
+					var jsonData = JSON.parse(data.data);
+					if(jsonData.code == 200){
+						var $div_clist = $('#building_list');
+						$div_clist.children().remove();
+						if(jsonData.houseList.length == 0){
+							mui.toast('未查询到用户信息!');
+							return;
+						}
+						$(jsonData.houseList).each(function(index,building){
+							$div_clist.append('<div class="customer_row"><div>');
+							var $div_row = $div_clist.find('div:last');
+							$div_row.click(function(){
+								var webview = plus.webview.getWebviewById('housebuilding_information');
+								if(webview != null){
+									webview.close();
+								}
+								mui.openWindow({
+									url:'housebuilding_information.html',
+									id: 'housebuilding_information',
+									createNew:true,
+									show: {
+										aniShow: 'slide-in-right'
+									},
+									waiting: {
+										autoShow: false
+									},
+									extras:{
+										building:JSON.stringify(building)
+									}
+								});
+							});
+							$div_row.append('<ul></ul>');
+							var $ul_row = $div_row.find('ul:last');
+							$ul_row.append('<li>小区名称：<span>'+building.tinyvillage_name+'</span></li>')
+							$ul_row.append('<li>楼号：<span>'+building.building_name+'</span></li>')
+						});
+						
+					}else{
+						mui.toast(jsonData.message);
+					}
+				}else{
+					mui.toast('查询失败!');
+				}
+			});
+		}
+		//平房查询
+		function doQueryHouse(){
+			var house_type = $('input[name="house_type"]:checked').val();
+			var str_name = $('#house_name').val();
+			var str_address = $('#house_number').val(); 
+			
+			if(!checkValue(str_name)){
+				mui.toast('请输入查询街/路/胡同！');
+				return;
+			}
+			if(!checkValue(str_address)){
+				mui.toast('请输入查询门牌号！');
+				return;
+			}
+			
+			var house_params = {
+				house_type:house_type,
+				tinyvillage_name:str_name,
+				house_no:str_address
+			};
+			doManager('HouseManager','getHouseApp',house_params,function(data){
+				if(data.result){
+					var jsonData = JSON.parse(data.data);
+					if(jsonData.code == 200){
+						var $div_clist = $('#building_list');
+						$div_clist.children().remove();
+						if(jsonData.houseList.length == 0){
+							mui.toast('未查询到用户信息!');
+							return;
+						}
+						$(jsonData.houseList).each(function(index,house){
+							$div_clist.append('<div class="customer_row"><div>');
+							var $div_row = $div_clist.find('div:last');
+							$div_row.click(function(){
+								var webview = plus.webview.getWebviewById('house_information');
+								if(webview != null){
+									webview.close();
+								}
+								mui.openWindow({
+									url:'house_information.html',
+									id: 'house_information',
+									createNew:true,
+									show: {
+										aniShow: 'slide-in-right'
+									},
+									waiting: {
+										autoShow: false
+									},
+									extras:{
+										house:JSON.stringify(house)
+									}
+								});
+							});
+							$div_row.append('<ul></ul>');
+							var $ul_row = $div_row.find('ul:last');
+							$ul_row.append('<li>街/路/胡同：<span>'+house.tinyvillage_name+'</span></li>')
+							$ul_row.append('<li>街道名称：<span>'+house.town_name+'</span></li>')
+						});
+						
+					}else{
+						mui.toast(jsonData.message);
+					}
+				}else{
+					mui.toast('查询失败!');
+				}
+			});
+		}
+		//商业楼宇查询
+		function doQueryOfficeBuilding(){
+			var house_type = $('input[name="house_type"]:checked').val();
+			var str_name = $('#officebuilding_name').val();
+			var str_address = $('#officebuilding_address').val(); 
+			
+			if(!checkValue(str_name) && !checkValue(str_address)){
+				mui.toast('查询条件请至少输入一项！');
+				return;
+			}
+			
+			
+			var officebuilding_params = {
+				building_name:str_name,
+				address:str_address,
+				house_type:house_type
+			};
+			doManager('HouseManager','getHouseApp',officebuilding_params,function(data){
+				if(data.result){
+					var jsonData = JSON.parse(data.data);
+					if(jsonData.code == 200){
+						var $div_clist = $('#building_list');
+						$div_clist.children().remove();
+						if(jsonData.houseList.length == 0){
+							mui.toast('未查询到用户信息!');
+							return;
+						}
+						$(jsonData.houseList).each(function(index,officebuilding){
+							$div_clist.append('<div class="customer_row"><div>');
+							var $div_row = $div_clist.find('div:last');
+							$div_row.click(function(){
+								var webview = plus.webview.getWebviewById('houseofficebuilding_information');
+								if(webview != null){
+									webview.close();
+								}
+								mui.openWindow({
+									url:'houseofficebuilding_information.html',
+									id: 'houseofficebuilding_information',
+									createNew:true,
+									show: {
+										aniShow: 'slide-in-right'
+									},
+									waiting: {
+										autoShow: false
+									},
+									extras:{
+										officebuilding:JSON.stringify(officebuilding)
+									}
+								});
+							});
+							$div_row.append('<ul></ul>');
+							var $ul_row = $div_row.find('ul:last');
+							$ul_row.append('<li>商业楼宇名称：<span>'+officebuilding.building_name+'</span></li>')
+							$ul_row.append('<li>地址：<span>'+officebuilding.houseData[0].address+'</span></li>')
+						});
+						
+					}else{
+						mui.toast(jsonData.message);
+					}
+				}else{
+					mui.toast('查询失败!');
+				}
+			});
+		}
+		
+	</script>
+</html>

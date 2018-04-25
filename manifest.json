@@ -1,0 +1,2271 @@
+{
+	"@platforms": [
+		"android",
+		"iPhone",
+		"iPad"
+	],
+	"id": "H546CAEF8",/*应用的标识，创建应用时自动生成，勿手动修改*/
+	"name": "国安数据",/*应用名称，程序桌面图标名称*/
+	"version": {
+		"name": "B2.1.5",/*应用版本名称*/
+		"code": "83"
+	},
+	"description": "",/*应用描述信息*/
+	"icons": {
+		"72": "icon.png"
+	},
+	"launch_path": "login.html",/*应用的入口页面，默认为根目录下的index.html；支持网络地址，必须以http://或https://开头*/
+	"developer": {
+		"name": "",/*开发者名称*/
+		"email": "",/*开发者邮箱地址*/
+		"url": "http://www.dcloud.io"
+	},
+	"permissions": {
+		"Accelerometer": {
+			"description": "访问加速度感应器"
+		},
+
+		"Cache": {
+			"description": "管理应用缓存"
+		},
+
+		"Console": {
+			"description": "跟踪调试输出日志"
+		},
+
+
+		"Downloader": {
+			"description": "文件下载管理"
+		},
+		"Events": {
+			"description": "应用扩展事件"
+		},
+		"File": {
+			"description": "访问本地文件系统"
+		},
+		"Gallery": {
+			"description": "访问系统相册"
+		},
+
+		"Invocation": {
+			"description": "使用Native.js能力"
+		},
+
+		"Orientation": {
+			"description": "访问方向感应器"
+		},
+		"Proximity": {
+			"description": "访问距离感应器"
+		},
+		"Storage": {
+			"description": "管理应用本地数据"
+		},
+		"UI": {},
+		"Uploader": {
+			"description": "管理文件上传任务"
+		},
+		"Runtime": {
+			"description": "访问运行期环境"
+		},
+		"XMLHttpRequest": {
+			"description": "跨域网络访问"
+		},
+		"Zip": {
+			"description": "文件压缩与解压缩"
+		},
+		"Maps": {
+			"description": "管理地图插件"
+		},
+		"Geolocation": {
+			"description": "位置信息"
+		},
+
+
+
+
+
+		"Webview": {},
+		"NativeUI": {},
+		"Navigator": {},
+		"NativeObj": {},
+		"Device": {},
+		"Camera": {},
+		"Barcode": {},
+		"Push": {},
+		"Speech": {}
+	},
+	"plus": {
+		"statusbar": {
+			"immersed": true
+		},
+		"splashscreen": {
+			"autoclose": true,/*是否自动关闭程序启动界面，true表示应用加载应用入口页面后自动关闭；false则需调plus.navigator.closeSplashscreen()关闭*/
+			"waiting": true,
+			"delay": "0"
+		},
+		"runmode": "liberate",/*应用的首次启动运行模式，可取liberate或normal，liberate模式在第一次启动时将解压应用资源（Android平台File API才可正常访问_www目录）*/
+		"signature": "Sk9JTiBVUyBtYWlsdG86aHIyMDEzQGRjbG91ZC5pbw==",/*可选，保留给应用签名，暂不使用*/
+		"distribute": {
+			"plugins": {
+				"maps": {
+					"amap": {
+						"appkey_ios": "b5ee62bfab52edfbe0532b4a611ae1f5",
+						"appkey_android": "67e074b82097d2d5f84bae408dc2e2bb",
+						"description": "高德地图"
+					}
+				},
+				"push": {
+					"igexin": {
+						"appid": "Z8JNVXog3B81UgwtixH0c4",
+						"appkey": "7nWqEMvdj27qC5G7kUy4U6",
+						"appsecret": "YcNLR6owxc7zx4XcFK2aF4"
+					}
+				}
+			},
+			"apple": {
+				"appid": "",/*iOS应用标识，苹果开发网站申请的appid，如io.dcloud.HelloH5*/
+				"mobileprovision": "",/*iOS应用打包配置文件*/
+				"password": "",/*iOS应用打包个人证书导入密码*/
+				"p12": "",/*iOS应用打包个人证书，打包配置文件关联的个人证书*/
+				"devices": "universal",/*iOS应用支持的设备类型，可取值iphone/ipad/universal*/
+				"StatusBarBackground": "#FF0000",
+				"UIStatusBarStyle": "UIStatusBarStyleBlackOpaque",
+				"UIReserveStatusbarOffset": false,
+				"frameworks": []
+			},
+			"google": {
+				"packagename": "",/*Android应用包名，如io.dcloud.HelloH5*/
+				"keystore": "",/*Android应用打包使用的密钥库文件*/
+				"password": "",/*Android应用打包使用密钥库中证书的密码*/
+				"aliasname": "",/*Android应用打包使用密钥库中证书的别名*/
+				"permissions": [
+					"<uses-permission android:name=\"android.permission.RECORD_AUDIO\"/>",
+					"<uses-permission android:name=\"android.permission.CHANGE_NETWORK_STATE\"/>",
+					"<uses-permission android:name=\"com.android.launcher.permission.INSTALL_SHORTCUT\"/>",
+					"<uses-permission android:name=\"android.permission.MOUNT_UNMOUNT_FILESYSTEMS\"/>",
+					"<uses-permission android:name=\"android.permission.INTERNET\"/>",
+					"<uses-permission android:name=\"android.permission.CHANGE_WIFI_STATE\"/>",
+					"<uses-permission android:name=\"android.permission.READ_PHONE_STATE\"/>",
+					"<uses-permission android:name=\"android.permission.VIBRATE\"/>",
+					"<uses-permission android:name=\"android.permission.READ_LOGS\"/>",
+					"<uses-permission android:name=\"android.permission.WAKE_LOCK\"/>",
+					"<uses-permission android:name=\"android.permission.CALL_PHONE\"/>",
+					"<uses-permission android:name=\"android.permission.FLASHLIGHT\"/>",
+					"<uses-permission android:name=\"android.permission.ACCESS_WIFI_STATE\"/>",
+					"<uses-permission android:name=\"android.permission.ACCESS_COARSE_LOCATION\"/>",
+					"<uses-feature android:name=\"android.hardware.camera.autofocus\"/>",
+					"<uses-permission  android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\"/>",
+					"<uses-feature android:name=\"android.hardware.camera\"/>",
+					"<uses-permission android:name=\"android.permission.SYSTEM_ALERT_WINDOW\"/>",
+					"<uses-permission android:name=\"android.permission.ACCESS_FINE_LOCATION\"/>",
+					"<uses-permission android:name=\"android.permission.RECEIVE_USER_PRESENT\"/>",
+					"<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\"/>",
+					"<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\"/>",
+					"<uses-permission android:name=\"android.permission.WRITE_SETTINGS\"/>",
+					"<uses-permission android:name=\"android.permission.RECEIVE_BOOT_COMPLETED\"/>",
+					"<uses-permission android:name=\"com.android.launcher.permission.UNINSTALL_SHORTCUT\"/>",
+					"<uses-permission android:name=\"android.permission.CAMERA\"/>"
+				]
+			},
+			"orientation": [
+				"portrait-primary"
+			],/*应用支持的方向，portrait-primary：竖屏正方向；portrait-secondary：竖屏反方向；landscape-primary：横屏正方向；landscape-secondary：横屏反方向*/
+			"icons": {
+				"ios": {
+					"prerendered": true, /*应用图标是否已经高亮处理，在iOS6及以下设备上有效*/
+					/*应用图标，分辨率：512x512，用于自动生成各种尺寸程序图标*/
+					"iphone": {
+						"normal": "unpackage/res/icons/57x57.png",/*iPhone普通屏幕程序图标，分辨率：57x57*/
+						"retina": "unpackage/res/icons/114x114.png",/*iPhone高分屏程序图标，分辨率：114x114*/
+						/*iPhone iOS7高分屏程序图标，分辨率：120x120*/
+						"spotlight-normal": "unpackage/res/icons/29x29.png", /*iPhone Spotlight搜索程序图标，分辨率：29x29*/
+						"spotlight-retina": "unpackage/res/icons/58x58.png", /*iPhone高分屏Spotlight搜索程序图标，分辨率：58x58*/
+						/*iPhone iOS7高分屏Spotlight搜索程序图标，分辨率：80x80*/
+						"settings-normal": "unpackage/res/icons/29x29.png", /*iPhone设置页面程序图标，分辨率：29x29*/
+
+
+						"app@3x": "unpackage/res/icons/180x180.png",
+						"app@2x": "unpackage/res/icons/120x120.png",
+						"settings@2x": "unpackage/res/icons/58x58.png",
+						"settings@3x": "unpackage/res/icons/87x87.png",
+						"spotlight@2x": "unpackage/res/icons/80x80.png",
+						"spotlight@3x": "unpackage/res/icons/120x120.png",
+						"notification@2x": "unpackage/res/icons/40x40.png",
+						"notification@3x": "unpackage/res/icons/60x60.png"
+					},
+					"ipad": {
+						"normal": "unpackage/res/icons/72x72.png", /*iPad普通屏幕程序图标，分辨率：72x72*/
+						"retina": "unpackage/res/icons/144x144.png", /*iPad高分屏程序图标，分辨率：144x144*/
+						/*iPad iOS7程序图标，分辨率：76x76*/
+						/*iPad iOS7高分屏程序图标，分辨率：152x152*/
+						"spotlight-normal": "unpackage/res/icons/50x50.png", /*iPad Spotlight搜索程序图标，分辨率：50x50*/
+						"spotlight-retina": "unpackage/res/icons/100x100.png", /*iPad高分屏Spotlight搜索程序图标，分辨率：100x100*/
+						/*iPad iOS7 Spotlight搜索程序图标，分辨率：40x40*/
+						/*iPad iOS7高分屏Spotlight搜索程序图标，分辨率：80x80*/
+						/*iPad设置页面程序图标，分辨率：29x29*/
+						"app": "unpackage/res/icons/76x76.png",
+						"app@2x": "unpackage/res/icons/152x152.png",
+						"settings": "unpackage/res/icons/29x29.png",
+						"spotlight": "unpackage/res/icons/40x40.png",
+						"proapp@2x": "unpackage/res/icons/167x167.png",
+						"settings@2x": "unpackage/res/icons/58x58.png",
+						"spotlight@2x": "unpackage/res/icons/80x80.png",
+						"notification": "unpackage/res/icons/20x20.png",
+						"notification@2x": "unpackage/res/icons/40x40.png"
+					},
+					"appstore": "unpackage/res/icons/1024x1024.png"
+				},
+				"android": {
+					"mdpi": "unpackage/res/icons/48x48.png", /*普通屏程序图标，分辨率：48x48*/
+					"ldpi": "unpackage/res/icons/48x48.png", /*大屏程序图标，分辨率：48x48*/
+					"hdpi": "unpackage/res/icons/72x72.png", /*高分屏程序图标，分辨率：72x72*/
+					"xhdpi": "unpackage/res/icons/96x96.png",/*720P高分屏程序图标，分辨率：96x96*/
+					"xxhdpi": "unpackage/res/icons/144x144.png",
+					"xxxhdpi": "unpackage/res/icons/192x192.png"
+				}
+			},
+			"splashscreen": {
+				"ios": {
+					"iphone": {
+						"retina40": "C:/Users/Administrator/Desktop/启动图片优化/ios/640-1136.png",
+						"retina55": "C:/Users/Administrator/Desktop/启动图片优化/ios/1242-2208.png",
+						"retina47": "C:/Users/Administrator/Desktop/启动图片优化/ios/750-1334.png"
+					},
+					"ipad": {
+						"portrait": "C:/Users/Administrator/Desktop/启动图片优化/ios/768-1004.png",
+						"portrait7": "C:/Users/Administrator/Desktop/启动图片优化/ios/768-1024.png",
+						"portrait-retina": "C:/Users/Administrator/Desktop/启动图片优化/ios/1536-2008.png",
+						"portrait-retina7": "C:/Users/Administrator/Desktop/启动图片优化/ios/1536-2048.png"
+					}
+				},
+				"android": {
+					"hdpi": "C:/Users/Administrator/Desktop/启动图片优化/android/480-762.png",
+					"xhdpi": "C:/Users/Administrator/Desktop/启动图片优化/android/720-1242.png",
+					"xxhdpi": "C:/Users/Administrator/Desktop/启动图片优化/android/1080-1882.png"
+				}
+			},
+			"debug": false
+		},"ads":{"rp":false,"splash":false,"push":false,"spot":false},"adid":""
+	},
+	"dependencies": {
+		"pages": {
+			"setting.html": {
+				"href": "setting.html",
+				"resources": [
+					"js/mui.min.js",
+					"js/mui.view.js",
+					"libs/easymob-webim-sdk/jquery-1.11.1.js",
+					"libs/easymob-webim-sdk/strophe-custom-2.0.0.js",
+					"libs/easymob-webim-sdk/json2.js",
+					"libs/easymob-webim-sdk/easemob.im-1.0.5.js",
+					"js/feedback.js",
+					"js/feedback-page.js",
+					"js/mui.locker.js",
+					"js/app.js",
+					"css/mui.min.css",
+					"fonts/mui.ttf",
+					"css/feedback-page.css",
+					"images/iconfont-tianjia.png"
+				],
+				"refer": [
+					"login.html"
+				],
+				"priority": 1
+			},
+			"main.html": {
+				"href": "main.html",
+				"resources": [
+					"css/mui.min.css",
+					"fonts/mui.ttf",
+					"js/mui.min.js",
+					"js/app.js"
+				],
+				"refer": [
+					"setting.html"
+				],
+				"priority": 1
+			},
+			"unlock.html": {
+				"href": "unlock.html",
+				"resources": [
+					"css/mui.min.css",
+					"fonts/mui.ttf",
+					"js/mui.min.js",
+					"js/mui.locker.js",
+					"js/app.js"
+				],
+				"refer": [
+					"login.html",
+					"main.html"
+				],
+				"priority": 0
+			},
+			"forget_password.html": {
+				"href": "forget_password.html",
+				"resources": [
+					"css/mui.min.css",
+					"fonts/mui.ttf",
+					"css/style.css",
+					"js/mui.min.js",
+					"js/app.js"
+				],
+				"priority": 1
+			},
+			"reg.html": {
+				"href": "reg.html",
+				"resources": [
+					"css/mui.min.css",
+					"fonts/mui.ttf",
+					"css/style.css",
+					"js/mui.min.js",
+					"js/app.js"
+				],
+				"refer": [
+					"login.html"
+				],
+				"priority": 3
+			},
+			"login.html": {
+				"href": "login.html",
+				"resources": [
+					"css/mui.min.css",
+					"fonts/mui.ttf",
+					"css/style.css",
+					"js/mui.min.js",
+					"js/mui.enterfocus.js",
+					"js/app.js",
+					"images/qihoo.png",
+					"images/qq.png",
+					"images/sinaweibo.png",
+					"images/weixin.png",
+					"js/common.js",
+					"js/immersed.js",
+					"js/custom_common.js",
+					"js/jquery-2.2.2.min.js",
+					"images/user.png",
+					"images/password.png",
+					"images/bg.jpg",
+					"images/new_bg.jpg",
+					"images/new_bg2.jpg"
+				],
+				"refer": [
+					"unlock.html",
+					"forget_password.html",
+					"main.html",
+					"reg.html",
+					"examples/tabbar.html",
+					"examples/my.html",
+					"examples/store_daily.html",
+					"examples/forget_password.html",
+					"examples/new_main.html",
+					"examples/web_index.html",
+					"examples/web_index2.html",
+					"examples/ceshi.html",
+					"examples/web_personal.html",
+					"examples/web_shopkeeper.html",
+					"examples/web_new_main.html",
+					"examples/new_tabbar.html",
+					"examples/maps.html",
+					"examples/city_main.html",
+					"examples/web_city_ej.html"
+				],
+				"priority": 0
+			},
+			"examples/tabbar.html": {
+				"resources": [
+					"fonts/mui.ttf",
+					"js/mui.min.js",
+					"css/mui.min.css",
+					"css/app.css",
+					"css/common.css",
+					"js/common.js",
+					"examples/index.html",
+					"js/jquery-2.2.2.min.js",
+					"images/cbd.jpg",
+					"images/muwu.jpg",
+					"images/yuantiao.jpg",
+					"images/shuijiao.jpg",
+					"images/icon3.png",
+					"images/icon2.png",
+					"images/icon4.png",
+					"images/icon1.png",
+					"images/60x60.gif",
+					"css/style.css",
+					"images/icon11.png",
+					"images/icon6.png",
+					"images/icon9.png",
+					"examples/message.html",
+					"examples/my.html",
+					"examples/store_daily.html",
+					"images/icon7.png",
+					"js/custom_common.js",
+					"examples/user_information.html",
+					"images/tabarbg.jpg",
+					"images/men2.jpg",
+					"examples/monomer_portrait.html",
+					"images/banner.jpg",
+					"images/icon36.png",
+					"images/men3.jpg",
+					"css/newmui.min.css",
+					"css/ionicons.min.css",
+					"css/font-awesome.min.css",
+					"css/AdminLTE.min.css",
+					"fonts/fontawesome-webfont.woff2",
+					"css/bootstrap.min.css",
+					"examples/web_new_main.html",
+					"examples/web_index.html",
+					"examples/web_message.html",
+					"css/_all-skins.min.css",
+					"images/user2-160x160.jpg"
+				],
+				"refer": [
+					"examples/express_list.html",
+					"examples/matching_information.html",
+					"examples/visiting_information.html",
+					"examples/update_password.html",
+					"login.html",
+					"examples/web_shopkeeper.html",
+					"examples/dataCard.html",
+					"examples/maps.html",
+					"examples/storeDataCard.html",
+					"examples/web_guoanxialist.html",
+					"examples/web_information.html",
+					"examples/web_user.html",
+					"examples/web_shopkeeper_new.html"
+				],
+				"priority": 0
+			},
+			"examples/my.html": {
+				"resources": [
+					"images/cbd.jpg",
+					"css/my.css",
+					"js/common.js",
+					"css/common.css",
+					"fonts/mui.ttf",
+					"js/mui.min.js",
+					"css/mui.min.css",
+					"css/style.css",
+					"images/icon32.png",
+					"images/icon31.png",
+					"images/icon33.png",
+					"images/icon10.png",
+					"images/icon7.png",
+					"examples/index.html",
+					"examples/tabbar.html",
+					"images/icon9.png",
+					"examples/message.html",
+					"examples/update_password.html",
+					"js/custom_common.js",
+					"js/jquery-2.2.2.min.js",
+					"images/my_card_head.png",
+					"css/my_card.css",
+					"images/my_card_bg.jpg"
+				],
+				"refer": [
+					"login.html",
+					"examples/express_list.html",
+					"examples/user_information.html",
+					"examples/more_datacard.html",
+					"examples/visiting_information.html",
+					"examples/web_index.html",
+					"examples/new_main.html",
+					"examples/set_headimg.html"
+				],
+				"priority": 0
+			},
+			"examples/store_daily.html": {
+				"resources": [
+					"images/cbd.jpg",
+					"images/icon13.png",
+					"css/my.css",
+					"js/common.js",
+					"css/common.css",
+					"fonts/mui.ttf",
+					"images/icon12.png",
+					"images/icon14.png",
+					"css/store-daily.css",
+					"js/mui.min.js",
+					"css/mui.min.css",
+					"css/style.css",
+					"images/icon11.png",
+					"images/icon9.png",
+					"images/icon7.png",
+					"examples/my.html",
+					"examples/tabbar.html",
+					"examples/express_list.html",
+					"examples/feedback.html",
+					"examples/store_index.html",
+					"images/icon15.png",
+					"js/jquery-2.2.2.min.js",
+					"js/date_util.js",
+					"js/custom_common.js",
+					"images/men2.jpg",
+					"examples/store_index_history_sub.html",
+					"examples/feedback_list.html"
+				],
+				"refer": [
+					"examples/message.html"
+				],
+				"priority": 0
+			},
+			"examples/index.html": {
+				"resources": [
+					"fonts/mui.ttf",
+					"images/cbd.jpg",
+					"images/icon4.png",
+					"images/muwu.jpg",
+					"images/yuantiao.jpg",
+					"images/icon1.png",
+					"images/shuijiao.jpg",
+					"images/icon3.png",
+					"images/icon2.png",
+					"js/jquery-2.2.2.min.js",
+					"js/common.js",
+					"css/common.css",
+					"js/mui.min.js",
+					"css/mui.min.css",
+					"images/icon11.png",
+					"images/icon6.png",
+					"images/icon9.png",
+					"css/style.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"examples/express_list.html": {
+				"resources": [
+					"examples/tabbar.html",
+					"css/common.css",
+					"images/icon11.png",
+					"css/mui.min.css",
+					"images/icon9.png",
+					"css/style.css",
+					"images/icon7.png",
+					"css/express.css",
+					"images/icon16.png",
+					"images/icon17.png",
+					"images/icon18.png",
+					"images/icon19.png",
+					"images/icon20.png",
+					"images/icon21.png",
+					"examples/my.html",
+					"images/icon23.png",
+					"images/icon24.png",
+					"examples/message.html",
+					"examples/order_detail.html",
+					"js/jquery-2.2.2.min.js",
+					"images/icon15.png",
+					"examples/store_daily.html",
+					"js/custom_common.js",
+					"js/mui.min.js",
+					"js/date_util.js",
+					"images/icon22.png",
+					"examples/express_list_sub.html",
+					"fonts/mui.ttf"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"examples/order_detail.html": {
+				"resources": [
+					"images/icon25.png",
+					"css/order_detail.css",
+					"images/icon34.png",
+					"images/cbd.jpg",
+					"images/icon11.png",
+					"images/icon19.png",
+					"images/icon18.png",
+					"css/style.css",
+					"images/icon7.png",
+					"images/icon16.png",
+					"images/icon17.png",
+					"css/my.css",
+					"js/common.js",
+					"images/icon20.png",
+					"css/common.css",
+					"js/mui.min.js",
+					"css/mui.min.css",
+					"images/icon9.png",
+					"examples/tabbar.html",
+					"images/icon15.png",
+					"images/icon22.png",
+					"examples/express_list.html",
+					"css/app.css",
+					"examples/my.html",
+					"css/mui.picker.css",
+					"css/mui.poppicker.css",
+					"js/mui.picker.js",
+					"js/mui.poppicker.js",
+					"js/custom_common.js",
+					"js/date_util.js",
+					"images/progress.png",
+					"js/immersed.js",
+					"js/mui.picker.min.js",
+					"css/mui.picker.min.css",
+					"js/mui.zoom.js",
+					"js/mui.previewimage.js",
+					"js/jquery-2.2.2.min.js",
+					"js/previewimage.js",
+					"js/jquery.rotate.min.js",
+					"images/icon35.png",
+					"js/dict.js",
+					"fonts/mui.ttf"
+				],
+				"refer": [
+					"examples/barcode_scan.html"
+				],
+				"priority": 0
+			},
+			"examples/feedback.html": {
+				"resources": [
+					"images/icon17.png",
+					"css/feedback.css",
+					"images/icon20.png",
+					"images/icon19.png",
+					"images/icon15.png",
+					"images/icon18.png",
+					"images/icon25.png",
+					"images/icon22.png",
+					"images/icon34.png",
+					"images/icon16.png",
+					"images/cbd.jpg",
+					"images/icon11.png",
+					"css/style.css",
+					"images/icon7.png",
+					"css/my.css",
+					"js/common.js",
+					"css/common.css",
+					"js/mui.min.js",
+					"css/mui.min.css",
+					"images/icon9.png",
+					"examples/tabbar.html",
+					"examples/my.html",
+					"images/icon26.png",
+					"images/icon27.png",
+					"images/icon28.png",
+					"images/icon29.png",
+					"examples/express_list.html",
+					"examples/store_daily.html",
+					"js/date_util.js",
+					"js/custom_common.js",
+					"fonts/mui.ttf"
+				],
+				"refer": [
+					"examples/message.html"
+				],
+				"priority": 0
+			},
+			"examples/store_index.html": {
+				"resources": [
+					"examples/express_list.html",
+					"css/store_index.css",
+					"examples/store_daily.html",
+					"images/icon11.png",
+					"images/icon19.png",
+					"images/icon15.png",
+					"css/style.css",
+					"images/icon18.png",
+					"images/icon7.png",
+					"images/icon17.png",
+					"images/icon27.png",
+					"images/icon26.png",
+					"js/common.js",
+					"css/common.css",
+					"js/mui.min.js",
+					"css/mui.min.css",
+					"images/icon9.png",
+					"images/icon29.png",
+					"images/icon28.png",
+					"examples/my.html",
+					"images/icon30.png",
+					"examples/tabbar.html",
+					"images/icon31.png",
+					"examples/store_index_history.html",
+					"fonts/mui.ttf",
+					"js/date_util.js",
+					"js/custom_common.js",
+					"js/app.js",
+					"js/mui.enterfocus.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"examples/barcode_scan.html": {
+				"resources": [
+					"js/common.js",
+					"css/common.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"examples/update_password.html": {
+				"resources": [
+					"css/mui.min.css",
+					"css/style.css",
+					"css/common.css",
+					"images/icon15.png",
+					"images/icon22.png",
+					"examples/my.html",
+					"js/custom_common.js",
+					"js/app.js",
+					"js/mui.enterfocus.js",
+					"js/mui.min.js",
+					"js/md5.js",
+					"fonts/mui.ttf"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"examples/store_index_history.html": {
+				"resources": [
+					"css/store_history.css",
+					"examples/store_daily.html",
+					"css/common.css",
+					"images/icon11.png",
+					"images/icon15.png",
+					"css/mui.min.css",
+					"images/icon9.png",
+					"css/style.css",
+					"images/icon7.png",
+					"examples/store_index.html",
+					"js/custom_common.js",
+					"js/mui.min.js",
+					"js/date_util.js",
+					"js/jquery-2.2.2.min.js",
+					"examples/store_index_history_sub.html",
+					"js/common.js",
+					"fonts/mui.ttf"
+				],
+				"refer": [
+					"examples/my.html",
+					"examples/tabbar.html",
+					"examples/message.html"
+				],
+				"priority": 0
+			},
+			"examples/message.html": {
+				"resources": [
+					"css/common.css",
+					"css/message.css",
+					"images/icon8.png",
+					"images/icon7.png",
+					"images/icon31.png",
+					"examples/tabbar.html",
+					"js/common.js",
+					"js/mui.min.js",
+					"css/mui.min.css",
+					"css/style.css",
+					"images/icon11.png",
+					"examples/my.html",
+					"js/date_util.js",
+					"js/jquery-2.2.2.min.js",
+					"js/custom_common.js"
+				],
+				"refer": [
+					"examples/monomer_portrait.html",
+					"examples/message_monomer_portrait.html",
+					"examples/work_record_result.html",
+					"examples/message_update_password.html",
+					"examples/message_more_information.html"
+				],
+				"priority": 0
+			},
+			"examples/store_index_history_sub.html": {
+				"resources": [
+					"js/jquery-2.2.2.min.js",
+					"js/custom_common.js",
+					"js/mui.min.js",
+					"css/common.css",
+					"css/store_history.css",
+					"css/mui.min.css",
+					"css/style.css",
+					"js/date_util.js",
+					"images/icon11.png",
+					"images/icon15.png",
+					"images/icon9.png",
+					"images/icon7.png",
+					"fonts/mui.ttf"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"examples/pullrefresh_main.html": {
+				"resources": [
+					"examples/pullrefresh_sub.html",
+					"fonts/mui.ttf"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"examples/express_list_sub.html": {
+				"resources": [
+					"images/icon17.png",
+					"images/icon20.png",
+					"images/icon21.png",
+					"images/icon19.png",
+					"images/icon18.png",
+					"images/icon22.png",
+					"images/icon16.png",
+					"js/jquery-2.2.2.min.js",
+					"js/custom_common.js",
+					"css/express.css",
+					"js/mui.min.js",
+					"css/common.css",
+					"fonts/mui.ttf",
+					"images/icon15.png",
+					"css/mui.min.css",
+					"css/style.css",
+					"js/date_util.js"
+				],
+				"refer": [
+					"examples/order_detail.html"
+				],
+				"priority": 0
+			},
+			"examples/user_information.html": {
+				"resources": [
+					"examples/tabbar.html",
+					"css/user_information.css",
+					"js/jquery-2.2.2.min.js",
+					"js/custom_common.js",
+					"js/mui.min.js",
+					"css/common.css",
+					"images/icon11.png",
+					"images/icon15.png",
+					"css/mui.min.css",
+					"images/icon9.png",
+					"css/style.css",
+					"images/icon7.png",
+					"js/date_util.js",
+					"fonts/mui.ttf",
+					"css/feedlist.css",
+					"js/mui.min2.js"
+				],
+				"refer": [
+					"examples/message.html",
+					"examples/monomer_portrait.html"
+				],
+				"priority": 0
+			},
+			"examples/monomer_portrait.html": {
+				"resources": [
+					"js/jquery-2.2.2.min.js",
+					"tx.jpg",
+					"js/mui.picker.js",
+					"js/mui.poppicker.js",
+					"fonts/mui.ttf",
+					"images/icon15.png",
+					"images/icon7.png",
+					"css/mui.poppicker.css",
+					"js/date_util.js",
+					"css/mui.picker.css",
+					"js/dict.js",
+					"js/custom_jquery_based.js",
+					"css/monomer_portrait.css",
+					"examples/message.html",
+					"examples/tabbar.html",
+					"js/mui.picker.min.js",
+					"css/express.css",
+					"css/mui.picker.min.css",
+					"images/badge_plus_16px.png",
+					"js/mui.min.js",
+					"css/style.css",
+					"js/custom_common.js",
+					"css/common.css",
+					"css/mui.min.css"
+				],
+				"refer": [
+					"examples/select_house.html",
+					"examples/apartment_layout_diagram.html",
+					"examples/user_information.html",
+					"examples/more_information.html",
+					"examples/new_select_house.html"
+				],
+				"priority": 0
+			},
+			"examples/apartment_layout_diagram.html": {
+				"resources": [
+					"js/jquery-2.2.2.min.js",
+					"js/mui.picker.js",
+					"css/style.css",
+					"images/icon22.png",
+					"css/mui.picker.css",
+					"js/custom_common.js",
+					"css/qq.css",
+					"css/common.css",
+					"js/mui.min.js",
+					"js/mui.poppicker.js",
+					"css/mui.min.css",
+					"css/mui.poppicker.css",
+					"js/date_util.js",
+					"css/monomer_portrait.css",
+					"js/custom_jquery_based.js",
+					"images/icon15.png",
+					"css/express.css",
+					"fonts/mui.ttf",
+					"icon/logo.png"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"examples/select_house.html": {
+				"resources": [
+					"images/icon15.png",
+					"js/custom_jquery_based.js",
+					"css/monomer_portrait.css",
+					"js/jquery-2.2.2.min.js",
+					"js/custom_common.js",
+					"js/mui.min.js",
+					"css/common.css",
+					"css/mui.min.css",
+					"css/style.css",
+					"js/awesomplete.js",
+					"css/awesomplete.css",
+					"fonts/mui.ttf"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"examples/message_monomer_portrait.html": {
+				"resources": [
+					"js/mui.picker.js",
+					"js/mui.poppicker.js",
+					"images/icon15.png",
+					"css/mui.poppicker.css",
+					"css/mui.picker.css",
+					"js/dict.js",
+					"js/custom_jquery_based.js",
+					"css/monomer_portrait.css",
+					"js/jquery-2.2.2.min.js",
+					"images/icon11.png",
+					"fonts/mui.ttf",
+					"css/style.css",
+					"images/icon7.png",
+					"js/custom_common.js",
+					"css/common.css",
+					"js/mui.min.js",
+					"css/mui.min.css",
+					"images/icon9.png",
+					"js/date_util.js",
+					"examples/tabbar.html",
+					"examples/message.html"
+				],
+				"refer": [
+					"examples/apartment_layout_diagram.html",
+					"examples/select_house.html",
+					"examples/user_information.html",
+					"examples/web_new_main.html",
+					"examples/web_message.html"
+				],
+				"priority": 0
+			},
+			"examples/work_record_result.html": {
+				"resources": [
+					"js/mui.picker.js",
+					"js/mui.poppicker.js",
+					"images/icon15.png",
+					"js/dict.js",
+					"css/work_record_result.css",
+					"js/custom_jquery_based.js",
+					"js/jquery-2.2.2.min.js",
+					"css/style.css",
+					"js/custom_common.js",
+					"css/common.css",
+					"js/mui.min.js",
+					"css/mui.min.css",
+					"js/date_util.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"examples/forget_password.html": {
+				"resources": [
+					"js/custom_common.js",
+					"js/app.js",
+					"js/mui.min.js",
+					"css/common.css",
+					"images/icon15.png",
+					"css/mui.min.css",
+					"css/style.css",
+					"js/jquery-2.2.2.min.js",
+					"fonts/mui.ttf"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"examples/message_update_password.html": {
+				"resources": [
+					"js/app.js",
+					"images/icon15.png",
+					"js/mui.enterfocus.js",
+					"js/md5.js",
+					"js/custom_common.js",
+					"js/mui.min.js",
+					"css/common.css",
+					"css/mui.min.css",
+					"css/style.css",
+					"js/jquery-2.2.2.min.js"
+				],
+				"refer": [
+					"examples/web_message.html"
+				],
+				"priority": 0
+			},
+			"examples/matching_information.html": {
+				"resources": [
+					"css/matching_information.css",
+					"images/icon15.png",
+					"css/mui.min.css",
+					"js/date_util.js",
+					"js/jquery-2.2.2.min.js",
+					"js/custom_common.js",
+					"js/mui.min.js",
+					"css/common.css",
+					"css/style.css",
+					"fonts/mui.ttf"
+				],
+				"refer": [
+					"examples/street_business_information.html",
+					"examples/building_information.html",
+					"examples/address_information.html",
+					"examples/matching_selectandadd.html",
+					"examples/address_type.html",
+					"examples/building_selectandadd.html",
+					"examples/address_selectandadd.html",
+					"examples/house_selectandadd.html"
+				],
+				"priority": 0
+			},
+			"examples/street_business_information.html": {
+				"resources": [
+					"css/street_business_information.css",
+					"js/mui.picker.js",
+					"js/mui.picker.min.js",
+					"css/express.css",
+					"js/mui.poppicker.js",
+					"fonts/mui.ttf",
+					"css/mui.picker.min.css",
+					"css/mui.poppicker.css",
+					"css/mui.picker.css",
+					"js/dict.js",
+					"js/custom_jquery_based.js",
+					"js/jquery-2.2.2.min.js",
+					"images/icon15.png",
+					"css/style.css",
+					"js/custom_common.js",
+					"css/common.css",
+					"js/mui.min.js",
+					"css/mui.min.css",
+					"js/date_util.js",
+					"js/cityObject.js",
+					"js/newcityObject.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"examples/building_information.html": {
+				"resources": [
+					"css/street_business_information.css",
+					"js/mui.picker.js",
+					"js/mui.picker.min.js",
+					"css/express.css",
+					"js/mui.poppicker.js",
+					"css/mui.picker.min.css",
+					"css/mui.poppicker.css",
+					"css/mui.picker.css",
+					"js/dict.js",
+					"js/custom_jquery_based.js",
+					"js/jquery-2.2.2.min.js",
+					"fonts/mui.ttf",
+					"images/icon15.png",
+					"css/style.css",
+					"js/custom_common.js",
+					"css/common.css",
+					"js/mui.min.js",
+					"css/mui.min.css",
+					"js/date_util.js",
+					"css/building_information.css",
+					"js/cityObject.js",
+					"images/badge_plus_16px.png",
+					"images/minus_16px.png"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"examples/more_information.html": {
+				"resources": [
+					"js/mui.picker.js",
+					"js/mui.picker.min.js",
+					"js/mui.min.js",
+					"css/mui.min.css",
+					"js/cityObject.js",
+					"css/more_information.css",
+					"js/jquery-2.2.2.min.js",
+					"css/express.css",
+					"fonts/mui.ttf",
+					"images/icon15.png",
+					"css/style.css",
+					"css/mui.picker.css",
+					"js/dict.js",
+					"js/custom_common.js",
+					"css/common.css",
+					"js/mui.poppicker.js",
+					"css/mui.poppicker.css",
+					"css/mui.picker.min.css",
+					"js/date_util.js",
+					"js/custom_jquery_based.js",
+					"js/city.data.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"examples/message_more_information.html": {
+				"resources": [
+					"js/mui.picker.js",
+					"js/mui.picker.min.js",
+					"css/express.css",
+					"js/mui.poppicker.js",
+					"fonts/mui.ttf",
+					"images/icon15.png",
+					"js/cityObject.js",
+					"css/mui.picker.min.css",
+					"css/mui.poppicker.css",
+					"css/more_information.css",
+					"css/mui.picker.css",
+					"js/dict.js",
+					"js/custom_jquery_based.js",
+					"js/jquery-2.2.2.min.js",
+					"css/style.css",
+					"js/custom_common.js",
+					"js/mui.min.js",
+					"css/common.css",
+					"css/mui.min.css",
+					"js/date_util.js"
+				],
+				"refer": [
+					"examples/message.html"
+				],
+				"priority": 0
+			},
+			"examples/visiting_information.html": {
+				"resources": [
+					"js/date_util.js",
+					"css/user_information.css",
+					"js/jquery-2.2.2.min.js",
+					"js/custom_common.js",
+					"js/mui.min.js",
+					"css/common.css",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"css/style.css",
+					"css/visiting_information.css"
+				],
+				"refer": [
+					"examples/monomer_portrait.html",
+					"examples/visiting_record.html"
+				],
+				"priority": 0
+			},
+			"examples/visiting_record.html": {
+				"resources": [
+					"css/visiting_record.css",
+					"js/jquery-2.2.2.min.js",
+					"js/mui.picker.js",
+					"js/mui.picker.min.js",
+					"css/express.css",
+					"fonts/mui.ttf",
+					"css/style.css",
+					"css/mui.picker.css",
+					"js/dict.js",
+					"js/custom_common.js",
+					"css/common.css",
+					"js/mui.min.js",
+					"js/mui.poppicker.js",
+					"css/mui.min.css",
+					"css/mui.poppicker.css",
+					"css/mui.picker.min.css",
+					"js/date_util.js",
+					"js/custom_jquery_based.js",
+					"images/badge_plus_16px.png",
+					"images/minus_16px.png"
+				],
+				"refer": [
+					"examples/new_select_house.html"
+				],
+				"priority": 0
+			},
+			"examples/address_information.html": {
+				"resources": [
+					"js/mui.picker.js",
+					"js/mui.picker.min.js",
+					"css/express.css",
+					"js/mui.poppicker.js",
+					"images/badge_plus_16px.png",
+					"js/cityObject.js",
+					"css/mui.picker.min.css",
+					"css/mui.poppicker.css",
+					"css/mui.picker.css",
+					"css/address_information.css",
+					"js/dict.js",
+					"js/custom_jquery_based.js",
+					"js/jquery-2.2.2.min.js",
+					"fonts/mui.ttf",
+					"css/style.css",
+					"js/custom_common.js",
+					"css/common.css",
+					"js/mui.min.js",
+					"css/mui.min.css",
+					"js/date_util.js",
+					"images/minus_16px.png",
+					"images/icon36.png",
+					"images/icon37.png"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"examples/matching_selectandadd.html": {
+				"resources": [
+					"css/matching_selectandadd.css",
+					"js/jquery-2.2.2.min.js",
+					"js/custom_common.js",
+					"js/mui.min.js",
+					"css/common.css",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"css/style.css",
+					"js/date_util.js"
+				],
+				"refer": [
+					"examples/monomer_portrait.html",
+					"examples/street_business_information.html",
+					"examples/building_information.html",
+					"examples/address_information.html"
+				],
+				"priority": 0
+			},
+			"examples/address_type.html": {
+				"resources": [
+					"css/address_type.css",
+					"js/jquery-2.2.2.min.js",
+					"js/custom_common.js",
+					"js/mui.min.js",
+					"css/common.css",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"css/style.css",
+					"js/date_util.js"
+				],
+				"refer": [
+					"examples/matching_selectandadd.html",
+					"examples/building_selectandadd.html",
+					"examples/address_selectandadd.html"
+				],
+				"priority": 0
+			},
+			"examples/building_selectandadd.html": {
+				"resources": [
+					"css/building_selectandadd.css",
+					"js/jquery-2.2.2.min.js",
+					"js/custom_common.js",
+					"js/mui.min.js",
+					"css/common.css",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"css/style.css",
+					"js/date_util.js"
+				],
+				"refer": [
+					"examples/street_business_information.html",
+					"examples/building_information.html",
+					"examples/monomer_portrait.html"
+				],
+				"priority": 0
+			},
+			"examples/address_selectandadd.html": {
+				"resources": [
+					"css/address_selectandadd.css",
+					"js/jquery-2.2.2.min.js",
+					"js/custom_common.js",
+					"js/mui.min.js",
+					"css/common.css",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"css/style.css",
+					"js/date_util.js"
+				],
+				"refer": [
+					"examples/community_information.html",
+					"examples/residential_area_information.html",
+					"examples/address_information.html"
+				],
+				"priority": 0
+			},
+			"examples/community_information.html": {
+				"resources": [
+					"js/mui.picker.js",
+					"js/mui.picker.min.js",
+					"css/express.css",
+					"js/mui.poppicker.js",
+					"css/community_information.css",
+					"js/cityObject.js",
+					"css/mui.picker.min.css",
+					"css/mui.poppicker.css",
+					"css/mui.picker.css",
+					"js/dict.js",
+					"js/custom_jquery_based.js",
+					"js/jquery-2.2.2.min.js",
+					"fonts/mui.ttf",
+					"css/style.css",
+					"js/custom_common.js",
+					"css/common.css",
+					"js/mui.min.js",
+					"css/mui.min.css",
+					"js/date_util.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"examples/residential_area_information.html": {
+				"resources": [
+					"css/residential_area_information.css",
+					"js/jquery-2.2.2.min.js",
+					"js/mui.picker.js",
+					"js/mui.picker.min.js",
+					"css/express.css",
+					"fonts/mui.ttf",
+					"css/style.css",
+					"css/mui.picker.css",
+					"js/dict.js",
+					"js/custom_common.js",
+					"css/common.css",
+					"js/mui.min.js",
+					"js/mui.poppicker.js",
+					"css/mui.min.css",
+					"js/cityObject.js",
+					"css/mui.poppicker.css",
+					"css/mui.picker.min.css",
+					"js/date_util.js",
+					"js/custom_jquery_based.js",
+					"js/newcityObject.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"examples/more_datacard.html": {
+				"resources": [
+					"js/app.js",
+					"fonts/mui.ttf",
+					"js/mui.enterfocus.js",
+					"js/md5.js",
+					"js/custom_common.js",
+					"js/mui.min.js",
+					"css/common.css",
+					"css/mui.min.css",
+					"css/style.css"
+				],
+				"refer": [
+					"examples/visiting_information.html"
+				],
+				"priority": 0
+			},
+			"examples/house_selectandadd.html": {
+				"resources": [
+					"css/building_selectandadd.css",
+					"js/jquery-2.2.2.min.js",
+					"js/custom_common.js",
+					"js/mui.min.js",
+					"css/common.css",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"css/style.css",
+					"js/date_util.js",
+					"css/house_selectandadd.css"
+				],
+				"refer": [
+					"examples/address_information.html",
+					"examples/housebuilding_information.html",
+					"examples/house_information.html",
+					"examples/houseofficebuilding_information.html"
+				],
+				"priority": 0
+			},
+			"examples/housebuilding_information.html": {
+				"resources": [
+					"js/mui.picker.js",
+					"js/mui.picker.min.js",
+					"css/express.css",
+					"js/mui.poppicker.js",
+					"images/badge_plus_16px.png",
+					"js/cityObject.js",
+					"css/mui.picker.min.css",
+					"css/mui.poppicker.css",
+					"css/mui.picker.css",
+					"css/address_information.css",
+					"js/dict.js",
+					"js/custom_jquery_based.js",
+					"js/jquery-2.2.2.min.js",
+					"images/icon37.png",
+					"fonts/mui.ttf",
+					"css/style.css",
+					"js/custom_common.js",
+					"css/common.css",
+					"js/mui.min.js",
+					"css/mui.min.css",
+					"images/minus_16px.png",
+					"js/date_util.js",
+					"css/housebuilding_information.css",
+					"js/newcityObject.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"examples/house_information.html": {
+				"resources": [
+					"js/jquery-2.2.2.min.js",
+					"js/mui.picker.js",
+					"js/mui.picker.min.js",
+					"css/express.css",
+					"fonts/mui.ttf",
+					"images/badge_plus_16px.png",
+					"css/style.css",
+					"css/mui.picker.css",
+					"js/dict.js",
+					"js/custom_common.js",
+					"css/common.css",
+					"js/mui.min.js",
+					"js/mui.poppicker.js",
+					"css/mui.min.css",
+					"js/cityObject.js",
+					"css/mui.poppicker.css",
+					"css/mui.picker.min.css",
+					"js/date_util.js",
+					"css/house_information.css",
+					"js/custom_jquery_based.js",
+					"images/minus_16px.png",
+					"images/icon37.png"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"examples/houseofficebuilding_information.html": {
+				"resources": [
+					"js/jquery-2.2.2.min.js",
+					"js/mui.picker.js",
+					"js/mui.picker.min.js",
+					"css/express.css",
+					"fonts/mui.ttf",
+					"images/badge_plus_16px.png",
+					"css/style.css",
+					"css/mui.picker.css",
+					"js/dict.js",
+					"js/custom_common.js",
+					"css/common.css",
+					"js/mui.min.js",
+					"js/mui.poppicker.js",
+					"css/mui.min.css",
+					"js/cityObject.js",
+					"css/mui.poppicker.css",
+					"css/mui.picker.min.css",
+					"css/houseofficebuilding_information.css",
+					"js/date_util.js",
+					"js/custom_jquery_based.js",
+					"images/minus_16px.png"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"examples/new_main.html": {
+				"resources": [
+					"images/green@2x.png",
+					"css/style.css",
+					"images/blue@2x.png",
+					"css/awesomplete.css",
+					"css/new_main.css",
+					"images/logo.png",
+					"css/common.css",
+					"images/logo_manage.png",
+					"images/timg.jpg",
+					"css/blue.css",
+					"css/green.css",
+					"css/mui.min.css",
+					"js/awesomplete.js",
+					"js/custom_jquery_based.js",
+					"js/icheck.min.js",
+					"js/jquery-2.2.2.min.js",
+					"js/mui.min.js",
+					"js/custom_common.js"
+				],
+				"refer": [
+					"examples/web_index.html",
+					"examples/tabbar.html",
+					"examples/web_index2.html",
+					"examples/ceshi.html",
+					"examples/web_personal.html",
+					"examples/web_shopkeeper.html"
+				],
+				"priority": 0
+			},
+			"examples/web_index.html": {
+				"resources": [
+					"css/_all-skins.min.css",
+					"js/raphael-min.js",
+					"js/echarts.common.min.js",
+					"css/bootstrap.min.css",
+					"js/custom_common.js",
+					"css/ionicons.min.css",
+					"js/fastclick.js",
+					"js/app.min.js",
+					"js/mui.min.js",
+					"css/font-awesome.min.css",
+					"css/AdminLTE.min.css",
+					"js/bootstrap.min.js",
+					"images/user2-160x160.jpg",
+					"js/date_util.js",
+					"css/newmui.min.css",
+					"js/jQuery-2.2.0.min.js",
+					"images/user8-128x128.jpg",
+					"fonts/fontawesome-webfont.woff2",
+					"images/avatar04.png",
+					"examples/web_personal.html",
+					"images/logo.png",
+					"css/mui.min.css",
+					"examples/web_new_main.html",
+					"examples/tabbar.html",
+					"examples/web_message.html",
+					"fonts/mui.ttf",
+					"images/dt2.png",
+					"images/dt1.png",
+					"css/web_index_search.css",
+					"images/dt3.png"
+				],
+				"refer": [
+					"examples/web_order_detail.html",
+					"login.html",
+					"examples/web_visit_detail.html",
+					"examples/new_main.html",
+					"examples/web_user.html",
+					"examples/update_password.html",
+					"examples/dataCard.html",
+					"examples/web_index.html",
+					"examples/maps.html"
+				],
+				"priority": 0
+			},
+			"examples/web_order_detail.html": {
+				"resources": [
+					"css/_all-skins.min.css",
+					"images/user7-128x128.jpg",
+					"js/raphael-min.js",
+					"css/bootstrap.min.css",
+					"js/custom_common.js",
+					"css/ionicons.min.css",
+					"js/app.min.js",
+					"js/fastclick.js",
+					"js/mui.min.js",
+					"css/font-awesome.min.css",
+					"css/mui.min.css",
+					"css/AdminLTE.min.css",
+					"js/bootstrap.min.js",
+					"js/date_util.js",
+					"css/newmui.min.css",
+					"js/jQuery-2.2.0.min.js",
+					"fonts/mui.ttf",
+					"fonts/fontawesome-webfont.woff2"
+				],
+				"refer": [
+					"examples/other_web_user.html",
+					"examples/web_portrait.html"
+				],
+				"priority": 0
+			},
+			"examples/web_visit_detail.html": {
+				"resources": [
+					"css/mui.min.css",
+					"css/_all-skins.min.css",
+					"css/AdminLTE.min.css",
+					"css/bootstrap.min.css",
+					"images/user7-128x128.jpg",
+					"images/user8-128x128.jpg",
+					"js/custom_common.js",
+					"js/fastclick.js",
+					"js/mui.min.js",
+					"js/raphael-min.js",
+					"js/bootstrap.min.js",
+					"js/date_util.js",
+					"js/jQuery-2.2.0.min.js",
+					"css/ionicons.min.css",
+					"css/font-awesome.min.css",
+					"css/newmui.min.css",
+					"images/user2-160x160.jpg",
+					"js/echarts.common.min.js",
+					"js/app.min.js",
+					"images/banner.jpg",
+					"fonts/mui.ttf",
+					"fonts/fontawesome-webfont.woff2"
+				],
+				"refer": [
+					"examples/web_portrait.html"
+				],
+				"priority": 0
+			},
+			"examples/web_personal.html": {
+				"resources": [
+					"css/_all-skins.min.css",
+					"css/ionicons.min.css",
+					"css/font-awesome.min.css",
+					"css/AdminLTE.min.css",
+					"css/newmui.min.css",
+					"css/bootstrap.min.css",
+					"js/raphael-min.js",
+					"js/echarts.common.min.js",
+					"js/custom_common.js",
+					"js/fastclick.js",
+					"js/app.min.js",
+					"js/mui.min.js",
+					"js/bootstrap.min.js",
+					"js/date_util.js",
+					"js/jQuery-2.2.0.min.js",
+					"images/avatar04.png",
+					"examples/web_index.html",
+					"images/user8-128x128.jpg",
+					"examples/web_user.html",
+					"fonts/fontawesome-webfont.woff2",
+					"images/logo.png",
+					"images/user2-160x160.jpg",
+					"css/mui.min.css",
+					"css/mui.min2.css",
+					"fonts/mui.ttf"
+				],
+				"refer": [
+					"examples/web_visit_detail.html",
+					"examples/web_order_detail.html",
+					"login.html",
+					"examples/new_main.html"
+				],
+				"priority": 0
+			},
+			"examples/web_user.html": {
+				"resources": [
+					"css/_all-skins.min.css",
+					"css/ionicons.min.css",
+					"css/font-awesome.min.css",
+					"css/AdminLTE.min.css",
+					"css/newmui.min.css",
+					"css/bootstrap.min.css",
+					"js/custom_common.js",
+					"js/mui.min.js",
+					"js/date_util.js",
+					"images/user7-128x128.jpg",
+					"js/raphael-min.js",
+					"js/fastclick.js",
+					"js/app.min.js",
+					"js/bootstrap.min.js",
+					"js/jQuery-2.2.0.min.js",
+					"fonts/mui.ttf",
+					"fonts/fontawesome-webfont.woff2",
+					"images/user2-160x160.jpg",
+					"examples/area_meter.html"
+				],
+				"refer": [
+					"examples/web_index.html",
+					"examples/new_main.html",
+					"examples/web_personal.html",
+					"login.html",
+					"examples/house_number.html",
+					"examples/house_users.html",
+					"examples/order_number.html",
+					"examples/customer_num.html",
+					"examples/portrait_six.html",
+					"examples/portrait_eighteen.html"
+				],
+				"priority": 0
+			},
+			"examples/web_index2.html": {
+				"resources": [
+					"css/_all-skins.min.css",
+					"js/raphael-min.js",
+					"fonts/fontawesome-webfont.woff2",
+					"css/bootstrap.min.css",
+					"css/ionicons.min.css",
+					"js/fastclick.js",
+					"js/app.min.js",
+					"js/mui.min.js",
+					"css/font-awesome.min.css",
+					"css/AdminLTE.min.css",
+					"js/bootstrap.min.js",
+					"css/newmui.min.css",
+					"js/jQuery-2.2.0.min.js",
+					"images/user2-160x160.jpg",
+					"css/mui.min.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"examples/ceshi.html": {
+				"resources": [
+					"js/mui.min.js",
+					"css/mui.min.css",
+					"css/bootstrap.min.css",
+					"css/font-awesome.min.css",
+					"fonts/fontawesome-webfont.woff2",
+					"css/ionicons.min.css",
+					"css/AdminLTE.min.css",
+					"css/_all-skins.min.css",
+					"css/newmui.min.css",
+					"js/custom_common.js",
+					"js/app.min.js",
+					"js/fastclick.js",
+					"js/raphael-min.js",
+					"js/bootstrap.min.js",
+					"js/date_util.js",
+					"js/echarts.common.min.js",
+					"js/jQuery-2.2.0.min.js"
+				],
+				"refer": [
+					"examples/new_main.html"
+				],
+				"priority": 0
+			},
+			"examples/set_headimg.html": {
+				"resources": [
+					"js/jquery-2.2.2.min.js",
+					"js/custom_common.js",
+					"css/set_headimg.css",
+					"css/cropper.css",
+					"images/my_card_head.png",
+					"js/mui.min.js",
+					"css/common.css",
+					"css/mui.min.css",
+					"js/cropper.js",
+					"js/bootstrap.min.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"examples/new_select_house.html": {
+				"resources": [
+					"css/common.css",
+					"css/mui.min.css",
+					"js/awesomplete.js",
+					"css/style.css",
+					"css/awesomplete.css",
+					"js/custom_common.js",
+					"js/custom_jquery_based.js",
+					"js/jquery-2.2.2.min.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"examples/other_web_user.html": {
+				"resources": [
+					"css/_all-skins.min.css",
+					"css/AdminLTE.min.css",
+					"css/bootstrap.min.css",
+					"js/custom_common.js",
+					"js/app.min.js",
+					"js/fastclick.js",
+					"js/mui.min.js",
+					"js/raphael-min.js",
+					"js/bootstrap.min.js",
+					"js/date_util.js",
+					"js/jQuery-2.2.0.min.js",
+					"css/ionicons.min.css",
+					"css/font-awesome.min.css",
+					"css/newmui.min.css",
+					"images/user7-128x128.jpg",
+					"fonts/mui.ttf",
+					"fonts/fontawesome-webfont.woff2",
+					"images/user2-160x160.jpg"
+				],
+				"refer": [
+					"examples/web_index.html",
+					"examples/web_user.html",
+					"examples/web_personal.html"
+				],
+				"priority": 0
+			},
+			"examples/web_portrait.html": {
+				"resources": [
+					"css/_all-skins.min.css",
+					"images/cbd.jpg",
+					"css/ionicons.min.css",
+					"css/font-awesome.min.css",
+					"css/AdminLTE.min.css",
+					"css/newmui.min.css",
+					"images/user1-128x128.jpg",
+					"css/bootstrap.min.css",
+					"js/custom_common.js",
+					"js/app.min.js",
+					"js/fastclick.js",
+					"js/mui.min.js",
+					"js/raphael-min.js",
+					"js/bootstrap.min.js",
+					"js/jQuery-2.2.0.min.js",
+					"fonts/mui.ttf"
+				],
+				"refer": [
+					"examples/new_main.html"
+				],
+				"priority": 0
+			},
+			"examples/web_shopkeeper.html": {
+				"resources": [
+					"css/_all-skins.min.css",
+					"js/raphael-min.js",
+					"js/echarts.common.min.js",
+					"fonts/fontawesome-webfont.woff2",
+					"css/bootstrap.min.css",
+					"css/ionicons.min.css",
+					"js/fastclick.js",
+					"js/app.min.js",
+					"js/mui.min.js",
+					"css/font-awesome.min.css",
+					"css/AdminLTE.min.css",
+					"js/bootstrap.min.js",
+					"css/newmui.min.css",
+					"js/jQuery-2.2.0.min.js",
+					"images/user2-160x160.jpg",
+					"js/custom_common.js",
+					"js/date_util.js",
+					"js/require.js",
+					"fonts/mui.ttf",
+					"examples/web_new_main.html",
+					"examples/web_message.html",
+					"examples/tabbar.html"
+				],
+				"refer": [
+					"examples/web_guoanxialist.html",
+					"examples/web_information.html",
+					"examples/new_main.html",
+					"login.html",
+					"examples/web_index.html",
+					"examples/web_area.html",
+					"examples/other_web_user.html",
+					"examples/update_password.html",
+					"examples/maps.html",
+					"examples/storeDataCard.html"
+				],
+				"priority": 0
+			},
+			"examples/web_guoanxialist.html": {
+				"resources": [
+					"css/_all-skins.min.css",
+					"images/user7-128x128.jpg",
+					"css/ionicons.min.css",
+					"css/font-awesome.min.css",
+					"css/AdminLTE.min.css",
+					"css/newmui.min.css",
+					"css/bootstrap.min.css",
+					"js/app.min.js",
+					"js/fastclick.js",
+					"js/mui.min.js",
+					"js/raphael-min.js",
+					"js/bootstrap.min.js",
+					"js/jQuery-2.2.0.min.js",
+					"js/custom_common.js",
+					"js/date_util.js",
+					"fonts/mui.ttf"
+				],
+				"refer": [
+					"examples/web_shopkeeper.html",
+					"examples/web_information.html",
+					"login.html",
+					"examples/other_web_user.html",
+					"examples/new_main.html"
+				],
+				"priority": 0
+			},
+			"examples/web_information.html": {
+				"resources": [
+					"css/_all-skins.min.css",
+					"images/user7-128x128.jpg",
+					"css/ionicons.min.css",
+					"js/app.min.js",
+					"js/fastclick.js",
+					"js/mui.min.js",
+					"js/raphael-min.js",
+					"css/font-awesome.min.css",
+					"js/bootstrap.min.js",
+					"css/AdminLTE.min.css",
+					"js/jQuery-2.2.0.min.js",
+					"css/newmui.min.css",
+					"css/bootstrap.min.css",
+					"fonts/mui.ttf"
+				],
+				"refer": [
+					"examples/web_guoanxialist.html",
+					"examples/web_shopkeeper.html",
+					"login.html",
+					"examples/new_main.html"
+				],
+				"priority": 0
+			},
+			"examples/web_area.html": {
+				"resources": [
+					"css/_all-skins.min.css",
+					"css/ionicons.min.css",
+					"css/font-awesome.min.css",
+					"css/AdminLTE.min.css",
+					"css/newmui.min.css",
+					"css/bootstrap.min.css",
+					"js/raphael-min.js",
+					"js/echarts.common.min.js",
+					"js/custom_common.js",
+					"js/fastclick.js",
+					"js/app.min.js",
+					"js/mui.min.js",
+					"js/bootstrap.min.js",
+					"js/date_util.js",
+					"js/jQuery-2.2.0.min.js",
+					"fonts/mui.ttf",
+					"images/avatar04.png",
+					"images/user8-128x128.jpg",
+					"fonts/fontawesome-webfont.woff2",
+					"images/user2-160x160.jpg"
+				],
+				"refer": [
+					"examples/web_order_detail.html",
+					"examples/web_visit_detail.html"
+				],
+				"priority": 0
+			},
+			"examples/feedback_list.html": {
+				"resources": [
+					"images/icon17.png",
+					"css/feedlist.css",
+					"css/common.css",
+					"images/icon21.png",
+					"images/icon19.png",
+					"css/mui.min2.css",
+					"images/icon18.png",
+					"js/mui.min2.js",
+					"images/icon16.png",
+					"examples/store_daily.html",
+					"js/jquery-2.2.2.min.js",
+					"js/custom_common.js",
+					"js/date_util.js",
+					"css/style.css"
+				],
+				"refer": [
+					"examples/feedListDetail.html",
+					"examples/feedback.html"
+				],
+				"priority": 0
+			},
+			"examples/feedListDetail.html": {
+				"resources": [
+					"images/icon27.png",
+					"images/icon26.png",
+					"css/feedback.css",
+					"js/mui.min.js",
+					"css/common.css",
+					"css/mui.min.css",
+					"images/icon29.png",
+					"images/icon28.png"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"examples/web_new_main.html": {
+				"resources": [
+					"css/_all-skins.min.css",
+					"css/ionicons.min.css",
+					"js/app.min.js",
+					"js/fastclick.js",
+					"js/raphael-min.js",
+					"css/font-awesome.min.css",
+					"js/bootstrap.min.js",
+					"css/AdminLTE.min.css",
+					"js/jQuery-2.2.0.min.js",
+					"css/newmui.min.css",
+					"fonts/fontawesome-webfont.woff2",
+					"css/bootstrap.min.css",
+					"css/mui.min.css",
+					"examples/tabbar.html",
+					"js/mui.min.js",
+					"examples/web_index.html",
+					"examples/web_information.html",
+					"js/date_util.js",
+					"examples/web_message.html",
+					"js/custom_common.js",
+					"examples/web_shopkeeper.html",
+					"images/user2-160x160.jpg",
+					"fonts/mui.ttf"
+				],
+				"refer": [
+					"examples/message_notice.html",
+					"examples/message_monomer_portrait.html",
+					"examples/update_password.html",
+					"login.html",
+					"examples/setting_hand.html",
+					"setting_hand.html",
+					"setting.html",
+					"examples/message_more_information.html",
+					"examples/work_record_result.html",
+					"examples/my.html",
+					"examples/dataCard.html",
+					"examples/visiting_information.html",
+					"examples/user_information.html",
+					"examples/maps.html"
+				],
+				"priority": 0
+			},
+			"examples/message_notice.html": {
+				"resources": [
+					"js/mui.picker.js",
+					"css/common.css",
+					"js/mui.poppicker.js",
+					"css/mui.min.css",
+					"css/style.css",
+					"js/dict.js",
+					"css/work_record_result.css",
+					"js/custom_jquery_based.js",
+					"fonts/mui.ttf"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"examples/web_message.html": {
+				"resources": [
+					"fonts/glyphicons-halflings-regular.woff2",
+					"css/_all-skins.min.css",
+					"css/ionicons.min.css",
+					"css/font-awesome.min.css",
+					"css/AdminLTE.min.css",
+					"css/newmui.min.css",
+					"css/bootstrap.min.css",
+					"examples/tabbar.html",
+					"examples/web_new_main.html",
+					"js/mui.min2.js",
+					"js/raphael-min.js",
+					"css/mui.min.css",
+					"css/mui.min2.css",
+					"js/app.min.js",
+					"js/fastclick.js",
+					"js/bootstrap.min.js",
+					"js/jQuery-2.2.0.min.js",
+					"js/custom_common.js",
+					"js/date_util.js",
+					"examples/web_index.html",
+					"css/feedlist.css",
+					"css/common.css",
+					"css/style.css",
+					"css/message.css",
+					"images/icon31.png",
+					"fonts/fontawesome-webfont.woff2",
+					"examples/web_shopkeeper.html",
+					"images/user2-160x160.jpg"
+				],
+				"refer": [
+					"examples/message_monomer_portrait.html",
+					"examples/work_record_result.html",
+					"examples/message_update_password.html",
+					"examples/update_password.html",
+					"examples/message_more_information.html",
+					"login.html",
+					"examples/message_notice.html",
+					"examples/dataCard.html",
+					"examples/maps.html",
+					"examples/storeDataCard.html",
+					"examples/web_guoanxialist.html",
+					"examples/web_information.html",
+					"examples/city_main.html",
+					"examples/my.html",
+					"examples/cs_my.html",
+					"examples/web_city_ej.html",
+					"examples/city_my.html",
+					"examples/new_city_my.html",
+					"examples/web_shopkeeper_new.html"
+				],
+				"priority": 0
+			},
+			"examples/new_tabbar.html": {
+				"resources": [
+					"css/font-awesome.min.css",
+					"css/mui.min.css",
+					"js/mui.min2.js",
+					"examples/web_new_main.html",
+					"fonts/fontawesome-webfont.woff2",
+					"examples/web_message.html",
+					"examples/web_index.html",
+					"examples/tabbar.html",
+					"css/style.css",
+					"js/jquery-2.2.2.min.js",
+					"css/_all-skins.min.css",
+					"js/raphael-min.js",
+					"css/bootstrap.min.css",
+					"css/ionicons.min.css",
+					"js/fastclick.js",
+					"js/app.min.js",
+					"css/message.css",
+					"css/AdminLTE.min.css",
+					"js/bootstrap.min.js",
+					"js/date_util.js",
+					"js/jQuery-2.2.0.min.js",
+					"css/new_main.css",
+					"js/custom_common.js",
+					"css/newmui.min.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"examples/setting_hand.html": {
+				"resources": [
+					"libs/easymob-webim-sdk/easemob.im-1.0.5.js",
+					"libs/easymob-webim-sdk/json2.js",
+					"libs/easymob-webim-sdk/jquery-1.11.1.js",
+					"js/mui.locker.js",
+					"js/feedback.js",
+					"js/feedback-page.js",
+					"libs/easymob-webim-sdk/strophe-custom-2.0.0.js",
+					"js/mui.view.js",
+					"css/mui.min.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"setting_hand.html": {
+				"resources": [
+					"libs/easymob-webim-sdk/easemob.im-1.0.5.js",
+					"css/mui.min.css",
+					"libs/easymob-webim-sdk/json2.js",
+					"libs/easymob-webim-sdk/jquery-1.11.1.js",
+					"js/mui.locker.js",
+					"js/feedback.js",
+					"css/feedback-page.css",
+					"js/feedback-page.js",
+					"libs/easymob-webim-sdk/strophe-custom-2.0.0.js",
+					"js/mui.view.js",
+					"fonts/mui.ttf"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"examples/dataCard.html": {
+				"resources": [
+					"css/common.css",
+					"css/mui.min2.css",
+					"css/style.css",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"images/icons5.png",
+					"images/icons3.png",
+					"images/icons2.png",
+					"images/icons1.png",
+					"js/jquery-2.2.2.min.js",
+					"js/custom_common.js"
+				],
+				"refer": [
+					"examples/user_information.html",
+					"examples/express_list.html",
+					"examples/visiting_information.html"
+				],
+				"priority": 0
+			},
+			"examples/maps.html": {
+				"resources": [],
+				"refer": [
+					"examples/tabbar.html",
+					"examples/web_message.html",
+					"examples/web_index.html",
+					"examples/update_password.html",
+					"examples/dataCard.html",
+					"login.html",
+					"examples/web_shopkeeper.html",
+					"examples/storeDataCard.html",
+					"examples/web_information.html",
+					"examples/web_guoanxialist.html",
+					"examples/web_user.html",
+					"examples/barcode_scan.html",
+					"examples/scan_login.html",
+					"examples/web_shopkeeper_new.html",
+					"examples/pc_login.html"
+				],
+				"priority": 0
+			},
+			"examples/city_main.html": {
+				"resources": [],
+				"refer": [
+					"examples/web_message.html",
+					"login.html",
+					"examples/tabbar.html",
+					"examples/update_password.html",
+					"examples/scan_login.html",
+					"examples/cs_my.html"
+				],
+				"priority": 0
+			},
+			"examples/web_shopkeeper_new.html": {
+				"resources": [],
+				"refer": [
+					"examples/web_message.html",
+					"login.html",
+					"examples/web_guoanxialist.html",
+					"examples/maps.html",
+					"examples/storeDataCard.html",
+					"examples/other_web_user.html",
+					"examples/tabbar.html"
+				],
+				"priority": 0
+			},
+			"examples/cs_my.html": {
+				"resources": [],
+				"refer": [
+					"examples/city_main.html",
+					"examples/web_message.html",
+					"examples/update_password.html",
+					"login.html",
+					"examples/web_city_ej.html"
+				],
+				"priority": 0
+			},
+			"examples/web_city_ej.html": {
+				"resources": [],
+				"refer": [
+					"login.html",
+					"examples/web_message.html",
+					"examples/cs_my.html",
+					"examples/update_password.html",
+					"examples/city_my.html",
+					"examples/new_city_my.html"
+				],
+				"priority": 0
+			},
+			"examples/city_my.html": {
+				"resources": [],
+				"refer": [
+					"examples/update_password.html",
+					"examples/web_city_ej.html",
+					"examples/web_message.html",
+					"login.html"
+				],
+				"priority": 0
+			},
+			"examples/new_city_my.html": {
+				"resources": [],
+				"refer": [
+					"examples/web_city_ej.html",
+					"examples/web_message.html",
+					"login.html"
+				],
+				"priority": 0
+			}
+		},
+		"idle": {
+			"resources": [
+				"js/service.js",
+				"libs/easymob-webim-sdk/quickstart.md",
+				"images/user-photo.png",
+				"README.md"
+			]
+		}
+	},
+	"unpackage": [
+		"README.md",
+		"images/user-photo.png",
+		"libs/easymob-webim-sdk/quickstart.md"
+	],
+	"fullscreen": false
+}

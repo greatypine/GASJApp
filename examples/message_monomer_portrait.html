@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>单体画像消息</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<!--标准mui.css-->
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="../css/common.css" />
+		<link rel="stylesheet" type="text/css" href="../css/style.css" />
+		<link href="../css/mui.picker.css" rel="stylesheet" />
+		<link href="../css/mui.poppicker.css" rel="stylesheet" />
+		<link href="../css/monomer_portrait.css" rel="stylesheet" />
+
+		<style>
+			.but_div {
+				text-align: center;
+			}
+			
+			.cancel {
+				padding: 0.15rem 0.5rem;
+				font-size: 0.3rem;
+				background-color: #18bc9c;
+				border-radius: 0.1rem;
+				margin-right: 0.8rem;
+				color: #FFFFFF;
+			}
+			
+			.sure {
+				padding: 0.15rem 0.5rem;
+				font-size: 0.3rem;
+				background-color: #18bc9c;
+				border-radius: 0.1rem;
+				color: #FFFFFF;
+			}
+			.mui-popover-bottom li{height: 0.8rem; line-height: 0.8rem; font-size: 0.32rem;}
+			.img_plus{margin-left: 10px;height: 14px;width: 14px;cursor: pointer;}
+			.img_minus{margin-left: 5px;height: 14px;width: 14px;cursor: pointer;}
+			.option_select{border: 1px solid rgba(0,0,0,.2) !important;height:40px;width: 30%;padding: 0;margin: 0;font-size: 15px;}
+			.content_input{margin: 0;margin-left: 5px;width: 60% !important;font-size: 14px;}
+		</style>
+
+	</head>
+
+	<body>
+		<!--<header class="mui-bar mui-bar-nav titleheader">
+			<div>用户画像</div>
+			<div class="back">
+				<a id="user_information" path="message.html" onclick="jump(this)"></a>
+			</div>
+
+		</header>-->
+		<header class="mui-bar mui-bar-nav titleheader">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">用户画像</h1>
+		</header>
+
+		<div id="picture" class="mui-popover mui-popover-action mui-popover-bottom">
+			<ul class="mui-table-view">
+				<li style="border-bottom: 1px solid #dbdbdb;" onclick="videoCapture();">
+					拍照
+				</li>
+				<li onclick="galleryImg();">
+					从手机相册中选择
+				</li>
+			</ul>
+			<ul class="mui-table-view">
+				<li>
+					<a id='aCancel' href="#picture"><b>取消</b></a>
+				</li>
+			</ul>
+		</div>
+
+		<div id="div_info" class="mui-content">
+			<div style="padding: 10px">
+				<div id="segmentedControl" class="mui-segmented-control" style="border: 1px solid #e66629;">
+					<a class="mui-control-item mui-active" href="#item1">
+						基本信息
+					</a>
+					<a class="mui-control-item" href="#item2">
+						补充信息
+					</a>
+					<a class="mui-control-item" href="#item3">
+						家庭成员
+					</a>
+					<!--<a class="mui-control-item" href="#item4">
+						拜访记录
+					</a>-->
+				</div>
+			</div>
+			<div id="item1" class="mui-control-content mui-active">
+				<ul class="mui-table-view mui-table-view-chevron ul_interval">
+					<li class="mui-table-view-cell input_li">
+						<div class="input-row">
+							<label>姓名</label>
+							<input type="hidden" id="id" name="id" readonly="readonly">
+							<input type="text" id="name" name="name" readonly="readonly">
+						</div>
+					</li>
+					<li class="mui-table-view-cell input_li">
+						<div class="input-row">
+							<label>电话</label>
+							<input type="tel" id="mobilephone" name="mobilephone" placeholder="11位电话号码或手机" maxlength="11" readonly="readonly">
+						</div>
+					</li>
+					<li class="mui-table-view-cell radio_li">
+						<div class="input-row-suffix mui-radio">
+							<label>性别</label>
+							<div style="float: right;">
+								<input id="man" name="sex" type="radio" style="float: initial;" value="0" checked disabled> 男
+								<input id="wuman" name="sex" type="radio" style="float: initial;" value="1" disabled> 女
+							</div>
+						</div>
+					</li>
+					<li class="mui-table-view-cell input_li">
+						<div class="input-row">
+							<label>年龄</label>
+							<input type="tel" id="age" name="age" maxlength="2" readonly="readonly">
+						</div>
+					</li>
+					<li class="mui-table-view-cell radio_li">
+						<div class="input-row-suffix mui-radio">
+							<label>房屋类型</label>
+							<div style="float: right;">
+								<input name="house_type" type="radio" style="float: initial;" bidTableFlag="true" value="0" disabled> 平房
+								<input name="house_type" type="radio" style="float: initial;" bidTableFlag="true" value="1" checked disabled> 楼房
+							</div>
+						</div>
+					</li>
+					<li id="li_house_address" class="mui-table-view-cell select_li">
+						<input type="hidden" id="house_id" name="house_id" bidTableFlag="true">
+						<!--<a id="a_address" class="mui-navigate-right" href="#">-->
+						<label>家庭住址</label>
+						<input id="address" name="address" type="text" placeholder="请填写" readonly="readonly">
+						</a>
+					</li>
+				</ul>
+
+				<ul id="ul_house_style" class="mui-table-view mui-table-view-chevron">
+					<li class="mui-table-view-cell radio_li" style="color: #e66629;">
+						<label style="font-weight: bolder;">|</label>&nbsp家庭信息
+						<input type="hidden" id="house_style_id" name="house_style_id" bidTableFlag="true">
+					</li>
+					<li class="mui-table-view-cell input_li_suffix">
+						<div class="input-row-suffix">
+							<label>面积</label>
+							<label class="suffix">平方米</label>
+							<input type="text" id="house_area" name="house_area" bidTableFlag="true" readonly="readonly">
+						</div>
+					</li>
+					<li class="mui-table-view-cell input_li">
+						<div class="input-row">
+							<label>朝向</label>
+							<input type="text" id="house_toward" name="house_toward" bidTableFlag="true" readonly="readonly">
+						</div>
+					</li>
+					<li class="mui-table-view-cell input_li">
+						<div class="input-row">
+							<label>户型</label>
+							<input type="text" id="house_style" name="house_style" bidTableFlag="true" readonly="readonly">
+						</div>
+					</li>
+					<li id="li_house_pic" class="mui-table-view-cell select_li">
+						<!--<a id="a_house_id" class="mui-navigate-right" href="#">-->
+						<label>户型图</label>
+						<input type="text" id="house_pic" name="house_pic" readonly="readonly" bidTableFlag="true">
+						</a>
+					</li>
+				</ul>
+
+			</div>
+			<div id="item2" class="mui-control-content">
+				<ul class="mui-table-view mui-table-view-chevron ul_interval">
+					<li class="mui-table-view-cell" style="line-height: 1.2rem;">
+						<a class="mui-navigate-right">
+							<label>照片</label>
+							<img src="" class="header_img" />
+						</a>
+					</li>
+					<li class="mui-table-view-cell input_li_suffix">
+						<div class="input-row-suffix">
+							<label>民族</label>
+							<label class="suffix">族</label>
+							<input type="text" id="nationality" name="nationality" readonly="readonly">
+						</div>
+					</li>
+					<li class="mui-table-view-cell radio_li">
+						<div class="input-row-suffix mui-radio">
+							<label>住房性质</label>
+							<div style="float: right;">
+								<input name="house_property" type="radio" style="float: initial;" value="1" checked disabled> 自有
+								<input name="house_property" type="radio" style="float: initial;" value="2" disabled> 租住
+							</div>
+						</div>
+					</li>
+					<li class="mui-table-view-cell input_li">
+						<div class="input-row">
+							<label>职业</label>
+							<input type="text" id="job" name="job" maxlength="20" readonly="readonly">
+						</div>
+					</li>
+					<li class="mui-table-view-cell input_li_suffix">
+						<div class="input-row-suffix">
+							<label>收入</label>
+							<label class="suffix">元</label>
+							<input type="tel" id="income" name="income" readonly="readonly">
+						</div>
+					</li>
+					<li class="mui-table-view-cell select_li">
+						<!--<a class="mui-navigate-right" href="#">-->
+						<label>加班频率</label>
+						<input type="text" id="work_overtime_text" name="work_overtime_text" placeholder="请选择" bidTableFlag='true' readonly />
+						<input type="hidden" id="work_overtime" name="work_overtime" />
+						<!--</a>-->
+					</li>
+					<li class="mui-table-view-cell input_li">
+						<div class="input-row">
+							<label>其他信息</label>
+							<input type="text" id="other" name="other" maxlength="120" readonly="readonly" />
+						</div>
+					</li>
+				</ul>
+
+				<ul class="mui-table-view mui-table-view-chevron">
+					<li class="mui-table-view-cell radio_li" style="color: #e66629;">
+						<label style="font-weight: bolder;">|</label>&nbsp家庭信息
+					</li>
+					<li class="mui-table-view-cell input_li_suffix">
+						<div class="input-row-suffix">
+							<label>家庭人口数</label>
+							<label class="suffix">人</label>
+							<input type="tel" id="family_num" name="family_num" maxlength="2" readonly="readonly" />
+						</div>
+					</li>
+					<li class="mui-table-view-cell input_li_suffix">
+						<div class="input-row-suffix">
+							<label>学龄前人数</label>
+							<label class="suffix">人</label>
+							<input type="tel" id="preschool_num" name="preschool_num" maxlength="2" placeholder="0-6岁" readonly="readonly">
+						</div>
+					</li>
+					<li class="mui-table-view-cell input_li_suffix">
+						<div class="input-row-suffix">
+							<label>未成年人数</label>
+							<label class="suffix">人</label>
+							<input type="tel" id="minor_num" name="minor_num" maxlength="2" placeholder="7-18岁" readonly="readonly">
+
+						</div>
+					</li>
+					<li class="mui-table-view-cell input_li">
+						<div class="input-row">
+							<label>宠物种类</label>
+							<input type="text" id="pet_type" name="pet_type" readonly="readonly">
+						</div>
+					</li>
+				</ul>
+			</div>
+
+			<div id="item3" class="mui-control-content">
+
+				<!--<div class="add_btn" >-->
+					<!--<button id="btnAdd">
+						<span class="mui-icon mui-icon-plusempty"></span>
+						添加成员信息
+					</button>-->
+				<!--</div>-->
+			</div>
+			
+			<!--<div id="item4" class="mui-control-content">-->
+				
+				<!--<div class="add_btn" id="item_div">
+					<button id="btnRelation">
+						<span class="mui-icon mui-icon-plusempty"></span>
+						添加拜访信息
+					</button>
+				</div>-->
+			<!--</div>-->
+			
+			
+
+			<div class="but_div">
+				<a class="cancel" onclick="cancel_but()">拒绝</a>
+				<a class="sure" onclick="sure_but()">确定</a>
+			</div>
+		</div>
+
+		<!--<footer>
+			<a class="foot1" href="tabbar.html">
+				<span></span>
+				<p>首页</p>
+			</a>
+			<a class="foot2" href="message.html">
+				<span></span>
+				<p>消息</p>
+			</a>
+			<a class="foot3" href="my.html">
+				<span></span>
+				<p>我</p>
+			</a>
+		</footer>-->
+	</body>
+	<script type="text/javascript" src="../js/mui.min.js"></script>
+	<script type="text/javascript" src="../js/jquery-2.2.2.min.js"></script>
+	<script type="text/javascript" src="../js/custom_jquery_based.js"></script>
+	<script src="https://pv.sohu.com/cityjson?ie=utf-8"></script>
+	<script type="text/javascript" src="../js/custom_common.js"></script>
+	<script type="text/javascript" src="../js/date_util.js"></script>
+	<script type="text/javascript" src="../js/mui.picker.js"></script>
+	<script type="text/javascript" src="../js/mui.poppicker.js"></script>
+	<script type="text/javascript" src="../js/dict.js"></script>
+	<script type="text/javascript" type="text/javascript">
+		var houseWebview = null;
+		var relationPicker = new mui.PopPicker();
+		var workDictArray = null;
+		var cus_id = null;
+		var message_id = null;
+		var monomer_main = null;
+		var message_to=null;
+		var showMenu = false;
+	    var dict_relation_content_resource = JSON.parse(localStorage.getItem('relation_content_resource'));
+    	var dict_relation_content_option_resource = JSON.parse(localStorage.getItem('relation_content_option_resource'));
+		var employee = JSON.parse(localStorage.getItem('employee'));
+
+		var obj_addressCustomer = null;
+		mui.init({
+		    beforeback: function() {
+		　　　　 //获得父页面的webview
+		        var list = plus.webview.currentWebview().opener();
+		　　　　 //触发父页面的自定义事件(refresh),从而进行刷新
+		        mui.fire(list, 'refresh');
+		        //返回true,继续页面关闭逻辑
+		        return true;
+		    }
+		});
+
+		
+
+		mui.plusReady(function() {
+//			setTimeout(function() {
+//				monomer_main = mui.preload({
+//					id: 'message',
+//					url: 'message.html',
+//				});
+//			}, 300);
+			
+			workDictArray = getDict('li_work_overtime', 'work_overtime', 'work_overtime_text', 'work_overtime_resource');
+    		getdata();
+		});
+		//获取消息内容
+		function getdata(){
+			 var self = plus.webview.currentWebview();
+			cus_id = self.pk_id;
+			message_id = self.message_id;
+			message_to=self.message_to;
+			if(cus_id == null || cus_id == '') {
+				return;
+			}
+			doManager('CustomerTemporaryManager', 'findCustomerTemporaryForId', cus_id, function(data) {
+				if(data.result) {
+					var customer = JSON.parse(data.data);
+					if(customer != null) {
+						setCustomer(customer);
+					}
+				}
+			});
+		}
+
+
+        function setCustomer(customer){
+			setFormSimpleData(customer);
+			$('input[name="sex"][value="' + customer.sex + '"]').attr('checked', 'checked');
+			$('input[name="house_property"][value="' + customer.house_property + '"]').attr('checked', 'checked');
+			if(customer.houseStyle != null){
+				obj_addressCustomer = customer.houseStyle;
+				$('input[name="house_type"][value="' + customer.houseStyle.house_type + '"]').attr('checked', 'checked');
+				if(customer.houseStyle.house_type == 0){
+					$('#li_house_pic').hide();
+				}else{
+					$('#li_house_pic').show();
+				}
+				
+				
+				$('#house_area').val(customer.houseStyle.house_area);
+				$('#house_style').val(customer.houseStyle.house_style);
+				$('#house_toward').val(customer.houseStyle.house_toward);
+				$('#house_pic').val(customer.houseStyle.house_pic);
+				$('#house_id').val(customer.houseStyle.house_id);
+				$('#house_style_id').val(customer.houseStyle.house_style_id);
+			}
+			if(customer.cus_pic != null){
+				$('.header_img').attr('src',decodeURI(customer.cus_pic));
+			}
+			for(var index in workDictArray) {
+				if(workDictArray[index].value == customer.work_overtime) {
+					$('#work_overtime_text').val(workDictArray[index].text);
+					break;
+				}
+			}
+//			$('#item4').children().remove();
+			$('#item3').children().remove();
+			$(customer.childs).each(function(i, family) {
+				addFamily(family);
+			});
+//			$(customer.customer.relations).each(function(i, relation) {
+//				addRelation(relation);
+//			});
+		
+		}
+
+		function addFamily(family) {
+			if(typeof(family) == 'undefined') {
+				family = {
+					family_relation: '',
+					family_name: '',
+					family_phone: '',
+					family_age: ''
+				};
+			}
+			
+			var $div_parent = $('#item3');
+            $div_parent.append('<ul class="mui-table-view mui-table-view-chevron ul_interval"></ul>');
+			var $ul = $div_parent.find('ul:last');
+			$ul.append('<li class="mui-table-view-cell select_li"></li>');
+			var $li = $ul.find('li:last');
+			$li.append('<a class="mui-navigate-right" href="#"></a>');
+			var $a = $li.find('a:last');
+			$a.append('<label>成员称谓</label>');
+			$a.append('<input type="text" name="family_relation" placeholder="请选择" readonly="readonly" value="' + family.family_relation + '" bidTableFlag="true" readonly />');
+
+			$ul.append('<li class="mui-table-view-cell input_li"></li>');
+			$ul.find('li:last').append('<div class="input-row"></div>');
+			$div = $ul.find('li:last').find('div:last');
+			$div.append('<label>成员姓名</label>');
+			$div.append('<input type="text" name="family_name" readonly="readonly" value="' + family.family_name + '"  bidTableFlag="true"/>');
+
+			$ul.append('<li class="mui-table-view-cell input_li"></li>');
+			$ul.find('li:last').append('<div class="input-row"></div>');
+			$div = $ul.find('li:last').find('div:last');
+			$div.append('<label>成员电话</label>');
+			$div.append('<input type="tel" name="family_phone" maxlength="11" readonly="readonly" value="' + family.family_phone + '"  bidTableFlag="true"/>');
+
+			$ul.append('<li class="mui-table-view-cell input_li"></li>');
+			$ul.find('li:last').append('<div class="input-row"></div>');
+			$div = $ul.find('li:last').find('div:last');
+			$div.append('<label>成员年龄</label>');
+			$div.append('<input type="tel"  name="family_age" maxlength="2" readonly="readonly" value="' + family.family_age + '"  bidTableFlag="true"/>');
+
+		}
+         //确定通过审核消息
+		function sure_but() {
+
+			var btnArray = ['否', '是'];
+			mui.confirm('确定要审核当前数据吗？', '系统提示', btnArray, function(e) {
+				if(e.index == 1) {
+					doManager('CustomerTemporaryManager', 'saveReviewCustomerTemporary', cus_id, function(data) {
+						if(data.result) {
+							mui.toast('审核成功');
+							newDeleteMessage();
+
+						} else {
+							mui.toast(data.message);
+						}
+					});
+				}
+			});
+
+		}
+		//拒绝通过审核消息
+		function cancel_but(){
+			var btnArray = ['否', '是'];
+			mui.confirm('确定拒绝审核当前数据吗？', '系统提示', btnArray, function(e) {
+				if(e.index == 1) {
+					doManager('CustomerTemporaryManager', 'deleteCustomerTemporaryForId', cus_id, function(data) {
+						if(data.result) {
+							mui.toast('拒绝审核');
+							newDeleteMessage();
+
+						} else {
+							mui.toast(data.message);
+						}
+					});
+				}
+			});
+			
+		}
+         //删除消息
+		function newDeleteMessage() {
+
+			if(message_id == null || message_id == '') {
+				return;
+			}
+			var	message = {
+				id:message_id
+			};
+
+			doManager('MessageNewManager', 'delateMessage', message, function(data) {
+				setTimeout(function() {
+					if(data.result) {
+						var jsonData = JSON.parse(data.data);
+					    setTimeout(function(){
+							closeMenu();
+						},500)
+
+					} else {
+						mui.toast(data.message);
+					}
+				}, 300);
+			});
+
+		}
+		
+		function closeMenu(){
+			//不使用父子模板方案的页面
+			
+			if(message_to=="main"){
+				var webview = plus.webview.getWebviewById('web_new_main');
+				if(webview != null){
+					webview.close();
+				}
+				mui.openWindow({
+					id: 'web_new_main',
+					url: 'web_new_main.html',
+					createNew:true,
+					show: {
+						aniShow: "slide-in-right"
+						},
+					waiting: {
+						autoShow: false
+					},
+					extras:{
+						messagepk_id: cus_id
+					}
+				});
+				
+			}else{
+				var webview = plus.webview.getWebviewById('web_message');
+				if(webview != null){
+					webview.close();
+				}
+				mui.openWindow({
+					id: 'web_message',
+					url: 'web_message.html',
+					createNew:true,
+					show: {
+						aniShow: "slide-in-right"
+						},
+					waiting: {
+						autoShow: false
+					},
+					extras:{
+						messagepk_id: cus_id
+					}
+				});
+			}
+			
+		}
+
+	</script>
+
+</html>

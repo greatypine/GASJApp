@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>地址录入商业信息、写字楼信息查询添加</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<!--标准mui.css-->
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="../css/common.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/style.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/building_selectandadd.css"/>
+		<style>
+		
+		</style>
+		
+		
+	</head>
+
+	<body style="background-color: #fff;">
+		<header class="mui-bar mui-bar-nav titleheader">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title"></h1>
+		</header>
+		
+		
+		<div class="list-item layout" style="display: block;padding-top: 1.8rem;">
+			<ul>
+				
+				<li class="mui-input-row">
+					<input class="mui-input-clear" type="text" id="building_name" name="building_name" placeholder=""/>
+				</li>
+				<li class="mui-input-row">
+					<input class="mui-input-clear" type="text" id="store_address" name="store_address" placeholder="地址"/>
+				</li>
+				
+				
+			</ul>
+			<div class="select_btn" style="margin-bottom: 0.5rem;">
+				<button id="btnQuery">查询</button>
+				<button id="btnAdd">添加</button>
+			</div>
+			
+			<!--预留显示查询内容-->
+				
+			<div class="mui-bar" id="building_list" style="overflow: auto;margin-bottom:1rem;height: 50%; background-color:#fff;color:#666;-webkit-box-shadow: 0 0 0 ;">
+				
+			</div>
+		</div>
+		
+
+	</body>
+	<script src="../js/mui.min.js"></script>
+	<script src="../js/custom_common.js"></script>
+	<script src="../js/date_util.js"></script>
+	<script src="../js/jquery-2.2.2.min.js"></script>
+	<script type="text/javascript">
+//	var customer_count=null;
+	var customer_count_type=null;
+	var employee_no=null;
+	var store_id=null;
+	
+	
+	var matching_title=null;
+	var matching_type=null;
+			
+		mui.init({
+			swipeBack:true //启用右滑关闭功能
+		});
+		//写字楼信息查询刷新
+		window.addEventListener('setbuildinginput',function(event){
+			var building = event.detail.building;
+			if(building != null) {
+				if(building.building_name != null){
+					$('#building_name').val(building.building_name);
+				}
+				if(building.address != null){
+					$('#store_address').val(building.address);
+				}
+				doQueryBuilding();
+			}
+		});
+		//商业信息查询刷新
+		window.addEventListener('setbusinessinput',function(event){
+			var business = event.detail.business;
+			if(business != null) {
+				if(business.business_name != null){
+					$('#building_name').val(business.business_name);
+				}
+				if(business.address != null){
+					$('#store_address').val(business.address);
+				}
+				doQueryBusiness();
+			}
+		});
+		
+		mui.plusReady(function(){
+			var self = plus.webview.currentWebview();
+			matching_title = self.matching_title;
+			matching_type=self.matching_type;
+			$('h1').html(matching_title);
+			if(matching_type=='street_business_information'){
+				 $('#building_name').attr('placeholder','商业名称')
+			}else if(matching_type=='building_information'){
+				$('#building_name').attr('placeholder','写字楼名称')
+			}
+			
+			var employee = JSON.parse(localStorage.getItem('employee'));
+			var store = JSON.parse(localStorage.getItem("store"));
+			var usergroup = JSON.parse(localStorage.getItem("usergroup"));
+			employee_no=employee.employeeId;
+            if(store == null||store.store_id == null||store.store_id ==""){
+			    store_id=null;
+			}else{
+				store_id=store.store_id;
+			}
+			mui('#btnAdd')[0].addEventListener('tap',function(event){
+				if(store==null||store==""){
+					mui.toast('没有所属门店不能添加信息！');
+				}else{
+					toContent(matching_type);
+				}
+				
+				
+			});
+			
+			mui('#btnQuery')[0].addEventListener('tap',function(event){
+				if(matching_type=='street_business_information'){
+					doQueryBusiness();
+				}else if(matching_type=='building_information'){
+					doQueryBuilding()
+				}
+				
+			});
+			
+		});
+		
+		function toContent(to_id){
+			var webview = plus.webview.getWebviewById(to_id);
+				if(webview != null){
+					webview.close();
+				}
+				mui.openWindow({
+					url:to_id+'.html',
+					id:to_id,
+					createNew:true,
+					show: {
+						aniShow: 'slide-in-right'
+					},
+					waiting: {
+						autoShow: false
+					}
+				});
+		}
+		//商业信息查询
+		function doQueryBusiness(){
+			var str_name = $('#building_name').val();
+			var str_address = $('#store_address').val(); 
+			
+			if(!checkValue(str_name) && !checkValue(str_address)
+				&& !checkValue(str_address)){
+				mui.toast('查询条件请至少输入一项！');
+				return;
+			}
+			
+			
+			var business_params = {
+				business_name:str_name,
+				address:str_address
+			};
+			doManager('BusinessInfoManager','findBusinessInfoList',business_params,function(data){
+				if(data.result){
+					var jsonData = JSON.parse(data.data);
+					if(jsonData.code == 200){
+						var $div_clist = $('#building_list');
+						$div_clist.children().remove();
+						if(jsonData.listBusinessInfo.length == 0){
+							mui.toast('未查询到用户信息!');
+							return;
+						}
+						$(jsonData.listBusinessInfo).each(function(index,business){
+							$div_clist.append('<div class="customer_row"><div>');
+							var $div_row = $div_clist.find('div:last');
+							$div_row.click(function(){
+								var webview = plus.webview.getWebviewById(matching_type);
+								if(webview != null){
+									webview.close();
+								}
+								mui.openWindow({
+									url:matching_type+'.html',
+									id: matching_type,
+									createNew:true,
+									show: {
+										aniShow: 'slide-in-right'
+									},
+									waiting: {
+										autoShow: false
+									},
+									extras:{
+										business:JSON.stringify(business)
+									}
+								});
+							});
+							$div_row.append('<ul></ul>');
+							var $ul_row = $div_row.find('ul:last');
+							$ul_row.append('<li>名称：<span>'+business.business_name+'</span></li>')
+							$ul_row.append('<li>地址：<span>'+business.address+'</span></li>')
+						});
+						
+					}else{
+						mui.toast(jsonData.message);
+					}
+				}else{
+					mui.toast('查询失败!');
+				}
+			});
+		}
+		//写字楼信息查询
+		function doQueryBuilding(){
+			var str_name = $('#building_name').val();
+			var str_address = $('#store_address').val(); 
+			
+			if(!checkValue(str_name) && !checkValue(str_address)
+				&& !checkValue(str_address)){
+				mui.toast('查询条件请至少输入一项！');
+				return;
+			}
+			
+			
+			var building_params = {
+				office_name:str_name,
+				office_address:str_address
+			};
+			doManager('OfficeManager','getOfficeByOfficeAddressandnamedata',building_params,function(data){
+				if(data.result){
+					var jsonData = JSON.parse(data.data);
+					if(jsonData.code == 200){
+						var $div_clist = $('#building_list');
+						$div_clist.children().remove();
+						if(jsonData.listOffice.length == 0){
+							mui.toast('未查询到用户信息!');
+							return;
+						}
+						$(jsonData.listOffice).each(function(index,building){
+							$div_clist.append('<div class="customer_row"><div>');
+							var $div_row = $div_clist.find('div:last');
+							$div_row.click(function(){
+								var webview = plus.webview.getWebviewById(matching_type);
+								if(webview != null){
+									webview.close();
+								}
+								mui.openWindow({
+									url:matching_type+'.html',
+									id: matching_type,
+									createNew:true,
+									show: {
+										aniShow: 'slide-in-right'
+									},
+									waiting: {
+										autoShow: false
+									},
+									extras:{
+										building:JSON.stringify(building)
+									}
+								});
+							});
+							$div_row.append('<ul></ul>');
+							var $ul_row = $div_row.find('ul:last');
+							$ul_row.append('<li>名称：<span>'+building.office_name+'</span></li>')
+							$ul_row.append('<li>地址：<span>'+building.office_address+'</span></li>')
+						});
+						
+					}else{
+						mui.toast(jsonData.message);
+					}
+				}else{
+					mui.toast('查询失败!');
+				}
+			});
+		}
+		
+	</script>
+</html>

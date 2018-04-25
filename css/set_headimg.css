@@ -1,0 +1,10 @@
+
+.mui-table-view{
+				line-height: 0.8rem;
+				font-size: 0.3rem;
+			}
+.mui-table-view a{display: block;}
+.flex-container {width: 100%;height: 0.8rem;}
+.flex-container span{width: 0.8rem;height: 0.8rem;border-radius: 50%;background:#ffffff;font-size: 0.85rem;}
+.headimg{margin-top: 2.8rem;}
+.headimg img{width: 100%;height: 100%;border: 1px solid #ccc;border-radius: 5px;}

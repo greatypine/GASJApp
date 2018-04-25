@@ -1,0 +1,10 @@
+*{margin: 0; padding: 0;}
+.maindiv{overflow:hidden;clear:both;font-size: 0.3rem;text-align: center; background-color: #fff;padding-bottom:0.3rem;}
+.maindiv a{color:#333;}
+.express{width:40%;border-right: 1px solid #dbdbdb;margin-top:0.3rem;}
+.store{width:60%; text-align: right; padding:0 0 0.2rem 0;margin-top:0.3rem;}
+.store a{display: block;}
+.store-pic{width: 0.8rem;height: 0.8rem;}
+.store span{ text-align: right; width: 70%; padding-top:0.2rem;}
+
+

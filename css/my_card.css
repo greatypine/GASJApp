@@ -1,0 +1,15 @@
+.my-card_bg{position: relative;overflow: hidden;text-align: center;padding: 70px 20px 0 20px;}
+.my-card_bg img,.selfie-img span img{width:100%; height:270px;}
+.my_card_title{position: absolute;overflow: hidden;width:100%;font-size: 16px;color: #e66629;text-align:center;top: 1.6rem;
+}
+.my_card_context{position: absolute;overflow: hidden;overflow: hidden;width:100%;top: 80px;height: 100%;}
+.my_card_text{margin-left: 10px;height: 150px;}
+.my_card_text ul{margin-top: 30px;}
+.my_card_text ul li{color: #888;margin-top: 15px;}
+/*.card_name,.card_id,.card_phone,.card_store{margin-left:10px;color: #333;}*/
+
+.my_card_img{margin-right:70px;margin-top: 30px;}
+.my_card_img a{width: 70px;height:88px;display: inline-block;}
+.my_card_img a img{width:80px;height: 80px;border: 0.5px solid lightgray;border-radius: 50px;}
+.my_card_sum{position: absolute;overflow: hidden;overflow: hidden;width:100%;top: 190px;}
+.user_portrait,.order,.express,.more,.relation{color: #333;}

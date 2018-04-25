@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>混片儿拜访记录详细页面</title>
+		<!-- Tell the browser to be responsive to screen width -->
+		<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+		<!-- Bootstrap 3.3.6 -->
+		<link rel="stylesheet" href="../css/bootstrap.min.css">
+		<!-- Font Awesome -->
+		<link rel="stylesheet" href="../css/font-awesome.min.css">
+		<!-- Ionicons -->
+		<link rel="stylesheet" href="../css/ionicons.min.css">
+		<!-- Theme style -->
+		<link rel="stylesheet" href="../css/AdminLTE.min.css">
+		<!-- AdminLTE Skins. Choose a skin from the css/skins
+       folder instead of downloading all of them to reduce the load. -->
+		<link rel="stylesheet" href="../css/_all-skins.min.css">
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<link rel="stylesheet" href="../css/newmui.min.css">
+
+		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+		<!--[if lt IE 9]>
+  <script src="IE 9/html5shiv.min.js"></script>
+  <script src="IE 9/respond.min.js"></script>
+  <![endif]-->
+		<style>
+			body {
+				background: #f2f2f2;
+			}
+			
+			.wrapper {
+				background-color: transparent!important;
+			}
+			
+			.navbar>a {
+				line-height: 50px;
+				color: #fff;
+				position: absolute;
+				left: 14px;
+				top: 13px;
+			}
+			
+			.navbar-custom-menu {
+				margin-top: 0;
+			}
+			
+			.navbar-nav>.user-menu>.dropdown-menu>li.user-header>p {
+				line-height: 22px;
+			}
+			
+			header {
+				position: fixed!important;
+				width: 100%;
+			}
+			
+			section {
+				margin-top: 50px;
+			}
+			
+			.modal-content {
+				margin-top: 15px;
+			}
+			
+			.box-body img {
+				width: 100%
+			}
+		</style>
+	</head>
+
+	<body class="hold-transition skin-blue sidebar-mini">
+		<!-- Site wrapper -->
+		<div class="wrapper">
+
+			<header class="main-header">
+				<!-- Logo -->
+				<nav class="navbar navbar-static-top text-center">
+					<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+					<span> 拜访记录</span>
+				</nav>
+				<!-- Header Navbar: style can be found in header.less -->
+
+			</header>
+
+			<!-- =============================================== -->
+
+			<!-- Content Wrapper. Contains page content -->
+			<section style="padding-top: 15px;">
+				<div class="modal-content" id="item_div">
+					<div class="box-header with-border"><i class="fa fa-user"></i><b>客户信息</b></div>
+					<div class="box-body" id="user_click">
+						<div class="col-xs-3 no-padding"><img src="" class="img-circle" style="height:90px;" id="header_img"></div>
+						<div class="col-xs-9">
+							<p><span class="margin-r-5" id="head_user_name"></span><span id="user_phone"></span></p>
+							<p><span class="margin-r-5" id="user_sex"></span><span class="margin-r-5" id="age"></span><span class="margin-r-5" id="relation_num"></span></p>
+							<p id="user_address"></p>
+						</div>
+					</div>
+
+				</div>
+				<div style="text-align: center; margin:20px auto">
+					<a style="color: #999;" id="morerelation">点击加载更多</a>
+				</div>
+
+			</section>
+
+			<!-- /.content -->
+
+		</div>
+		<!-- ./wrapper -->
+
+		<!-- jQuery 2.2.0 -->
+		<!-- jQuery 2.2.0 -->
+		<script src="../js/jQuery-2.2.0.min.js"></script>
+		<!-- Bootstrap 3.3.6 -->
+		<script src="../js/bootstrap.min.js"></script>
+		<!-- Morris.js charts -->
+		<script src="../js/raphael-min.js"></script>
+		<!-- FastClick -->
+		<script src="../js/fastclick.js"></script>
+		<!-- AdminLTE App -->
+		<script src="../js/app.min.js"></script>
+		<script src="../js/echarts.common.min.js"></script>
+		<!-- 滑动js -->
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript" src="../js/custom_common.js"></script>
+		<script src="../js/date_util.js"></script>
+		<script>
+			//分页
+			var relationPageInfo = {
+				currentPage: 0,
+				recordsPerPage: 10,
+				totalRecords: 0,
+				tooManySearchReturn: false
+			};
+			var customer_id = null;
+			var house_id = null;
+			var employee = JSON.parse(localStorage.getItem('employee'));
+			mui.init({
+				swipeBack: false
+			});
+			mui.plusReady(function() {
+				var self = plus.webview.currentWebview();
+				if(self != null && self.relation_detail != null) {
+					var relation_detail = JSON.parse(self.relation_detail);
+					customer_id = relation_detail.customer_id;
+					house_id = relation_detail.house_id;
+					initView(relation_detail);
+					getRelationDetail(relation_detail.customer_id);
+				}
+
+				$(document).on('click', '#morerelation', function() {
+					getMoreRelationDetail(customer_id);
+				});
+				document.getElementById('user_click').addEventListener('tap', function(event) {
+					var phone = $('#user_phone').text();
+					if(ischeckValue(customer_id) && ischeckValue(house_id) && ischeckValue(phone)) {
+						toWeb_portrait(customer_id, house_id, phone);
+					} else {
+						mui.toast('该用户没有用户画像！');
+					}
+
+				});
+
+			});
+			//获取拜访记录明细
+			function getRelationDetail(customer_id) {
+				relationPageInfo.currentPage = relationPageInfo.currentPage + 1;
+				doManager('InterManager', 'findRelation_customer_app', [customer_id, relationPageInfo], function(data) {
+					if(data.result == true) {
+						var jsonData = JSON.parse(data.data);
+						if(jsonData.customer != null && jsonData.customer != "") {
+							headInitView(jsonData);
+						}
+
+						var $div = $('#item_div');
+						$(jsonData.dataMap.data).each(function(index, relation) {
+                            var newemployee_pic = ""
+							if(relation.employee_pic != null && relation.employee_pic != "") {
+								if(relation.employee_pic.pngUrl == null || relation.employee_pic.pngUrl == ""|| relation.employee_pic.pngUrl == "https://imgcdn.guoanshequ.com/") {
+									newemployee_pic = "../images/my_card_head.png";
+								} else {
+									newemployee_pic = decodeURI(relation.employee_pic.pngUrl);
+								}
+
+							}else{
+								newemployee_pic = "../images/my_card_head.png";
+							}
+							var html2 = '';
+							if(relation.customer_type=="1"){
+								html2 = '<p><span class="text-light-blue">拜访事由:</span>' + relation.relation_reason + '</p>' +
+										 '<p><span class="text-light-blue">反馈:</span>' + relation.relation_rcv + '</p>';
+							}else{
+								$(relation.relation_content).each(function(index, relation_content) {
+									html2 += '<p><span class="text-light-blue">' + relation_content.resourcetext + ':</span><br>' +
+										'<b class="margin-r-5">' + relation_content.optiontext + '</b>' + relation_content.content + '</p>';
+								});
+							}
+							var html = '<div class="modal-content">' +
+									'<div class="box-header with-border">' + relation.relation_type + '拜访<span class="pull-right">' + new Date(relation.relation_date).Format('YYYY-MM-DD') + '</span></div>' +
+									'<div class="box-body box-header with-border">' +
+									'<div class="col-xs-2 no-padding text-center">' +
+									'<img src="'+newemployee_pic+ '"class="img-circle" style="height:60px;"><br>' + relation.employee_name + '</div>' +
+									'<div class="col-xs-10">' +
+									'' + html2 + '' +
+									'</div></div></div>';
+							$div.after(html);
+						});
+
+					}
+				}); 
+			}
+
+			//获取更多拜访记录明细
+			function getMoreRelationDetail(customer_id) {
+				relationPageInfo.currentPage = relationPageInfo.currentPage + 1;
+				doManager('InterManager', 'findRelation_customer_app', [customer_id, relationPageInfo], function(data) {
+					if(data.result == true) {
+						var jsonData = JSON.parse(data.data);
+						if(jsonData.dataMap.data.length < 10 || jsonData.dataMap.data == null) {
+							mui.toast("没有更多了");
+							$("#morerelation").hide();
+						}
+
+						var $div = $('#item_div');
+						$(jsonData.dataMap.data).each(function(index, relation) {
+							 var newemployee_pic = ""
+							if(relation.employee_pic != null && relation.employee_pic != "") {
+								if(relation.employee_pic.pngUrl == null || relation.employee_pic.pngUrl == ""|| relation.employee_pic.pngUrl == "https://imgcdn.guoanshequ.com/") {
+									newemployee_pic = "../images/my_card_head.png";
+								} else {
+									newemployee_pic = decodeURI(relation.employee_pic.pngUrl);
+								}
+
+							}else{
+								newemployee_pic = "../images/my_card_head.png";
+							}
+							var html2 = '';
+							$(relation.relation_content).each(function(index, relation_content) {
+								html2 = '<p><span class="text-light-blue">' + relation_content.resourcetext + ':</span><br>' +
+									'<b class="margin-r-5">' + relation_content.optiontext + '</b>' + relation_content.content + '</p>';
+							});
+							var html = '<div class="modal-content">' +
+								'<div class="box-header with-border">' + relation.relation_type + '拜访<span class="pull-right">' + new Date(relation.relation_date).Format('YYYY-MM-DD') + '</span></div>' +
+								'<div class="box-body box-header with-border">' +
+								'<div class="col-xs-2 no-padding text-center">' +
+								'<img src="'+newemployee_pic+ '"class="img-circle" style="height:60px;"><br>' + relation.employee_name + '</div>' +
+								'<div class="col-xs-10">' +
+								'' + html2 + '' +
+
+								'</div></div></div>';
+							$div.after(html);
+
+						});
+
+					}
+				});
+			}
+
+			function initView(relation_detail) {
+				if(relation_detail.customerName == null || relation_detail.customerName == "") {
+					$("#head_user_name").html('暂无姓名');
+				} else {
+					$("#head_user_name").html(relation_detail.customerName);
+				}
+				if(relation_detail.mobilephone == null || relation_detail.mobilephone == "") {
+					$("#user_phone").html('暂无电话');
+				} else {
+					$("#user_phone").html(relation_detail.mobilephone);
+				}
+				if(relation_detail.address == null || relation_detail.address == "") {
+					$("#user_address").html('暂无地址');
+				} else {
+					$("#user_address").html(relation_detail.address);
+				}
+			}
+
+			function headInitView(jsonData) {
+				if(jsonData != null) {
+					if(jsonData.customer.cus_pic != null&&jsonData.customer.cus_pic != ""&&jsonData.customer.cus_pic != "https://imgcdn.guoanshequ.com/") {
+						$('#header_img').attr('src', decodeURI(jsonData.customer.cus_pic));
+					} else {
+						$('#header_img').attr('src', '../images/no_img2.png');
+					}
+
+					if(jsonData.customer.sex == 0) {
+						$("#user_sex").html('男');
+					} else if(jsonData.customer.sex == 1) {
+						$("#user_sex").html('女');
+					} else {
+						$("#user_sex").html('暂无性别');
+					}
+
+					if(jsonData.customer.age == null || jsonData.customer.age == "") {
+						$("#age").html('暂无年龄');
+					} else {
+						$("#age").html(jsonData.customer.age + '岁');
+					}
+					if(jsonData.dataMap.pageinfo.totalRecords == null || jsonData.dataMap.pageinfo.totalRecords == "") {
+						$("#relation_num").html('拜访0次');
+					} else {
+						$("#relation_num").html('拜访' + jsonData.dataMap.pageinfo.totalRecords + '次');
+					}
+
+				}
+
+			}
+			//function  getIsCustomer(phone){
+			//			doManager('CustomerManager', 'checkCustomerByPhone',phone, function(data) {
+			//				if(data.result == true) {
+			//					var jsonData = JSON.parse(data.data);
+			//					if(jsonData.count>0){
+			//						toWeb_portrait(phone);
+			//					}else{
+			//						mui.toast('该用户没有用户画像！');
+			//					}
+			//					
+			//					
+			//				}
+			//			});
+			//		}
+			function toWeb_portrait(customer_id, house_id, phone) {
+				setTimeout(function() {
+					var webview = plus.webview.getWebviewById('web_portrait');
+					if(webview != null) {
+						webview.close();
+					}
+					mui.openWindow({
+						url: 'web_portrait.html',
+						id: 'web_portrait',
+						createNew: true,
+						extras: {
+							visit_phone: phone,
+							customer_id: customer_id,
+							house_id: house_id
+						},
+						show: {
+							aniShow: 'slide-in-right'
+						},
+						waiting: {
+							autoShow: false
+						}
+					});
+				}, 0);
+			};
+//			//获取国安侠头像
+//			function getEmployeePicByEmployeeId(employee_id) {
+//				var urlpic="";
+//				doManager('InterManager','findEmployeePicByEmployeeId',employee_id, function(data) {
+//					if(data.result == true) {
+//						var jsonData = JSON.parse(data.data);
+//						if(jsonData.dataMap!=null&&jsonData.dataMap!=""){
+//							if(jsonData.dataMap.pngUrl!=null&&jsonData.dataMap.pngUrl!=""){
+//								urlpic=jsonData.dataMap.pngUrl;
+//							}
+//						    
+//					    }
+//					}
+//				},false);
+//				return urlpic;
+//			}
+		</script>
+	</body>
+
+</html>

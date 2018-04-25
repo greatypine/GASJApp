@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>Hello MUI</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<!--标准mui.css-->
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="../css/common.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/style.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/express.css"/>
+	</head>
+	 <style>
+
+	 </style>
+
+	<body>
+		
+		<!--<header class="mui-bar mui-bar-nav titleheader">
+			<div>订单列表</div>
+			<div class="back mui-action-back" ><a></a></div>
+			<div class="camera">
+				<a onclick="capClick()"></a>
+			</div>
+		</header>-->
+		<header class="mui-bar mui-bar-nav titleheader">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">订单列表</h1>
+			<div class="camera" style="display: none;">
+				<a onclick="capClick()"></a>
+			</div>
+		</header>
+		
+		<div class="mui-content"></div>
+		
+		
+		
+
+	</body>
+	<script type="text/javascript" src="../js/jquery-2.2.2.min.js"></script>
+	<script type="text/javascript" src="../js/mui.min.js"></script>
+	<script type="text/javascript" src="../js/custom_common.js"></script>
+	<script type="text/javascript" src="../js/date_util.js"></script>
+	<script type="text/javascript">
+	    var express_count=null;
+	    var express_count_type=null;
+	
+//	    mui.back =function(){
+//			mui.openWindow({
+//				url:'store_daily.html',
+//				id:'store_daily',
+//				createNew:true
+//			});
+//		};
+//		
+			var employee = JSON.parse(localStorage.getItem('employee'));
+			var store = JSON.parse(localStorage.getItem('store'));
+		
+		
+		mui.plusReady(function(){
+			var self = plus.webview.currentWebview();
+			express_count = self.express_count;
+			express_count_type=self.express_count_type;
+			if(express_count_type != '999'){
+				$('.camera').show();
+			}
+				var fontSize = $('body').css('font-size');
+				fontSize = fontSize.substring(0,fontSize.length - 2);
+				if(mui.os.ios) {
+				var strTop = "66px";
+			    }else{
+			    var strTop = "63px";	
+			    }
+			    
+				var strBottom = 0;
+				mui.init({
+					back:function(){
+						
+					},
+				    subpages:[{
+				    	url:"express_list_sub.html",//下拉刷新内容页面地址
+				  	  	id:"express_list_sub",//内容页面标志
+				  	  	styles:{
+							top: strTop,
+							bottom:strBottom
+						},
+						 extras:{
+						 	express_counts:express_count,
+						 	express_count_types:express_count_type
+                        }
+
+				  	}]
+				});
+		});
+		
+
+		var contentWebview = null;
+//		document.querySelector('header').addEventListener('doubletap',function () {
+//			if(contentWebview==null){
+//				contentWebview = plus.webview.currentWebview().children()[0];
+//			}
+//			contentWebview.evalJS("mui('#pullrefresh').pullRefresh().scrollTo(0,0,100)");
+//		});
+//		
+		function capClick(){
+			if(contentWebview==null){
+				contentWebview = plus.webview.currentWebview().children()[0];
+			}
+			contentWebview.evalJS("mui('#pullrefresh').pullRefresh().scrollTo(0,0,100)");
+			contentWebview.evalJS("picClick()");
+		}
+		
+		
+		</script>
+</html>

@@ -1,0 +1,1599 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>国安侠混片儿主页(片区动态)</title>
+		<!-- Tell the browser to be responsive to screen width -->
+		<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+		<!-- Bootstrap 3.3.6 -->
+		<link rel="stylesheet" href="../css/bootstrap.min.css">
+		<!-- Font Awesome -->
+		<link rel="stylesheet" href="../css/font-awesome.min.css">
+		<!-- Ionicons -->
+		<link rel="stylesheet" href="../css/ionicons.min.css">
+		<!-- Morris charts -->
+		<!--<link rel="stylesheet" href="../css/morris.css">-->
+		<!-- Theme style -->
+		<link rel="stylesheet" href="../css/AdminLTE.min.css">
+		<!-- AdminLTE Skins. Choose a skin from the css/skins
+       folder instead of downloading all of them to reduce the load. -->
+		<link rel="stylesheet" href="../css/_all-skins.min.css">
+		<link rel="stylesheet" href="../css/img_preview.css">
+		<link rel="stylesheet" href="../css/web_index_search.css">
+		<link rel="stylesheet" href="../css/newmui.min.css">
+
+		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+		<!--[if lt IE 9]>
+  <script src="IE 9/html5shiv.min.js"></script>
+  <script src="IE 9/respond.min.js"></script>
+  <![endif]-->
+		<style>
+			html,
+			body {
+				background: #fff;
+			}
+			
+			.navbar-nav>.user-menu>.dropdown-menu>li.user-header>p {
+				line-height: 22px;
+			}
+			
+			header {
+				position: fixed!important;
+				width: 100%;
+			}
+			
+			.mui-slider-indicator {
+				position: fixed;
+				top: 65px;
+				background-color: #fff;
+				z-index: 99;
+				border-bottom: 1px solid #f2f2f2;
+			}
+			
+			.mui-slider-progress-bar {
+				margin-top: 104px;
+				position: fixed;
+			}
+			
+			.express {
+				position: relative;
+				background-color: transparent;
+				border: 0;
+				margin-top: 25px;
+			}
+			
+			.express:nth-child(1) {
+				margin-top: 5px;
+			}
+			
+			.express section .express_time {
+				margin-bottom: 5px;
+				padding-left: 10px;
+			}
+			
+			.express section .box-header {
+				background-color: #fff;
+				padding: 15px 15px 5px 15px;
+			}
+			
+			.mui-control-content {
+				overflow-y: scroll;
+			}
+			
+			.fdPhone {
+				position: fixed;
+				_position: absolute;
+				width: 100%;
+				height: 100px;
+				position: fixed;
+				top: 0px;
+				display: none;
+			}
+			
+			.image {
+				color: #fff;
+			}
+			
+			.box {
+				box-shadow: none!important
+			}
+			
+			.select_store {
+				height: 3rem;
+				width: 50%;
+				margin-left: 20px;
+				background: #000;
+			}
+			
+			.select {
+				height: 3rem;
+				width: 50%;
+				margin-left: 20px;
+				background: #000;
+				color: #fff;
+			}
+			
+			footer {
+				position: fixed;
+				bottom: 0;
+				left: 0;
+				width: 100%;
+				border-top: 1px solid #c3c3c3;
+				background-color: #fff;
+				text-align: center;
+				color: #666;
+				height: 50px;
+				padding-top: 2px;
+			}
+			
+			footer p {
+				font-size: 20px;
+				margin: 0 0 -3px 0;
+			}
+			
+			footer a {
+				margin: 0;
+				font-size: 14px;
+			}
+			
+			footer a,
+			footer a:hover,
+			footer a:active,
+			footer a:visited {
+				color: #666;
+			}
+			
+			.mark-green {
+				color: #169a80!important;
+			}
+			
+			.statistics {
+				background-color: #fff;
+				padding: 40px 25px;
+				;
+				height: 100%;
+			}
+			
+			.dt1 {
+				border: 1px solid #fa6567;
+				padding: 0 15px 10px 15px;
+			}
+			
+			.dt2 {
+				border: 1px solid #5abeed;
+				padding: 0 15px 10px 15px;
+				margin-top: 20px;
+			}
+			
+			.dt3 {
+				border: 1px solid #f1a90d;
+				padding: 0 15px 10px 15px;
+				margin-top: 20px;
+			}
+			
+			.dt4 {
+				border: 1px solid #00bfa2;
+				padding: 0 15px 10px 15px;
+				margin-top: 20px;
+			}
+			
+			.dt_l {
+				width: 15%;
+				margin-top: 10px;
+				padding-top: 15px;
+			}
+			
+			.dt_l img {
+				width: 100%;
+			}
+			
+			.dt_r {
+				margin-left: 10px;
+				width: 80%;
+				padding-top: 5px;
+			}
+			
+			.dt_r h4 {
+				color: #404040;
+				padding-top: 20px;
+				margin: 0;
+				font-size: 16px;
+			}
+			
+			.dt_r h4 p {
+				font-size: 20px;
+				font-weight: bold;
+				padding-top: 10px;
+				font-family: Arial, Helvetica, sans-serif;
+			}
+			
+			.dt_r .pull-right {
+				color: #afafaf;
+				font-size: 12px;
+			}
+			
+			.dt5 {
+				padding-top: 10px;
+				color: #afafaf;
+			}
+			
+			.order_p {
+				display: -webkit-box;
+				text-overflow: ellipsis;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				-webkit-line-clamp: 2;
+				-webkit-box-orient: vertical;
+			}
+			
+			#map {
+				width: 100%;
+				position: fixed;
+				top: 20px;
+				bottom: 0px;
+				line-height: 200px;
+				text-align: center;
+				background: #FFFFFF;
+			}
+			
+			.modal-content {
+				margin-top: 15px;
+			}
+		</style>
+	</head>
+
+	<body class="hold-transition skin-blue sidebar-mini">
+		<!--主体-->
+		<div class="mui-off-canvas-wrap  mui-slide-in" id="offCanvasWrapper">
+			<!--主页部分-->
+			<div class="wrapper mui-inner-wrap">
+				<header class="main-header">
+					<nav class="navbar navbar-static-top text-center">
+						<span> 片区动态</span>
+						<a href="#offCanvasSide" class="sidebar-toggle fa fa-navicon mui-icon-bars"></a>
+					</nav>
+				</header>
+				<div class="mui-content mui-inner-wrap" style="height: auto;">
+					<div id="slider" class="mui-slider">
+						<div id="sliderSegmentedControl" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+
+							<a class="mui-control-item mui-active" href="#item1mobile">动态统计</a>
+							<a class="mui-control-item" href="#item2mobile">消费记录</a>
+							<a class="mui-control-item" href="#item3mobile">拜访记录</a>
+							<!--<a class="mui-control-item" href="#item4mobile">数据动态</a>-->
+						</div>
+
+						<div id="sliderProgressBar" class="mui-slider-progress-bar mui-col-xs-4"></div>
+						<div class="mui-slider-group">
+							<div id="item1mobile" class="mui-slider-item mui-control-content mui-active">
+								<div id="scroll1">
+									<div class="mui-scroll mui-content-padded">
+										<div class="statistics">
+											<div class="dt1 clearfix">
+												<div class="dt_l pull-left"><img src="../images/dt1.png"> </div>
+												<div class="dt_r pull-right">
+													<!--<div class="pull-right">(截止到昨日24点)</div>-->
+													<h4 style="font-size: 16px;">绩效GMV<p class="no-margin"><a id="month_areagmv" style="text-decoration : underline" data-container="body" data-toggle="popover" data-placement="bottom" data-html="true" data-content="<p><span>片区GMV:</span><span id='pes_areagmv'>0</span></p><p><span>手动分配GMV:</span><span id='pes_assigngmv'>0</span></p><p><span>人均分配GMV:</span><span id='pes_pergmv'>0</span></p>"></a></p></h4>
+													<p class="text-muted text-right" style="margin-top: 6px;">上月片区GMV:<span id="othermonth_areagmv"></span></p>
+												</div>
+											</div>
+
+											<div class="dt2 clearfix">
+												<div class="dt_l pull-left"><img src="../images/dt2.png"> </div>
+												<div class="dt_r pull-right">
+													<!--<div class="pull-right">(截止到昨日24点)</div>-->
+													<h4 style="font-size: 16px;">本月片区拉新(超10元)<p class="no-margin" id="month_getusercount"></p></h4>
+													<p class="text-muted text-right" style="margin-top: 6px;">上月片区拉新(超10元):<span id="othermonth_getusercount"></span></p>
+												</div>
+											</div>
+
+											<div class="dt3 clearfix">
+												<div class="dt_l pull-left"><img src="../images/dt3.png"> </div>
+												<div class="dt_r pull-right">
+													<h4 style="font-size: 16px;">本月片区消费(超10元)<p class="no-margin" id="month_zdgmv"></p></h4>
+													<p class="text-muted text-right" style="margin-top: 6px;">上月片区消费(超10元):<span id="othermonth_zdgmv"></span></p>
+												</div>
+											</div>
+
+											<!--<div class="dt4 clearfix">
+                    <div class="dt_l pull-left"><img src="../images/dt4.png"> </div>
+                    <div class="dt_r pull-right">
+                      <div class="pull-right">(截止到昨日24点)</div>
+                      <h4>拜访记录：3900</h4>
+                      <p class="text-muted">上月拜访记录：30808</p>
+                    </div>
+                  </div>-->
+											<div style="margin-top: 20px;"><span style="color: red;">*</span><span class="text-muted">本月统计量为截止到昨日24点</span>
+												<p class="text-muted"><span style="color: red;">*</span>统计口径为该用户所有片区完成的总和</p>
+											</div>
+										</div>
+
+									</div>
+								</div>
+							</div>
+
+							<div id="item2mobile" class="mui-slider-item mui-control-content">
+								<div class="mui-input-row mui-search" style="margin-top: 20px;height: 40px;width: 90%;margin-left: 5%;margin-right: 5%;">
+									<input type="search" id="search" class="mui-input-clear" style="border:1px solid #18bc9c ;background-color: white;" placeholder="请输入订单号">
+								</div>
+								<div style="text-align: center; margin:20px auto;" id="orderrefresh">
+									<a>点击刷新</a>
+								</div>
+								<div id="scroll2">
+									<div class="mui-scroll" id="item2div">
+										<div class="mui-loading">
+											<div class="mui-spinner">
+											</div>
+										</div>
+									</div>
+									<div style="text-align: center; margin:30px 0 60px 0">
+										<a style="color: #999;" id="moreorder">点击加载更多</a>
+										<!--<a id="noMoreOrder" style="display: none;">暂无数据,点击刷新</a>-->
+									</div>
+								</div>
+							</div>
+
+							<div id="item3mobile" class="mui-slider-item mui-control-content">
+								<div style="text-align: center; margin:20px auto;" id="relationrefresh">
+									<a>点击刷新</a>
+								</div>
+								<div id="scroll3">
+									<div class="mui-scroll" id="item3div">
+										<div class="mui-loading">
+											<div class="mui-spinner">
+											</div>
+										</div>
+									</div>
+									<div style="text-align: center; margin:30px 0 60px 0">
+										<a style="color: #999;" id="morerelation">点击加载更多</a>
+										<a id="noMoreRelation" style="display: none;">暂无数据,点击刷新</a>
+									</div>
+								</div>
+							</div>
+							<!--<div id="item4mobile" class="mui-slider-item mui-control-content">
+								<div id="scroll4">
+									<div class="mui-scroll" id="item4div">
+										<div class="modal-content">
+											<div class="box-header with-border"><i class="fa fa-bar-chart" style="padding-top: 5px;"></i><b id="dataCard_name"></b>
+												<select style="float: right;width: 20%;height: 25px;" id="crm_date" onchange="reloadByDate()"></select>
+											</div>
+											<div class="box-body">
+												<div class="real-time text-center" style="height: 500px;">
+
+												</div>
+											</div>
+										</div>
+
+									</div>
+								</div>
+
+							</div>-->
+
+						</div>
+						<footer style="display: none;" id="footer_bottmo">
+							<a class="col-xs-3" id="maps" path="maps.html" onclick="jump(this)">
+								<p><i class="fa fa-globe"></i></p>地图</a>
+							<a class="col-xs-3 mark-green" id="areaState" href="javascript:void(0)">
+								<p><i class="fa fa-user"></i></p>混片儿</a>
+							<a class="col-xs-3" id="web_message" path="web_message.html" onclick="jump(this)">
+								<p><i class="fa fa-envelope-o"></i></p>消息
+								<div id="message_state_div"></div>
+							</a>
+							<a class="col-xs-3" id="tabbar" path="tabbar.html" onclick="jump(this)">
+								<p><i class="fa fa-file-text-o"></i></p>录入</a>
+							
+
+						</footer>
+
+					</div>
+
+				</div>
+				<div class="mui-off-canvas-backdrop" id="backdrop"></div>
+			</div>
+			<!--侧滑部分-->
+			<aside id="offCanvasSide" class="main-sidebar mui-off-canvas-left">
+				<section id="offCanvasSideScroll" class="sidebar">
+					<div class="user-panel">
+						<div class="text-center image">
+							<img src="" class="img-circle" data-preview-src="" data-preview-group="1">
+							<p style="margin-top: 10px;"><strong id="user_name"></strong></p>
+							<p><span id="user_zw"></span><span id="user_employeeid"></span></p>
+							<!--<span id="div_title" style="display: block;margin-top:10px;"></span>
+							<select class="select_store" id="select_store">
+							</select>
+							<p id="store_num" style="display: block;margin-top:10px;"><span>门店编号：</span><span id="storeid"></span></p>-->
+						</div>
+					</div>
+					<!--<div style="color: #FFFFFF;padding:14px 5px 12px 15px;">
+							<span>所属门店：</span>
+							<span id="div_title"></span>
+							<select class="select_store" id="select_store">
+							</select>
+							<p id="store_num" style="display: block;margin-top:10px;"><span>门店编号：</span><span id="storeid"></span></p>
+						</div>-->
+					<ul class="sidebar-menu">
+						<div style="padding:0px 0px 0px 18px;">
+							<a>
+								<span>所属门店：</span>
+								<span id="div_title"></span>
+								<select class="select_store" id="select_store" style="margin-left: 0px;">
+								</select>
+							</a>
+						</div>
+						<div id="store_num" style="padding:18px 0px 5px 18px;">
+							<a><span>门店编号：</span><span id="storeid" style="margin-left: 4px;"></span>
+							</a>
+						</div>
+						<li class="treeview">
+							<a onclick="toPerson()">
+								<span>个人动态</span> <i class="fa  fa-angle-right pull-right"></i>
+							</a>
+						</li>
+						<li class="treeview">
+							<a onclick="toUser()">
+								<span>我的片区</span> <i class="fa  fa-angle-right pull-right"></i>
+							</a>
+						</li>
+						<li class="treeview" style="display: none;" id="datacard">
+							<a onclick="toCard()">
+								<span>国安侠数据卡</span> <i class="fa  fa-angle-right pull-right"></i>
+							</a>
+						</li>
+						<li class="treeview">
+							<a onclick="toUpdatePassword()">
+								<span>修改密码</span> <i class="fa  fa-angle-right pull-right"></i>
+							</a>
+						</li>
+						<li class="treeview" style="margin-top: 8px;">
+							<span style="color:#b8c7ce;padding-left: 20px;">片区选择</span>
+							<select class="select" onchange="changetip(this.value)" style="margin-left: 12px;">
+							</select>
+						</li>
+
+						<li class="text-center" style="margin-top: 2rem;">
+							<a id="btnLogout">退出登录</a>
+						</li>
+
+					</ul>
+				</section>
+			</aside>
+		</div>
+		<!-- jQuery 2.2.0 -->
+		<script src="../js/jQuery-2.2.0.min.js"></script>
+		<!-- Bootstrap 3.3.6 -->
+		<script src="../js/bootstrap.min.js"></script>
+		<!-- Morris.js charts -->
+		<script src="../js/raphael-min.js"></script>
+		<!-- FastClick -->
+		<script src="../js/fastclick.js"></script>
+		<!-- AdminLTE App -->
+		<script src="../js/app.min.js"></script>
+		<script src="../js/echarts.common.min.js"></script>
+		<!-- 滑动js -->
+		<script src="../js/mui.min.js"></script>
+		<script src="https://pv.sohu.com/cityjson?ie=utf-8"></script>
+		<script type="text/javascript" src="../js/custom_common.js"></script>
+		<script src="../js/previewimage.js"></script>
+		<script src="../js/mui.zoom.js"></script>
+		<script src="../js/date_util.js"></script>
+		<!--<script src="../js/jquery.min.js" type="text/javascript"></script>-->
+		<script>
+			//消费记录分页
+			var oredrPageInfo = {
+				currentPage: 0,
+				recordsPerPage: 10,
+				totalRecords: 0,
+				tooManySearchReturn: false
+			};
+			//快递派送分页
+			var expressPageInfo = {
+				currentPage: 0,
+				recordsPerPage: 10,
+				totalRecords: 0,
+				tooManySearchReturn: false
+			};
+			//拜访记录分页
+			var relationPageInfo = {
+				currentPage: 0,
+				recordsPerPage: 10,
+				totalRecords: 0,
+				tooManySearchReturn: false
+			};
+			var h = '';
+			var w = '';
+			var item1 = document.getElementById('item1mobile');
+			var item2 = document.getElementById('item2mobile');
+			var item3 = document.getElementById('item3mobile');
+			//			var item4 = document.getElementById('item4mobile');
+			var employee = JSON.parse(localStorage.getItem('employee'));
+			var select_areaid = JSON.parse(localStorage.getItem('selectArea_id'));
+			var select_area_list = JSON.parse(localStorage.getItem('selectArea_list'));
+			var employee_pic = JSON.parse(localStorage.getItem('employee_pic'));
+			var express_date_group = null;
+			var area_id = null;
+			var store = null;
+			var storelist = null;
+			var mDate = new Date();
+			var myear = mDate.getFullYear(); //当前年
+			var mmonth = mDate.getMonth() + 1; //本月
+			var last_mmonth = mDate.getMonth(); //上一月
+//			var pes_sendgmv=0;
+			var pes_areagmv=0;
+			var pes_assigngmv=0;
+			var pes_pergmv=0;
+			mui.previewImage();
+
+			mui.init({
+				swipeBack: false
+			});
+			window.addEventListener('setarea', function(event) {
+				var id = event.detail.id;
+				if(id != null) {
+					if(mui.os.ios) {
+						setTimeout(function() {
+							window.location.reload();
+						}, 200);
+					} else {
+						window.location.reload();
+					}
+				}
+			});
+			mui.plusReady(function() {
+				var	maps_webview= plus.webview.getWebviewById('maps_web');
+						if(maps_webview != null) {
+							maps_webview.close();
+						}
+				if(employee.usergroup != null) {
+					if(employee.usergroup.code == 'ZHGLY' || employee.usergroup.code == 'DZ' || employee.usergroup.code == 'GAX' || employee.usergroup.code == 'FDZJSZ') {
+						$("footer").css("display", "");
+					} else {
+						$("footer").css("display", "");
+						$("#tabbar").attr("style", "display:none;");
+						$("#maps").attr("class", "col-xs-4 ");
+						$("#areaState").attr("class", "col-xs-4 mark-green");
+						$("#web_message").attr("class", "col-xs-4");
+					}
+					if(employee.usergroup.code == 'GAX') {
+						$("#datacard").css("display", "");
+					}
+				}
+				h = plus.screen.resolutionHeight;
+				message_isread();
+				getAllAreaOfEmployee(select_area_list);
+				initView();
+				initStore();
+//				initDate();
+//				if(employee.usergroup != null) {
+//					if(employee.usergroup.code == 'GAX' || employee.usergroup.code == 'FDZJSZ' || employee.usergroup.code == 'ZHGLY') {
+//						GuoanxiaOtherMonthResult(mmonth);
+//					}
+//				}
+
+				//本月数据
+				getMonthAreaData(myear, mmonth);
+				//上月数据
+				if(mmonth == 1) {
+					var new_year = myear - 1;
+					var new_month = '12';
+					getOtherMonthAreaData(new_year, new_month);
+				} else {
+					getOtherMonthAreaData(myear, mmonth - 1);
+				}
+				if('Android' == plus.os.name) {
+					var first = null;
+					mui.back = function() {
+						if(!first) {
+							first = new Date().getTime();
+							mui.toast('再按一次退出应用');
+							setTimeout(function() {
+								first = null;
+							}, 1000);
+						} else {
+							if(new Date().getTime() - first < 1000) {
+								plus.runtime.quit();
+							}
+						}
+					}
+				}
+				//				  if(store==null||store==""){
+				//				  	getOrderOfMonth(employee.store_id, employee.employeeId, select_areaid);
+				//				  }else{
+				//				  	getOrderOfMonth(store.store_id, employee.employeeId, select_areaid);
+				//				  }
+				//				getOrderOfMonth(employee.store_id, employee.employeeId, select_areaid);
+				//				getRelationOfMonth(employee.employeeId, select_areaid);
+				//				getCustomerOfMonth(employee.employeeId, select_areaid);
+				$('.mui-control-content').css("height", h);
+
+				document.getElementById('slider').addEventListener('slide', function(e) {
+					$('[data-toggle="popover"]').popover('hide');
+					$('#orderrefresh').hide();
+					$('#relationrefresh').hide();
+					//  	$('#expressrefresh').hide();
+					if(e.detail.slideNumber === 0) {
+						//      if (item2.querySelector('.mui-loading')) {
+						setTimeout(function() {
+							//							if(store==null||store==""){
+							//				  	getOrderOfMonth(employee.store_id, employee.employeeId, select_areaid);
+							//				  }else{
+							//				  	getOrderOfMonth(store.store_id, employee.employeeId, select_areaid);
+							//				  }
+							//							getOrderOfMonth(employee.store_id, employee.employeeId, area_id);
+							//							getRelationOfMonth(employee.employeeId, area_id);
+							//							getCustomerOfMonth(employee.employeeId, area_id);
+						}, 500);
+						//      }
+					} else if(e.detail.slideNumber === 1) {
+						$('#orderrefresh').hide();
+						if(item2.querySelector('.mui-loading')) {
+							setTimeout(function() {
+								oredrPageInfo.currentPage = 0;
+								getOrderNew(employee.employeeId, null);
+								//								if(store==null||store==""){
+								//								  	getOrder(employee.store_id, employee.employeeId, area_id);
+								//								  }else{
+								//								  	getOrder(store.store_id, employee.employeeId, area_id);
+								//								  }
+
+							}, 500);
+						}
+					} else if(e.detail.slideNumber === 2) {
+						$('#relationrefresh').hide();
+						if(item3.querySelector('.mui-loading')) {
+							setTimeout(function() {
+								relationPageInfo.currentPage = 0;
+								getRelation(employee.employeeId, area_id);
+							}, 500);
+						}
+					}
+					//					    else if (e.detail.slideNumber === 3) {
+					//					      if (item4.querySelector('.mui-loading')) {
+					//					        setTimeout(function() {
+					//					        	alert("1");
+					//					          getmaps();
+					//					        }, 500);
+					//					      }
+					//					    }
+				});
+
+				$(document).on('click', '#moreorder', function() {
+					getOrderMoreNew(employee.employeeId);
+					//					if(store==null||store==""){
+					//						getOrderMore(employee.store_id, employee.employeeId, select_areaid);
+					//				    }else{
+					//				  	    getOrderMore(store.store_id, employee.employeeId, select_areaid);
+					//				    } 
+				});
+				//				$(document).on('click', '#noMoreOrder', function() {
+				//					getOrderNew(employee.employeeId, null);
+				//
+				//				});
+				//				document.querySelector('.mui-icon-bars').addEventListener('tap', function(e) {
+				//				w.setStyle({zindex:-1});
+				//				
+				//				});
+				// 监听点击遮罩关闭事件
+				//          document.getElementById("backdrop").addEventListener('tap', function(e) {
+				//			  var i=mui("#slider").slider().getSlideNumber();
+				//			  if(i==3){
+				//			  	getmaps();
+				//			  }
+				//          });
+
+				$(document).on('click', '#morerelation', function() {
+					getRelationMore(employee.employeeId, select_areaid);
+				});
+				$(document).on('click', '#noMoreRelation', function() {
+					getRelation(employee.employeeId, select_areaid);
+				});
+				//  $(document).on('click', '#noMoreExpress', function(){
+				//       getExpress(employee.employeeId);
+				//  });
+				//  $(document).on('click', '#moreexpress', function(){
+				//       getExpressMore(employee.employeeId);
+				//  });
+				$(document).on('click', '#orderrefresh', function() {
+					$('#orderrefresh').hide();
+					oredrPageInfo.currentPage = 0;
+					$("#search").val("");
+					getOrderNew(employee.employeeId, null);
+					//					if(store==null||store==""){
+					//						getOrder(employee.store_id, employee.employeeId, select_areaid);
+					//				    }else{
+					//				  	    getOrder(store.store_id, employee.employeeId, select_areaid);
+					//				    }
+				});
+				$(document).on('click', '#relationrefresh', function() {
+					$('#relationrefresh').hide();
+					relationPageInfo.currentPage = 0;
+					getRelation(employee.employeeId, select_areaid);
+				});
+				//  $(document).on('click', '#expressrefresh', function(){
+				//     $('#expressrefresh').hide();
+				//     express_date_group =null
+				//  	 expressPageInfo.currentPage =0;
+				//     getExpress(employee.employeeId);
+				//  });
+
+				$(document).on('touchend', '#item2mobile', function() {
+					if(getScrollTop() == 0) {
+						$('#orderrefresh').fadeIn(500);
+					} else {
+						$('#orderrefresh').fadeOut(500);
+					}
+				});
+				$(document).on('touchend', '#item3mobile', function() {
+					if(getScrollTop() == 0) {
+						$('#relationrefresh').fadeIn(500);
+					} else {
+						$('#relationrefresh').fadeOut(500);
+					}
+				});
+				//搜索功能（android和ios软件盘右下角完成键监听）
+				$('#search').bind('keypress', function(event) {
+					if(event.keyCode == "13") {
+						//需要处理的事情
+						var searchText = document.getElementById("search").value;
+						oredrPageInfo.currentPage = 0;
+						getOrderNew(employee.employeeId, searchText);
+
+						setTimeout(function() {
+							$("#moreorder").hide();
+						}, 200);
+					}
+				});
+				if(mui.os.ios) {
+					//ios软件盘完成键监听事件
+					$('#search').change(function() {
+						var searchText = document.getElementById("search").value;
+						oredrPageInfo.currentPage = 0;
+						getOrderNew(employee.employeeId, searchText);
+						setTimeout(function() {
+							$("#moreorder").hide();
+						}, 200);
+
+					});
+					$(document).on('focusin', function() {　　 //软键盘弹出的事件处理
+						$("footer").css("display", 'none');
+					});
+
+					$(document).on('focusout', function() {　　 //软键盘收起的事件处理
+						$("footer").css("display", "");
+					});
+				} else {
+					var clientHeight = document.documentElement.clientHeight || document.body.clientHeight;
+					$(window).on('resize', function() {
+						var nowClientHeight = document.documentElement.clientHeight || document.body.clientHeight;
+						if(clientHeight > nowClientHeight) {
+							//键盘弹出的事件处理
+							$("footer").css("display", 'none');
+						} else {
+							//键盘收起的事件处理
+							$("footer").css("display", "");
+						}
+					});
+				}
+
+				//  $(document).on('touchend', '#item4mobile', function(){
+				//  	 if(getScrollTop()==0){
+				//         $('#expressrefresh').fadeIn(500); 
+				//      }else{ 
+				//         $('#expressrefresh').fadeOut(500);     
+				//      }  
+				//  });
+
+				var sliderSegmentedControl = document.getElementById('sliderSegmentedControl');
+				$('.mui-input-group').on('change', 'input', function() {
+					if(this.checked) {
+						sliderSegmentedControl.className = 'mui-slider-indicator mui-segmented-control mui-segmented-control-inverted mui-segmented-control-' + this.value;
+						//force repaint
+						sliderProgressBar.setAttribute('style', sliderProgressBar.getAttribute('style'));
+					}
+				});
+				//退出
+				var t_username = localStorage.getItem("employee_key");
+				mui('#btnLogout')[0].addEventListener('click', function(event) {
+					setTimeout(function() {
+						var webview = plus.webview.getWebviewById('login');
+						if(webview != null) {
+							webview.close();
+						}
+						localStorage.clear();
+						localStorage.setItem("employee_key", t_username);
+						mui.openWindow({
+							url: '../login.html',
+							id: 'login',
+							createNew: true,
+							show: {
+								aniShow: "slide-in-right"
+							},
+							waiting: {
+								autoShow: false
+							}
+						});
+					}, 50);
+				});
+
+				//				$("#main1").css("width","360px");
+				//				
+				//				$("#main1").attr("width","360px");
+				//ios软件盘激活
+				var nativeWebview, imm, InputMethodManager;
+				initNativeObjects();
+				showSoftInput();
+			$(function(){ 
+		        $('[data-toggle="popover"]').popover().on('shown.bs.popover', function () {
+		            $(this).parent().siblings().find('[data-toggle="popover"]').popover('hide');
+		        });
+		    });
+		   
+		    //给Body加一个Click监听事件
+		    $('body').on('click', function(event) {
+//		      	$('#pes_sendgmv').text(pes_sendgmv);
+		      	$('#pes_areagmv').text(pes_areagmv);
+		      	$('#pes_assigngmv').text(pes_assigngmv);
+		      	$('#pes_pergmv').text(pes_pergmv);
+		        var target = $(event.target);
+		        if (!target.hasClass('popover') //弹窗内部点击不关闭
+		                && target.parent('.popover-content').length === 0
+		                && target.parent('.popover-title').length === 0
+		                && target.parent('.popover').length === 0
+		                && target.data("toggle") !== "popover") {
+		                //弹窗触发列不关闭，否则显示后隐藏
+		            $('[data-toggle="popover"]').popover('hide');
+		        }
+		    });
+
+			});
+			
+			 
+
+			function initView() {
+				if(employee != null) {
+					if(employee.name == null || employee.name == "") {
+						$("#user_name").html("无数据");
+					} else {
+						$("#user_name").html(employee.name);
+					}
+					if(employee.zw == null || employee.zw == "") {
+						$("#user_zw").text("无数据");
+					} else {
+						$("#user_zw").text(employee.zw);
+					}
+
+					if(employee.employeeId == null || employee.employeeId == "") {
+						$("#user_employeeid").text("无数据");
+					} else {
+						$("#user_employeeid").text(employee.employeeId);
+					}
+
+					if(employee.store_name == null || employee.store_name == "") {
+						$("#store_name").html("无数据");
+					} else {
+						$("#store_name").html(employee.store_name);
+					}
+
+				}
+				if(employee_pic!=null){
+					if(employee_pic.pngUrl!=null&&employee_pic.pngUrl!=""&&employee_pic.pngUrl!="https://imgcdn.guoanshequ.com/"){
+						$(".img-circle").attr("src",decodeURI(employee_pic.pngUrl));
+					}else{
+						$(".img-circle").attr("src","../images/my_card_head.png");
+					}
+					
+				}else{
+					$(".img-circle").attr("src","../images/my_card_head.png");
+				}
+
+			}
+			//获取拜访记录
+			function getRelation(employee_no, select_areaid) {
+				relationPageInfo.currentPage = relationPageInfo.currentPage + 1;
+				doManager('InterManager', 'findRelation_area_employee_app', [employee_no, relationPageInfo, select_areaid], function(data) {
+					if(data.result == true) {
+						var jsonData = JSON.parse(data.data);
+						if(jsonData.dataMap.data.length == 0) {
+							mui.toast("暂无数据");
+							$("#morerelation").hide();
+							$("#noMoreRelation").show();
+						} else {
+							$("#morerelation").show();
+							$("#noMoreRelation").hide();
+						}
+						var $div = $('#item3div');
+						$('#item3div').empty();
+						$(jsonData.dataMap.data).each(function(index, relation) {
+							var html3 = '<ul class="mui-table-view">' +
+								'<li class="mui-table-view-cell no-padding"><section>' +
+								'<div class="box-header with-border">' +
+								'<i class="fa fa-user">' +
+								'</i>' + relation.relationModel + '<span class="pull-right text-right">' + relation.relationDate + '</span></div>' +
+								'<div class="box-header with-border"><div class="col-xs-3"><img src="../images/no_img2.png"></div>' +
+								'<div class="col-xs-4 no-padding"><p>' + relation.customerName + '</p>' +
+								'<p>' + relation.address + '</p></div>' +
+								'<div class="col-xs-5 text-right no-padding"><p>' + relation.employee_name + '</p>' +
+								'<p>' + relation.relation_type + '</p></div></div></section></li></ul>';
+							$div.append(html3);
+							$li = $div.find("ul:last");
+							var $item_div = $li.find('li:last');
+							$item_div[0].addEventListener('click', function(event) {
+								$('#relationrefresh').hide();
+								var webview = plus.webview.getWebviewById('web_visit_detail');
+								if(webview != null) {
+									webview.close();
+								}
+
+								mui.openWindow({
+									url: 'web_visit_detail.html',
+									id: 'web_visit_detail',
+									createNew: true,
+									show: {
+										aniShow: "slide-in-right"
+									},
+									waiting: {
+										autoShow: false
+									},
+									extras: {
+										relation_detail: JSON.stringify(relation)
+									}
+								});
+							});
+
+						});
+					}
+				});
+			}
+			//获取更多拜访记录
+			function getRelationMore(employee_no, select_areaid) {
+				relationPageInfo.currentPage = relationPageInfo.currentPage + 1;
+				doManager('InterManager', 'findRelation_area_employee_app', [employee_no, relationPageInfo, select_areaid], function(data) {
+					if(data.result == true) {
+						var jsonData = JSON.parse(data.data);
+						var $div = $('#item3div');
+						if(jsonData.dataMap.data.length < 10 || jsonData.dataMap.data == null) {
+							mui.toast("没有更多了");
+							$("#morerelation").hide();
+							$('#relationrefresh').show();
+						}
+						$(jsonData.dataMap.data).each(function(index, relation) {
+							var html3 = '<ul class="mui-table-view">' +
+								'<li class="mui-table-view-cell no-padding"><section>' +
+								'<div class="box-header with-border">' +
+								'<i class="fa fa-user">' +
+								'</i>' + relation.relationModel + '<span class="pull-right text-right">' + relation.relationDate + '</span></div>' +
+								'<div class="box-header with-border"><div class="col-xs-3"><img src="../images/no_img2.png"></div>' +
+								'<div class="col-xs-4 no-padding"><p>' + relation.customerName + '</p>' +
+								'<p>' + relation.address + '</p></div>' +
+								'<div class="col-xs-5 text-right no-padding"><p>' + relation.employee_name + '</p>' +
+								'<p>' + relation.relation_type + '</p></div></div></section></li></ul>';
+							$div.append(html3);
+							$li = $div.find("ul:last");
+							var $item_div = $li.find('li:last');
+							$item_div[0].addEventListener('click', function(event) {
+								$('#relationrefresh').hide();
+								var webview = plus.webview.getWebviewById('web_visit_detail');
+								if(webview != null) {
+									webview.close();
+								}
+								mui.openWindow({
+									url: 'web_visit_detail.html',
+									id: 'web_visit_detail',
+									createNew: true,
+									show: {
+										aniShow: "slide-in-right"
+									},
+									waiting: {
+										autoShow: false
+									},
+									extras: {
+										relation_detail: JSON.stringify(relation)
+									}
+								});
+							});
+
+						});
+					}
+				});
+			}
+
+			//跳转到选择页面
+			function toMain() {
+				setTimeout(function() {
+					var webview = plus.webview.getWebviewById('new_main');
+					if(webview != null) {
+						webview.close();
+					}
+					mui.openWindow({
+						url: 'new_main.html',
+						id: 'new_main',
+						createNew: true,
+						show: {
+							aniShow: 'slide-in-right'
+						},
+						waiting: {
+							autoShow: false
+						}
+					});
+				}, 50);
+			};
+			//跳转到个人动态页面
+			function toPerson() {
+				setTimeout(function() {
+					var webview = plus.webview.getWebviewById('web_personal');
+					if(webview != null) {
+						webview.close();
+					}
+					mui.openWindow({
+						url: 'web_personal.html',
+						id: 'web_personal',
+						createNew: true,
+						show: {
+							aniShow: 'slide-in-right'
+						},
+						waiting: {
+							autoShow: false
+						}
+					});
+				}, 50);
+			};
+			//跳转到片区信息
+			function toUser() {
+				setTimeout(function() {
+					var webview = plus.webview.getWebviewById('web_user');
+					if(webview != null) {
+						webview.close();
+					}
+					mui.openWindow({
+						url: 'web_user.html',
+						id: 'web_user',
+						createNew: true,
+						show: {
+							aniShow: 'slide-in-right'
+						},
+						waiting: {
+							autoShow: false
+						}
+					});
+				}, 100);
+			};
+
+			//获取滚动条距离顶端的距离 
+
+			function getScrollTop() {
+				var scrollPos;
+				if(window.pageYOffset) {
+					scrollPos = window.pageYOffset;
+				} else if(document.compatMode && document.compatMode != 'BackCompat') {
+					scrollPos = document.documentElement.scrollTop;
+				} else if(document.body) {
+					scrollPos = document.body.scrollTop;
+				}
+				return scrollPos;
+			}
+
+			//获取片区信息数据
+			function getAllAreaOfEmployee(jsonData) {
+				if(jsonData != null) {
+					$(jsonData).each(function(index, arealist) {
+						if(select_areaid == null) {
+							if(index == 0) {
+								$('.select').append('<option selected="selected" value=' + arealist.id + '>' + arealist.name + '(' + arealist.area_no + ')' + '</option>');
+								area_id = arealist.id;
+								localStorage.setItem("selectArea_id", arealist.id);
+							} else {
+								$('.select').append('<option value=' + arealist.id + '>' + arealist.name + '(' + arealist.area_no + ')' + '</option>');
+							}
+						} else {
+							if(select_areaid == arealist.id) {
+								$('.select').append('<option selected="selected" value=' + arealist.id + '>' + arealist.name + '(' + arealist.area_no + ')' + '</option>');
+								area_id = arealist.id;
+							} else {
+								$('.select').append('<option value=' + arealist.id + '>' + arealist.name + '(' + arealist.area_no + ')' + '</option>');
+							}
+
+						}
+
+					});
+
+				}
+			}
+
+			function changetip(value) {
+				localStorage.setItem("selectArea_id", value);
+				area_id = value;
+
+				if(mui.os.ios) {
+					setTimeout(function() {
+						window.location.reload();
+					}, 200);
+				} else {
+					window.location.reload();
+				}
+
+			}
+			//查看消息列表是否有未读信息，如有未读信息消息显示红点
+			function message_isread() {
+				var message = {
+					receiveId: employee.employeeId
+				};
+				doManager('MessageNewManager', 'getUnReadMessageAmount', message, function(data) {
+					if(data.result == true) {
+						var jsonData = JSON.parse(data.data);
+						if(jsonData == 0 || jsonData == null) {
+							$('#message_state_div').removeClass("message-dian1");
+						} else {
+							$('#message_state_div').addClass("message-dian1");
+						}
+
+					}
+				});
+			}
+			//跳转到修改密码
+			function toUpdatePassword() {
+				setTimeout(function() {
+					var webview = plus.webview.getWebviewById('update_password');
+					if(webview != null) {
+						webview.close();
+					}
+					mui.openWindow({
+						url: 'update_password.html',
+						id: 'update_password',
+						createNew: true,
+						show: {
+							aniShow: 'slide-in-right'
+						},
+						waiting: {
+							autoShow: false
+						}
+					});
+				}, 0);
+			};
+
+			function initStore() {
+				store = JSON.parse(localStorage.getItem("store"));
+				storelist = JSON.parse(localStorage.getItem("storelist"));
+				getStorelist();
+				if(store != null) {
+					if(storelist.length <= 1) {
+						mui("#div_title")[0].innerHTML = store.name;
+						mui("#storeid")[0].innerHTML = store.storeno;
+						$("#select_store").hide();
+					} else {
+						$("#select_store").show();
+						$("#div_title").hide();
+						mui("#storeid")[0].innerHTML = store.storeno;
+					}
+
+				} else {
+					getStore($('.select_store option:selected').val());
+				}
+
+			}
+
+			function getStorelist() {
+				if(storelist != null || storelist != "") {
+					$(storelist).each(function(index, element) {
+						if(index == 0) {
+							$('#select_store').append('<option selected="selected" value=' + element.store_id + '>' + element.name + '</option>');
+						} else {
+							$('#select_store').append('<option value=' + element.store_id + '>' + element.name + '</option>');
+						}
+					});
+					if(store != null) {
+						$('#select_store').val(store.store_id);
+					}
+
+				} else {
+					mui("#div_title")[0].innerHTML = "国安社区";
+					$('#select_store').hide();
+					$("#store_num").hide();
+				}
+
+			}
+
+			function getStore(store_id) {
+				if(store_id == null || store_id == "" || store_id == "null") {
+					mui("#div_title")[0].innerHTML = "国安社区";
+					$("#select_store").hide();
+					$("#store_num").hide();
+					return;
+				}
+				doManager("StoreManager", "findStore", store_id, function(data) {
+					if(data.result == true) {
+						var jsonStore = JSON.parse(data.data);
+						localStorage.setItem("store", JSON.stringify(jsonStore));
+						mui("#div_title")[0].innerHTML = jsonStore.name;
+						mui("#storeid")[0].innerHTML = store.storeno;
+						if(storelist.length <= 1) {
+							$("#select_store").hide();
+						} else {
+							$("#select_store").show();
+							$("#div_title").hide();
+						}
+
+					} else {
+						$("#select_store").hide();
+						$("#store_num").hide();
+						mui("#div_title")[0].innerHTML = "国安社区";
+
+					}
+				});
+
+			}
+			$(document).ready(function() {
+				$('#select_store').change(function() {
+					var a = $('#select_store option:selected').text();
+					$('#select_store span').text(a);
+					getStore($('#select_store option:selected').val());
+					if(mui.os.ios) {
+						setTimeout(function() {
+							window.location.reload();
+						}, 200);
+					} else {
+						window.location.reload();
+					}
+				});
+			});
+			//跳转本月数据动态
+			function toCard() {
+				setTimeout(function() {
+					var webview = plus.webview.getWebviewById('dataCard');
+					if(webview != null) {
+						webview.close();
+					}
+					mui.openWindow({
+						url: 'dataCard.html',
+						id: 'dataCard',
+						createNew: true,
+						show: {
+							aniShow: 'slide-in-right'
+						},
+						waiting: {
+							autoShow: false
+						}
+					});
+				}, 0);
+			};
+
+			//最新获取消费记录
+			function getOrderNew(employee_no, order_sn) {
+				oredrPageInfo.currentPage = oredrPageInfo.currentPage + 1;
+				doManager('InterManager', 'queryOrderOfAreaByApp', [employee_no, oredrPageInfo, order_sn], function(data) {
+					if(data.result == true) {
+						var jsonData = JSON.parse(data.data);
+						if(jsonData.dataMap.data.length == 0) {
+							mui.toast("暂无数据");
+							$("#moreorder").hide();
+							//							$("#noMoreOrder").show();
+						} else {
+							$("#moreorder").show();
+							//							$("#noMoreOrder").hide();
+						}
+						var $div = $('#item2div');
+						$('#item2div').empty();
+						$(jsonData.dataMap.data).each(function(index, order) {
+							var order_employee_name = null;
+							var order_img = null;
+							if(order.customer_name == null || order.customer_name == "") {
+								order.customer_name = "未录入"
+							}
+							if(order.eshop_pro_name == null || order.eshop_pro_name == "") {
+								order.eshop_pro_name = "未录入"
+							}
+							if(order.placename == null || order.placename == "") {
+								order.placename = "未录入"
+							}
+							if(order.employee_name == null || order.employee_name == "") {
+								order_employee_name = ''
+							} else {
+								order_employee_name = order.employee_name.split("+")[0];
+							}
+							if(order.jpgUrl == null || order.jpgUrl == ""||order.jpgUrl == "https://imgcdn.guoanshequ.com/") {
+								order_img = "../images/no_img2.png";
+							} else {
+								order_img = decodeURI(order.jpgUrl);
+							}
+							var html2 = '<ul class="mui-table-view" style="padding-top:0px;">' +
+								'<li class="mui-table-view-cell no-padding">' +
+								'<section>' +
+								'<div class="box-header with-border">' +
+								'<i class="fa fa-home">' +
+								'</i>消费信息<span class="pull-right text-right" style="width: 30%;font-size: 12px;" >派送国安侠:' + order_employee_name + ' </span></div>' +
+								'<div class="box-header with-border" style="background-color:#fafafa;">' +
+								'<div class="col-xs-3"><img src="' + order_img + '"> </div>' +
+								'<div class="col-xs-9 no-padding">' +
+								'<p>用户:' + order.customer_name + '</p>' +
+								'<p class="order_p">商品:' + order.eshop_pro_name + '</p></div></div>' +
+								'<div class="box-header" style="font-size: 12px;">订单编号:' + order.order_sn + '</br>订单区块:' + order.placename + '</br>签收日期:' + new Date(order.df_signed_time).Format('YYYY-MM-DD') + '</div>' +
+								'</section></li></ul>';
+							$div.append(html2);
+							$li = $div.find("ul:last");
+							var $item_div = $li.find('li:last');
+							$item_div[0].addEventListener('click', function(event) {
+								$('#orderrefresh').hide();
+								var webview = plus.webview.getWebviewById('web_order_detail');
+								if(webview != null) {
+									webview.close();
+								}
+								mui.openWindow({
+									url: 'web_order_detail.html',
+									id: 'web_order_detail',
+									createNew: true,
+									show: {
+										aniShow: "slide-in-right"
+									},
+									waiting: {
+										autoShow: false
+									},
+									extras: {
+										order_detail: JSON.stringify(order)
+									}
+								});
+							});
+
+						});
+					}
+				});
+			}
+			//最新获取更多消费记录
+			function getOrderMoreNew(employee_no) {
+
+				oredrPageInfo.currentPage = oredrPageInfo.currentPage + 1;
+				doManager('InterManager', 'queryOrderOfAreaByApp', [employee_no, oredrPageInfo, null], function(data) {
+					if(data.result == true) {
+						var jsonData = JSON.parse(data.data);
+						var $div = $('#item2div');
+						if(jsonData.dataMap.data.length < 10 || jsonData.dataMap.data == null) {
+							mui.toast("没有更多了");
+							$("#moreorder").hide();
+							$('#orderrefresh').show();
+						}
+						$(jsonData.dataMap.data).each(function(index, order) {
+							var order_employee_name = null;
+							var order_img = null;
+							if(order.customer_name == null || order.customer_name == "") {
+								order.customer_name = "未录入"
+							}
+							if(order.eshop_pro_name == null || order.eshop_pro_name == "") {
+								order.eshop_pro_name = "未录入"
+							}
+							if(order.placename == null || order.placename == "") {
+								order.placename = "未录入"
+							}
+							if(order.employee_name == null || order.employee_name == "") {
+								order_employee_name = ''
+							} else {
+								order_employee_name = order.employee_name.split("+")[0];
+							}
+							if(order.jpgUrl == null || order.jpgUrl == ""||order.jpgUrl == "https://imgcdn.guoanshequ.com/") {
+								order_img = "../images/no_img2.png";
+							} else {
+								order_img = decodeURI(order.jpgUrl);
+							}
+
+							var html2 = '<ul class="mui-table-view" style="padding-top:0px;">' +
+								'<li class="mui-table-view-cell no-padding">' +
+								'<section>' +
+								'<div class="box-header with-border">' +
+								'<i class="fa fa-home">' +
+								'</i>消费信息<span class="pull-right text-right" style="width: 30%;font-size: 12px;" >派送国安侠:' + order_employee_name + ' </span></div>' +
+								'<div class="box-header with-border" style="background-color:#fafafa;">' +
+								'<div class="col-xs-3"><img src="' + order_img + '"> </div>' +
+								'<div class="col-xs-9 no-padding">' +
+								'<p>用户:' + order.customer_name + '</p>' +
+								'<p class="order_p">商品:' + order.eshop_pro_name + '</p></div></div>' +
+								'<div class="box-header" style="font-size: 12px;">订单编号:' + order.order_sn + '</br>订单区块:' + order.placename + '</br>签收日期:' + new Date(order.df_signed_time).Format('YYYY-MM-DD') + '</div>' +
+								'</section></li></ul>';
+							$div.append(html2);
+							$li = $div.find("ul:last");
+							var $item_div = $li.find('li:last');
+							$item_div[0].addEventListener('click', function(event) {
+								$('#orderrefresh').hide();
+								var webview = plus.webview.getWebviewById('web_order_detail');
+								if(webview != null) {
+									webview.close();
+								}
+								mui.openWindow({
+									url: 'web_order_detail.html',
+									id: 'web_order_detail',
+									createNew: true,
+									show: {
+										aniShow: "slide-in-right"
+									},
+									waiting: {
+										autoShow: false
+									},
+									extras: {
+										order_detail: JSON.stringify(order)
+									}
+								});
+							});
+						});
+					}
+				});
+			}
+			var showSoftInput = function() {
+				if(mui.os.android) {
+					//					imm.toggleSoftInput(0, InputMethodManager.SHOW_FORCED);
+				} else {
+					nativeWebview.plusCallMethod({
+						"setKeyboardDisplayRequiresUserAction": false
+					});
+				}
+				//			setTimeout(function() {
+				//					var inputElem = document.querySelector('input');
+				//					inputElem.focus();
+				//					inputElem.parentNode.classList.add('mui-active'); //第一个是search，加上激活样式
+				//				}, 200);
+			};
+			var initNativeObjects = function() {
+				if(mui.os.android) {
+					var main = plus.android.runtimeMainActivity();
+					var Context = plus.android.importClass("android.content.Context");
+					InputMethodManager = plus.android.importClass("android.view.inputmethod.InputMethodManager");
+					imm = main.getSystemService(Context.INPUT_METHOD_SERVICE);
+				} else {
+					nativeWebview = plus.webview.currentWebview().nativeInstanceObject();
+				}
+			};
+			//动态统计本月数据
+			function getMonthAreaData(year_data, month_data) {
+				doManager('DynamicManager', 'getNewAreaData', [employee.employeeId,year_data,month_data], function(data) { 
+					if(data.result == true) {
+						var jsonData = JSON.parse(data.data);
+//						alert(JSON.stringify(jsonData));
+						//国安侠GMV
+						$('#month_areagmv').html(jsonData.pesgmv);
+						//服务GMV
+//                       pes_sendgmv=jsonData.pes_sendgmv
+						//片区GMV
+                        pes_areagmv=jsonData.pes_areagmv
+						//手动分配GMV
+                        pes_assigngmv=jsonData.pes_assigngmv
+						//平均分配GMV
+						pes_pergmv=jsonData.pes_pergmv
+						//拉新
+						$('#month_getusercount').html(jsonData.areaNewaddCusSum);
+						//消费
+						$('#month_zdgmv').html(jsonData.cusMoreTen);								
+
+					}
+				});
+			}
+			//动态统计上月数据
+			function getOtherMonthAreaData(year_data, month_data) {
+				doManager('DynamicManager', 'getNewAreaData', [employee.employeeId, year_data, month_data], function(data) {
+					if(data.result == true) {
+						var jsonData = JSON.parse(data.data);
+//						alert(JSON.stringify(jsonData)+"2");
+						//国安侠GMV
+						$('#othermonth_areagmv').html(jsonData.pesgmv);
+                        //拉新
+						$('#othermonth_getusercount').html(jsonData.areaNewaddCusSum);
+						//消费
+						$('#othermonth_zdgmv').html(jsonData.cusMoreTen);								
+						
+					}
+				});
+			}
+
+//			function reloadByDate() {
+//				var s_date = $("#crm_date").val();
+//				var last_selectmouth = $("#dataCard_name").text().split("月");
+//				var myDate = new Date();
+//				var c_year = myDate.getFullYear(); //当前年
+//				var c_month = myDate.getMonth(); //当前月
+//				var year_month = c_month + 1;
+//				//				var btnArray = ['确定', '取消'];
+//				//				if(s_date == year_month) {
+//				//					mui.confirm('查询当月数据需数分钟时间，是否继续？', '提示', btnArray, function(e) {
+//				//						if(e.index == 0) {
+//				//							$("#dataCard_name").text(s_date + "月数据卡");
+//				//							if(employee.zw != null) {
+//				//								if(employee.zw == '店长' || employee.zw == "综合管理") {
+//				//									ShopownerMonthResult();
+//				//								} else if(employee.zw == '国安侠') {
+//				//									GuoanxiaMonthResult();
+//				//								}
+//				//							}
+//				//						} else {
+//				//							$("#crm_date").val(last_selectmouth);
+//				//						}
+//				//
+//				//					});
+//				//				} else {
+//				$("#dataCard_name").text(s_date + "月数据卡");
+//				if(employee.usergroup != null) {
+//					if(employee.usergroup.code == 'GAX' || employee.usergroup.code == 'FDZJSZ' || employee.usergroup.code == 'ZHGLY') {
+//						GuoanxiaOtherMonthResult(s_date);
+//					}
+//				}
+//
+//			}
+
+//			function initDate() {
+//				var myDate = new Date();
+//				var c_year = myDate.getFullYear(); //当前年
+//				var c_month = myDate.getMonth() + 1; //当前月
+//
+//				curMonth = c_month;
+//				curYear = c_year;
+//				curDate = c_year + "-" + c_month; //当前日期
+//				var date_option = "";
+//				var year_month = null;
+//				var y_m = null;
+//				if(c_month == 1) {
+//					y_m = '1月'
+//					date_option = date_option + "<option value='" + i + "' selected>" + y_m + "</option>";
+//					$("#dataCard_name").html("1月数据卡");
+//				} else {
+//					for(var i = 1; i <= c_month; i++) {
+//						year_month = i;
+//						y_m = i + "月";
+//						if(i == (c_month)) { //上一个月
+//							date_option = date_option + "<option value='" + i + "' selected>" + y_m + "</option>";
+//							$("#dataCard_name").html((parseInt(c_month)) + "月数据卡");
+//						} else if(c_month == 1) { //当前月是一月
+//							date_option = date_option + "<option value='" + i + "' selected>" + y_m + "</option>";
+//							$("#dataCard_name").html("1月数据卡");
+//						} else {
+//							date_option = date_option + "<option value='" + i + "' >" + y_m + "</option>";
+//						}
+//					}
+//
+//				}
+//
+//				$("#crm_date").append(date_option);
+//			}
+
+			//国安侠其他月份成绩
+//			function GuoanxiaOtherMonthResult(c_month) {
+//				var myDate = new Date();
+//				var c_year = myDate.getFullYear(); //当前年
+//
+//				var store_id = "";
+//				if(store == null || store == "") {
+//					store_id = employee.store_id;
+//				} else {
+//					store_id = store.store_id;
+//				}
+//				var dynamicDto = {        
+//					cityId: "",
+//					employeeNo: employee.employeeId,
+//					employeeName: employee.name,
+//					        year: c_year,
+//					        storeId: store_id,
+//					        month: c_month,
+//					        target: 3   
+//				}
+//				doManager('DynamicManager', 'getDataCardInfo', dynamicDto, function(data) {
+//					if(data.result == true) {
+//						var jsonData = JSON.parse(data.data);
+//						var $div = $('.real-time');
+//						$div.children().remove();
+//						if(jsonData == null || jsonData == "") {
+//							var html = '<div class="no_message">暂无内容</div>';
+//							$div.append(html);
+//						} else {
+//							var html = '<div class="col-xs-4 circle">' +
+//								'<div class="hexagon" style="font-size:14px">' + jsonData.sendorders + '</div>' +
+//								'<h4>送单量</h4></div>' +
+//								'<div class="col-xs-4 circle">' +
+//								'<div class="hexagon" style="font-size:14px">' + jsonData.relation + '</div>' +
+//								'<h4>拜访记录</h4></div>' +
+//								'<div class="col-xs-4 circle">' +
+//								'<div class="hexagon" style="font-size:14px">' + jsonData.customer + '</div>' +
+//								'<h4>客户画像</h4>' +
+//								'</div>';
+//							$div.append(html);
+//						}
+//					}
+//				});
+//			}
+		</script>
+	</body>
+
+</html>

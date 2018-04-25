@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>配套信息</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<!--标准mui.css-->
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="../css/common.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/style.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/matching_information.css"/>
+		<style>
+		
+		</style>
+		
+		
+	</head>
+
+	<body style="background-color: #fff;height: auto;">
+		<header class="mui-bar mui-bar-nav titleheader">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">地址录入</h1>
+		</header>
+		
+		
+		
+			<div class="select_btn">
+				<button id="street" class="select_btn_button">商业信息</button>
+				<button id="building" style="margin-top: 1rem;"class="select_btn_button" >写字楼信息</button>
+				
+				<li class="mui-table-view-cell mui-collapse" style="margin-top: 1rem;">
+					<a id="address" href="#" class="address_information" style="color: #FFFFFF; padding-top:0.15rem;">地采信息</a>
+					<div class="mui-collapse-content" style="border: 1px solid #ccc; border-bottom-left-radius: 5px; border-bottom-right-radius: 5px; border-top:0;">
+						<button id="community_information" class="community_information" style="margin-top: 0.1rem;">社区信息</button>
+						<button id="residential_area_information" class="residential_area_information" style="margin-top: 0.1rem;">小区信息</button>
+						<button id="house_information" class="house_information" style="margin-top: 0.1rem;">房屋信息</button>
+					</div>
+				</li>
+				
+				
+			</div>
+			
+		
+		
+
+	</body>
+	<script src="../js/mui.min.js"></script>
+	<script src="../js/custom_common.js"></script>
+	<script src="../js/date_util.js"></script>
+	<script src="../js/jquery-2.2.2.min.js"></script>
+	<script type="text/javascript">
+	var store=null;
+	var store_id=null;
+	var obj;
+	mui.plusReady(function(){
+		store=JSON.parse(localStorage.getItem('store'));
+		store_id=JSON.parse(localStorage.getItem('store_id'));
+		if(store!=null&&(store_id==null||store_id==""||store_id!=store.store_id)){
+			getStoreAddress(store);
+		}
+		mui('#street')[0].addEventListener('tap',function(event){
+			        setTitleAndType('street','street_business_information');
+		});
+		mui('#building')[0].addEventListener('tap',function(event){
+			        setTitleAndType('building','building_information');
+			
+		});
+		mui('#community_information')[0].addEventListener('tap',function(event){
+		            setAddressTitleAndType("community_information","community_information")
+		});
+		mui('#residential_area_information')[0].addEventListener('tap',function(event){
+		            setAddressTitleAndType("residential_area_information","residential_area_information")
+		});
+		mui('#house_information')[0].addEventListener('tap',function(event){
+		            setHouseTitleAndType("house_information","address_information")
+		});
+		
+	});
+	
+	function setTitleAndType(select_id,type){
+		
+            var matching_title=document.getElementById(select_id).innerHTML;
+	        var matching_type=type;
+			var webview = plus.webview.getWebviewById('building_selectandadd');
+			if(webview != null){
+				webview.close();
+			}
+			mui.openWindow({
+				url:'building_selectandadd.html',
+				id:"building_selectandadd",
+				createNew:true,
+				show: {
+						aniShow: 'slide-in-right'
+					},
+					waiting: {
+						autoShow: false
+				},
+				extras: {
+					matching_title:matching_title,
+					matching_type:matching_type
+				}
+			});
+		
+	}
+	function setAddressTitleAndType(select_id,type){
+		
+            var matching_title=document.getElementById(select_id).innerHTML;
+	        var matching_type=type;
+			var webview = plus.webview.getWebviewById('address_selectandadd');
+			if(webview != null){
+				webview.close();
+			}
+			mui.openWindow({
+				url:'address_selectandadd.html',
+				id:"address_selectandadd",
+				createNew:true,
+				show: {
+						aniShow: 'slide-in-right'
+					},
+					waiting: {
+						autoShow: false
+				},
+				extras: {
+					matching_title:matching_title,
+					matching_type:matching_type
+				}
+			});
+		
+	}
+	function setHouseTitleAndType(select_id,type){
+		
+            var matching_title=document.getElementById(select_id).innerHTML;
+	        var matching_type=type;
+			var webview = plus.webview.getWebviewById('address_selectandadd');
+			if(webview != null){
+				webview.close();
+			}
+			mui.openWindow({
+				url:'house_selectandadd.html',
+				id:"house_selectandadd",
+				createNew:true,
+				show: {
+						aniShow: 'slide-in-right'
+					},
+					waiting: {
+						autoShow: false
+					},
+				extras: {
+					matching_title:matching_title,
+					matching_type:matching_type
+				}
+			});
+		
+	}
+	
+	function getStoreAddress(store) {
+			doManager('StoreManager', 'getStoreInfoById',store, function(data) {
+				if(data.result) {
+					var jsonData = JSON.parse(data.data);
+					if(jsonData == 0 || jsonData == null) {
+
+					} else {
+						window.localStorage.setItem("default_city",JSON.stringify(jsonData));
+						window.localStorage.setItem("store_id", store.store_id);
+						 
+					}
+					  
+				} else {
+					mui.toast(data.message);
+				}
+			});
+	}
+	</script>
+</html>

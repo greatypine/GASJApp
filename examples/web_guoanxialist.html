@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>门店人员列表</title>
+		<!-- Tell the browser to be responsive to screen width -->
+		<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+		<!-- Bootstrap 3.3.6 -->
+		<link rel="stylesheet" href="../css/bootstrap.min.css">
+		<!-- Font Awesome -->
+		<link rel="stylesheet" href="../css/font-awesome.min.css">
+		<!-- Ionicons -->
+		<link rel="stylesheet" href="../css/ionicons.min.css">
+		<!-- Theme style -->
+		<link rel="stylesheet" href="../css/AdminLTE.min.css">
+		<!-- AdminLTE Skins. Choose a skin from the css/skins
+       folder instead of downloading all of them to reduce the load. -->
+		<link rel="stylesheet" href="../css/_all-skins.min.css">
+		<link rel="stylesheet" href="../css/newmui.min.css">
+
+		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+		<!--[if lt IE 9]>
+  <script src="IE 9/html5shiv.min.js"></script>
+  <script src="IE 9/respond.min.js"></script>
+  <![endif]-->
+		<style>
+			.navbar-nav>.user-menu>.dropdown-menu>li.user-header>p {
+				line-height: 22px;
+			}
+			
+			header {
+				position: fixed!important;
+				width: 100%;
+			}
+			
+			.mui-scroll-wrapper {
+				padding-top: 15px;
+			}
+			
+			section {
+				margin-top: 50px;
+			}
+			
+			.modal-content {
+				margin-top: 15px;
+			}
+			
+			.box-body img {
+				width: 100%
+			}
+			
+			.select {
+				height: 3rem;
+				width: 50%;
+				margin-left: 20px;
+				background: #000;
+			}
+		</style>
+	</head>
+
+	<body class="hold-transition skin-blue sidebar-mini">
+		<!-- Site wrapper -->
+		<div class="wrapper mui-off-canvas-wrap mui-slide-in" id="offCanvasWrapper">
+			<aside id="offCanvasSide" class="main-sidebar mui-off-canvas-left">
+				<!-- sidebar: style can be found in sidebar.less -->
+				<section id="offCanvasSideScroll" class="sidebar">
+					<!-- Sidebar user panel -->
+					<div class="user-panel">
+						<div class="text-center image">
+							<img src="../images/user2-160x160.jpg" class="img-circle" alt="User Image">
+							<p><strong id="user_name"></strong></p>
+							<p><span id="user_zw"></span><span id="user_employeeid"></span></p>
+							<!--<p id="store_name"></p>-->
+							<select class="select" onchange="changetip(this)">
+							</select>
+						</div>
+					</div>
+					<!-- sidebar menu: : style can be found in sidebar.less -->
+					<ul class="sidebar-menu">
+
+						<li class="treeview">
+							<a onclick="toStore();">
+								<span>门店动态</span> <i class="fa  fa-angle-right pull-right"></i>
+							</a>
+						</li>
+						<li class="treeview">
+							<a onclick="toInfromation()">
+								<span>个人信息</span> <i class="fa  fa-angle-right pull-right"></i>
+							</a>
+						</li>
+						<li class="treeview active">
+							<a>
+								<span>门店人员</span> <i class="fa  fa-angle-right pull-right"></i>
+							</a>
+						</li>
+						<li class="treeview">
+							<a onclick="toMain()">
+								<span>国安数据首页</span> <i class="fa  fa-angle-right pull-right"></i>
+							</a>
+						</li>
+						<li class="text-center" style="margin-top: 2rem;">
+							<a id="btnLogout">退出登录</a>
+						</li>
+
+					</ul>
+
+				</section>
+				<!-- /.sidebar -->
+			</aside>
+
+			<div class="mui-inner-wrap">
+				<header class="main-header">
+					<!-- Logo -->
+					<nav class="navbar navbar-static-top text-center">
+						<span> 门店人员</span>
+						<!--<a href="#offCanvasSide" class="sidebar-toggle fa fa-navicon mui-icon-bars"></a>-->
+						<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+
+					</nav>
+
+					<!-- Header Navbar: style can be found in header.less -->
+
+				</header>
+				<!-- =============================================== -->
+				<div class="mui-content mui-scroll-wrapper">
+					<!-- Content Wrapper. Contains page content -->
+					<section id="itemdiv">
+
+						<!--<div class="modal-content">
+          <div class="box-body servicer">
+            <div class="col-xs-3 no-padding img-circle"><img src="../images/user7-128x128.jpg" class="img-circle"></div>
+            <div class="col-xs-9">
+              <p class="h4 text-yellow"><span class="margin-r-5">王春</span>A111111</p>
+              <p>本月订单派送：187<br>本月拜访记录：98</p>
+            </div>
+          </div>
+        </div>-->
+
+					</section>
+				</div>
+				<!-- /.content -->
+				<div class="mui-off-canvas-backdrop"></div>
+			</div>
+
+		</div>
+		<!-- ./wrapper -->
+
+		<!-- jQuery 2.2.0 -->
+		<script src="../js/jQuery-2.2.0.min.js"></script>
+		<!-- Bootstrap 3.3.6 -->
+		<script src="../js/bootstrap.min.js"></script>
+		<!-- Morris.js charts -->
+		<script src="../js/raphael-min.js"></script>
+		<!--<script src="plugins/morris/morris.min.js"></script>-->
+		<!-- FastClick -->
+		<script src="../js/fastclick.js"></script>
+		<!-- AdminLTE App -->
+		<script src="../js/app.min.js"></script>
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript" src="../js/custom_common.js"></script>
+		<script src="../js/date_util.js"></script>
+		<script>
+			var employee = JSON.parse(localStorage.getItem('employee'));
+			var store_list = JSON.parse(localStorage.getItem('storelist'));
+			//	var default_storeid = JSON.parse(localStorage.getItem('default_storeid'));
+			var store = JSON.parse(localStorage.getItem('store'));
+			var urlpic = "";
+			mui.init({
+				swipeBack: false
+			});
+			mui.plusReady(function() {
+				initView();
+				// 	getStorelist(store_list);
+				if(store != null || store != "") {
+					if(store.store_id != null || store.store_id != "") {
+						//   	  	   getGuoanxialist(store.store_id,null);
+						getEmployeePic(store.store_id, null);
+					} else {
+						//   	  	getGuoanxialist(employee.store_id,null);
+						getEmployeePic(employee.store_id, null);
+					}
+
+				} else {
+					//   	  getGuoanxialist(employee.store_id,null);
+					getEmployeePic(employee.store_id, null);
+				}
+
+				//   if(store !=null){
+				//    	getGuoanxialist(default_storeid,null);
+				//   }else{
+				//   	  getGuoanxialist(employee.store_id,null);
+				//   }
+
+				//退出
+				//  var t_username=localStorage.getItem("employee_key");
+				//  mui('#btnLogout')[0].addEventListener('click',function(event){
+				//  	 setTimeout(function() {
+				//  	 	var webview = plus.webview.getWebviewById('login');
+				//			if(webview != null){
+				//				webview.close();
+				//			}
+				//    localStorage.clear();
+				//			localStorage.setItem("employee_key",t_username);
+				//			mui.openWindow({
+				//				url:'../login.html',
+				//				id:'login',
+				//				createNew:true,
+				//				show: {
+				//						aniShow: "slide-in-right"
+				//						},
+				//						waiting: {
+				//							autoShow: false
+				//					}
+				//			});
+				//        }, 50);
+				//			  
+				//		}); 
+
+			});
+
+			function initView() {
+				if(employee != null) {
+					if(employee.name == null || employee.name == "") {
+						$("#user_name").html("无数据");
+					} else {
+						$("#user_name").html(employee.name);
+					}
+					if(employee.zw == null || employee.zw == "") {
+						$("#user_zw").text("无数据");
+					} else {
+						$("#user_zw").text(employee.zw);
+					}
+
+					if(employee.employeeId == null || employee.employeeId == "") {
+						$("#user_employeeid").text("无数据");
+					} else {
+						$("#user_employeeid").text(employee.employeeId);
+					}
+
+					//	    if(employee.store_name==null ||employee.store_name==""){
+					//	    	$("#store_name").html("无数据");
+					//	    }else{
+					//	    	$("#store_name").html(employee.store_name);
+					//	    }
+
+				}
+
+			}
+
+			//跳转店长首页
+			//  function toStore() {
+			//			setTimeout(function() {
+			//				var webview = plus.webview.getWebviewById('web_shopkeeper');
+			//				if(webview != null){
+			//					webview.close();
+			//				}
+			//				mui.openWindow({
+			//					url:'web_shopkeeper.html',
+			//					id: 'web_shopkeeper',
+			//					createNew:true,
+			//					show: {
+			//						aniShow: 'slide-in-right'
+			//					},
+			//					waiting: {
+			//						autoShow: false
+			//					}
+			//				});
+			//			}, 50);
+			//		};
+			//跳转到店长个人信息
+			//  function toInfromation() {
+			//			setTimeout(function() {
+			//				var webview = plus.webview.getWebviewById('web_information');
+			//				if(webview != null){
+			//					webview.close();
+			//				}
+			//				mui.openWindow({
+			//					url:'web_information.html',
+			//					id: 'web_information',
+			//					createNew:true,
+			//					show: {
+			//						aniShow: 'slide-in-right'
+			//					},
+			//					waiting: {
+			//						autoShow: false
+			//					}
+			//				});
+			//			}, 50);
+			//		};
+			//跳转到选择页面
+			//  function toMain() {
+			//			setTimeout(function() {
+			//			var webview = plus.webview.getWebviewById('new_main');
+			//			if(webview != null){
+			//				webview.close();
+			//			}
+			//				mui.openWindow({
+			//					url:'new_main.html',
+			//					id: 'new_main',
+			//					createNew:true,
+			//					show: {
+			//						aniShow: 'slide-in-right'
+			//					},
+			//					waiting: {
+			//						autoShow: false
+			//					}
+			//				});
+			//			}, 50);
+			//		};
+			//获取人员列表
+			// function  getGuoanxialist(store_id,query_date){
+			//			doManager('InterManager', 'getRelationAndCustomerOfStore',[store_id,query_date], function(data) {
+			//				if(data.result == true) {
+			//					var jsonData = JSON.parse(data.data);
+			//					var $div = $('#itemdiv');
+			//					$('#itemdiv').empty();
+			//					$(jsonData.data).each(function(index, relation) {
+			//						getEmployeePicByEmployeeId(relation.employeeId);
+			//						setTimeout(function() {
+			//							var employee_pic="";
+			//							if(urlpic==null||urlpic==""){
+			//								employee_pic="../images/my_card_head.png";
+			//							}else{
+			//								employee_pic=decodeURI(urlpic);
+			//							}
+			//						
+			//					var html = '<div class="modal-content">'+
+			//					           '<div class="box-body servicer">'+
+			//					           '<div class="col-xs-3 no-padding img-circle">'+
+			//					           '<img src="'+employee_pic+ '"class="img-circle"></div>'+
+			//					           '<div class="col-xs-9">'+
+			//					           '<p class="h4 text-yellow">'+
+			//					           '<span class="margin-r-5">'+relation.name+'</span>'+
+			//					           '<span>'+relation.employeeId+'</span></p>'+
+			//					           ' <p>本月用户画像：'+relation.customer_total+'</p>'+
+			//					           ' <p>本月拜访记录：'+relation.total+'</p>'+
+			//					           '</div></div></div>';
+			//						$div.append(html);
+			//						$li = $div.find(".modal-content").last();
+			//						var $item_div = $li.find('.col-xs-9').last();
+			//						$item_div[0].addEventListener('click', function(event) {
+			//									var webview = plus.webview.getWebviewById('other_web_user');
+			//											if(webview != null){
+			//												webview.close();
+			//											}
+			//									mui.openWindow({
+			//										url:'other_web_user.html',
+			//										id: 'other_web_user',
+			//										createNew:true,
+			//										extras:{
+			//											employee_id:relation.employeeId,
+			//											to_type:'999999',
+			//											employee_pic:employee_pic
+			//										},
+			//										show: {
+			//											aniShow: 'slide-in-right'
+			//										},
+			//										waiting: {
+			//											autoShow: false
+			//										}
+			//									});
+			//						});
+			//												},100);
+			//					});
+			//							
+			//
+			//							
+			//				}
+			//			});
+			//		}
+
+			function getEmployeePic(store_id, query_date) {
+				doManager('InterManager', 'getEmployeeOfStore', [store_id, query_date], function(data) {
+					if(data.result == true) {
+						var jsonData = JSON.parse(data.data);
+						var $div = $('#itemdiv');
+						$('#itemdiv').empty();
+						$(jsonData.data).each(function(index, relation) {
+							var employee_pic = ""
+							if(relation.employee_pic != null && relation.employee_pic != "") {
+								if(relation.employee_pic.pngUrl == null || relation.employee_pic.pngUrl == ""||relation.employee_pic.pngUrl== "https://imgcdn.guoanshequ.com/") {
+									employee_pic = "../images/my_card_head.png";
+								} else {
+									employee_pic = decodeURI(relation.employee_pic.pngUrl);
+								}
+
+							}else{
+								employee_pic = "../images/my_card_head.png";
+							}
+
+							var html = '<div class="modal-content">' +
+								'<div class="box-body servicer">' +
+								'<div class="col-xs-3 no-padding img-circle">' +
+								'<img src="' + employee_pic + '"class="img-circle"></div>' +
+								'<div class="col-xs-9">' +
+								'<p class="h4 text-yellow">' +
+								'<span class="margin-r-5">' + relation.name + '</span>' +
+								'<span>' + relation.employeeId + '</span></p>' +
+								' <p>本月用户画像：' + relation.customer_total + '</p>' +
+								' <p>本月拜访记录：' + relation.total + '</p>' +
+								'</div></div></div>';
+							$div.append(html);
+							$li = $div.find(".modal-content").last();
+							var $item_div = $li.find('.col-xs-9').last();
+							$item_div[0].addEventListener('click', function(event) {
+								var webview = plus.webview.getWebviewById('other_web_user');
+								if(webview != null) {
+									webview.close();
+								}
+								mui.openWindow({
+									url: 'other_web_user.html',
+									id: 'other_web_user',
+									createNew: true,
+									extras: {
+										employee_id: relation.employeeId,
+										to_type: '999999',
+										employee_pic: employee_pic
+									},
+									show: {
+										aniShow: 'slide-in-right'
+									},
+									waiting: {
+										autoShow: false
+									}
+								});
+							});
+						});
+
+					}
+				});
+			}
+
+			//function changetip(t){
+			//   savedefaultstore($(t).find('option:selected')[0].value,employee.employeeId);
+			//   //重新请求接口，刷新数据
+			//   getGuoanxialist($(t).find('option:selected')[0].value,null);
+			//   getData($(t).find('option:selected')[0].value);
+			//   window.localStorage.setItem("default_storeid",$(t).find('option:selected')[0].value);
+			//   window.localStorage.setItem("default_storename",$(t).find('option:selected')[0].text);
+			// 
+			//  }
+			//默认门店
+			//	function savedefaultstore(store_id,employee_no) {
+			//		doManager('UserManager','updateUserStoreId',[store_id,employee_no], function(data) {
+			//			if(data.result == true) {
+			//				var jsonData = JSON.parse(data.data);
+			//			 
+			//				
+			//			}
+			//		});
+			//	}
+			//门店信息
+			//		function getStorelist(jsonData) {
+			//		     	if(jsonData !=null){
+			//					    $(jsonData).each(function(index, store) {
+			//					    	
+			//					    	if(default_storeid==null){
+			//							    	if(employee.store_id !=null){
+			//								    		if(employee.store_id==store.store_id){
+			//								    		$('.select').append('<option selected = "selected" value='+store.store_id+'>'+store.name+'</option>');
+			//								    	}else{
+			//								    		$('.select').append('<option value='+store.store_id+'>'+store.name+'</option>');
+			//								    	  }
+			//							    	}else{
+			//							    		  if(index==0){
+			//													$('.select').append('<option selected="selected" value='+store.store_id+'>'+store.name+'</option>');
+			//													select_storeid=store.store_id;
+			//												}else{
+			//												    $('.select').append('<option value='+store.store_id+'>'+store.name+'</option>');
+			//												}
+			//							    	}
+			//					    		
+			//					    	}else{
+			//					    		    if(default_storeid==store.store_id){
+			//								    		$('.select').append('<option selected = "selected" value='+store.store_id+'>'+store.name+'</option>');
+			//								    	}else{
+			//								    		$('.select').append('<option value='+store.store_id+'>'+store.name+'</option>');
+			//								    	}
+			//					    	}
+			//					    	
+			//					    	
+			//					    	
+			//				   	});
+			//										
+			//					}
+			//		}
+
+			//	function getData(store_id) {
+			//			doManager('InterManager', 'queryRelationAndCustomerOfYear_crm_app',store_id, function(data) {
+			//				if(data.result == true) {
+			//					var jsonData = JSON.parse(data.data);
+			//				  var order_sum=0;
+			//				  var relation_sum=0;
+			//				  var customer_sum=0;
+			//        $(jsonData.data.relation).each(function(index, relation) {
+			//     
+			//        	relation_sum +=relation.total;
+			//        	window.localStorage.setItem("relation_sum",relation_sum);
+			//        });
+			//       
+			//        $(jsonData.data.customer).each(function(index, customer) {
+			//        	
+			//        	customer_sum +=customer.total;
+			//        	window.localStorage.setItem("customer_sum",customer_sum);
+			//        });
+			//        $(jsonData.data.ordermonth).each(function(index, order) {
+			//        	
+			//        	order_sum +=order.total_count;
+			//        	window.localStorage.setItem("order_sum",order_sum);
+			//        });
+			//				}
+			//			});
+			//		}
+		</script>
+
+	</body>
+
+</html>

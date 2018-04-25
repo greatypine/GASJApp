@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>我的片区</title>
+		<!-- Tell the browser to be responsive to screen width -->
+		<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+		<!-- Bootstrap 3.3.6 -->
+		<link rel="stylesheet" href="../css/bootstrap.min.css">
+		<!-- Font Awesome -->
+		<link rel="stylesheet" href="../css/font-awesome.min.css">
+		<!-- Ionicons -->
+		<link rel="stylesheet" href="../css/ionicons.min.css">
+		<!-- Theme style -->
+		<link rel="stylesheet" href="../css/AdminLTE.min.css">
+		<link rel="stylesheet" href="../css/_all-skins.min.css">
+		<link rel="stylesheet" href="../css/newmui.min.css" />
+
+		<style>
+			header {
+				position: fixed!important;
+				width: 100%;
+			}
+			
+			body,
+			td,
+			th,
+			ul,
+			li {
+				padding: 0;
+				margin: 0;
+			}
+			
+			.find_nav {
+				width: 100%;
+				height: 40px;
+				background-color: #f9f9f9;
+				top: 0;
+				/*z-index: 9999;*/
+				border-bottom: 1px solid #ddd;
+				display: -moz-box;
+				display: -webkit-box;
+				display: box;
+			}
+			
+			.find_nav_left {
+				height: 70px;
+				position: relative;
+				overflow: hidden;
+				-moz-box-flex: 1;
+				-webkit-box-flex: 1;
+				box-flex: 1;
+			}
+			
+			.find_nav_list {
+				position: absolute;
+				left: 0;
+			}
+			
+			.find_nav_list ul {
+				position: relative;
+				white-space: nowrap;
+				font-size: 0;
+			}
+			
+			.find_nav_list ul li {
+				display: inline-block;
+				padding: 0;
+				margin: 0 20px;
+			}
+			
+			.find_nav_list ul li a {
+				display: block;
+				width: 100%;
+				height: 100%;
+				line-height: 40px;
+				font-size: 16px;
+				text-align: center;
+				color: #666;
+			}
+			
+			.find_nav_cur a {
+				color: #48a5f4 !important;
+			}
+			
+			.find_nav_list a.active {
+				color: #C00
+			}
+			
+			.sideline {
+				display: block;
+				position: absolute;
+				border: 0;
+				height: 2px;
+				background-color: #48a5f4;
+				left: 0;
+				top: 38px;
+				pointer-events: none;
+			}
+			/*.swipe{ padding:70px 0 0 0;}*/
+			
+			.xiaoqu_right {
+				position: fixed;
+				bottom: 0;
+				right: 0;
+				height: 45px;
+				line-height: 45px;
+				border-top: 1px solid #dfdfdf;
+				width: 100%;
+				clear: both;
+				overflow: hidden;
+				font-size: 14px;
+			}
+			
+			.xiaoqu_right span {
+				float: left;
+				padding-left: 15px;
+			}
+			
+			.xiaoqu_right b {
+				float: right;
+				padding-right: 15px;
+				color: #D01414;
+			}
+			
+			.swipe ul {
+				height: 200px;
+				overflow: hidden;
+			}
+			
+			.swipe li {
+				height: 100%;
+				overflow-y: auto;
+			}
+			
+			.swipe li p {
+				overflow: hidden;
+				clear: both;
+				margin: 8px 20px;
+			}
+			
+			.swipe li p:nth-child(2) {
+				margin-top: 10px;
+			}
+			
+			.swipe li span:nth-child(1) {
+				width: 70%;
+				display: inline-block;
+				white-space: nowrap;
+				text-overflow: ellipsis;
+				-o-text-overflow: ellipsis;
+				overflow: hidden;
+			}
+			
+			.text_c {
+				color: #0062CC;
+			}
+		</style>
+	</head>
+
+	<body class="hold-transition skin-blue sidebar-mini">
+		<div class="wrapper mui-inner-wrap">
+			<header class="main-header">
+				<div class="navbar navbar-static-top text-center">
+					<span id="title_name" style="margin-left: -20px;">我的片区</span>
+					<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" style="color: #FFFFFF;"></a>
+				</div>
+			</header>
+			<div class="mui-content" style="margin-top: 75px;font-size: 12px;">
+				<section class="box box-primary" id="ssssss">
+					<div class="box-header with-border "><i class="fa fa-file-zip-o"></i>片区信息</div>
+					<div class="box-body">
+						<p>
+							<b>片 区 选 择：</b>
+							<select class="select" onchange="changetip(this.value)">
+							</select>
+						</p>
+						<p>
+							<b>片 区 管 家：</b>
+							<span class="margin-r-5" id='area_name_a'></span>
+							<span class="margin-r-5" id='area_name_b'></span>
+						</p>
+					</div>
+				</section>
+				<section class="box box-primary">
+					<div class="box-header with-border "><i class="fa fa-file-zip-o"></i>小区信息</div>
+					<div class="box-body">
+						<div class="find_nav">
+							<div class="find_nav_left">
+								<div class="find_nav_list" id="pagenavi1">
+									<ul>
+										<li>
+											<a href="#" class="active">面积</a>
+										</li>
+										<li>
+											<a href="#">楼房/平房数量</a>
+										</li>
+										<li>
+											<a href="#">户数(房间数)</a>
+										</li>
+										<li>
+											<a href="#">订单数量(上月)</a>
+										</li>
+										<li>
+											<a href="#">消费客户数(上月)</a>
+										</li>
+										<li>
+											<a href="#">用户画像(6字段)</a>
+										</li>
+										<li>
+											<a href="#">用户画像(18字段)</a>
+										</li>
+										<li class="sideline"></li>
+									</ul>
+
+								</div>
+							</div>
+						</div>
+						<div id="slider1" class="swipe">
+							<ul class="box01_list" id="area_select">
+								<li class="li_list" id="area_meter">
+									<p><span class="pull-left"><b>小区名字</b></span><span class="pull-right text-center"><b>面积</b></span></p>
+
+								</li>
+								<li class="li_list" id="area_building">
+
+								</li>
+								<li class="li_list" id="area_house">
+
+								</li>
+								<li class="li_list" id="area_order">
+
+								</li>
+								<li class="li_list" id="area_orderuser">
+
+								</li>
+								<li class="li_list" id="area_customer_six">
+
+								</li>
+								<li class="li_list" id="area_customer">
+
+								</li>
+
+							</ul>
+						</div>
+					</div>
+				</section>
+			</div>
+			<div class="xiaoqu_right" style="background: #fff;"><span>总计：</span><b id="sum_area"></b></div>
+			<!--*********************************************************************************-->
+		</div>
+		<!-- jQuery 2.2.0 -->
+		<script src="../js/jQuery-2.2.0.min.js"></script>
+		<!-- Bootstrap 3.3.6 -->
+		<script src="../js/bootstrap.min.js"></script>
+		<!-- Morris.js charts -->
+		<script src="../js/raphael-min.js"></script>
+		<!-- FastClick -->
+		<script src="../js/fastclick.js"></script>
+		<!-- AdminLTE App -->
+		<!--<script src="../js/app.min.js"></script>-->
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript" src="../js/custom_common.js"></script>
+		<script src="../js/date_util.js"></script>
+		<script type="text/javascript" src="../js/touchslider.js"></script>
+		<script src="../js/webviewGroup.js" type="text/javascript" charset="utf-8"></script>
+		<script>
+			var employee = JSON.parse(localStorage.getItem('employee'));
+			var select_areaid = JSON.parse(localStorage.getItem('selectArea_id'));
+			var select_area_list = JSON.parse(localStorage.getItem('selectArea_list'));
+			var area_id = null;
+			var sum = 0;
+			var villagedata = null;
+			mui.init({
+				swipeBack: false
+			});
+
+			mui.plusReady(function() {
+				autodivheight();
+				getOrderOfMonth(employee.employeeId, select_areaid);
+				getAllAreaOfEmployee(select_area_list);
+				if(mui.os.ios) {
+					setTimeout(function() {
+						getVillagedata(select_areaid);
+					}, 400);
+				} else {
+					getVillagedata(select_areaid);
+				}
+
+				//退出
+				var t_username = localStorage.getItem("employee_key");
+				mui.back = function() {
+					var _current = plus.webview.currentWebview();
+					var main = _current.opener();
+					mui.fire(main, "setarea", {
+						id: "9999"
+					});
+					_current.close();
+				}
+
+			});
+
+			//获取片区信息数据
+			function getOrderOfMonth(employee_no, area_id) {
+				doManager('InterManager', 'findAreaInfoOfEmployee_app', [employee_no, area_id], function(data) {
+					var jsonData = JSON.parse(data.data);
+					if(data.result == true) {
+						if(jsonData != null) {
+							if(jsonData.dataMap.housetotal != null) {
+								$('#num_area').html(jsonData.dataMap.housetotal + '户');
+							} else {
+								$('#num_area').html('0户');
+							}
+							if(jsonData.dataMap.allAreaInfo.area.employee_a_name != null) {
+								$('#area_name_a').html(jsonData.dataMap.allAreaInfo.area.employee_a_name + '(A)');
+							}
+							if(jsonData.dataMap.allAreaInfo.area.employee_b_name != null) {
+								$('#area_name_b').html(jsonData.dataMap.allAreaInfo.area.employee_b_name + '(B)');
+							}
+							var $div = $('#itemdiv');
+							if(jsonData.dataMap.allAreaInfo.areaInfo == null) {
+								var html = '<p>' +
+									'<span class="margin-r-5">' + '无信息' + '</span>' +
+									'<span class="margin-r-5"></span>' +
+									'<span></span></p>';
+								$div.append(html);
+							} else {
+								$(jsonData.dataMap.allAreaInfo.areaInfo).each(function(index, areainfo) {
+									if(areainfo.name == null || areainfo.name == "") {
+										areainfo.name = "未录入街道信息"
+									}
+									if(areainfo.villname == null || areainfo.villname == "") {
+										areainfo.villname = "未录入社区信息"
+									}
+									if(areainfo.tinyname == null || areainfo.tinyname == "") {
+										areainfo.tinyname = "未录入小区信息"
+									}
+									var html = '<div>' +
+										'<span class="margin-r-5">' + areainfo.name + '</span>' +
+										'<span class="margin-r-5">' + areainfo.villname + '</span>' +
+										'<span>' + areainfo.tinyname + '</span></div>';
+									$div.append(html);
+
+								});
+							}
+
+						}
+
+					}
+				});
+			}
+
+			//跳转到选择页面
+			function toMain() {
+				setTimeout(function() {
+					var webview = plus.webview.getWebviewById('new_main');
+					if(webview != null) {
+						webview.close();
+					}
+					mui.openWindow({
+						url: 'new_main.html',
+						id: 'new_main',
+						createNew: true,
+						show: {
+							aniShow: 'slide-in-right'
+						},
+						waiting: {
+							autoShow: false
+						}
+					});
+				}, 50);
+			};
+			//跳转到个人动态页面
+			function toPerson() {
+				setTimeout(function() {
+					var webview = plus.webview.getWebviewById('web_personal');
+					if(webview != null) {
+						webview.close();
+					}
+					mui.openWindow({
+						url: 'web_personal.html',
+						id: 'web_personal',
+						createNew: true,
+						show: {
+							aniShow: 'slide-in-right'
+						},
+						waiting: {
+							autoShow: false
+						}
+					});
+				}, 50);
+			};
+			//跳转到片区信息
+			function toUser() {
+				setTimeout(function() {
+					var webview = plus.webview.getWebviewById('web_user_to');
+					if(webview != null) {
+						webview.close();
+					}
+					mui.openWindow({
+						url: 'web_user.html',
+						id: 'web_user_to',
+						createNew: true,
+						show: {
+							aniShow: 'slide-in-right'
+						},
+						waiting: {
+							autoShow: false
+						}
+					});
+				}, 50);
+			};
+			//跳转到个人动态页面
+			function toArea() {
+				setTimeout(function() {
+					var webview = plus.webview.getWebviewById('web_index');
+					if(webview != null) {
+						webview.close();
+					}
+					mui.openWindow({
+						url: 'web_index.html',
+						id: 'web_index',
+						createNew: true,
+						show: {
+							aniShow: 'slide-in-right'
+						},
+						waiting: {
+							autoShow: false
+						}
+					});
+				}, 50);
+			};
+			//获取片区信息数据(片区选择)
+			function getAllAreaOfEmployee(jsonData) {
+				if(jsonData != null) {
+					$(jsonData).each(function(index, arealist) {
+						if(select_areaid == null) {
+							if(index == 0) {
+								$('.select').append('<option selected="selected" value=' + arealist.id + '>' + arealist.name + '(' + arealist.area_no + ')' + '</option>');
+								area_id = arealist.id;
+								localStorage.setItem("selectArea_id", arealist.id);
+							} else {
+								$('.select').append('<option value=' + arealist.id + '>' + arealist.name + '(' + arealist.area_no + ')' + '</option>');
+							}
+						} else {
+							if(select_areaid == arealist.id) {
+								$('.select').append('<option selected="selected" value=' + arealist.id + '>' + arealist.name + '(' + arealist.area_no + ')' + '</option>');
+								area_id = arealist.id;
+							} else {
+								$('.select').append('<option value=' + arealist.id + '>' + arealist.name + '(' + arealist.area_no + ')' + '</option>');
+							}
+
+						}
+
+					});
+
+				}
+			}
+			//select选着刷新页面
+			function changetip(value) {
+				localStorage.setItem("selectArea_id", value);
+				area_id = value;
+				if(mui.os.ios) {
+					setTimeout(function() {
+						window.location.reload();
+					}, 100);
+
+				} else {
+					window.location.reload();
+				}
+
+			}
+			//获取片区信息数据
+			function getVillagedata(area_id) {
+				doManager('InterManager', 'queryVillageInfoByAreaNoApp', area_id, function(data) {
+					var jsonData = JSON.parse(data.data);
+					if(data.result == true) {
+						if(jsonData.dataMap.data != null || jsonData.dataMap.data != "") {
+							villagedata = JSON.stringify(jsonData.dataMap.data);
+							var $villagelist = $("#area_meter");
+							if(jsonData.dataMap.data == null || jsonData.dataMap.data == "") {
+								var html = '<div id="notdata" style="text-align: center;">暂无数据</div>';
+								$villagelist.append(html);
+							} else {
+								$(jsonData.dataMap.data).each(function(index, village) {
+									var meter_count = "";
+									if(village.vallage_area == null || village.vallage_area == "") {
+										meter_count = 0;
+									} else {
+										meter_count = village.vallage_area;
+									}
+
+									sum += parseFloat(meter_count);
+									var html = '<p>' +
+										'<span class="pull-left text_c" onclick="clickli(' + village.tin_village_id + ',this)">' + village.tiny_name + '</span>' +
+										'<span class="pull-right">' + meter_count + '</span></p>';
+									$villagelist.append(html);
+								});
+							}
+
+							$('#sum_area').html((Math.round(sum * 100) / 100));
+
+						}
+
+					}
+				});
+			}
+
+			$(".find_nav_list").css("left", 0);
+
+			$(".find_nav_list li").each(function() {
+				$(".sideline").css({
+					left: 0
+				});
+				$(".find_nav_list li").eq(0).addClass("find_nav_cur").siblings().removeClass("find_nav_cur");
+			});
+			var nav_w = $(".find_nav_list li").first().width();
+			$(".sideline").width(nav_w);
+			$(".find_nav_list li").on('click', function() {
+				nav_w = $(this).width();
+				$(".sideline").stop(true);
+				$(".sideline").animate({
+					left: $(this).position().left
+				}, 300);
+				$(".sideline").animate({
+					width: nav_w
+				});
+				$(this).addClass("find_nav_cur").siblings().removeClass("find_nav_cur");
+				var fn_w = ($(".find_nav").width() - nav_w) / 2;
+				var fnl_l;
+				var fnl_x = parseInt($(this).position().left);
+				if(fnl_x <= fn_w) {
+					fnl_l = 0;
+				} else if(fn_w - fnl_x <= flb_w - fl_w) {
+					fnl_l = flb_w - fl_w;
+				} else {
+					fnl_l = fn_w - fnl_x;
+				}
+				$(".find_nav_list").animate({
+					"left": fnl_l
+				}, 300);
+
+			});
+			var fl_w = $(".find_nav_list").width();
+			var flb_w = $(".find_nav_left").width();
+			$(".find_nav_list").on('touchstart', function(e) {
+				var touch1 = e.originalEvent.targetTouches[0];
+				x1 = touch1.pageX;
+				y1 = touch1.pageY;
+				ty_left = parseInt($(this).css("left"));
+
+			});
+			$(".find_nav_list").on('touchmove', function(e) {
+				var touch2 = e.originalEvent.targetTouches[0];
+				var x2 = touch2.pageX;
+				var y2 = touch2.pageY;
+				if(ty_left + x2 - x1 >= 0) {
+					$(this).css("left", 0);
+				} else if(ty_left + x2 - x1 <= flb_w - fl_w) {
+					$(this).css("left", flb_w - fl_w);
+				} else {
+					$(this).css("left", ty_left + x2 - x1);
+				}
+				if(Math.abs(y2 - y1) > 0) {
+					e.preventDefault();
+				}
+
+			});
+
+			for(n = 1; n < 2; n++) {
+				var page = 'pagenavi' + n;
+				var mslide = 'slider' + n;
+				var mtitle = 'emtitle' + n;
+				arrdiv = 'arrdiv' + n;
+				var as = document.getElementById(page).getElementsByTagName('a');
+				var tt = new TouchSlider({
+					id: mslide,
+					'auto': '-1',
+					fx: 'ease-out',
+					direction: 'left',
+					speed: 600,
+					timeout: 5000,
+					'before': function(index) {
+						//ar as = document.getElementById(this.page).getElementsByTagName('a');
+						as[this.p].className = '';
+						this.p = index;
+
+						fnl_x = parseInt($(".find_nav_list li").eq(this.p).position().left);
+
+						nav_w = $(".find_nav_list li").eq(this.p).width();
+						$(".sideline").stop(true);
+						$(".sideline").animate({
+							left: $(".find_nav_list li").eq(this.p).position().left
+						}, 300);
+						$(".sideline").animate({
+							width: nav_w
+						}, 100);
+						$(".find_nav_list li").eq(this.p).addClass("find_nav_cur").siblings().removeClass("find_nav_cur");
+						var fn_w = ($(".find_nav").width() - nav_w) / 2;
+						var fnl_l;
+						if(fnl_x <= fn_w) {
+							fnl_l = 0;
+						} else if(fn_w - fnl_x <= flb_w - fl_w) {
+							fnl_l = flb_w - fl_w;
+						} else {
+							fnl_l = fn_w - fnl_x;
+						}
+						$(".find_nav_list").animate({
+							"left": fnl_l
+						}, 300);
+
+					},
+					'after': function(index) {
+						switch(index) {
+							case 0:
+								var $villagelist = $("#area_meter");
+								$villagelist.children().remove();
+								sum = 0;
+								var html1 = '<p><span class="pull-left"><b>小区名字</b></span>' +
+									'<span class="pull-right text-center"><b>面积</b></span></p>';
+								$villagelist.append(html1);
+								if(JSON.parse(villagedata) == null || JSON.parse(villagedata) == "") {
+									var html = '<div id="notdata" style="text-align: center;">暂无数据</div>';
+									$villagelist.append(html);
+								} else {
+									$(JSON.parse(villagedata)).each(function(index, village) {
+										var meter_count = "";
+										if(village.vallage_area == null || village.vallage_area == "") {
+											meter_count = 0;
+										} else {
+											meter_count = village.vallage_area;
+										}
+
+										sum += parseFloat(meter_count);
+
+										var html = '<p>' +
+											'<span class="pull-left text_c" onclick="clickli(' + village.tin_village_id + ',this)">' + village.tiny_name + '</span>' +
+											'<span class="pull-right">' + meter_count + '</span></p>';
+										$villagelist.append(html);
+									});
+
+								}
+
+								$('#sum_area').html((Math.round(sum * 100) / 100));
+								break;
+							case 1:
+								var $villagelist = $("#area_building");
+								$villagelist.children().remove();
+								sum = 0;
+								var html1 = '<p><span class="pull-left"><b>小区名字</b></span>' +
+									'<span class="pull-right text-center"><b>数量</b></span></p>';
+								$villagelist.append(html1);
+								if(JSON.parse(villagedata) == null || JSON.parse(villagedata) == "") {
+									var html = '<div id="notdata" style="text-align: center;">暂无数据</div>';
+									$villagelist.append(html);
+								} else {
+									$(JSON.parse(villagedata)).each(function(index, village) {
+										var building_count = "";
+										if(village.sumbuilding == null || village.sumbuilding == "") {
+											building_count = 0;
+										} else {
+											building_count = village.sumbuilding;
+										}
+
+										sum += parseFloat(building_count);
+
+										var html = '<p>' +
+											'<span class="pull-left text_c" onclick="clickli(' + village.tin_village_id + ',this)">' + village.tiny_name + '</span>' +
+											'<span class="pull-right">' + building_count + '</span></p>';
+										$villagelist.append(html);
+									});
+								}
+
+								$('#sum_area').html((Math.round(sum * 100) / 100));
+								break;
+							case 2:
+								var $villagelist = $("#area_house");
+								$villagelist.children().remove();
+								sum = 0;
+								var html1 = '<p><span class="pull-left"><b>小区名字</b></span>' +
+									'<span class="pull-right text-center"><b>数量</b></span></p>';
+								$villagelist.append(html1);
+								if(JSON.parse(villagedata) == null || JSON.parse(villagedata) == "") {
+									var html = '<div id="notdata" style="text-align: center;">暂无数据</div>';
+									$villagelist.append(html);
+								} else {
+									$(JSON.parse(villagedata)).each(function(index, village) {
+										var house_count = "";
+										if(village.sumhouse == null || village.sumhouse == "") {
+											house_count = 0;
+										} else {
+											house_count = village.sumhouse;
+										}
+
+										sum += parseFloat(house_count);
+										var html = '<p>' +
+											'<span class="pull-left text_c" onclick="clickli(' + village.tin_village_id + ',this)">' + village.tiny_name + '</span>' +
+											'<span class="pull-right">' + house_count + '</span></p>';
+										$villagelist.append(html);
+									});
+								}
+
+								$('#sum_area').html((Math.round(sum * 100) / 100));
+								break;
+							case 3:
+								var $villagelist = $("#area_order");
+								$villagelist.children().remove();
+								sum = 0;
+								var html1 = '<p><span class="pull-left"><b>小区名字</b></span>' +
+									'<span class="pull-right text-center"><b>数量</b></span></p>';
+								$villagelist.append(html1);
+								if(JSON.parse(villagedata) == null || JSON.parse(villagedata) == "") {
+									var html = '<div id="notdata" style="text-align: center;">暂无数据</div>';
+									$villagelist.append(html);
+								} else {
+									$(JSON.parse(villagedata)).each(function(index, village) {
+										var ordercount = "";
+										if(village.order_count == null || village.order_count == "") {
+											ordercount = 0;
+										} else {
+											ordercount = village.order_count;
+										}
+
+										sum += parseFloat(ordercount);
+										var html = '<p>' +
+											'<span class="pull-left text_c" onclick="clickli(' + village.tin_village_id + ',this)">' + village.tiny_name + '</span>' +
+											'<span class="pull-right">' + ordercount + '</span></p>';
+										$villagelist.append(html);
+									});
+
+								}
+
+								$('#sum_area').html((Math.round(sum * 100) / 100));
+								break;
+							case 4:
+								var $villagelist = $("#area_orderuser");
+								$villagelist.children().remove();
+								sum = 0;
+								var html1 = '<p><span class="pull-left"><b>小区名字</b></span>' +
+									'<span class="pull-right text-center"><b>数量</b></span></p>';
+								$villagelist.append(html1);
+								if(JSON.parse(villagedata) == null || JSON.parse(villagedata) == "") {
+									var html = '<div id="notdata" style="text-align: center;">暂无数据</div>';
+									$villagelist.append(html);
+								} else {
+									$(JSON.parse(villagedata)).each(function(index, village) {
+										var orderuser_count = "";
+										if(village.custmer_count == null || village.custmer_count == "") {
+											orderuser_count = 0;
+										} else {
+											orderuser_count = village.custmer_count;
+										}
+
+										sum += parseFloat(orderuser_count);
+										var html = '<p>' +
+											'<span class="pull-left text_c" onclick="clickli(' + village.tin_village_id + ',this)">' + village.tiny_name + '</span>' +
+											'<span class="pull-right">' + orderuser_count + '</span></p>';
+										$villagelist.append(html);
+									});
+
+								}
+
+								$('#sum_area').html((Math.round(sum * 100) / 100));
+								break;
+							case 5:
+								var $villagelist = $("#area_customer_six");
+								$villagelist.children().remove();
+								sum = 0;
+								var html1 = '<p><span class="pull-left"><b>小区名字</b></span>' +
+									'<span class="pull-right text-center"><b>数量</b></span></p>';
+								$villagelist.append(html1);
+								if(JSON.parse(villagedata) == null || JSON.parse(villagedata) == "") {
+									var html = '<div id="notdata" style="text-align: center;">暂无数据</div>';
+									$villagelist.append(html);
+								} else {
+									$(JSON.parse(villagedata)).each(function(index, village) {
+										var customersix_count = "";
+										if(village.user_count_6 == null || village.user_count_6 == "") {
+											customersix_count = 0;
+										} else {
+											customersix_count = village.user_count_6;
+										}
+
+										sum += parseFloat(customersix_count);
+										var html = '<p>' +
+											'<span class="pull-left text_c" onclick="clickli(' + village.tin_village_id + ',this)">' + village.tiny_name + '</span>' +
+											'<span class="pull-right">' + customersix_count + '</span></p>';
+										$villagelist.append(html);
+									});
+								}
+
+								$('#sum_area').html((Math.round(sum * 100) / 100));
+								break;
+							case 6:
+								var $villagelist = $("#area_customer");
+								$villagelist.children().remove();
+								sum = 0;
+								var html1 = '<p><span class="pull-left"><b>小区名字</b></span>' +
+									'<span class="pull-right text-center"><b>数量</b></span></p>';
+								$villagelist.append(html1);
+								if(JSON.parse(villagedata) == null || JSON.parse(villagedata) == "") {
+									var html = '<div id="notdata" style="text-align: center;">暂无数据</div>';
+									$villagelist.append(html);
+								} else {
+									$(JSON.parse(villagedata)).each(function(index, village) {
+										var customer_count = "";
+										if(village.user_count_18 == null || village.user_count_18 == "") {
+											customer_count = 0;
+										} else {
+											customer_count = village.user_count_18;
+										}
+
+										sum += parseFloat(customer_count);
+										var html = '<p>' +
+											'<span class="pull-left text_c" onclick="clickli(' + village.tin_village_id + ',this)">' + village.tiny_name + '</span>' +
+											'<span class="pull-right">' + customer_count + '</span></p>';
+										$villagelist.append(html);
+									});
+								}
+
+								$('#sum_area').html((Math.round(sum * 100) / 100));
+								break;
+						}
+					}
+				});
+				tt.page = page;
+				tt.p = 0;
+				//console.dir(tt); console.dir(tt.__proto__);
+
+				for(var i = 0; i < as.length; i++) {
+					(function() {
+						var j = i;
+						as[j].tt = tt;
+						as[j].onclick = function() {
+							this.tt.slide(j);
+							return false;
+						}
+					})();
+				}
+			}
+
+			function clickli(tiny_village_id,_this) {
+              var child_length= $(_this).parent().parent().children();
+              for(var i=1;i<=child_length.length;i++){
+              	$(child_length[i]).children().eq(0).css('color','#0062CC');
+              }
+              $(_this).css('color','red');
+			  getstreet(tiny_village_id);
+			}
+			//获取街道小区信息数据
+			function getstreet(village_id) {
+				doManager('InterManager', 'findTinyTownByVillageId', village_id, function(data) {
+					var jsonData = JSON.parse(data.data);
+					var townname;
+					var villagename;
+					var area_name;
+					if(data.result == true) {
+						if(jsonData.code == 200) {
+							if(jsonData.dataMap.town_name != null) {
+								townname = jsonData.dataMap.town_name;
+							} else {
+								townname = "";
+							}
+							if(jsonData.dataMap.village_name != null) {
+								villagename = jsonData.dataMap.village_name;
+							} else {
+								villagename = "";
+							}
+							if(jsonData.dataMap.name != null) {
+								area_name = jsonData.dataMap.name;
+							} else {
+								area_name = "";
+							}
+
+//							if(townname == "" && villagename == "") {
+//
+//							} else {
+								plus.nativeUI.toast(townname + "   " + villagename+"  "+area_name);
+//							}
+						}
+
+					}
+				});
+			}
+
+			function  autodivheight() {  //函数：获取尺寸
+				     //获取浏览器窗口高度
+				    
+				var  winHeight = 0;    
+				if (window.innerHeight) {        
+					winHeight  =  window.innerHeight;    
+				} else 
+					if ((document.body)  &&  (document.body.clientHeight)) {        
+						winHeight  =  document.body.clientHeight;
+					}     //通过深入Document内部对body进行检测，获取浏览器窗口高度
+				     if (document.documentElement  &&  document.documentElement.clientHeight) {        
+					winHeight  =  document.documentElement.clientHeight;     //DIV高度为浏览器窗口的高度
+					     //document.getElementById("test").style.height= winHeight +"px";
+					     //DIV高度为浏览器窗口高度的一半
+					//    document.getElementById("box01_list").style.height= winHeight/2 +"px";
+
+				}
+				document.getElementById("area_select").style.height = winHeight - 350 + "px";
+			}
+			window.onresize = autodivheight;  //浏览器窗口发生变化时同时变化DIV高度
+		</script>
+
+	</body>
+
+</html>

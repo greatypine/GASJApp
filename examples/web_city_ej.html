@@ -1,0 +1,1338 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>城市首页</title>
+		<!-- Tell the browser to be responsive to screen width -->
+		<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+		<!-- Bootstrap 3.3.6 -->
+		<link rel="stylesheet" href="../css/bootstrap.min.css">
+		<!-- Font Awesome -->
+		<link rel="stylesheet" href="../css/font-awesome.min.css">
+		<!-- Ionicons -->
+		<link rel="stylesheet" href="../css/ionicons.min.css">
+		<!-- Theme style -->
+		<link rel="stylesheet" href="../css/AdminLTE.min.css">
+		<!-- AdminLTE Skins. Choose a skin from the css/skins
+       folder instead of downloading all of them to reduce the load. -->
+		<link rel="stylesheet" href="../css/_all-skins.min.css">
+		<link rel="stylesheet" href="../css/img_preview.css">
+		<link rel="stylesheet" type="text/css" href="../css/mui.picker.min.css" />
+		<link rel="stylesheet" href="../css/newmui.min.css">
+		<link rel="stylesheet" href="../css/tTurnover-head-scoll.css">
+		<link rel="stylesheet" href="../css/morris.css">
+		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+		<!--[if lt IE 9]>
+  <script src="IE 9/html5shiv.min.js"></script>
+  <script src="IE 9/respond.min.js"></script>
+  <![endif]-->
+		<style>
+			html,
+			body {
+				background: #f1f5f6;
+			}
+			
+			p {
+				margin: 0;
+			}
+			
+			.navbar-nav>.user-menu>.dropdown-menu>li.user-header>p {
+				line-height: 22px;
+			}
+			
+			header {
+				position: fixed!important;
+				width: 100%;
+				z-index: 999999999999999;
+			}
+			
+			.mui-scroll-wrapper {
+				padding-top: 15px;
+			}
+			
+			section {
+				padding: 50px 0 60px 0;
+				font-size: 16px;
+			}
+			
+			.customer {
+				background-color: #11214e;
+				height: 40px;
+				padding: 10px 20px 0 20px;
+			}
+			
+			.customer_bg {
+				width: 100%;
+			}
+			
+			.customer_bg div {
+				background-color: #fff;
+				height: 70px;
+				width: 46%;
+				padding: 0 10px;
+				font-size: 12px;
+				color: #b8b8b8;
+				border-radius: 3px;
+				box-shadow: 0 1px 10px rgba(0, 0, 0, 0.1);
+			}
+			
+			.customer_bg .text-center {
+				font-size: 22px;
+				font-weight: bold;
+				color: #666;
+			}
+			
+			.customer_bg i {
+				font-size: 16px;
+				margin-right: 5px;
+			}
+			
+			.text-muted {
+				margin: 60px 20px 0 20px;
+				background-color: #fff;
+				border-radius: 3px;
+				box-shadow: 0 1px 10px rgba(0, 0, 0, 0.1);
+				padding: 5px 15px 10px 15px;
+			}
+			
+			.box {
+				margin: 20px 20px 0 20px;
+				width: auto;
+			}
+			/*翻页效果*/
+			
+			.dataStatistics {
+				cursor: pointer;
+				font-family: futura_mdcn_btmedium;
+				text-align: center;
+				font-size: 36px;
+				position: relative;
+				height: 40px;
+				line-height: 30px;
+			}
+			/*.data_new{position: relative; float: left; left: 50%;}*/
+			
+			.data_new {
+				position: relative;
+				width: 100%
+			}
+			/*.digit_set{border: 1px solid #078dff; border-radius: 4px; perspective: 200px; height: 90px!important; margin: 0 5px!important; width: 57px!important; right: 50%;}*/
+			
+			.digit_set {
+				float: none!important;
+				perspective: 200px;
+				height: 40px!important;
+				margin: 0 auto!important;
+				width: 6.5%!important;
+			}
+			
+			.dataStatistics .digit>div.digit_top,
+			.dataStatistics .digit>div.shadow_top {
+				width: 30px;
+			}
+			
+			.dataStatistics .digit>div.digit_bottom,
+			.dataStatistics .digit>div.shadow_bottom {
+				width: 30px;
+				text-align: center;
+			}
+			
+			.dataStatistics .digit>div.digit_bottom .digit_wrap,
+			.dataStatistics .digit>div.shadow_bottom .digit_wrap {
+				margin-top: -67%;
+				line-height: 40px;
+			}
+			
+			.digit_wrap {
+				line-height: 40px;
+			}
+			/*逗号*/
+			/*.douhao{width: 16px; height: 21px; background: url("dist/img/douhao.png") no-repeat; float: left; position: relative; right: 50%;bottom: -70px;}*/
+			
+			.douhao {
+				width: 6px;
+				height: 8px;
+				background: url("../images/douhao1.png") no-repeat;
+				display: inline-block;
+			}
+			
+			.select {
+				color: #ffffff;
+				font-size: 20px;
+				border: 0;
+				/*width:25%;*/
+				max-width: 100px;
+				min-width: 50px;
+				/*设置箭头*/
+				background: url("") no-repeat scroll center center transparent;
+			}
+			
+			.select_ios {
+				border: 0;
+				padding-right: 20px;
+				background-size: 2px;
+				border-color: #000 transparent;
+				border-style: solid;
+				border-width: 5px 4px 0 4px;
+				max-width: 100px;
+				min-width: 50px;
+				height: 20px;
+				overflow: auto;
+			}
+			
+			footer {
+				position: fixed;
+				bottom: 0;
+				left: 0;
+				width: 100%;
+				border-top: 1px solid #c3c3c3;
+				background-color: #fff;
+				text-align: center;
+				color: #666;
+				height: 50px;
+				padding-top: 2px;
+				z-index: 100;
+			}
+			
+			footer p {
+				font-size: 20px;
+				margin: 0 0 -3px 0;
+			}
+			
+			footer a,
+			footer a:hover,
+			footer a:active,
+			footer a:visited {
+				color: #666;
+			}
+			
+			.mark-green {
+				color: #169a80!important;
+			}
+		</style>
+	</head>
+
+	<body class="hold-transition skin-blue sidebar-mini">
+		<!-- Site wrapper -->
+		<div class="wrapper mui-off-canvas-wrap mui-slide-in" id="offCanvasWrapper">
+			
+
+			<div class="mui-inner-wrap">
+				<header class="main-header" style="position: fixed;display: block;">
+					<!-- Logo -->
+					<nav class="navbar navbar-static-top text-center">
+						<div style="text-align: center;">
+						      <div style="width: 100%;text-align: center;"id="city_select">
+						      	<span  style="max-width: 100px;min-width: 50px;" id="city_span">城市</span>
+							    <span class="fa fa-angle-down"></span>
+						      	
+						      </div>
+								
+							
+							<!--<select class="" id="select_store">
+							</select>-->
+						</div>
+						<a href="#offCanvasSide" class="sidebar-toggle fa fa-navicon mui-icon-bars"></a>
+					</nav>
+					<!-- Header Navbar: style can be found in header.less -->
+
+				</header>
+				<!-- =============================================== -->
+				<div class="mui-content mui-scroll-wrapper">
+					<!-- Content Wrapper. Contains page content -->
+					<section>
+						<div class="customer">
+							<div class="customer_bg clearfix">
+								<div class="pull-left">
+									<h6>当月新增用户</h6>
+									<p class="text-center" id="newmonthcustomer">--</p>
+									<!--	<p>上月同比数：<span class="text-green pull-right"><i class="fa fa-long-arrow-up"></i>5%</span></p>-->
+								</div>
+								<div class="pull-right">
+									<h6>当月消费用户</h6>
+									<p class="text-center" id="monthcustomer">--</p>
+									<!--<p>上月同比数：<span class="text-red pull-right"><i class="fa fa-long-arrow-down"></i>2%</span></p>-->
+								</div>
+							</div>
+						</div>
+						<div class="text-muted">
+							<h5 class="text-center" style="margin-bottom: 0;">当月累计营业额</h5>
+							<div class="dataStatistics">
+								<div class="data_new">
+									<div class="digit_set"></div>
+									<div class="digit_set"></div>
+									<div class="digit_set"></div>
+									<div class="douhao" id="dou1"></div>
+									<div class="digit_set"></div>
+									<div class="digit_set"></div>
+									<div class="digit_set"></div>
+									<div class="douhao" id="dou2"></div>
+									<div class="digit_set"></div>
+									<div class="digit_set"></div>
+									<div class="digit_set set_last"></div>
+								</div>
+							</div>
+						</div>
+						<div class="box box-solid bg-light-blue-gradient">
+							<div class="box-header">
+								<!-- /. tools -->
+								<i class="fa fa-cny"></i>
+								<h3 class="box-title">本月营业额<span style="font-size: 14px;" id="gmv_danwei"></span></h3>
+							</div>
+							<div class="box-body">
+								<div id="main1" style="height: 160px; width: 100%;"></div>
+							</div>
+
+						</div>
+						<div class="box box-solid">
+							<div class="box-header">
+								<!-- /. tools -->
+								<i class="fa fa-star"></i>
+								<h3 class="box-title">频道<span style="font-size: 14px;">（本月）</span></h3>
+							</div>
+							<div class=" text-center" style="border-right: 1px solid #f4f4f4">
+								<div id="main3" style="height: 200px; width: 100%;"></div>
+								<!--<div class="knob-label">频道（本月）</div>-->
+							</div>
+
+							<div class="box-header">
+								<!-- /. tools -->
+								<i class="fa fa-users"></i>
+								<h3 class="box-title">事业群<span style="font-size: 14px;">（本月）</span></h3>
+							</div>
+							<div class=" text-center" style="border-right: 1px solid #f4f4f4;">
+								<div id="main2" style="height: 200px; width: 100%; "></div>
+
+							</div>
+
+						</div>
+
+						<div class="box box-solid bg-teal-gradient">
+							<div class="box-header">
+								<i class="fa fa-th"></i>
+								<h3 class="box-title">本周消费用户数<span style="font-size: 14px;" id="danwei"></span></h3>
+							</div>
+							<div class="box-body border-radius-none">
+								<div class="chart" id="main4" style="height: 160px; width: 100%"></div>
+							</div>
+
+						</div>
+
+						<div class="box box-solid bg-red-gradient">
+							<div class="box-header">
+								<i class="fa fa-th"></i>
+								<h3 class="box-title">本周新增用户数<span style="font-size: 14px;" id="new_danwei"></span></h3>
+							</div>
+							<div class="box-body border-radius-none">
+								<div class="chart" id="main5" style="height: 160px; width: 100%"></div>
+							</div>
+						</div>
+
+					</section>
+				</div>
+				<!-- /.content -->
+				<!-- footer -->
+				<footer>
+					<a class="col-xs-4 mark-green" id="web_city_ej" href="javascript:void(0)">
+						<p><i class="fa fa-bar-chart-o"></i></p>动态</a>
+					<a class="col-xs-4" id="web_message" path="web_message.html" onclick="jump(this)">
+						<p><i class="fa fa-envelope-o"></i></p>消息
+						<div id="message_state_div"></div>
+					</a>
+					<a class="col-xs-4" id="new_city_my" path="new_city_my.html" onclick="jump(this)">
+						<p><i class="fa fa-user"></i></p>我</a>
+
+				</footer>
+				<!-- /.footer-->
+				<div class="mui-off-canvas-backdrop"></div>
+			</div>
+			
+			
+			<aside id="offCanvasSide" class="main-sidebar mui-off-canvas-left">
+				<section id="offCanvasSideScroll" class="sidebar" style="padding-top: 0; font-size: 14px;">
+					<div class="user-panel">
+						<div class="text-center image">
+							<img src="" class="img-circle" data-preview-src="" data-preview-group="1">
+							<p style="margin-top: 10px;"><strong id="user_name"></strong></p>
+							<p style="margin-top: 10px;"><span id="user_zw"></span><span id="user_employeeid"></span></p>
+						</div>
+					</div>
+					<ul class="sidebar-menu">
+						<li class="treeview">
+							<a onclick="toUpdatePassword()">
+								<span>修改密码</span> <i class="fa  fa-angle-right pull-right"></i>
+							</a>
+						</li>
+						<li class="text-center" style="margin-top: 2rem;">
+							<a id="btnLogout">退出登录</a>
+						</li>
+
+					</ul>
+				</section>
+			</aside>
+
+		</div>
+		<!-- ./wrapper -->
+
+		<!-- jQuery 2.2.0 -->
+		<script src="../js/jQuery-2.2.0.min.js"></script>
+		<!-- Bootstrap 3.3.6 -->
+		<script src="../js/bootstrap.min.js"></script>
+		<!-- Morris.js charts -->
+		<script src="../js/raphael-min.js"></script>
+		<!--<script src="plugins/morris/morris.min.js"></script>-->
+		<!-- FastClick -->
+		<script src="../js/fastclick.js"></script>
+		<!-- AdminLTE App -->
+		<script src="../js/app.min.js"></script>
+		<script src="../js/mui.min.js"></script>
+			<script src="../js/mui.picker.js"></script>
+		<script src="../js/mui.picker.min.js"></script>
+		<script src="../js/mui.poppicker.js"></script>
+		<script src="https://pv.sohu.com/cityjson?ie=utf-8"></script>
+		<script type="text/javascript" src="../js/custom_common.js"></script>
+		<!-- echarts -->
+		<script src="../js/echarts.common.min.js"></script>
+		<script src="../js/date_util.js"></script>
+		<script src="../js/previewimage.js"></script>
+		<script src="../js/mui.zoom.js"></script>
+		<!-- page script -->
+		<script src="../js/jquery.dataStatistics.js"></script>
+		<script>
+			//			$(document).ready(function() {
+			//				//  $('.dataStatistics').dataStatistics({min:1,max:146,time:200000,len:8});
+			//				
+			//			});
+
+			function timer(opj) {
+				$(opj).find('ul').animate({
+					marginTop: "-1.6rem"
+				}, 500, function() {
+					$(this).css({
+						marginTop: "0"
+					}).find("li:first").appendTo(this);
+				})
+			}
+			$(function() {
+				var num = $('.notice_active').find('li').length;
+				if(num > 1) {
+					var time = setInterval('timer(".notice_active")', 3500);
+					$('.gg_more a').mousemove(function() {
+						clearInterval(time);
+					}).mouseout(function() {
+						time = setInterval('timer(".notice_active")', 3500);
+					});
+				}
+
+				$(".news_ck").click(function() {
+					location.href = $(".notice_active .notice_active_ch").children(":input").val();
+				})
+			});
+		</script>
+		<script>
+			//营业额
+			var myChart1 = echarts.init(document.getElementById('main1'));
+			//事业群
+			var myChart2 = echarts.init(document.getElementById('main2'));
+			//频道
+			var myChart3 = echarts.init(document.getElementById('main3'));
+			//消费用户
+			var myChart4 = echarts.init(document.getElementById('main4'));
+			//拉新用户
+			var myChart5 = echarts.init(document.getElementById('main5'));
+		
+
+			option1 = {
+				tooltip: {
+					trigger: 'axis',
+				},
+				grid: {
+					borderWidth: 0,
+					top: 10,
+					bottom: 30,
+					textStyle: {
+						color: "#fff"
+					}
+
+				},
+				xAxis: {
+					//					data: dataAxis,
+					data: [],
+					axisLabel: {
+
+						textStyle: {
+							color: '#f1f1f1'
+						}
+					},
+					axisTick: {
+						show: false
+					},
+					axisLine: {
+						show: true,
+						lineStyle: {
+							color: '#f1f1f1'
+						}
+					},
+					z: 10
+				},
+				yAxis: {
+					axisLine: {
+						show: true,
+						lineStyle: {
+							color: '#f1f1f1'
+						}
+
+					},
+					axisTick: {
+						show: false
+					},
+					axisLabel: {
+						textStyle: {
+							color: '#f1f1f1'
+						},
+						formatter: function(value) {
+							var texts = [];
+							if(value == 0) {
+								texts.push(value);
+							} else if(max_count >= 1000 && max_count < 10000) {
+								texts.push(value / 1000);
+								$("#gmv_danwei").html("(单位:千)");
+							} else if(max_count >= 10000 && max_count < 100000) {
+								texts.push(value / 10000);
+								$("#gmv_danwei").html("(单位:万)");
+							} else if(max_count >= 100000 && max_count < 1000000) {
+								texts.push(value / 100000);
+								$("#gmv_danwei").html("(单位:十万)");
+							} else if(max_count >= 1000000 && max_count < 10000000) {
+								texts.push(value / 1000000);
+								$("#gmv_danwei").html("(单位:百万)");
+							} else if(max_count >= 10000000 && max_count < 100000000) {
+								texts.push(value / 10000000);
+								$("#gmv_danwei").html("(单位:千万)");
+							} else if(max_count >= 100000000 && max_count < 1000000000) {
+								texts.push(value / 100000000);
+								$("#gmv_danwei").html("(单位:亿)");
+							}
+
+							return texts;
+
+						}
+					}
+
+				},
+				dataZoom: [{
+					type: 'inside'
+				}],
+				series: [{ // For shadow
+						type: 'bar',
+						name: "最大值",
+						itemStyle: {
+							normal: {
+								color: 'rgba(0,0,0,0)'
+							}
+						},
+						barGap: '-100%',
+						barCategoryGap: '40%',
+						data: [],
+						animation: false
+					},
+					{
+						type: 'bar',
+						name: "当前值",
+						itemStyle: {
+							normal: {
+								color: new echarts.graphic.LinearGradient(
+									0, 0, 0, 1, [{
+											offset: 0,
+											color: '#fff'
+										},
+										{
+											offset: 0.5,
+											color: '#efefef'
+										},
+										{
+											offset: 1,
+											color: '#efefef'
+										}
+									]
+								)
+							},
+							emphasis: {
+								color: new echarts.graphic.LinearGradient(
+									0, 0, 0, 1, [{
+											offset: 0,
+											color: '#04e57d'
+										},
+										{
+											offset: 0.7,
+											color: '#04e57d'
+										},
+										{
+											offset: 1,
+											color: '#48f0a2'
+										}
+									]
+								)
+							}
+						},
+						data: []
+					}
+				]
+			};
+
+			// Enable data zoom when user click bar.
+			//			var zoomSize = 6;
+			//			myChart1.on('click', function(params) {
+			//				console.log(dataAxis[Math.max(params.dataIndex - zoomSize / 2, 0)]);
+			//				myChart1.dispatchAction({
+			//					type: 'dataZoom',
+			//					startValue: dataAxis[Math.max(params.dataIndex - zoomSize / 2, 0)],
+			//					endValue: dataAxis[Math.min(params.dataIndex + zoomSize / 2, data.length - 1)]
+			//				});
+			//			});
+			
+			var option2 = {
+
+				tooltip: {
+					trigger: 'item',
+					formatter: "{a} <br/>{b} : {c} ({d}%)",
+					position: ['20%', '80%']
+				},
+			
+				series: [{
+					name: '事业群',
+					type: 'pie',
+					radius: '50%',
+					
+					data: [],
+
+					itemStyle: {
+						emphasis: {
+							shadowBlur: 10,
+							shadowOffsetX: 0,
+							shadowColor: 'rgba(0, 0, 0, 0.5)'
+						}
+					}
+				}]
+			};
+
+			var option3 = {
+				tooltip: {
+					trigger: 'item',
+					formatter: "{a} <br/>{b} : {c} ({d}%)",
+					position: ['20%', '80%']
+				},
+
+				series: [{
+					name: '频道',
+					type: 'pie',
+					radius: ['30%', '50%'],
+					
+					data: [],
+					itemStyle: {
+						emphasis: {
+							shadowBlur: 20,
+							shadowOffsetX: 20,
+							shadowColor: 'rgba(0, 0, 0, 0.5)'
+						}
+					}
+				}]
+			};
+
+
+			option4 = {
+				tooltip: {
+					trigger: 'axis'
+				},
+				grid: {
+					borderWidth: 0,
+					top: 10,
+					bottom: 30,
+					textStyle: {
+						color: "#fff"
+					}
+				},
+				xAxis: {
+					type: 'category',
+					boundaryGap: false,
+					data: ['星期一', '星期二', '星期三', '星期四', '星期五', '星期六', '星期日'],
+					axisLine: {
+						lineStyle: {
+							color: '#f1f1f1'
+						}
+					},
+					splitLine: {
+						show: false
+					},
+					axisTick: {
+						show: false
+					},
+					splitArea: {
+						show: false
+					},
+					axisLabel: {
+						interval: 0,
+
+					}
+				},
+				yAxis: {
+					type: 'value',
+					splitLine: {
+						show: false
+					},
+					axisLine: {
+						lineStyle: {
+							color: '#f1f1f1'
+						}
+					},
+					axisTick: {
+						show: false
+					},
+					//					axisLabel: {
+					//						interval: 0,
+					//
+					//					},
+					splitArea: {
+						show: false
+					},
+					axisLabel: {
+						textStyle: {
+							color: '#f1f1f1'
+						},
+						formatter: function(value) {
+
+							var texts = [];
+							
+
+							if(value == 0) {
+								texts.push('0');
+							} else if(week_max_count < 1000 && week_max_count > 0) {
+								texts.push(value);
+							} else if(week_max_count >= 1000 && week_max_count < 10000) {
+								texts.push(value / 1000);
+								$("#danwei").html("(单位:千)");
+							} else if(week_max_count >= 10000 && week_max_count < 100000) {
+								texts.push(value / 10000);
+								$("#danwei").html("(单位:万)");
+							} else if(week_max_count >= 100000 && week_max_count < 1000000) {
+								texts.push(value / 100000);
+								$("#danwei").html("(单位:十万)");
+							} else if(week_max_count >= 1000000 && week_max_count < 10000000) {
+								texts.push(value / 1000000);
+								$("#danwei").html("(单位:百万)");
+							} else if(week_max_count >= 10000000 && week_max_count < 100000000) {
+								texts.push(value / 10000000);
+								$("#danwei").html("(单位:千万)");
+							} else if(week_max_count >= 100000000 && week_max_count < 1000000000) {
+								texts.push(value / 100000000);
+								$("#danwei").html("(单位:亿)");
+							}
+
+							return texts;
+
+						}
+					},
+				},
+				series: [{
+					data: [],
+					type: 'line',
+					smooth: true,
+					itemStyle: {
+						normal: {
+							color: '#f1f1f1',
+							borderWidth: 5,
+							borderColor: '#fff'
+						},
+
+					},
+				}]
+			};
+			option5 = {
+				tooltip: {
+					trigger: 'axis'
+				},
+				grid: {
+					borderWidth: 0,
+					top: 10,
+					bottom: 30,
+					textStyle: {
+						color: "#fff"
+					}
+				},
+				xAxis: {
+					type: 'category',
+					boundaryGap: false,
+					data: ['星期一', '星期二', '星期三', '星期四', '星期五', '星期六', '星期日'],
+					axisLine: {
+						lineStyle: {
+							color: '#f1f1f1'
+						}
+					},
+					splitLine: {
+						show: false
+					},
+					axisTick: {
+						show: false
+					},
+					splitArea: {
+						show: false
+					},
+					axisLabel: {
+						interval: 0,
+
+					}
+				},
+				yAxis: {
+					type: 'value',
+					splitLine: {
+						show: false
+					},
+					axisLine: {
+						lineStyle: {
+							color: '#f1f1f1'
+						}
+					},
+					axisTick: {
+						show: false
+					},
+					//					axisLabel: {
+					//						interval: 0,
+					//
+					//					},
+					splitArea: {
+						show: false
+					},
+					axisLabel: {
+						textStyle: {
+							color: '#f1f1f1'
+						},
+						formatter: function(value) {
+
+							var texts = [];
+							
+
+							if(value == 0) {
+								texts.push('0');
+							} else if(week_max_newcount < 1000 && week_max_newcount > 0) {
+								texts.push(value);
+							} else if(week_max_newcount >= 1000 && week_max_newcount < 10000) {
+								texts.push(value / 1000);
+								$("#new_danwei").html("(单位:千)");
+							} else if(week_max_newcount >= 10000 && week_max_newcount < 100000) {
+								texts.push(value / 10000);
+								$("#new_danwei").html("(单位:万)");
+							} else if(week_max_newcount >= 100000 && week_max_newcount < 1000000) {
+								texts.push(value / 100000);
+								$("#new_danwei").html("(单位:十万)");
+							} else if(week_max_newcount >= 1000000 && week_max_newcount < 10000000) {
+								texts.push(value / 1000000);
+								$("#new_danwei").html("(单位:百万)");
+							} else if(week_max_newcount >= 10000000 && week_max_newcount < 100000000) {
+								texts.push(value / 10000000);
+								$("#new_danwei").html("(单位:千万)");
+							} else if(week_max_newcount >= 100000000 && week_max_newcount < 1000000000) {
+								texts.push(value / 100000000);
+								$("#new_danwei").html("(单位:亿)");
+							}
+
+							return texts;
+
+						}
+					},
+				},
+				series: [{
+					data: [],
+					type: 'line',
+					smooth: true,
+					itemStyle: {
+						normal: {
+							color: '#f1f1f1',
+							borderWidth: 5,
+							borderColor: '#fff'
+						},
+
+					},
+				}]
+			};
+
+
+			var employee = JSON.parse(localStorage.getItem('employee'));
+			var select_areaid = JSON.parse(localStorage.getItem('selectArea_id'));
+			var select_area_list = JSON.parse(localStorage.getItem('selectArea_list'));
+			var employee_pic = JSON.parse(localStorage.getItem('employee_pic'));
+			var txtEmployee;
+			var city_id;
+			var city_name;
+			var now = new Date();
+			var nowTime = now.getTime();
+			var day = now.getDay();
+			var oneDayTime = 24 * 60 * 60 * 1000;
+			var max_count;
+			var week_max_count;
+			var week_max_newcount;
+			mui.previewImage();
+			mui.init({
+				swipeBack: false
+			});
+			mui.plusReady(function() {
+				initView();
+				if('Android' == plus.os.name) {
+					var first = null;
+					mui.back = function() {
+						if(!first) {
+							first = new Date().getTime();
+							mui.toast('再按一次退出应用');
+							setTimeout(function() {
+								first = null;
+							}, 1000);
+						} else {
+							if(new Date().getTime() - first < 1000) {
+								plus.runtime.quit();
+							}
+						}
+					}
+				}
+				//退出
+				var t_username = localStorage.getItem("employee_key");
+				mui('#btnLogout')[0].addEventListener('click', function(event) {
+					setTimeout(function() {
+						var webview = plus.webview.getWebviewById('login');
+						if(webview != null) {
+							webview.close();
+						}
+						localStorage.clear();
+						localStorage.setItem("employee_key", t_username);
+						mui.openWindow({
+							url: '../login.html',
+							id: 'login',
+							createNew: true,
+							show: {
+								aniShow: "slide-in-right"
+							},
+							waiting: {
+								autoShow: false
+							}
+						});
+					}, 50);
+				});
+			});
+//			$(document).ready(function() {
+//				$('#select_store').change(function() {
+//					var cityid = $('#select_store option:selected').val();
+//					var cityname = $('#select_store option:selected').text();
+//					$("#monthcustomer").html("--");
+//					$("#newmonthcustomer").html("--");
+//					city_id = cityid;
+//					city_name = cityname;
+//					if(mui.os.ios) {
+//						getDailyData();
+//						setTimeout(function() {
+//							getData();
+//
+//						}, 500);
+//					} else {
+//
+//						getDailyData();
+//						getData();
+//
+//					}
+//				});
+//			});
+
+			function initView() {
+
+//				if('Android' == plus.os.name) {
+//					$('#select_store').removeClass("select_ios");
+//					$('#select_store').addClass("select");
+//				} else {
+////					$('#select_store').removeClass("select");
+////					$('#select_store').addClass("select_ios");
+//				}
+
+				if(employee != null) {
+					getCity(employee.id);
+					if(employee.name == null || employee.name == "") {
+						$("#user_name").html("无数据");
+					} else {
+						$("#user_name").html(employee.name);
+					}
+					if(employee.zw == null || employee.zw == "") {
+						$("#user_zw").text("无数据");
+					} else {
+						$("#user_zw").text(employee.zw);
+					}
+
+					if(employee.employeeId == null || employee.employeeId == "") {
+						$("#user_employeeid").text("无数据");
+					} else {
+						$("#user_employeeid").text(employee.employeeId);
+					}
+
+					if(employee.store_name == null || employee.store_name == "") {
+						$("#store_name").html("无数据");
+					} else {
+						$("#store_name").html(employee.store_name);
+					}
+
+				}
+				if(employee_pic != null) {
+					if(employee_pic.pngUrl != null && employee_pic.pngUrl != "" && employee_pic.pngUrl != "https://imgcdn.guoanshequ.com/") {
+						$(".img-circle").attr("src", decodeURI(employee_pic.pngUrl));
+					} else {
+						$(".img-circle").attr("src", "../images/my_card_head.png");
+					}
+
+				} else {
+					$(".img-circle").attr("src", "../images/my_card_head.png");
+				}
+
+			}
+			//获取城市人员管理城市列表
+			function getCity(employee_no) {
+				
+				var employeePicker = new mui.PopPicker();
+			    txtEmployee=mui('#city_select')[0];
+		
+			
+				doManager('StoreManager', 'getCityNameOfCSZJ', [employee_no, null], function(data) {
+					var jsonData = JSON.parse(data.data);
+					if(data.result == true) {
+						var employeeData = new Array();
+						if(jsonData.citylist != null || jsonData.citylist != "") {
+							$(jsonData.citylist).each(function(index, city) {
+								var itemData = {
+									value:city.ctid,
+									text: city.name
+								};
+								employeeData.push(itemData);
+//								if(index == 0) {
+//									city_id = city.ctid;
+//									city_name = city.name;
+//									$('#select_store').append('<option selected="selected" value=' + city.ctid + '>' + city.name + '</option>');
+//								} else {
+//									$('#select_store').append('<option value=' + city.ctid + '>' + city.name + '</option>');
+//								}
+
+							});
+							
+							city_id = employeeData[0].value;
+							city_name = employeeData[0].text;
+							$("#city_span").html(employeeData[0].text);
+							employeePicker.setData(employeeData);
+
+							getDailyData();
+
+							setTimeout(function() {
+								getData();
+							}, 500);
+						
+						}
+					}
+				});
+				txtEmployee.addEventListener('tap', function(event) {
+				employeePicker.show(function(items) {
+				
+					$("#city_span").html(items[0].text);
+					city_id = items[0].value;
+					city_name =items[0].text;
+					$("#monthcustomer").html("--");
+					$("#newmonthcustomer").html("--");
+					if(mui.os.ios) {
+						getDailyData();
+						setTimeout(function() {
+							getData();
+
+						}, 500);
+					} else {
+
+						getDailyData();
+						getData();
+
+					}
+					
+					
+
+				});
+				
+			}, false);
+			}
+			//获取当日累计营业额(元)数据定时刷新
+			function getDailyData() {
+				getActualMothlyTurnover();
+				timerId = setInterval(getActualMothlyTurnover, 2000);
+			}
+
+			//获取当月实时营业额
+			function getActualMothlyTurnover() {
+				var dynamicDto = {
+					cityId: city_id
+				}
+				doManager('InterManager', 'queryActualMothlyTurnover', dynamicDto, function(data) {
+					var jsonData = JSON.parse(data.data);
+					if(data.result == true) {
+						var totle_price = jsonData.dataMap.history_week_amount;
+						var totalprice = totle_price + '';
+						if(totalprice.indexOf(".") > 0) {
+							totalprice = totalprice.substring(0, totalprice.lastIndexOf("."));
+						}
+						if(totalprice.length > 8) {
+							dojob(totalprice.substring(0, totalprice.length));
+						} else {
+							totalprice = "000000000" + totalprice;
+							dojob(totalprice.substring(totalprice.length - 9, totalprice.length));
+						}
+
+					}
+				});
+			}
+			var ns = [];
+			var changeno = "";
+			var srcnumber = "";
+
+			function dojob(now_number) {
+				//$(".dataStatistics").html("");
+				var ths = $(".dataStatistics"); //解决this指向问题
+				var html = '<div class="digit">' +
+					'  <div class="digit_top">' +
+					'    <span class="digit_wrap"></span>' +
+					'  </div>' +
+					'  <div class="shadow_top"></div>' +
+					'  <div class="digit_bottom">' +
+					'    <span class="digit_wrap"></span>' +
+					'  </div>' +
+					'  <div class="shadow_bottom"></div>' +
+					'</div>';
+
+				var htmlactive = '<div class="digit active">' +
+					'  <div class="digit_top">' +
+					'    <span class="digit_wrap"></span>' +
+					'  </div>' +
+					'  <div class="shadow_top"></div>' +
+					'  <div class="digit_bottom">' +
+					'    <span class="digit_wrap"></span>' +
+					'  </div>' +
+					'  <div class="shadow_bottom"></div>' +
+					'</div>';
+				var htmlprevious = '<div class="digit previous active">' +
+					'  <div class="digit_top">' +
+					'    <span class="digit_wrap"></span>' +
+					'  </div>' +
+					'  <div class="shadow_top"></div>' +
+					'  <div class="digit_bottom">' +
+					'    <span class="digit_wrap"></span>' +
+					'  </div>' +
+					'  <div class="shadow_bottom"></div>' +
+					'</div>';
+
+				var nowNums = now_number.split("");
+
+				changeno = "";
+				for(var i = 0; i < 9; i++) {
+					if(nowNums[i] != ns[i]) {
+						ns[i] = nowNums[i];
+						changeno += i + "";
+					}
+				}
+				var isbefore = true; //标记第一位是否0,0显示空
+				var countsign = 1;
+				ths.find('.digit_set').each(function(index, obj) {
+					$(this).empty();
+					if(srcnumber != now_number && changeno.indexOf(index) > -1) { //如果相等  样式不变 
+						$(this).append(htmlactive);
+						$(this).append(htmlprevious);
+					} else {
+						$(this).append(html);
+					}
+
+					var nowNumber = nowNums[index];
+					if(nowNumber == 0 && isbefore) {
+						nowNumber = "";
+						$(this).hide();
+					} else {
+						isbefore = false;
+						$(this).show();
+					}
+					if(index == 8 && nowNumber == "") {
+						nowNumber = "0";
+						$(this).show();
+					}
+					countsign++;
+					if(nowNumber != "") {
+						$(this).find('.digit_wrap').append(nowNumber);
+					}
+				});
+				srcnumber = now_number;
+				if(parseInt(now_number) < 1000000) {
+					$("#dou1").hide();
+					if(parseInt(now_number) < 1000) {
+						$("#dou2").hide();
+					} else {
+						$("#dou2").show();
+					}
+				} else {
+					$("#dou1").show();
+					$("#dou2").show();
+				}
+			}
+			//跳转到修改密码
+			function toUpdatePassword() {
+				setTimeout(function() {
+					var webview = plus.webview.getWebviewById('update_password');
+					if(webview != null) {
+						webview.close();
+					}
+					mui.openWindow({
+						url: 'update_password.html',
+						id: 'update_password',
+						createNew: true,
+						show: {
+							aniShow: 'slide-in-right'
+						},
+						waiting: {
+							autoShow: false
+						}
+					});
+				}, 0);
+			};
+	
+
+			function getData() {
+			
+
+				var dynamicDto = {
+					cityId: city_id,
+					cityName: city_name
+				}
+				doManager('InterManager', 'getCityWebViewData', dynamicDto, function(data) {
+					if(data.result == true) {
+
+						var jsonData = JSON.parse(data.data);
+						var dateArry = new Array();
+						var relationArry = new Array();
+						var option2Arry = new Array();
+						var option3Arry = new Array();
+						var option4Arry = new Array();
+						var option5Arry = new Array();
+						var option6Arry = new Array();
+						var option7Arry = new Array();
+						var maxArry = new Array();
+						var newmaxArry = new Array();
+						$(jsonData.DailyTurnover.data.lst_data).each(function(index, day_gmv) {
+							dateArry[index] = day_gmv.week_date + "号";
+							relationArry[index] = day_gmv.storecur_all_price;
+
+						});
+
+						var yMax = jsonData.DailyTurnover.data.max_price[0].max_all_price;
+						max_count = yMax;
+						var dataShadow = [];
+						
+						for(var i = 0; i < relationArry.length; i++) {
+							dataShadow.push(yMax);
+						}
+					
+						if(jsonData.TradeDepMonthlyGMV.code == 200) {
+							$(jsonData.TradeDepMonthlyGMV.dataMap.trade_dep_monthly_amount.gmv).each(function(index, gmv) {
+								var data_ = {
+									value: gmv.order_amount,
+									name: gmv.dep_name==''?'--':gmv.dep_name
+								};
+
+								option2Arry[index] = data_;
+
+							});
+
+						}
+						if(jsonData.TradeChannelGMV.code == 200) {
+							$(jsonData.TradeChannelGMV.dataMap.trade_channel_monthly_amount.gmv).each(function(index, channelgmv) {
+								var data_ = {
+									value: channelgmv.order_amount,
+									name: channelgmv.channel_name==''?'暂无':channelgmv.channel_name
+								};
+								option3Arry[index] = data_;
+
+							});
+
+						}
+					
+						$(jsonData.CustomerCountForWeek.data.lst_data).each(function(index, week_gmv) {
+
+							option4Arry[index] = week_gmv.month_customer_count;
+							maxArry[index] = week_gmv.month_customer_count;
+							option5Arry[index] = week_gmv.new_customer_count;
+							newmaxArry[index] = week_gmv.new_customer_count;
+
+						});
+
+						sortarr(maxArry);
+						sortarr2(newmaxArry);
+						//					
+						$("#monthcustomer").html(jsonData.MonthCustomerCount.data.month_customer_count == null ? "0" : jsonData.MonthCustomerCount.data.month_customer_count);
+						$("#newmonthcustomer").html(jsonData.CustomerStatBycity.dataMap.cur_month_new_cus_count == null ? "0" : jsonData.CustomerStatBycity.dataMap.cur_month_new_cus_count);
+
+						//日期
+						option1.xAxis.data = dateArry;
+						option2.series[0].data = option2Arry;
+						
+
+						option3.series[0].data = option3Arry;
+						option4.series[0].data = option4Arry;
+						option5.series[0].data = option5Arry;
+						
+
+						//每日数据
+						option1.series[0].data = dataShadow;
+						//最大值
+						option1.series[1].data = relationArry;
+						myChart1.setOption(option1);
+						myChart2.setOption(option2);
+						myChart3.setOption(option3);
+						myChart4.setOption(option4);
+						myChart5.setOption(option5);
+						
+
+					}
+
+				});
+
+			}
+			
+			//小到大排序
+			function sortarr(arr) {
+				for(i = 0; i < arr.length - 1; i++) {
+					for(j = 0; j < arr.length - 1 - i; j++) {
+						if(arr[j] > arr[j + 1]) {
+							var temp = arr[j];
+							arr[j] = arr[j + 1];
+							arr[j + 1] = temp;
+						}
+					}
+				}
+				week_max_count = arr[arr.length - 1];
+
+			}
+
+			function sortarr2(arr) {
+				for(i = 0; i < arr.length - 1; i++) {
+					for(j = 0; j < arr.length - 1 - i; j++) {
+						if(arr[j] > arr[j + 1]) {
+							var temp = arr[j];
+							arr[j] = arr[j + 1];
+							arr[j + 1] = temp;
+						}
+					}
+				}
+
+				week_max_newcount = arr[arr.length - 1];
+
+			}
+			
+		
+		</script>
+
+	</body>
+
+</html>

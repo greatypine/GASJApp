@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>地采社区、小区信息查询添加</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<!--标准mui.css-->
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="../css/common.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/style.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/address_selectandadd.css"/>
+		<style>
+		
+		</style>
+		
+		
+	</head>
+
+	<body style="background-color: #fff;">
+		<header class="mui-bar mui-bar-nav titleheader">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title"></h1>
+		</header>
+		
+		
+		<div class="list-item layout" style="display: block;padding-top: 1.8rem;">
+			<ul>
+				
+				<li class="mui-input-row">
+					<input class="mui-input-clear" type="text" id="address_name" name="address_name" placeholder=""/>
+				</li>
+				<li class="mui-input-row" style="display: none;">
+					<input class="mui-input-clear" type="text" id="address" name="address" placeholder="地址"/>
+				</li>
+				
+				
+			</ul>
+			<div class="select_btn" style="margin-bottom: 0.5rem;">
+				<button id="btnQuery" style="display: none;">查询</button>
+				<button id="btnAdd" style="display: none;">添加</button>
+			</div>
+			
+			<!--预留显示查询内容-->
+				
+			<div class="mui-bar" id="building_list" style="overflow: auto;margin-bottom:1rem;height: 50%; background-color:#fff;color:#666;-webkit-box-shadow: 0 0 0 ;">
+				
+			</div>
+		</div>
+		
+
+	</body>
+	<script src="../js/mui.min.js"></script>
+	<script src="../js/custom_common.js"></script>
+	<script src="../js/date_util.js"></script>
+	<script src="../js/jquery-2.2.2.min.js"></script>
+	<script type="text/javascript">
+//	var customer_count=null;
+	var customer_count_type=null;
+	var employee_no=null;
+	var store_id=null;
+	
+	
+	var matching_title=null;
+	var matching_type=null;
+	var employee = JSON.parse(localStorage.getItem('employee'));
+			
+		mui.init({
+			swipeBack:true //启用右滑关闭功能
+		});
+		//社区查询刷新
+		window.addEventListener('setcommunityinput',function(event){
+			var community = event.detail.community;
+			if(community != null) {
+				if(community.community_name != null){
+					$('#address_name').val(community.community_name);
+				}
+				doQueryCommunity();
+			}
+		});
+		//小区查询刷新
+		window.addEventListener('setresidentialareainput',function(event){
+			var residentialarea = event.detail.residentialarea;
+			if(residentialarea != null) {
+				if(residentialarea.residentialarea_name != null){
+					$('#address_name').val(residentialarea.residentialarea_name);
+				}
+				doQueryResidentialArea();
+			}
+		});
+		
+		mui.plusReady(function(){
+			var self = plus.webview.currentWebview();
+			matching_title = self.matching_title;
+			matching_type=self.matching_type;
+			$('h1').html(matching_title);
+			if(matching_type=='community_information'){
+				$("#btnQuery").css("display","");
+                $("#btnQuery").css("width","100%");
+				$('#address_name').attr('placeholder','社区名称')
+			}else if(matching_type=='residential_area_information'){
+				$('#address_name').attr('placeholder','小区名称')
+				$("#btnQuery").css("display","");
+				$("#btnAdd").css("display","");
+			}
+			
+			var store = JSON.parse(localStorage.getItem("store"));
+			var usergroup = JSON.parse(localStorage.getItem("usergroup"));
+			employee_no=employee.employeeId;
+            if(store == null||store.store_id == null||store.store_id ==""){
+			    store_id=null;
+			}else{
+				store_id=store.store_id;
+			}
+			mui('#btnAdd')[0].addEventListener('tap',function(event){
+				
+//				if(store==null||store==""){
+//					mui.toast('没有所属门店不能添加信息！');
+//				}else{
+//					toContent(matching_type);
+//				}
+				toContent(matching_type);
+				
+			});
+			
+			mui('#btnQuery')[0].addEventListener('tap',function(event){
+				if(matching_type=='community_information'){
+					doQueryCommunity();
+				}else if(matching_type=='residential_area_information'){
+					doQueryResidentialArea();
+				}
+				
+			});
+			
+		});
+		//根据参数跳转到社区信息、小区信息页面
+		function toContent(to_id){
+			var webview = plus.webview.getWebviewById(to_id);
+				if(webview != null){
+					webview.close();
+				}
+				mui.openWindow({
+					url:to_id+'.html',
+					id:to_id,
+					createNew:true,
+					show: {
+					aniShow: "slide-in-right"
+					},
+					waiting: {
+						autoShow: false
+					}
+				});
+		}
+		//社区查询
+		function doQueryCommunity(){
+			var str_name = $('#address_name').val();
+			var str_address = $('#address').val(); 
+			
+			if(!checkValue(str_name) && !checkValue(str_address)
+				&& !checkValue(str_address)){
+				mui.toast('请输入查询条件！');
+				return;
+			}
+			
+			
+			var business_params = {
+				name:str_name
+			};
+			doManager('VillageManager','getVillageByVillage_name',business_params,function(data){
+				if(data.result){
+					var jsonData = JSON.parse(data.data);
+					if(jsonData.code == 200){
+						var $div_clist = $('#building_list');
+						$div_clist.children().remove();
+						if(jsonData.villageList.length == 0){
+							mui.toast('未查询到用户信息!');
+							return;
+						}
+						$(jsonData.villageList).each(function(index,community){
+							$div_clist.append('<div class="customer_row"><div>');
+							var $div_row = $div_clist.find('div:last');
+							$div_row.click(function(){
+								var webview = plus.webview.getWebviewById(matching_type);
+								if(webview != null){
+									webview.close();
+								}
+								mui.openWindow({
+									url:matching_type+'.html',
+									id: matching_type,
+									createNew:true,
+									show: {
+									aniShow: "slide-in-right"
+									},
+									waiting: {
+										autoShow: false
+									},
+									extras:{
+										community:JSON.stringify(community)
+									}
+								});
+							});
+							$div_row.append('<ul></ul>');
+							var $ul_row = $div_row.find('ul:last');
+							$ul_row.append('<li>社区名称：<span>'+community.name+'</span></li>')
+							$ul_row.append('<li>街道：<span>'+community.town_name+'</span></li>')
+						});
+						
+					}else{
+						mui.toast(jsonData.message);
+					}
+				}else{
+					mui.toast('查询失败!');
+				}
+			});
+		}
+		
+		
+		//小区查询
+		function doQueryResidentialArea(){
+			var str_name = $('#address_name').val();
+			var str_address = $('#address').val(); 
+			
+			if(!checkValue(str_name) && !checkValue(str_address)
+				&& !checkValue(str_address)){
+				mui.toast('查询条件请至少输入一项！');
+				return;
+			}
+			
+			
+			var residentialarea_params = {
+				name:str_name
+			};
+			doManager('TinyVillageManager','getAppTinyVillageInfo',residentialarea_params,function(data){
+				if(data.result){
+					var jsonData = JSON.parse(data.data);
+					if(jsonData.code == 200){
+						var $div_clist = $('#building_list');
+						$div_clist.children().remove();
+						if(jsonData.tinyVillageList.length == 0){
+							mui.toast('未查询到用户信息!');
+							return;
+						}
+						$(jsonData.tinyVillageList).each(function(index,residentialarea){
+							$div_clist.append('<div class="customer_row"><div>');
+							var $div_row = $div_clist.find('div:last');
+							$div_row.click(function(){
+								var webview = plus.webview.getWebviewById(matching_type);
+								if(webview != null){
+									webview.close();
+								}
+								mui.openWindow({
+									url:matching_type+'.html',
+									id: matching_type,
+									createNew:true,
+									show: {
+									aniShow: "slide-in-right"
+									},
+									waiting: {
+										autoShow: false
+									},
+									extras:{
+										residentialarea:JSON.stringify(residentialarea)
+									}
+								});
+							});
+							$div_row.append('<ul></ul>');
+							var $ul_row = $div_row.find('ul:last');
+							$ul_row.append('<li>小区名称：<span>'+residentialarea.name+'</span></li>')
+							$ul_row.append('<li>街道：<span>'+residentialarea.town_name+'</span></li>')
+						});
+						
+					}else{
+						mui.toast(jsonData.message);
+					}
+				}else{
+					mui.toast('查询失败!');
+				}
+			});
+		}
+		
+	</script>
+</html>

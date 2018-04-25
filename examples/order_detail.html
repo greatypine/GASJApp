@@ -1,0 +1,999 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>快递订单详情页面</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<!--标准mui.css-->
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="../css/common.css" />
+		<link rel="stylesheet" type="text/css" href="../css/style.css" />
+		<link rel="stylesheet" type="text/css" href="../css/my.css" />
+		<link rel="stylesheet" type="text/css" href="../css/order_detail.css" />
+		<link rel="stylesheet" type="text/css" href="../css/mui.picker.min.css" />
+		<link href="../css/mui.picker.css" rel="stylesheet" />
+		<link href="../css/mui.poppicker.css" rel="stylesheet" />
+		<script type="text/javascript" src="../js/common.js"></script>
+		<style>
+			.userinfostyle {
+				height: 1.6rem;
+				width: 1.6rem;
+				border: 1px;
+				background: #ffab33;
+				border-radius: 50%;
+				margin: 0.2rem auto 0.2rem auto;
+			}
+			
+			.express img {
+				height: 1.5rem;
+				width: 1.5rem;
+				margin: 0.3rem 0 0.15rem 0;
+			}
+			
+			.mui-table-view {
+				line-height: 1rem;
+				font-size: 0.36rem;
+			}
+			
+			.mui-table-view a {
+				display: block;
+			}
+			
+			.hdata {
+				color: #e1673e;
+				font-size: 14px;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+			}
+			
+			.mui-preview-image.mui-fullscreen {
+				position: fixed;
+				z-index: 20;
+				background-color: #000;
+			}
+			
+			.mui-preview-header,
+			.mui-preview-footer {
+				position: absolute;
+				width: 100%;
+				left: 0;
+				z-index: 10;
+			}
+			
+			.mui-preview-header {
+				height: 44px;
+				top: 0;
+			}
+			
+			.mui-preview-footer {
+				height: 50px;
+				bottom: 0px;
+			}
+			
+			.mui-preview-header .mui-preview-indicator {
+				display: block;
+				line-height: 25px;
+				color: #fff;
+				text-align: center;
+				margin: 15px auto 4;
+				width: 70px;
+				background-color: rgba(0, 0, 0, 0.4);
+				border-radius: 12px;
+				font-size: 16px;
+			}
+			
+			.mui-preview-image {
+				display: none;
+				-webkit-animation-duration: 0.5s;
+				animation-duration: 0.5s;
+				-webkit-animation-fill-mode: both;
+				animation-fill-mode: both;
+			}
+			
+			.mui-preview-image.mui-preview-in {
+				-webkit-animation-name: fadeIn;
+				animation-name: fadeIn;
+			}
+			
+			.mui-preview-image.mui-preview-out {
+				background: none;
+				-webkit-animation-name: fadeOut;
+				animation-name: fadeOut;
+			}
+			
+			.mui-preview-image.mui-preview-out .mui-preview-header,
+			.mui-preview-image.mui-preview-out .mui-preview-footer {
+				display: none;
+			}
+			
+			.mui-zoom-scroller {
+				position: absolute;
+				display: -webkit-box;
+				display: -webkit-flex;
+				display: flex;
+				-webkit-box-align: center;
+				-webkit-align-items: center;
+				align-items: center;
+				-webkit-box-pack: center;
+				-webkit-justify-content: center;
+				justify-content: center;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				top: 0;
+				width: 100%;
+				height: 100%;
+				margin: 0;
+				-webkit-backface-visibility: hidden;
+			}
+			
+			.mui-zoom {
+				-webkit-transform-style: preserve-3d;
+				transform-style: preserve-3d;
+			}
+			
+			.mui-slider .mui-slider-group .mui-slider-item img {
+				width: auto;
+				height: auto;
+				max-width: 100%;
+				max-height: 100%;
+			}
+			
+			.mui-android-4-1 .mui-slider .mui-slider-group .mui-slider-item img {
+				width: 100%;
+			}
+			
+			.mui-android-4-1 .mui-slider.mui-preview-image .mui-slider-group .mui-slider-item {
+				display: inline-table;
+			}
+			
+			.mui-android-4-1 .mui-slider.mui-preview-image .mui-zoom-scroller img {
+				display: table-cell;
+				vertical-align: middle;
+			}
+			
+			.mui-preview-loading {
+				position: absolute;
+				width: 100%;
+				height: 100%;
+				top: 0;
+				left: 0;
+				display: none;
+			}
+			
+			.mui-preview-loading.mui-active {
+				display: block;
+			}
+			
+			.mui-preview-loading .mui-spinner-white {
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				margin-left: -25px;
+				margin-top: -25px;
+				height: 50px;
+				width: 50px;
+			}
+			
+			.mui-preview-image img.mui-transitioning {
+				-webkit-transition: -webkit-transform 0.5s ease, opacity 0.5s ease;
+				transition: transform 0.5s ease, opacity 0.5s ease;
+			}
+			
+			@-webkit-keyframes fadeIn {
+				0% {
+					opacity: 0;
+				}
+				100% {
+					opacity: 1;
+				}
+			}
+			
+			@keyframes fadeIn {
+				0% {
+					opacity: 0;
+				}
+				100% {
+					opacity: 1;
+				}
+			}
+			
+			@-webkit-keyframes fadeOut {
+				0% {
+					opacity: 1;
+				}
+				100% {
+					opacity: 0;
+				}
+			}
+			
+			@keyframes fadeOut {
+				0% {
+					opacity: 1;
+				}
+				100% {
+					opacity: 0;
+				}
+			}
+			
+			.img {
+				max-width: 100%;
+				height: auto;
+			}
+			.mui-table-view{
+				line-height: 0.8rem;
+				font-size: 0.32rem;
+			}
+		</style>
+		<script type="text/javascript">
+			function videoCapture() {
+				var cmr = plus.camera.getCamera();
+				cmr.captureImage(
+					function(path) {
+						plus.io.resolveLocalFileSystemURL(path, function(entry) {
+							var localUrl = entry.toLocalURL();
+							plus.zip.compressImage({
+									src: localUrl,
+									dst: localUrl,
+									quality: 20,
+									overwrite: true
+								},
+								function() {
+									mui('#express_img')[0].src = localUrl;
+									doSaveImage();
+								},
+								function(error) {
+									mui('#express_img')[0].src = localUrl;
+									doSaveImage();
+								});
+						});
+					},
+					function(error) {
+						mui.toast('拍照选择失败！');
+					}
+				);
+				mui('#picture').popover('toggle');
+			}
+
+			function galleryImg() {
+				// 从相册中选择图片
+				console.log("从相册中选择图片:");
+				plus.gallery.pick(function(path) {
+
+					plus.zip.compressImage({
+							src: path,
+							dst: path,
+							quality: 20,
+							overwrite: true
+						},
+						function() {
+							mui('#express_img')[0].src = path;
+							doSaveImage();
+						},
+						function(error) {
+							mui('#express_img')[0].src = path;
+							doSaveImage();
+						});
+				}, function(e) {
+
+				}, {
+					filter: "image"
+				});
+				mui('#picture').popover('toggle');
+			}
+		</script>
+
+	</head>
+
+	<body style="background-color: #fff;">
+		<!--<header class="mui-bar mui-bar-nav titleheader">
+			<div>订单详情</div>
+			<div class="back mui-action-back" ><a></a></div>
+			<div class="camera">
+				<a href="#picture"></a>
+			</div>
+		</header>-->
+		<header class="mui-bar mui-bar-nav titleheader">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">订单详情</h1>
+			<div class="camera">
+				<a href="#picture"></a>
+			</div>
+		</header>
+		<div class="my-photo" style="overflow: hidden;padding-top: 1rem;">
+			<div class="my-bg" style="background: url(../images/progress.png) no-repeat center center;">
+				<img id='express_img' class='img' name="express" src='' style="width: 100%;height: 100%;" data-preview-src="" data-preview-group="1" />
+			</div>
+		</div>
+
+		<div class="list-item layout" style="display: block;">
+			<ul>
+				<li class="item-time"></li>
+				<li class="item-man">
+					<span>国安侠<font style="color:red">*</font></span>
+					<input type="text" id='employee' name='employee' readonly="readonly" placeholder="暂无数据" />
+					<input type="hidden" id='employee_id' name='employee_id' />
+					<input type="hidden" id='id' name='id' />
+				</li>
+				<li class="item-manphone">
+					<span>员工编号<font style="color:red">*</font></span>
+					<input type="text" id='employee_no' name='employee_no' readonly="readonly" placeholder="暂无数据" />
+				</li>
+				<li class="item-radio" id="business_li">
+							<span>业务类型</span>
+								<input class="business" type="text" id='business_type' name='business_type' readonly="readonly" placeholder="暂无数据"  />
+								<input type="hidden" id='business_value' name='business_value' />
+				</li>
+				<li class="item-num">
+					<span class="fl">订单编号<font style="color:red">*</font></span>
+					<input type="text" class="fl" id="express_no" name="express_no" placeholder="暂无数据" />
+					<a href="#" datafld="fr" onclick="clicked('barcode_scan.html',true,true);"></a>
+				</li>
+
+				<li class="item-company">
+					<span>快递公司<font style="color:red">*</font></span>
+					<input type="text" id="express_company" name="express_company" placeholder="暂无数据" readonly/>
+				</li>
+
+				<li class="item-ordername">
+					<span>物品名称</span>
+					<input type="text" id='obj_name' name='obj_name' placeholder="暂无数据" />
+				</li>
+				<li class="item-orderdate">
+					<span>快递日期<font style="color:red">*</font></span>
+					<input type="text" id='express_date' name='express_date'  placeholder="暂无数据" readonly/>
+				</li>
+
+				<li class="item-name">
+					<span>收件人姓名<font style="color:red">*</font></span>
+					<input type="text" id='rcv_name' name='rcv_name' placeholder="暂无数据" />
+				</li>
+				<li class="item-phone">
+					<span>收件人电话<font id='is_normal' style="color:red">*</font></span>
+					<input  type="number" pattern="\d*" id='rcv_tel' name='rcv_tel' placeholder="暂无数据" maxlength="11" oninput="if(value.length>11)value=value.slice(0,11)"/>
+				</li>
+				<li class="item-address">
+					<span>收件人地址<font style="color:red">*</font></span>
+					<textarea id="rcv_address" name="rcv_address" placeholder="暂无数据"></textarea>
+				</li>
+
+				<li class="item-name">
+					<span>寄件人姓名</span>
+					<input type="text" id='send_name' name="send_name" placeholder="暂无数据" />
+				</li>
+				<li class="item-phone">
+					<span>寄件人电话</span>
+					<input type="number" pattern="\d*" id="send_tel" name="send_tel" placeholder="暂无数据" maxlength="11" oninput="if(value.length>11)value=value.slice(0,11)"/>
+				</li>
+				<li class="item-address">
+					<span>寄件人地址</span>
+					<textarea id="send_address" name="send_address" placeholder="暂无数据"></textarea>
+				</li>
+				<li class="item-remark">
+					<span>备注</span>
+					<textarea type="text" id='remark' name='remark' placeholder="暂无数据" ></textarea>
+				</li>
+			</ul>
+			<div class="order_btn">
+				<a href="#" onclick="doSave();">保存</a>
+			</div>
+		</div>
+
+		<!--<footer>
+			<a class="foot1" href="tabbar.html">
+				<span></span>
+				<p>首页</p>
+			</a>
+			<a class="foot2" href="message.html">
+				<span></span>
+				<p>消息</p>
+			</a>
+			<a class="foot3" href="my.html">
+				<span></span>
+				<p>我</p>
+			</a>
+		</footer>-->
+
+		<div id="picture" class="mui-popover mui-popover-action mui-popover-bottom">
+			<ul class="mui-table-view">
+				<li style="border-bottom: 1px solid #dbdbdb;" onclick="videoCapture();">
+					拍照
+				</li>
+				<li onclick="galleryImg();">
+					从手机相册中选择
+				</li>
+			</ul>
+			<ul class="mui-table-view">
+				<li>
+					<a id='aCancel' href="#picture"><b>取消</b></a>
+				</li>
+			</ul>
+		</div>
+
+	</body>
+	<script type="text/javascript" src="../js/jquery-2.2.2.min.js"></script>
+	<script src="../js/mui.min.js"></script>
+	<script src="../js/mui.picker.js"></script>
+	<script src="../js/mui.picker.min.js"></script>
+	<script src="../js/mui.poppicker.js"></script>
+	<script src="../js/custom_common.js"></script>
+	<script src="../js/date_util.js"></script>
+	<script src="../js/jquery.rotate.min.js"></script>
+	<script src="../js/previewimage.js"></script>
+	<script src="../js/mui.zoom.js"></script>
+	<script type="text/javascript" src="../js/dict.js"></script>
+
+	<script>
+		mui.init({
+			swipeBack: true //启用右滑关闭功能
+		});
+
+		var store = JSON.parse(localStorage.getItem('store'));
+
+		var express = null;
+
+		var employee = JSON.parse(localStorage.getItem('employee'));
+
+		var express = JSON.parse(localStorage.getItem('express'));
+
+		var currIndex = -1;
+
+		var strCode = null;
+
+		var strId = null;
+		var businessPicker = null;
+		var bussiness_data=	null;
+		mui.previewImage();
+
+
+		mui.plusReady(function() {
+
+			var currDate = new Date().Format('YYYY-MM-DD');
+			mui('.item-time')[0].innerHTML = currDate;
+            bussiness_data=[{value:0,text:'普通快件'},{value:1,text:'信用卡快件'}];
+			
+			initExpressCompany();
+			businessPicker = initDictFotData('business_li','business_value','business_type',bussiness_data,'0','is_normal');
+			
+			if(plus == null) {
+				return;
+			}
+         
+			var self = plus.webview.currentWebview();
+			if(self != null) {
+				strCode = self.express_no;
+				strId = self.s_id;
+				initData();
+			}else{
+				initEmployeeSelect();
+			}
+		
+			
+		});
+		var img = null;
+
+		function scaned(t, r, f) {
+			document.getElementById("express_no").value = r;
+		}
+        //快递单查看详情
+		function initData() {
+			if(strId != null) {
+				var express = {
+					id: strId
+				};
+				
+				doManager('ExpressManager', 'queryExpressSingleDetails', express, function(data) {
+					if(data.result) {
+						var jsonData = JSON.parse(data.data);
+						if(jsonData.code == 200) {
+							express = jsonData.exitExpress;
+							setViewData(jsonData.exitExpress);
+						} else {
+							mui.toast(jsonData.message)
+						}
+					}
+				}, false);
+			}
+		}
+
+		function setViewData(objExpress) {
+			initEmployeeSelect();
+			mui('#id')[0].value = objExpress.id;
+
+			if(objExpress.expressURL != null) {
+				if(objExpress.expressURL.indexOf('file:') > -1)
+					mui('#express_img')[0].src = objExpress.expressURL;
+				else
+					mui('#express_img')[0].src = objExpress.expressURL.replace('\\\\', '/');
+			}
+			mui('#employee_id')[0].value = objExpress.employee_id;
+			//				mui('#employee')[0].value = objExpress.employee_name;
+			mui('#express_no')[0].value = objExpress.express_no;
+			mui('#express_company')[0].value = objExpress.express_company;
+			mui('#rcv_name')[0].value = objExpress.rcv_name;
+			mui('#rcv_tel')[0].value = objExpress.rcv_tel;
+			mui('#rcv_address')[0].value = objExpress.rcv_address;
+			mui('#send_name')[0].value = objExpress.send_name;
+			mui('#send_tel')[0].value = objExpress.send_tel;
+			mui('#send_address')[0].value = objExpress.send_address;
+			mui('#remark')[0].value = objExpress.remark;
+			if(objExpress.express_type==''||objExpress.express_type==null){
+				mui('#business_value')[0].value="0";
+			}else{
+		    	mui('#business_value')[0].value = objExpress.express_type;
+			}
+			for(var index in businessPicker) {
+				if(businessPicker[index].value == objExpress.express_type) {
+					$('#business_type').val(businessPicker[index].text);
+					$('#business_value').val(businessPicker[index].value);
+					break;
+				}
+			}
+			var express_type_val = $('#business_value').val();
+			if(express_type_val==1){
+				$('#is_normal').html("");
+			}else{
+				$('#is_normal').html("*");
+			}
+			//				mui('#employee_no')[0].value = objExpress.employee_no;
+			mui('#obj_name')[0].value = objExpress.obj_name;
+			if(objExpress.employee_name == '' || objExpress.employee_name == null) {
+				if(employee.usergroup != null) {
+					if(employee.usergroup.code == 'GAX') {
+						mui('#employee')[0].value = employee.name;
+					    mui('#employee_no')[0].value = employee.employeeId;
+					}else{
+						mui('#employee')[0].value = null;
+					    mui('#employee_no')[0].value = null;
+					}
+					
+				}
+//				if(employee.zw == "国安侠") {
+//					mui('#employee')[0].value = employee.name;
+//					mui('#employee_no')[0].value = employee.employeeId;
+//				} else {
+//					mui('#employee')[0].value = null;
+//					mui('#employee_no')[0].value = null;
+//				}
+			} else {
+
+				mui('#employee')[0].value = objExpress.employee_name;
+				mui('#employee_no')[0].value = objExpress.employee_no;
+			}
+			if(objExpress.express_date == '' || objExpress.express_date == null) {
+				mui('#express_date')[0].value = '';
+			} else {
+				mui('#express_date')[0].value = new Date(objExpress.express_date).Format('YYYY-MM-DD');
+			}
+		}
+        //根据门店id查询所有 员工信息
+		function initEmployeeSelect() {
+
+			var employeePicker = new mui.PopPicker();
+			var txtEmployee = mui('#employee')[0];
+			var txtEmployeeNo = mui('#employee_no')[0];
+			var store_id = store.store_id + '';
+			doManager('UserManager', 'findNamesBySid', store_id, function(data) {
+				if(data.result == true) {
+					var employeeData = new Array();
+					var jsonData = JSON.parse(data.data);
+
+					for(var index in jsonData.userList) {
+						var itemData = {
+							value: jsonData.userList[index].employeeId,
+							text: jsonData.userList[index].name
+						};
+						employeeData.push(itemData);
+					}
+					employeePicker.setData(employeeData);
+				}
+			});
+			txtEmployee.value = employee.name;
+
+			txtEmployeeNo.value = employee.employeeId;
+
+			txtEmployee.addEventListener('tap', function(event) {
+				employeePicker.show(function(items) {
+					txtEmployee.value = items[0].text;
+					txtEmployeeNo.value = items[0].value;
+					document.getElementById("employee_no").value = txtEmployeeNo.value;
+
+				});
+			}, false);
+		}
+
+		function initExpressCompany() {
+			var expressData = new Array();
+			var txtExpressName = mui('#express_company')[0];
+			var expressPicker = new mui.PopPicker();
+
+			for(var index in express) {
+				var itemexpressData = {
+					value: express[index].express_name,
+					text: express[index].express_name
+				};
+				expressData.push(itemexpressData);
+			}
+			expressPicker.setData(expressData);
+
+			txtExpressName.addEventListener('tap', function(event) {
+				expressPicker.show(function(items) {
+					txtExpressName.value = items[0].text;
+				});
+			}, false);
+		}
+
+
+		(function($) {
+			$.init();
+			var result = $('#express_date')[0];
+			var btns = $('#express_date');
+			btns.each(function(i, btn) {
+				btn.addEventListener('tap', function() {
+					
+					var options = {type:"date",endDate:new Date()};
+					var id = this.getAttribute('id');
+					/*
+					 * 首次显示时实例化组件
+					 * 示例为了简洁，将 options 放在了按钮的 dom 上
+					 * 也可以直接通过代码声明 optinos 用于实例化 DtPicker
+					 */
+					var picker = new $.DtPicker(options);
+					picker.show(function(rs) {
+						/*
+						 * rs.value 拼合后的 value
+						 * rs.text 拼合后的 text
+						 * rs.y 年，可以通过 rs.y.vaue 和 rs.y.text 获取值和文本
+						 * rs.m 月，用法同年
+						 * rs.d 日，用法同年
+						 * rs.h 时，用法同年
+						 * rs.i 分（minutes 的第二个字母），用法同年
+						 */
+						result.value = rs.text;
+						/* 
+						 * 返回 false 可以阻止选择框的关闭
+						 * return false;
+						 */
+						/*
+						 * 释放组件资源，释放后将将不能再操作组件
+						 * 通常情况下，不需要示放组件，new DtPicker(options) 后，可以一直使用。
+						 * 当前示例，因为内容较多，如不进行资原释放，在某些设备上会较慢。
+						 * 所以每次用完便立即调用 dispose 进行释放，下次用时再创建新实例。
+						 */
+						picker.dispose();
+					});
+				}, false);
+			});
+		})(mui);
+
+		function doSave() {
+			var files = [];
+			var imgpath = mui('#express_img')[0].src;
+			var strEmployee_id = mui('#employee_id')[0].value;
+			var strEmployee_name = mui('#employee')[0].value;
+			var strexpress_no = mui('#express_no')[0].value;
+			var strexpress_company = mui('#express_company')[0].value;
+			var strrcv_name = mui('#rcv_name')[0].value;
+			var strrcv_tel = mui('#rcv_tel')[0].value;
+			var strrcv_address = mui('#rcv_address')[0].value;
+			var strsend_name = mui('#send_name')[0].value;
+			var strsend_tel = mui('#send_tel')[0].value;
+			var strsend_address = mui('#send_address')[0].value;
+			var strremark = mui('#remark')[0].value;
+			var strbusiness_value = mui('#business_value')[0].value;
+			var strsend_employee_no = mui('#employee_no')[0].value;
+			var strsend_obj_name = mui('#obj_name')[0].value;
+			var strsend_express_date = mui('#express_date')[0].value;
+
+			if(imgpath == null || imgpath == '' || imgpath.indexOf('.html') != -1) {
+				mui.toast('请拍照或从相册中选择快递单照片。');
+				return;
+			}
+			files.push({
+				name: new Date().Format('YYYYMMDDhhmmss'),
+				path: imgpath
+			});
+			if(!checkValue(strEmployee_name)) {
+				mui.toast('请选择国安侠。');
+				return;
+			}
+			if(!checkValue(strsend_employee_no)) {
+				mui.toast('请输入国安侠编号。');
+				return;
+			}
+
+			if(!checkValue(strexpress_no)) {
+				mui.toast('请输入订单号。');
+				return;
+			}
+
+			if(!checkValue(strexpress_company)) {
+				mui.toast('请选择快递公司。');
+				return;
+			}
+
+			//			if(!checkValue(strsend_obj_name)){
+			//				mui.toast('请输入物品名称。');
+			//				return;
+			//			}
+			if(!checkValue(strsend_express_date)) {
+				mui.toast('请输入快递日期。');
+				return;
+			}
+
+			if(!checkValue(strrcv_name)) {
+				mui.toast('请输入收件人姓名。');
+				return;
+			}
+            
+			if(strbusiness_value == '0'){
+				if(!checkValue(strrcv_tel)) {
+					mui.toast('请输入收件人电话。');
+					return;
+			   }
+			}
+			
+			if(checkValue(strrcv_tel)) {
+				if(!/^\d{11}$/.test(strrcv_tel)) {
+					mui.toast("请输入正确的收件人电话。");
+					return;
+			    }
+			}
+			
+
+			if(!checkValue(strrcv_address)) {
+				mui.toast('请输入收件人地址。');
+				return;
+			}
+
+			var strId = mui('#id')[0].value;
+			var objExpress = {
+				id: strId,
+				store_id: store.store_id,
+				employee_id: strEmployee_id,
+				express_no: strexpress_no,
+				express_company: strexpress_company,
+				rcv_name: strrcv_name,
+				rcv_tel: strrcv_tel,
+				rcv_address: strrcv_address,
+				send_name: strsend_name,
+				send_tel: strsend_tel,
+				send_address: strsend_address,
+				remark: strremark,
+				express_type:strbusiness_value,
+				expressURL: imgpath,
+				create_user: employee.name,
+				create_user_id: employee.id,
+				employee_name: strEmployee_name,
+				employee_no: strsend_employee_no,
+				obj_name: strsend_obj_name,
+				express_date: strsend_express_date,
+				create_time: new Date().Format('YYYY-MM-DD'),
+				express_status: 1
+			};
+
+			if(objExpress.expressURL.indexOf('file:') == -1) {
+				submitExpress(objExpress);
+			} else {
+				var wt = plus.nativeUI.showWaiting();
+				var task = plus.uploader.createUpload(server, {
+						method: "POST"
+					},
+					function(t, status) { //上传完成
+						if(status == 200) {
+							var data = JSON.parse(t.responseText);
+							if(data.result == true) {
+								var pmsfile = JSON.parse(data.data);
+								imgpath = pmsfile.filePath;
+								objExpress.expressURL =imgpath;
+								submitExpress(objExpress);
+							}
+							wt.close();
+						} else {
+							mui.toast('上传图片失败');
+							wt.close();
+						}
+					}
+				);
+
+				for(var i = 0; i < files.length; i++) {
+					var f = files[i];
+					task.addFile(f.path, {
+						key: f.name
+					});
+				}
+				task.start();
+			}
+
+		}
+
+		function doSaveImage() {
+			var files = [];
+			var imgpath = mui('#express_img')[0].src;
+			var strEmployee_id = mui('#employee_id')[0].value;
+			var strEmployee_name = mui('#employee')[0].value;
+			var strexpress_no = mui('#express_no')[0].value;
+			var strexpress_company = mui('#express_company')[0].value;
+			var strrcv_name = mui('#rcv_name')[0].value;
+			var strrcv_tel = mui('#rcv_tel')[0].value;
+			var strrcv_address = mui('#rcv_address')[0].value;
+			var strsend_name = mui('#send_name')[0].value;
+			var strsend_tel = mui('#send_tel')[0].value;
+			var strsend_address = mui('#send_address')[0].value;
+			var strremark = mui('#remark')[0].value;
+			var strbusiness_type = mui('#business_value')[0].value;
+
+			var strsend_employee_no = mui('#employee_no')[0].value;
+			var strsend_obj_name = mui('#obj_name')[0].value;
+
+			if(imgpath == null || imgpath == '' || imgpath.indexOf('.html') != -1) {
+				mui.toast('请拍照或从相册中选择快递单照片。');
+				return;
+			}
+			files.push({
+				name: new Date().Format('YYYYMMDDhhmmss'),
+				path: imgpath
+			});
+
+			var strId = mui('#id')[0].value;
+
+			var express_status = 0;
+
+			if(express != null && express.express_no != '' && express.express_no != null) {
+				express_status = 1;
+			}
+
+			var objExpress = {
+				id: strId,
+				store_id: store.store_id,
+				employee_id: strEmployee_id,
+				expressURL: imgpath,
+				create_user: employee.name,
+				create_user_id: employee.id,
+				employee_name: strEmployee_name,
+				employee_no: strsend_employee_no,
+				create_time: new Date().Format('YYYY-MM-DD'),
+				express_status: express_status
+			};
+
+			if(objExpress.expressURL.indexOf('file:') > -1) {
+				var wt = plus.nativeUI.showWaiting();
+				var task = plus.uploader.createUpload(server, {
+						method: "POST"
+					},
+					function(t, status) { //上传完成
+						if(status == 200) {
+							var data = JSON.parse(t.responseText);
+							if(data.result == true) {
+								var pmsfile = JSON.parse(data.data);
+								imgpath = pmsfile.filePath;
+								objExpress.expressURL = imgpath;
+								submitExpress_img(objExpress);
+							}
+							wt.close();
+						} else {
+							mui.toast('上传图片失败');
+							wt.close();
+						}
+					}
+				);
+
+				for(var i = 0; i < files.length; i++) {
+					var f = files[i];
+					task.addFile(f.path, {
+						key: f.name
+					});
+				}
+				task.start();
+			}
+
+		}
+
+		function getLocalTime(nS) {
+			return new Date(parseInt(nS) * 1000).toLocaleString().substr(0, 17);
+		}
+		
+		function doBack(){
+			var main = plus.webview.currentWebview().opener();
+			main.evalJS('refreshData()');
+			mui.back();
+			
+		}
+           //保存、更新订单
+		function submitExpress(objExpress) {
+			var methodName = 'addExpressSingle';
+			if(objExpress.id != null && objExpress.id != '') {
+				methodName = 'updateExpressInfo';
+			} else {
+				strId = null;
+			}
+			doManager('ExpressManager', methodName, objExpress, function(data) {
+				if(data.result == true) {
+					var jsonData = JSON.parse(data.data);
+					if(jsonData.code == 200) {
+						mui('#id')[0].value = jsonData.express.id;
+						mui.toast('保存成功');
+						setTimeout(function() {
+							doBack();
+						}, 500);
+					}
+					if(jsonData.code == 9000033) {
+						var btnArray = ['否', '是'];
+						mui.confirm('单号已存在！确定要删除当前数据吗？', '系统提示', btnArray, function(e) {
+							if(e.index == 1) {
+								delExpressMulti($("#id").val());
+								doBack();
+							}
+						});
+					}
+
+				} else {
+					mui.toast('保存失败');
+				}
+			});
+		}
+
+		function submitExpress_img(objExpress) {
+			var methodName = 'addExpressSingle';
+			if(objExpress.id != null && objExpress.id != '') {
+				methodName = 'updateExpressInfo';
+			} else {
+				strId = null;
+			}
+			doManager('ExpressManager', methodName, objExpress, function(data) {
+				if(data.result == true) {
+					var jsonData = JSON.parse(data.data);
+					if(jsonData.code == 200) {
+						mui('#id')[0].value = jsonData.express.id;
+						mui.toast('保存成功');
+						if(currIndex != -1) {
+							delete itemArray[currIndex];
+							localStorage.setItem('expressList', JSON.stringify(itemArray));
+						}
+						//						setTimeout(function() {
+						//							mui.openWindow({
+						//							    url:'express_list.html',
+						//							    id:'express_list',
+						//							    createNew:true
+						//							});
+						//						}, 1000);
+					}
+					if(jsonData.code == 9000033) {
+						var btnArray = ['否', '是'];
+						mui.confirm('单号已存在！确定要删除当前数据吗？', '系统提示', btnArray, function(e) {
+							if(e.index == 1) {
+								delExpressMulti($("#id").val());
+								window.location.href = "express_list.html";
+							}
+						});
+					}
+
+				} else {
+					mui.toast('保存失败');
+				}
+			});
+		}
+
+		function checkValue(value) {
+			if(value == null || value.trim() == '') {
+				return false;
+			}
+			return true;
+		}
+        //根据ID删除重复的快递单
+		function delExpressMulti(id) {
+			doManager("ExpressManager", "delExpressMulit", id + "", function(data,
+				textStatus, XMLHttpRequest) {
+				if(data.result) {
+					mui.toast('删除成功');
+				}
+			}, false);
+		}
+	
+	</script>
+
+</html>

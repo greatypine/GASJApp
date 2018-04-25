@@ -1,0 +1,16 @@
+.his_con{padding-bottom:0.1rem;}
+.history_line{position: fixed;left: 0.6rem;top:0;width:1px;height:100%;background-color: #999;overflow: hidden;}
+.history_every{clear: both;overflow: hidden; position: relative;z-index: 10000;margin-top: 0.5rem;}
+.history_every_l{width:0.2rem;height:0.2rem;border-radius: 50%;background-color: #649cf1;position: absolute; left: 0.5rem;}
+.history_every_r{margin-left: 0.5rem;font-size:0.26rem;color:#666;}
+.history_tit{height:0.7rem;line-height:0.7rem;background-color: #649cf1;color:#fff;font-size: 0.34rem;padding-left:0.2rem;margin-top: 0.2rem;}
+.history_content{background-color: #fff;overflow: hidden;clear: both;padding: 0.2rem;}
+.history_content table{width:100%;}
+.history_content td{border: 1px solid #dbdbdb;height:0.69rem;line-height:0.68rem;padding-left: 0.1rem;}
+.his_con>ul {
+	background-color: transparent;
+}
+
+.his_con>ul>li {
+	background-color: transparent;
+}

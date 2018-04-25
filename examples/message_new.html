@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>消息、公告</title>
+		<!-- Tell the browser to be responsive to screen width -->
+		<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+		<!-- Bootstrap 3.3.6 -->
+		<link rel="stylesheet" href="../css/bootstrap.min.css">
+		<!-- Font Awesome -->
+		<link rel="stylesheet" href="../css/font-awesome.min.css">
+		<!-- Ionicons -->
+		<link rel="stylesheet" href="../css/ionicons.min.css">
+		<!-- Morris charts -->
+		<!--<link rel="stylesheet" href="../css/morris.css">-->
+		<!-- Theme style -->
+		<link rel="stylesheet" href="../css/AdminLTE.min.css">
+		<!-- AdminLTE Skins. Choose a skin from the css/skins
+       folder instead of downloading all of them to reduce the load. -->
+		<link rel="stylesheet" href="../css/_all-skins.min.css">
+		<link rel="stylesheet" href="../css/img_preview.css">
+		<link rel="stylesheet" href="../css/web_index_search.css">
+		<link rel="stylesheet" href="../css/newmui.min.css">
+
+		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+		<!--[if lt IE 9]>
+  <script src="IE 9/html5shiv.min.js"></script>
+  <script src="IE 9/respond.min.js"></script>
+  <![endif]-->
+		<style>
+			html,
+			body {
+				background: #fff;
+			}
+			
+			.navbar-nav>.user-menu>.dropdown-menu>li.user-header>p {
+				line-height: 22px;
+			}
+			
+			header {
+				position: fixed!important;
+				width: 100%;
+			}
+			
+			.mui-slider-indicator {
+				position: fixed;
+				top: 65px;
+				background-color: #fff;
+				z-index: 99;
+				border-bottom: 1px solid #f2f2f2;
+			}
+			
+			.mui-slider-progress-bar {
+				margin-top: 104px;
+				position: fixed;
+			}
+			
+			.express {
+				position: relative;
+				background-color: transparent;
+				border: 0;
+				margin-top: 25px;
+			}
+			
+			.express:nth-child(1) {
+				margin-top: 5px;
+			}
+			
+			.express section .express_time {
+				margin-bottom: 5px;
+				padding-left: 10px;
+			}
+			
+			.express section .box-header {
+				background-color: #fff;
+				padding: 15px 15px 5px 15px;
+			}
+			
+			.mui-control-content {
+				overflow-y: scroll;
+			}
+			
+			.fdPhone {
+				position: fixed;
+				_position: absolute;
+				width: 100%;
+				height: 100px;
+				position: fixed;
+				top: 0px;
+				display: none;
+			}
+			
+			.image {
+				color: #fff;
+			}
+			
+			.box {
+				box-shadow: none!important
+			}
+			
+			.select_store {
+				height: 3rem;
+				width: 50%;
+				margin-left: 20px;
+				background: #000;
+			}
+			
+			.select {
+				height: 3rem;
+				width: 50%;
+				margin-left: 20px;
+				background: #000;
+				color: #fff;
+			}
+			
+			footer {
+				position: fixed;
+				bottom: 0;
+				left: 0;
+				width: 100%;
+				border-top: 1px solid #c3c3c3;
+				background-color: #fff;
+				text-align: center;
+				color: #666;
+				height: 50px;
+				padding-top: 2px;
+			}
+			
+			footer p {
+				font-size: 20px;
+				margin: 0 0 -3px 0;
+			}
+			
+			footer a {
+				margin: 0;
+				font-size: 14px;
+			}
+			
+			footer a,
+			footer a:hover,
+			footer a:active,
+			footer a:visited {
+				color: #666;
+			}
+			
+			.mark-green {
+				color: #169a80!important;
+			}
+			
+			.statistics {
+				background-color: #fff;
+				padding: 40px 25px;
+				;
+				height: 100%;
+			}
+			
+			.dt1 {
+				border: 1px solid #fa6567;
+				padding: 0 15px 10px 15px;
+			}
+			
+			.dt2 {
+				border: 1px solid #5abeed;
+				padding: 0 15px 10px 15px;
+				margin-top: 20px;
+			}
+			
+			.dt3 {
+				border: 1px solid #f1a90d;
+				padding: 0 15px 10px 15px;
+				margin-top: 20px;
+			}
+			
+			.dt4 {
+				border: 1px solid #00bfa2;
+				padding: 0 15px 10px 15px;
+				margin-top: 20px;
+			}
+			
+			.dt_l {
+				width: 15%;
+				margin-top: 10px;
+				padding-top: 15px;
+			}
+			
+			.dt_l img {
+				width: 100%;
+			}
+			
+			.dt_r {
+				margin-left: 10px;
+				width: 80%;
+				padding-top: 5px;
+			}
+			
+			.dt_r h4 {
+				color: #404040;
+				padding-top: 20px;
+				margin: 0;
+				font-size: 16px;
+			}
+			
+			.dt_r h4 p {
+				font-size: 20px;
+				font-weight: bold;
+				padding-top: 10px;
+				font-family: Arial, Helvetica, sans-serif;
+			}
+			
+			.dt_r .pull-right {
+				color: #afafaf;
+				font-size: 12px;
+			}
+			
+			.dt5 {
+				padding-top: 10px;
+				color: #afafaf;
+			}
+			
+			.order_p {
+				display: -webkit-box;
+				text-overflow: ellipsis;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				-webkit-line-clamp: 2;
+				-webkit-box-orient: vertical;
+			}
+			
+			#map {
+				width: 100%;
+				position: fixed;
+				top: 20px;
+				bottom: 0px;
+				line-height: 200px;
+				text-align: center;
+				background: #FFFFFF;
+			}
+			
+			.modal-content {
+				margin-top: 15px;
+			}
+		</style>
+	</head>
+
+	<body class="hold-transition skin-blue sidebar-mini">
+		<!--主体-->
+		<div class="mui-off-canvas-wrap  mui-slide-in" id="offCanvasWrapper">
+			<!--主页部分-->
+			<div class="wrapper mui-inner-wrap">
+				<header class="main-header">
+					<nav class="navbar navbar-static-top text-center">
+						<span>消息</span>
+						<a href="#offCanvasSide" class="sidebar-toggle fa fa-navicon mui-icon-bars"></a>
+					</nav>
+				</header>
+				<div class="mui-content mui-inner-wrap" style="height: auto;">
+					<div id="slider" class="mui-slider">
+						<div id="sliderSegmentedControl" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+							<a class="mui-control-item" href="#item2mobile">消息</a>
+							<a class="mui-control-item" href="#item3mobile">公告</a>
+						</div>
+
+						<div id="sliderProgressBar" class="mui-slider-progress-bar mui-col-xs-5"></div>
+						<div class="mui-slider-group">
+							
+							<div id="item2mobile" class="mui-slider-item mui-control-content">
+								<div style="text-align: center; margin:20px auto;" id="orderrefresh">
+									<a>点击刷新</a>
+								</div>
+								<div id="scroll2">
+									<div class="mui-scroll" id="item2div">
+										<div class="mui-loading">
+											<div class="mui-spinner">
+											</div>
+										</div>
+									</div>
+									<div style="text-align: center; margin:30px 0 60px 0">
+										<a style="color: #999;" id="moreorder">点击加载更多</a>
+										<!--<a id="noMoreOrder" style="display: none;">暂无数据,点击刷新</a>-->
+									</div>
+								</div>
+							</div>
+
+							<div id="item3mobile" class="mui-slider-item mui-control-content">
+								<div style="text-align: center; margin:20px auto;" id="relationrefresh">
+									<a>点击刷新</a>
+								</div>
+								<div id="scroll3">
+									<div class="mui-scroll" id="item3div">
+										<div class="mui-loading">
+											<div class="mui-spinner">
+											</div>
+										</div>
+									</div>
+									<div style="text-align: center; margin:30px 0 60px 0">
+										<a style="color: #999;" id="morerelation">点击加载更多</a>
+										<a id="noMoreRelation" style="display: none;">暂无数据,点击刷新</a>
+									</div>
+								</div>
+							</div>
+							
+						</div>
+						<footer style="display: none;" id="footer_bottmo">
+							<a class="col-xs-3" id="maps" path="maps.html" onclick="jump(this)">
+								<p><i class="fa fa-globe"></i></p>地图</a>
+							<a class="col-xs-3 mark-green" id="areaState" href="javascript:void(0)">
+								<p><i class="fa fa-user"></i></p>混片儿</a>
+							<a class="col-xs-3" id="web_message" path="web_message.html" onclick="jump(this)">
+								<p><i class="fa fa-envelope-o"></i></p>消息
+								<div id="message_state_div"></div>
+							</a>
+							<a class="col-xs-3" id="tabbar" path="tabbar.html" onclick="jump(this)">
+								<p><i class="fa fa-file-text-o"></i></p>录入</a>
+							
+						</footer>
+
+					</div>
+
+				</div>
+				<div class="mui-off-canvas-backdrop" id="backdrop"></div>
+			</div>
+			<!--侧滑部分-->
+			<aside id="offCanvasSide" class="main-sidebar mui-off-canvas-left">
+				<section id="offCanvasSideScroll" class="sidebar">
+					<div class="user-panel">
+						<div class="text-center image">
+							<img src="" class="img-circle" data-preview-src="" data-preview-group="1">
+							<p style="margin-top: 10px;"><strong id="user_name"></strong></p>
+							<p><span id="user_zw"></span><span id="user_employeeid"></span></p>
+							
+						</div>
+					</div>
+					
+					<ul class="sidebar-menu">
+						<div style="padding:0px 0px 0px 18px;">
+							<a>
+								<span>所属门店：</span>
+								<span id="div_title"></span>
+								<select class="select_store" id="select_store" style="margin-left: 0px;">
+								</select>
+							</a>
+						</div>
+						<div id="store_num" style="padding:18px 0px 5px 18px;">
+							<a><span>门店编号：</span><span id="storeid" style="margin-left: 4px;"></span>
+							</a>
+						</div>
+						<li class="treeview">
+							<a onclick="toPerson()">
+								<span>个人动态</span> <i class="fa  fa-angle-right pull-right"></i>
+							</a>
+						</li>
+						<li class="treeview">
+							<a onclick="toUser()">
+								<span>我的片区</span> <i class="fa  fa-angle-right pull-right"></i>
+							</a>
+						</li>
+						<li class="treeview" style="display: none;" id="datacard">
+							<a onclick="toCard()">
+								<span>国安侠数据卡</span> <i class="fa  fa-angle-right pull-right"></i>
+							</a>
+						</li>
+						<li class="treeview">
+							<a onclick="toUpdatePassword()">
+								<span>修改密码</span> <i class="fa  fa-angle-right pull-right"></i>
+							</a>
+						</li>
+						<li class="treeview" style="margin-top: 8px;">
+							<span style="color:#b8c7ce;padding-left: 20px;">片区选择</span>
+							<select class="select" onchange="changetip(this.value)" style="margin-left: 12px;">
+							</select>
+						</li>
+
+						<li class="text-center" style="margin-top: 2rem;">
+							<a id="btnLogout">退出登录</a>
+						</li>
+
+					</ul>
+				</section>
+			</aside>
+		</div>
+		<!-- jQuery 2.2.0 -->
+		<script src="../js/jQuery-2.2.0.min.js"></script>
+		<!-- Bootstrap 3.3.6 -->
+		<script src="../js/bootstrap.min.js"></script>
+		<!-- Morris.js charts -->
+		<script src="../js/raphael-min.js"></script>
+		<!-- FastClick -->
+		<script src="../js/fastclick.js"></script>
+		<!-- AdminLTE App -->
+		<script src="../js/app.min.js"></script>
+		<script src="../js/echarts.common.min.js"></script>
+		<!-- 滑动js -->
+		<script src="../js/mui.min.js"></script>
+		<script src="https://pv.sohu.com/cityjson?ie=utf-8"></script>
+		<script type="text/javascript" src="../js/custom_common.js"></script>
+		<script src="../js/previewimage.js"></script>
+		<script src="../js/mui.zoom.js"></script>
+		<script src="../js/date_util.js"></script>
+		<!--<script src="../js/jquery.min.js" type="text/javascript"></script>-->
+		<script>
+			var item2 = document.getElementById('item2mobile');
+			var item3 = document.getElementById('item3mobile');
+			var employee = JSON.parse(localStorage.getItem('employee'));
+			var selectArea_list = JSON.parse(localStorage.getItem('selectArea_list'));
+			var employee_pic = JSON.parse(localStorage.getItem('employee_pic'));
+			var store = null;
+			var storelist = null;
+			var h = '';
+			var w = '';
+			var suffix = ".html";
+			var pageInfo = {
+				currentPage: 0,
+				recordsPerPage: 10,
+				totalRecords: 0,
+				tooManySearchReturn: false
+			};
+			mui.previewImage();
+			mui.init({
+				swipeBack: false
+			});
+			mui.plusReady(function() {
+				var	maps_webview= plus.webview.getWebviewById('maps_web');
+						if(maps_webview != null) {
+							maps_webview.close();
+						}
+				if(employee.usergroup != null) {
+					if(employee.usergroup.code=='ZHGLY' || employee.usergroup.code == 'DZ' || employee.usergroup.code == 'GAX'|| employee.usergroup.code == 'FDZJSZ') {
+						$("footer").css("display", "");
+						$("#web_city_ej").attr("style", "display:none;");
+						$("#my").attr("style", "display:none;");
+					}else if(employee.usergroup.code=='CSMDGLZ'){
+						$("footer").css("display", "");
+						$("#tabbar").attr("style", "display:none;");
+						$("#maps").attr("style", "display:none;");
+						$("#areaState").attr("style", "display:none;");
+						$("#message").attr("class", "col-xs-4 mark-green");
+					}else {
+						$("footer").css("display", "");
+						$("#tabbar").attr("style", "display:none;");
+						$("#web_city_ej").attr("style", "display:none;");
+						$("#my").attr("style", "display:none;");
+						$("#maps").attr("class", "col-xs-4 ");
+						$("#areaState").attr("class", "col-xs-4");
+						$("#message").attr("class", "col-xs-4 mark-green");
+					}
+					
+					
+					if(employee.usergroup.code == 'GAX'){
+						$("#datacard").css("display","");
+						$("#my_area").css("display", "");
+					}else if(employee.usergroup.code == 'DZ'){
+						$("#store_datacard").css("display", "");
+						$("#shopkeeper_information").css("display", "");
+						$("#shopuser_information").css("display", "");
+					}
+				}
+				h = plus.screen.resolutionHeight;
+				setMy();
+				initStore();
+				
+				if('Android' == plus.os.name) {
+					var first = null;
+					mui.back = function() {
+						if(!first) {
+							first = new Date().getTime();
+							mui.toast('再按一次退出应用');
+							setTimeout(function() {
+								first = null;
+							}, 1000);
+						} else {
+							if(new Date().getTime() - first < 1000) {
+								plus.runtime.quit();
+							}
+						}
+					}
+				}
+				$('.mui-control-content').css("height", h);
+
+				document.getElementById('slider').addEventListener('slide', function(e) {
+					$('[data-toggle="popover"]').popover('hide');
+					$('#orderrefresh').hide();
+					$('#relationrefresh').hide();
+					if(e.detail.slideNumber === 0) {
+						setTimeout(function() {
+												getCustomerOfMonth(employee.employeeId, area_id);
+						}, 500);
+					} else if(e.detail.slideNumber === 1) {
+						$('#orderrefresh').hide();
+						if(item2.querySelector('.mui-loading')) {
+							setTimeout(function() {
+								oredrPageInfo.currentPage = 0;
+								getOrderNew(employee.employeeId, null);
+													  }
+
+							}, 500);
+						}
+					} else if(e.detail.slideNumber === 2) {
+						$('#relationrefresh').hide();
+						if(item3.querySelector('.mui-loading')) {
+							setTimeout(function() {
+								relationPageInfo.currentPage = 0;
+								getRelation(employee.employeeId, area_id);
+							}, 500);
+						}
+					}
+				
+				});
+
+				$(document).on('click', '#moreorder', function() {
+					getOrderMoreNew(employee.employeeId);
+					
+				});
+			
+				$(document).on('click', '#morerelation', function() {
+					getRelationMore(employee.employeeId, select_areaid);
+				});
+				$(document).on('click', '#noMoreRelation', function() {
+					getRelation(employee.employeeId, select_areaid);
+				});
+				
+				$(document).on('click', '#orderrefresh', function() {
+					$('#orderrefresh').hide();
+					oredrPageInfo.currentPage = 0;
+					$("#search").val("");
+					getOrderNew(employee.employeeId, null);
+								    }
+				});
+				$(document).on('click', '#relationrefresh', function() {
+					$('#relationrefresh').hide();
+					relationPageInfo.currentPage = 0;
+					getRelation(employee.employeeId, select_areaid);
+				});
+			
+
+				$(document).on('touchend', '#item2mobile', function() {
+					if(getScrollTop() == 0) {
+						$('#orderrefresh').fadeIn(500);
+					} else {
+						$('#orderrefresh').fadeOut(500);
+					}
+				});
+				$(document).on('touchend', '#item3mobile', function() {
+					if(getScrollTop() == 0) {
+						$('#relationrefresh').fadeIn(500);
+					} else {
+						$('#relationrefresh').fadeOut(500);
+					}
+				});
+				
+				if(mui.os.ios) {
+					//ios软件盘完成键监听事件
+					$('#search').change(function() {
+						var searchText = document.getElementById("search").value;
+						oredrPageInfo.currentPage = 0;
+						getOrderNew(employee.employeeId, searchText);
+						setTimeout(function() {
+							$("#moreorder").hide();
+						}, 200);
+
+					});
+					$(document).on('focusin', function() {　　 //软键盘弹出的事件处理
+						$("footer").css("display", 'none');
+					});
+
+					$(document).on('focusout', function() {　　 //软键盘收起的事件处理
+						$("footer").css("display", "");
+					});
+				} else {
+					var clientHeight = document.documentElement.clientHeight || document.body.clientHeight;
+					$(window).on('resize', function() {
+						var nowClientHeight = document.documentElement.clientHeight || document.body.clientHeight;
+						if(clientHeight > nowClientHeight) {
+							//键盘弹出的事件处理
+							$("footer").css("display", 'none');
+						} else {
+							//键盘收起的事件处理
+							$("footer").css("display", "");
+						}
+					});
+				}
+
+
+				var sliderSegmentedControl = document.getElementById('sliderSegmentedControl');
+				$('.mui-input-group').on('change', 'input', function() {
+					if(this.checked) {
+						sliderSegmentedControl.className = 'mui-slider-indicator mui-segmented-control mui-segmented-control-inverted mui-segmented-control-' + this.value;
+						//force repaint
+						sliderProgressBar.setAttribute('style', sliderProgressBar.getAttribute('style'));
+					}
+				});
+				//退出
+				var t_username = localStorage.getItem("employee_key");
+				mui('#btnLogout')[0].addEventListener('click', function(event) {
+					setTimeout(function() {
+						var webview = plus.webview.getWebviewById('login');
+						if(webview != null) {
+							webview.close();
+						}
+						localStorage.clear();
+						localStorage.setItem("employee_key", t_username);
+						mui.openWindow({
+							url: '../login.html',
+							id: 'login',
+							createNew: true,
+							show: {
+								aniShow: "slide-in-right"
+							},
+							waiting: {
+								autoShow: false
+							}
+						});
+					}, 50);
+				});
+
+				var nativeWebview, imm, InputMethodManager;
+				initNativeObjects();
+				showSoftInput();
+			$(function(){ 
+		        $('[data-toggle="popover"]').popover().on('shown.bs.popover', function () {
+		            $(this).parent().siblings().find('[data-toggle="popover"]').popover('hide');
+		        });
+		    });
+		   
+		  
+
+			});
+			//获取所有消息列表
+			function initView() {
+				message_isread();
+				var message = {
+					receiveId: employee.employeeId,
+					isRead: 2
+				};
+				pageInfo.currentPage = pageInfo.currentPage + 1;
+				doManager('MessageNewManager', 'queryMessageOfHistory', [message, pageInfo], function(data) {
+					if(data.result == true) {
+						var jsonData = JSON.parse(data.data);
+						
+						if(jsonData.data.length == 0) {
+							mui.toast("暂无数据");
+							$("#morerelation").hide();
+							$("#noMoreRelation").show();
+						} else {
+							$("#morerelation").show();
+							$("#noMoreRelation").hide();
+						}
+						var $div = $('#item3div');
+						$('#item3div').empty();
+						$(jsonData.data).each(function(index, message) {
+							var t_html = "";
+							var d_html = "";
+							//用户画像
+							if(message.type == "customer_edit") {
+								t_html = '<div class="yonghu"><i class="fa fa-users"></i></div>';
+							//用户画像更多信息
+							} else if(message.type == "monomer") {
+								t_html = '<div class="yonghu"><i class="fa fa-users"></i></div>';
+								//密码修改
+							} else if(message.type == "update_password") {
+								t_html = '<div class="mima"><i class="fa fa-cog"></i></div>';
+								//公告、通知
+							}else if(message.type == "other_notice") {
+								t_html = '<div class="kaoqin"><i class="fa fa-bullhorn"></i></div>';
+								// 异常订单
+							}else if(message.type == "abnormal_order"){
+								t_html = '<div class="kaoqin"><i class="fa fa-bullhorn"></i></div>';
+								// 考勤
+							}else if(message.type == "work_record") {
+								t_html = '<div class="gonggao"><i class="fa fa-calendar-check-o"></i></div>';
+							} else {
+								t_html = '<div class="yonghu"><i class="fa fa-users"></i></div>';
+							}
+							if(message.isRead == '1') {
+								d_html = '<div></div>';
+							} else {
+								d_html = '<div class="message-dian2"></div>';
+							}
+							var html = '<li class="mui-table-view-cell item_div" style="margin-bottom:0px">' +
+								'<div class="mui-slider-right mui-disabled">' +
+								//								         '<a class="mui-btn mui-btn-green">确定</a>'+
+								'<a class="mui-btn mui-btn-red" style="background-color: red;">删除</a>' +
+								'</div>' +
+								'<div class="message-div mui-slider-handle">' +
+								'<div class="col-xs-2 no-padding">' +
+								t_html +
+								'</div>' +
+								'<div class="col-xs-10">' +
+								'<h5><b>' + message.title + '</b><span class="pull-right text-muted" style="width: 30%;">' + getDateDiff(message.create_time) + '</span></h5>' +
+								'<p class="text-muted info-box-text">' + message.content + '</p>' +
+								d_html +
+								'</div></div>' +
+								'</li>';
+
+							$div.append(html);
+							var $item_div = $div.find('.item_div').last();
+							$item_div.find('.mui-slider-handle').click(function() {
+								message_state(message.id);
+								$(this).find('.message-dian2').remove();
+								//公告
+								if(message.jump_path != null || message.jump_path != "") {
+									if(message.type == "other_notice"||message.type == "abnormal_order") {
+										var webview = plus.webview.getWebviewById(message.jump_path);
+										if(webview != null) {
+											webview.close();
+										}
+										mui.openWindow({
+											url: message.jump_path + suffix,
+											id: message.jump_path,
+											createNew: true,
+											show: {
+												aniShow: 'slide-in-right'
+											},
+											waiting: {
+												autoShow: false
+											},
+											extras: {
+												message_content: message.content,
+												message_title: message.title,
+												message_id: message.id
+											}
+										});
+
+									} else {
+										var webview = plus.webview.getWebviewById(message.jump_path);
+										if(webview != null) {
+											webview.close();
+										}
+										mui.openWindow({
+											url: message.jump_path + suffix,
+											id: message.jump_path,
+											createNew: true,
+											show: {
+												aniShow: 'slide-in-right'
+											},
+											waiting: {
+												autoShow: false
+											},
+											extras: {
+												pk_id: message.pk_id,
+												message_id: message.id,
+												message_to: 'web_message'
+											}
+										});
+
+									}
+
+								}
+
+							});
+							$item_div.find('.mui-btn-red').click(function() {
+								var btnArray = ['否', '是'];
+								mui.confirm('确定要删除当前数据吗？', '提示', btnArray, function(e) {
+									if(e.index == 1) {
+										newDeleteMessage(message.id, $item_div);
+
+									}
+								});
+							});
+
+						});
+
+					} else {
+						mui.toast(data.message);
+						mui('#pullrefresh').pullRefresh().endPullup(true);
+					}
+				})
+			}
+			//查看消息列表是否有未读信息，如有未读信息消息显示红点
+			function message_isread() {
+				var message = {
+					receiveId: employee.employeeId
+				};
+				doManager('MessageNewManager', 'getUnReadMessageAmount', message, function(data) {
+					if(data.result == true) {
+						var jsonData = JSON.parse(data.data);
+						if(jsonData == 0 || jsonData == null) {
+							$('#message_state_div').removeClass("message-dian1");
+						} else {
+							$('#message_state_div').addClass("message-dian1");
+						}
+
+					}
+				});
+			}
+		
+		</script>
+	</body>
+
+</html>

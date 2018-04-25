@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>客户意见详情页面</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<!--标准mui.css-->
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="../css/common.css" />
+		<link rel="stylesheet" type="text/css" href="../css/style.css" />
+		<link rel="stylesheet" type="text/css" href="../css/feedback.css" />
+		<style>
+			.list-item input,textarea{
+				color: lightgray;
+			}
+		</style>
+	</head>
+	<body>
+		<header class="mui-bar mui-bar-nav titleheader">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">详情</h1>
+		</header>
+		<div class="list-item layout" style="display: block; padding-top:0.8rem">
+			<ul>
+				<li class="item-time"></li>
+				<li class="item-name">
+					<span>姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名</span>
+					<input type="text" id="name" name="name" maxlength="10" readonly="readonly" />
+				</li>
+				<li class="item-sex">
+					<span>性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别</span>
+					<input type="text" id="sex" name="sex" readonly="readonly" />
+				</li>
+				<li class="item-age">
+					<span>年&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;龄</span>
+					<input type="tel" id="reg_num" name="reg_num" maxlength="2" readonly="readonly" />
+				</li>
+				<li class="item-phone">
+					<span>电&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;话</span>
+					<input type="tel" id="mobilephone" name="mobilephone" maxlength="11" readonly="readonly" />
+				</li>
+				<li class="item-address">
+					<span class="fl">地&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;址</span>
+					<textarea id="address" name="address" maxlength="120" readonly="readonly"></textarea>
+				</li>
+				<li class="item-question">
+					<span>咨询的问题</span>
+					<textarea type="text" id="request" name="request" maxlength="120" readonly="readonly"></textarea>
+				</li>
+				<li class="item-proposal">
+					<span>合理化建议</span>
+					<textarea type="text" id="advice_content" name="advice_content" maxlength="120" readonly="readonly"></textarea>
+				</li>
+
+			</ul>
+			<!--<div class="order_btn">
+				<a href="#" onclick="doSave()">保存</a>
+			</div>-->
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/custom_common.js"></script>
+		<script src="../js/date_util.js"></script>
+		<script type="text/javascript" src="../js/jquery-2.2.2.min.js"></script>
+		<script type="text/javascript">
+			mui.plusReady(function() {
+				var self = plus.webview.currentWebview();
+				if(self != null) {
+//									alert(JSON.stringify(self.feedback));
+					var userInfo = JSON.parse(self.feedback);
+					//姓名
+					if(userInfo.name == null || userInfo.name == "null" || userInfo.name =="") {
+						mui("#name")[0].value = "暂无数据";
+					} else {
+						mui("#name")[0].value = userInfo.name;
+					}
+
+					if(userInfo.sex == 0) {
+						$("#sex").val("男");
+
+					} else if(userInfo.sex == 1) {
+						$("#sex").val("女");
+					}else{
+						$("#sex").val("暂无数据");
+					}
+
+					//年龄
+					if(userInfo.reg_num == null || userInfo.reg_num == "null" || userInfo.reg_num =="") {
+
+						mui("#reg_num")[0].value = "暂无数据";
+					} else {
+						mui("#reg_num")[0].value = userInfo.reg_num;
+					}
+					//电话
+					if(userInfo.mobilephone == null || userInfo.mobilephone == "null" || userInfo.mobilephone == "") {
+
+						mui("#mobilephone")[0].value = "暂无数据";
+					} else {
+						mui("#mobilephone")[0].value = userInfo.mobilephone;
+					}
+					//地址
+					if(userInfo.address == null || userInfo.address == "null" || userInfo.address == "") {
+
+						mui("#address")[0].value = "暂无数据";
+					} else {
+						mui("#address")[0].value = userInfo.address;
+					}
+					//咨询的问题
+					if(userInfo.request == null || userInfo.request == "null" || userInfo.request == "") {
+
+						mui("#request")[0].value = "暂无数据";
+					} else {
+						mui("#request")[0].value = userInfo.request;
+					}
+					//合理化建议
+					if(userInfo.advice_content == null || userInfo.advice_content == "null" || userInfo.advice_content == "") {
+
+						mui("#advice_content")[0].value = "暂无数据";
+					} else {
+						mui("#advice_content")[0].value = userInfo.advice_content;
+					}
+					if(userInfo.create_time == null || userInfo.create_time == "null" || userInfo.create_time == "") {
+
+						mui("#item-time")[0].value = "--";
+					} else {
+						var currDate = new Date(parseInt(userInfo.create_time)).Format('YYYY-MM-DD');
+						mui('.item-time')[0].innerHTML = currDate;
+					}
+
+				}
+			})
+		</script>
+
+	</body>
+
+</html>

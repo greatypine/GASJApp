@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>拜访记录查询、添加页面</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<!--标准mui.css-->
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="../css/common.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/style.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/visiting_information.css"/>
+		<style>
+		
+		</style>
+		
+		
+	</head>
+
+	<body style="background-color: #fff;">
+		<header class="mui-bar mui-bar-nav titleheader">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">拜访记录</h1>
+			<!--<div class="save">
+				<a onclick="add_visiting()">添加</a>
+			</div>-->
+		</header>
+		
+		
+		<div class="list-item layout" style="display: block;padding-top: 1.8rem;">
+			<ul>
+				
+				<li class="mui-input-row">
+					<input class="mui-input-clear" type="text" id="name" name="name" placeholder="姓名"/>
+				</li>
+				<li class="mui-input-row">
+					<input class="mui-input-clear" type="tel" id="mobilephone" name="mobilephonr" placeholder="电话" maxlength="11"/>
+				</li>
+			</ul>
+			<div class="select_btn" style="margin-bottom: 0.5rem;">
+				<button id="btnQuery">拜访记录查询</button>
+				<button id="btnAddUser" onclick="add_visiting()">添加新拜访</button>
+			</div>
+			
+			<!--预留显示查询内容-->
+				
+			<div class="mui-bar" id="customer_list" style="overflow: auto;margin-bottom:1rem;height: 50%; background-color:#fff;color:#666;-webkit-box-shadow: 0 0 0 ;">
+				
+			</div>
+		</div>
+		
+
+	</body>
+	<script src="../js/mui.min.js"></script>
+	<script src="../js/custom_common.js"></script>
+	<script src="../js/date_util.js"></script>
+	<script src="../js/jquery-2.2.2.min.js"></script>
+	<script type="text/javascript">
+	var relation_count=null;
+	var relation_count_type=null;
+	var employee = JSON.parse(localStorage.getItem('employee'));
+	var employee_no=null;
+	var store_id=null;
+	var default_store_id=null;	
+			
+		mui.init({
+			swipeBack:true //启用右滑关闭功能
+		});
+		
+		window.addEventListener('setRelationText',function(event){
+			var relation = event.detail.relation;
+			if(relation != null) {
+				if(relation.relation_name != null){
+					$('#name').val(relation.relation_name);
+				}
+				if(relation.relation_mobilephone != null){
+					$('#mobilephone').val(relation.relation_mobilephone);
+				}
+				doQueryRelation();
+			}
+		});
+		
+		
+		mui.plusReady(function(){
+			var store = JSON.parse(localStorage.getItem("store"));
+			var usergroup = JSON.parse(localStorage.getItem("usergroup"));
+			default_store_id=JSON.parse(localStorage.getItem("store_id"));
+			employee_no=employee.employeeId;
+            if(store == null||store.store_id == null||store.store_id ==""){
+			    store_id=null;
+			}else{
+				store_id=store.store_id;
+			}
+			if(store!=null&&(default_store_id==null||default_store_id==""||default_store_id!=store.store_id)){
+			   getStoreAddress(store);
+		    }
+			var self = plus.webview.currentWebview();
+			relation_count = self.relation_count;
+			relation_count_type=self.relation_count_type;
+			if(relation_count_type=='777'){
+				getMonthCustomer(usergroup.cardtype);
+				var $refresh_div = $('#customer_list');
+				$refresh_div.before('<div class="relation_count" id="relation_count"><span>工作统计量(本月)：<span id="month_relation_count"></span>条</span></div>');
+				mui('#month_relation_count')[0].innerHTML =relation_count;
+				
+				
+				mui.back = function() {
+			
+					var _current = plus.webview.currentWebview();
+					var main = _current.opener();
+					mui.fire(main,"settype",{id:"1"});
+					_current.close();
+			  }
+				
+			}
+			mui('#btnQuery')[0].addEventListener('tap',function(event){
+				doQueryRelation();
+			});
+			
+			var self = plus.webview.currentWebview();
+			if(self != null) {
+				if(self.customer_name != null){
+					$('#name').val(self.customer_name);
+				}
+				if(self.customer_mobilephone != null){
+					$('#mobilephone').val(self.customer_mobilephone);
+				}
+				if(self.select_name != null&&self.select_phone != null){
+					$('#name').val(self.select_name);
+					$('#mobilephone').val(self.select_phone);
+					doQueryRelation();
+				}else if(self.select_name != null&&self.select_phone == null){
+					$('#name').val(self.select_name);
+					doQueryRelation();
+				}
+			}
+			
+			
+			
+		});
+		
+//		function doQueryRelation(){
+//			 $('#relation_count').hide();
+//			var str_name = $('#name').val();
+//			var str_mobilephone = $('#mobilephone').val(); 
+//			var str_address = $('#address').val();
+//			
+//			if(!checkValue(str_name) && !checkValue(str_mobilephone)
+//				&& !checkValue(str_address)){
+//				mui.toast('查询条件请至少输入一项！');
+//				return;
+//			}
+//			
+//			if(checkValue(str_mobilephone)){
+//				if(!/^\d{11}$/.test(str_mobilephone)){
+//					mui("#mobilephone")[0].focus();
+//					mui.toast("请输入正确的电话号码。");
+//					return;
+//				}
+//			}
+//			
+//			var customer_params = {
+//				name:str_name,
+//				mobilephone:str_mobilephone,
+//				address:str_address
+//			};
+//			doManager('CustomerManager','findCustomerListByNamePhone',customer_params,function(data){
+//				if(data.result){
+//					var jsonData = JSON.parse(data.data);
+//					if(jsonData.code == 200){
+//						var $div_clist = $('#customer_list');
+//						$div_clist.children().remove();
+//						if(jsonData.data.length == 0){
+//							mui.toast('未查询到用户信息，请到用户画像添加用户信息!');
+//							return;
+//						}
+//						$(jsonData.data).each(function(index,customer){
+//							$div_clist.append('<div class="customer_row"><div>');
+//							var $div_row = $div_clist.find('div:last');
+//							$div_row.click(function(){
+//								var webview = plus.webview.getWebviewById('visiting_record');
+//								if(webview != null){
+//									webview.close();
+//								}
+//								mui.openWindow({
+//									url:'visiting_record.html',
+//									id:"visiting_record",
+//									createNew:true,
+//									extras:{
+//										customer:JSON.stringify(customer)
+//									}
+//								});
+//							});
+//							var work_overtime=customer.work_overtime;
+//							if(work_overtime==null||work_overtime==""){
+//								work_overtime='暂无拜访'
+//							}else{
+//								work_overtime = work_overtime.substring(0,10);
+//							}
+//							$div_row.append('<ul></ul>');
+//							var $ul_row = $div_row.find('ul:last');
+//							$ul_row.append('<li>姓名：<span>'+customer.name+'</span></li>')
+//							$ul_row.append('<li>电话：<span>'+customer.mobilephone+'</span></li>')
+//							$ul_row.append('<li>拜访次数：<span>'+customer.minor_num+'</span></li>')
+//							$ul_row.append('<li>最后一次拜访时间：<span>'+work_overtime+'</span></li>')
+//						});
+//						
+//					}else{
+//						mui.toast(jsonData.message);
+//					}
+//				}else{
+//					mui.toast('查询失败!');
+//				}
+//			});
+//		}
+		
+        //数据卡点击查询所有拜访记录
+        function getMonthCustomer(cardtype){
+			if(cardtype=='0'){
+				var relation_params = {
+					store_id:store_id,
+				    employee_no:employee_no,
+				    cardtype:cardtype
+			    };
+				
+			}else if(cardtype=='1'){
+				var relation_params = {
+				    store_id:store_id,
+				    employee_no:employee_no,
+				    cardtype:cardtype
+			    };
+			}
+			
+			
+			doManager('RelationManager','queryRelationListByUserCard',[store_id,employee_no,cardtype],function(data){
+				if(data.result){
+					var jsonData = JSON.parse(data.data);
+					if(jsonData!= null){
+						var $div_clist = $('#customer_list');
+						$div_clist.children().remove();
+						$(jsonData.data).each(function(index,customer){
+							$div_clist.append('<div class="customer_row"><div>');
+							var $div_row = $div_clist.find('div:last');
+							$div_row.click(function(){
+								var webview = plus.webview.getWebviewById('visiting_record');
+								if(webview != null){
+									webview.close();
+								}
+								selectData(customer);
+								
+							});
+							var work_overtime=customer.work_overtime;
+							if(work_overtime==null||work_overtime==""){
+								work_overtime='暂无拜访'
+							}else{
+								work_overtime = work_overtime.substring(0,10);
+							}
+							
+							$div_row.append('<ul></ul>');
+							var $ul_row = $div_row.find('ul:last');
+							$ul_row.append('<li>姓名：<span>'+customer.name+'</span></li>')
+							$ul_row.append('<li>电话：<span>'+customer.mobilephone+'</span></li>')
+							$ul_row.append('<li>拜访次数：<span>'+customer.minor_num+'</span></li>')
+							$ul_row.append('<li>最后一次拜访时间：<span>'+work_overtime+'</span></li>')
+						});
+						
+					}else{
+						mui.toast('未查询到用户信息!');
+//						mui.toast(jsonData.message);
+					}
+				}else{
+					mui.toast('查询失败!');
+				}
+			});
+			
+		}
+        function selectData(customer){
+        	var webview = plus.webview.getWebviewById('visiting_record');
+			if(webview != null){
+				webview.close();
+			}
+	        mui.openWindow({
+				url:'visiting_record.html',
+				id:"visiting_record",
+				createNew:true,
+				show: {
+						aniShow: 'slide-in-right'
+					},
+					waiting: {
+						autoShow: false
+					},
+				extras:{
+					customer:JSON.stringify(customer)
+				}
+			});
+//			
+        	
+        }
+        
+        function add_visiting(){
+        	var webview = plus.webview.getWebviewById('visiting_record');
+								if(webview != null){
+									webview.close();
+								}
+			mui.openWindow({
+				url:'visiting_record.html',
+				id:"visiting_record",
+				createNew:true,
+				show: {
+						aniShow: 'slide-in-right'
+					},
+					waiting: {
+						autoShow: false
+					}
+				
+			});
+        }
+        //查询拜访记录
+        function doQueryRelation(){
+			 $('#relation_count').hide();
+			var str_name = $('#name').val();
+			var str_mobilephone = $('#mobilephone').val(); 
+			var str_address = $('#address').val();
+			if(!checkValue(str_name) && !checkValue(str_mobilephone)
+				&& !checkValue(str_address)){
+				mui.toast('查询条件请至少输入一项！');
+				return;
+			}
+			
+			if(checkValue(str_mobilephone)){
+				if(!/^\d{11}$/.test(str_mobilephone)){
+					mui("#mobilephone")[0].focus();
+					mui.toast("请输入正确的电话号码。");
+					return;
+				}
+			}
+			
+			var customer_params = {
+				name:str_name,
+				mobilephone:str_mobilephone,
+				address:str_address
+			};
+			doManager('RelationManager','queryRelationListForApp',[employee.store_id,employee.employeeId,employee.cardtype,str_name,str_mobilephone],function(data){
+				if(data.result){
+					var jsonData = JSON.parse(data.data);
+					if(jsonData.code == 200){
+						var $div_clist = $('#customer_list');
+						$div_clist.children().remove();
+						if(jsonData.data.length == 0){
+							mui.toast('未查询到拜访记录,请添加!');
+							return;
+						}
+						$(jsonData.data).each(function(index,customer){
+							$div_clist.append('<div class="customer_row"><div>');
+							var $div_row = $div_clist.find('div:last');
+							$div_row.click(function(){
+								var webview = plus.webview.getWebviewById('visiting_record');
+								if(webview != null){
+									webview.close();
+								}
+								mui.openWindow({
+									url:'visiting_record.html',
+									id:"visiting_record",
+									createNew:true,
+									show: {
+										aniShow: 'slide-in-right'
+									},
+									waiting: {
+										autoShow: false
+									},
+									extras:{
+										customer:JSON.stringify(customer)
+									}
+								});
+							});
+							var work_overtime=customer.work_overtime;
+							if(work_overtime==null||work_overtime==""){
+								work_overtime='暂无拜访'
+							}else{
+								work_overtime = work_overtime.substring(0,10);
+							}
+							$div_row.append('<ul></ul>');
+							var $ul_row = $div_row.find('ul:last');
+							$ul_row.append('<li>用户姓名：<span>'+customer.name+'</span></li>')
+							$ul_row.append('<li>电话：<span>'+customer.mobilephone+'</span></li>')
+							$ul_row.append('<li>总拜访次数：<span>'+customer.minor_num+'</span></li>')
+							$ul_row.append('<li>最后拜访时间：<span>'+work_overtime+'</span></li>')
+						});
+						
+					}else{
+						mui.toast(jsonData.message);
+					}
+				}else{
+					mui.toast('查询失败!');
+				}
+			});
+		}
+        //查询门店信息
+        function getStoreAddress(store) {
+			doManager('StoreManager', 'getStoreInfoById',store, function(data) {
+				if(data.result) {
+					var jsonData = JSON.parse(data.data);
+					if(jsonData == 0 || jsonData == null) {
+
+					} else {
+						window.localStorage.setItem("default_city",JSON.stringify(jsonData));
+						window.localStorage.setItem("store_id", store.store_id);
+						 
+					}
+					  
+				} else {
+					mui.toast(data.message);
+				}
+			});
+	    }
+	</script>
+</html>

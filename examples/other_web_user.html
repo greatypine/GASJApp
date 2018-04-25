@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>其它国安侠基础页面</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <!-- Bootstrap 3.3.6 -->
+  <link rel="stylesheet" href="../css/bootstrap.min.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="../css/font-awesome.min.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="../css/ionicons.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="../css/AdminLTE.min.css">
+  <!-- AdminLTE Skins. Choose a skin from the css/skins
+       folder instead of downloading all of them to reduce the load. -->
+  <link rel="stylesheet" href="../css/_all-skins.min.css">
+  <link rel="stylesheet" href="../css/newmui.min.css">
+
+  <style>
+    .wrapper,.content-wrapper{background-color: transparent!important;}
+    .modal-content{ margin-bottom: 15px;}
+    .box-body img{width: 100%}
+    .dl-horizontal dt{width: 100px; font-weight: normal;}
+    .dl-horizontal .w3{letter-spacing:8px;}
+    .dl-horizontal .w2{letter-spacing:30px;}
+    .servicer{height: 80px; }
+    .servicer .col-xs-10{line-height: 50px;}
+
+    .bg-head-green{background-color:#18bc9c; color: #fff; border-radius: 0;}
+    .bg-head-green .col-xs-4 img{border-radius: 50%; max-height: 150px; box-shadow: 0px 3px 5px rgba(0,0,0,0.3);}
+    .return-arrow a{color: #fff; padding: 20px; font-size: 26px;width: 100%;}
+    .bg-shade{background-color: rgba(0,0,0,0.1); padding: 10px 0; margin-top: 10px;}
+    .image{color: #fff;}
+
+  </style>
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+<!-- Site wrapper -->
+<div class="wrapper mui-off-canvas-wrap mui-slide-in" id="offCanvasWrapper">
+
+  <aside id="offCanvasSide" class="main-sidebar mui-off-canvas-left">
+    <!-- sidebar: style can be found in sidebar.less -->
+    <!--<section id="offCanvasSideScroll" class="sidebar">
+      <div class="user-panel">
+        <div class="text-center image">
+          <img src="../images/user2-160x160.jpg" class="img-circle" alt="User Image">
+          <p><strong id="user_name"></strong></p>
+          <p><span id="user_zw"></span><span id="user_employeeid"></span></p>
+          <p id="store_name"></p>
+        </div>
+      </div>
+      <ul class="sidebar-menu">
+
+        <li class="treeview">
+          <a onclick="toArea()">
+            <span>片区动态</span> <i class="fa  fa-angle-right pull-right"></i>
+          </a>
+        </li>
+        <li class="treeview">
+          <a onclick="toPerson()">
+            <span>个人动态</span> <i class="fa  fa-angle-right pull-right"></i>
+          </a>
+        </li>
+        <li class="treeview">
+          <a onclick="toUser()">
+            <span>片区信息</span> <i class="fa  fa-angle-right pull-right"></i>
+          </a>
+        </li>
+        <li class="treeview">
+          <a onclick="toMain()">
+            <span>国安数据首页</span> <i class="fa  fa-angle-right pull-right"></i>
+          </a>
+        </li>
+        <li class="text-center">
+        	<a id="btnLogout">退出登录</a>
+        </li>
+
+      </ul>
+    </section>-->
+    <!-- /.sidebar -->
+  </aside>
+  <!-- Content Wrapper. Contains page content -->
+  <div class="mui-inner-wrap">
+    <section class="mui-content mui-scroll-wrapper">
+
+        <!--<div class="return-arrow bg-head-green">
+          <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" id="back_id"></a>
+        </div>-->
+         <header class="main-header" >
+     		 <nav class="navbar navbar-static-top text-center">
+					<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+				</nav>
+   		 </header>
+        
+        <div class="content-wrapper">
+          <div class="box-body no-padding bg-head-green text-center">
+            <div class="clearfix">
+              <div class="col-xs-4"></div>
+              <div class="col-xs-4"><img src="../images/my_card_head.png" id="head_img"> <p class="h4" id="employee_name"></p></div>
+              <div class="col-xs-4"></div>
+            </div>
+           <!--<div class="clearfix bg-shade">
+            <div class="col-xs-4">订单派送总量<br><p id="oreder_sum"></p></div>
+            <div class="col-xs-4">拜访记录总量<br><p id="relation_sum"></p></div>
+            <div class="col-xs-4">单体画像总量<br><p id="customer_sum"></p></div>
+          </div>-->
+          </div>
+          <div class="box-header with-border"><i class="fa fa-file-zip-o"></i><b>基本信息</b></div>
+          <div class="modal-content">
+            <div class="box-body">
+	            <p id="employee_zw"></p>
+	            <p id="employee_no"></p>
+	            <p id="work_time"></p>
+	            <p id="phome"></p>
+	            <p class="no-margin" id="store_name_"></p>
+	          </div>
+          </div>
+          <!--<div class="box-header with-border"><i class="fa fa-file-zip-o"></i><b>片区信息</b></div>
+	          <div class="modal-content">
+		          <div class="box-body" id="itemdiv">
+		          </div>
+	          </div>-->
+
+        </div>
+
+    </section>
+    <!-- /.content -->
+    <div class="mui-off-canvas-backdrop"></div>
+  </div>
+
+</div>
+<!--*********************************************************************************-->
+
+<!-- jQuery 2.2.0 -->
+<script src="../js/jQuery-2.2.0.min.js"></script>
+<!-- Bootstrap 3.3.6 -->
+<script src="../js/bootstrap.min.js"></script>
+<!-- Morris.js charts -->
+<script src="../js/raphael-min.js"></script>
+<!--<script src="plugins/morris/morris.min.js"></script>-->
+<!-- FastClick -->
+<script src="../js/fastclick.js"></script>
+<!-- AdminLTE App -->
+<script src="../js/app.min.js"></script>
+<script src="../js/mui.min.js"></script>
+<script type="text/javascript" src="../js/custom_common.js"></script>
+<script src="../js/date_util.js"></script>
+<script>
+//	var employee = JSON.parse(localStorage.getItem('employee'));
+	var to_type=null;
+	mui.init({
+    swipeBack: false
+  });
+
+  mui.plusReady(function (){
+  	var self = plus.webview.currentWebview();
+			if(self != null && self.other_user_id != null) {
+				var other_user_id = self.other_user_id;
+				var guoanxia_img=self.guoanxia_img;
+				if(other_user_id != null){
+					getOrderOfMonth(other_user_id);
+				}
+				if(guoanxia_img!=null&&guoanxia_img!=""&&guoanxia_img!="https://imgcdn.guoanshequ.com/"){
+					$("#head_img").attr("src",decodeURI(guoanxia_img));
+				}
+			}
+			
+			if(self != null && self.employee_id != null) {
+				var employee_id = self.employee_id;
+				var employee_pic = self.employee_pic;
+				to_type=self.to_type;
+				if(employee_id != null){
+					getOrderOfMonth(employee_id);
+				}
+				if(employee_pic!=null){
+					$("#head_img").attr("src",employee_pic);
+				}
+			}
+			if(self != null && self.employeeid != null) {
+				var employeeid = self.employeeid;
+				to_type=self.to_type;
+				if(employeeid != null){
+					getOrderOfMonth(employeeid);
+					getEmployeePicByEmployeeId(employeeid);
+				}
+			}
+			
+  });
+  
+  
+
+  //获取片区信息数据
+		function getOrderOfMonth(employee_no) {
+			doManager('InterManager', 'findEmployeePerformance_app',[employee_no,null], function(data) {
+				var jsonData = JSON.parse(data.data);
+				if(data.result == true) {
+					if(jsonData !=null){
+						if(jsonData.dataMap.employeeInfo.human!=null){
+							if(jsonData.dataMap.employeeInfo.human.name==null||jsonData.dataMap.employeeInfo.human ==""){
+					  			$('#employee_name').html("无数据");
+					  	}else{
+					  			$('#employee_name').html(jsonData.dataMap.employeeInfo.human.name);
+							}
+					  	
+					  	if(jsonData.dataMap.employeeInfo.human.zw==null||jsonData.dataMap.employeeInfo.zw ==""){
+					  			$("#employee_zw").text("职务:"+"无数据");
+					  	}else{
+					  			$('#employee_zw').html("职务:"+jsonData.dataMap.employeeInfo.human.zw);
+							}
+					  	
+					  	if(jsonData.dataMap.employeeInfo.human.employee_no==null||jsonData.dataMap.employeeInfo.employee_no ==""){
+					  			$('#employee_no').html("员工号:"+"无数据");
+					  	}else{
+					  			$('#employee_no').html("员工号:"+jsonData.dataMap.employeeInfo.human.employee_no);
+							}
+					  	
+					  	if(jsonData.dataMap.employeeInfo.human.storename==null ||jsonData.dataMap.employeeInfo.human.storename==""){
+					    	$('#store_name_').html("所属门店:"+"无数据");
+					    }else{
+					    	$('#store_name_').html("所属门店:"+jsonData.dataMap.employeeInfo.human.storename);
+					    }
+					    
+					    if(jsonData.dataMap.employeeInfo.human.phone==null ||jsonData.dataMap.employeeInfo.human.phone==""){
+					    	$('#phome').html("电话:"+"无数据");
+					    }else{
+					    	$('#phome').html("电话:"+jsonData.dataMap.employeeInfo.human.phone);
+					    }
+							
+						}
+//						if(jsonData.dataMap.employeeInfo.customercount!=null){
+//							$('#customer_sum').html(jsonData.dataMap.employeeInfo.customercount);
+//						}else{
+//							$('#customer_sum').html("0");
+//						}
+//						
+//						if(jsonData.dataMap.employeeInfo.orderTotal!=null){
+//							$('#oreder_sum').html(jsonData.dataMap.employeeInfo.orderTotal);
+//						}else{
+//							$('#oreder_sum').html("0");
+//						}
+//						alert(JSON.stringify(jsonData.dataMap.employeeInfo));
+//						if(jsonData.dataMap.employeeInfo.relationcount!=null){
+//							$('#relation_sum').html(jsonData.dataMap.employeeInfo.relationcount);
+//						}else{
+//							$('#relation_sum').html("0");
+//						}
+						if(jsonData.dataMap.employeeInfo.human.remark!=null){
+							$('#work_time').html("在职时间:"+jsonData.dataMap.employeeInfo.human.remark);
+						}else{
+							$('#work_time').html("无");
+						}
+					
+					}
+					
+					
+				}
+			});
+		}
+		
+		//跳转到选择页面
+    function toMain() {
+			setTimeout(function() {
+				var webview = plus.webview.getWebviewById('new_main');
+					if(webview != null){
+						webview.close();
+					}
+				mui.openWindow({
+					url:'new_main.html',
+					id: 'new_main',
+					createNew:true,
+					show: {
+						aniShow: 'slide-in-right'
+					},
+					waiting: {
+						autoShow: false
+					}
+				});
+			}, 50);
+		};
+		//跳转到个人动态页面
+    function toPerson() {
+			setTimeout(function() {
+				var webview = plus.webview.getWebviewById('web_personal');
+					if(webview != null){
+						webview.close();
+					}
+				mui.openWindow({
+					url:'web_personal.html',
+					id: 'web_personal',
+					createNew:true,
+					show: {
+						aniShow: 'slide-in-right'
+					},
+					waiting: {
+						autoShow: false
+					}
+				});
+			}, 50);
+		};
+		//跳转到片区信息
+    function toUser() {
+			setTimeout(function() {
+				var webview = plus.webview.getWebviewById('web_user');
+					if(webview != null){
+						webview.close();
+					}
+				mui.openWindow({
+					url:'web_user.html',
+					id: 'web_user',
+					createNew:true,
+					show: {
+						aniShow: 'slide-in-right'
+					},
+					waiting: {
+						autoShow: false
+					}
+				});
+			}, 50);
+		};
+		//跳转到个人动态页面
+    function toArea() {
+			setTimeout(function() {
+				var webview = plus.webview.getWebviewById('web_index');
+					if(webview != null){
+						webview.close();
+					}
+				mui.openWindow({
+					url:'web_index.html',
+					id: 'web_index',
+					createNew:true,
+					show: {
+						aniShow: 'slide-in-right'
+					},
+					waiting: {
+						autoShow: false
+					}
+				});
+			}, 50);
+		};
+		 //获取国安侠头像
+			function getEmployeePicByEmployeeId(employee_id) {
+				doManager('InterManager','findEmployeePicByEmployeeId',employee_id, function(data) {
+					if(data.result == true) {
+						var jsonData = JSON.parse(data.data);
+						if(jsonData.dataMap!=null&&jsonData.dataMap!=""){
+							if(jsonData.dataMap.pngUrl!=null&&jsonData.dataMap.pngUrl!=""&&jsonData.dataMap.pngUrl!="https://imgcdn.guoanshequ.com/"){
+								$("#head_img").attr("src",jsonData.dataMap.pngUrl);
+							}
+						    
+					    }
+					}
+				},false);
+			}
+		
+		//本月完成量
+//		function getMonthData(employee_name,employee_Id){
+//		    var dynamicDto = {
+//				  employeeName:employee_name,
+//				  employeeNo:employee_Id,
+//		  		target:3
+//		   }
+//			doManager('DynamicManager','getDataCardInfoOfCurMonth',[dynamicDto], function(data) {
+//				if(data.result == true) {
+//					var jsonData = JSON.parse(data.data);
+//					if(jsonData!=""||jsonData!=null){
+//					}
+//					
+//				}
+//			});
+//		}
+	
+	
+</script>
+
+</body>
+</html>

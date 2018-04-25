@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>添加客户意见详情页面</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<!--标准mui.css-->
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="../css/common.css" />
+		<link rel="stylesheet" type="text/css" href="../css/style.css" />
+		<link rel="stylesheet" type="text/css" href="../css/feedback.css" />
+	</head>
+	<body style="background-color: #fff;">
+		<!--<header class="mui-bar mui-bar-nav titleheader">
+			<div>客户意见</div>
+			<div class="back"><a href="store_daily.html"></a></div>
+		</header>-->
+		<header class="mui-bar mui-bar-nav titleheader">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">客户意见</h1>
+		</header>
+
+		<div class="list-item layout" style="display: block; padding-top:0.8rem;">
+			<ul>
+				<li class="item-time"></li>
+				<li class="item-name">
+					<span>姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名<font>*</font></span>
+					<input type="text" id="name" name="name" maxlength="10" />
+				</li>
+				<li class="item-sex">
+					<span>性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别</span>
+					<select id="sex" name="sex" style="border:1px solid #dbdbdb !important;">
+						<option value="0">男</option>
+						<option value="1">女</option>
+					</select>
+				</li>
+				<li class="item-age">
+					<span>年&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;龄<font>*</font></span>
+					<input type="tel" id="reg_num" name="reg_num" maxlength="3" onkeyup="value=this.value.replace(/\D+/g,'')" />
+				</li>
+				<li class="item-phone">
+					<span>电&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;话<font>*</font></span>
+					<input type="tel" id="mobilephone" name="mobilephone"  maxlength="11" onkeyup="value=this.value.replace(/\D+/g,'')"/>
+				</li>
+				<li class="item-address">
+					<span class="fl">地&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;址</span>
+					<textarea id="address" name="address" maxlength="120"></textarea>
+				</li>
+				<li class="item-question">
+					<span>咨询的问题<font>*</font></span>
+					<textarea type="text" id="request" name="request" maxlength="120"></textarea>
+				</li>
+				<li class="item-proposal">
+					<span>合理化建议<font>*</font></span>
+					<textarea type="text" id="advice_content" name="advice_content" maxlength="120"></textarea>
+				</li>
+
+			</ul>
+			<div class="order_btn">
+				<a href="#" onclick="doSave()">保存</a>
+			</div>
+		</div>
+
+	</body>
+	<script src="../js/mui.min.js"></script>
+	<script src="../js/custom_common.js"></script>
+	<script src="../js/date_util.js"></script>
+	<script type="text/javascript">
+		mui.init({
+			swipeBack: true //启用右滑关闭功能
+		});
+		//		mui.init({
+		//			beforeback: function() {　　　　 //获得父页面的webview
+		//				var list = plus.webview.currentWebview().opener();　　　　 //触发父页面的自定义事件(refresh),从而进行刷新
+		//				mui.fire(list, 'add');
+		//				//返回true,继续页面关闭逻辑
+		//				return true;
+		//			}
+		//		});
+
+		var currDate = new Date().Format('YYYY-MM-DD');
+		mui('.item-time')[0].innerHTML = currDate;
+
+		function doSave() {
+
+			var store = JSON.parse(localStorage.getItem("store"));
+
+			var employee = JSON.parse(localStorage.getItem("employee"))
+
+			var str_name = mui("#name")[0].value;
+			var str_sex = mui("#sex")[0].value;
+			var str_age = mui("#reg_num")[0].value;
+			var str_phone = mui("#mobilephone")[0].value;
+			var str_address = mui("#address")[0].value;
+			var str_request = mui("#request")[0].value;
+			var str_ac = mui("#advice_content")[0].value;
+
+			if(!checkValue(str_name)) {
+				mui("#name")[0].focus();
+				mui.toast("请输入您的姓名。");
+				return;
+			}
+
+			if(!checkValue(str_age)) {
+				mui("#reg_num")[0].focus();
+				mui.toast("请输入您的年龄。");
+				return;
+			}
+
+			if(!checkValue(str_phone)) {
+				mui("#mobilephone")[0].focus();
+				mui.toast("请输入您的电话。");
+				return;
+			}
+
+			if(!/^\d{11}$/.test(str_phone)) {
+				mui("#mobilephone")[0].focus();
+				mui.toast("请输入正确的电话号码。");
+				return;
+			}
+
+			if(!checkValue(str_request) && !checkValue(str_ac)) {
+				mui.toast("请输入要咨询的问题或建议。");
+				return;
+			}
+
+			var userAdvice = {
+				store_id: store.store_id,
+				createUserId: employee.id,
+				name: str_name,
+				sex_2: str_sex,
+				reg_num_2: str_age,
+				mobilephone: str_phone,
+				address: str_address,
+				request: str_request,
+				advice_content: str_ac,
+				status_2: 0
+			}
+			doManager('UserAdviceManager', 'userOpinion', userAdvice, function(data) {
+				if(data.result == true) {
+					var jsonData = JSON.parse(data.data)
+					if(jsonData.code == 200) {
+						mui.toast('保存成功');
+						//						mui.back();
+						setTimeout(function() {
+							doBack();
+						}, 500);
+					} else {
+						mui.toast(jsonData.message);
+					}
+				} else {
+					mui.toast('保存失败');
+				}
+			});
+
+		}
+
+		function doBack() {
+			var main = plus.webview.currentWebview();
+			var open = main.opener();
+			mui.fire(open, "loadView");
+			main.close();
+		}
+
+		function checkValue(value) {
+			if(value != null && value != ''&& value.toString().trim().length !=0) {
+				return true;
+			}
+			return false;
+		}
+	</script>
+
+</html>

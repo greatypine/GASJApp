@@ -1,0 +1,1569 @@
+{
+  "login.html": {
+    "resources": [
+      "js/jquery-2.2.2.min.js",
+      "js/custom_common.js",
+      "images/user.png",
+      "js/app.js",
+      "js/common.js",
+      "js/mui.min.js",
+      "css/mui.min.css",
+      "css/style.css",
+      "images/password.png",
+      "js/mui.enterfocus.js",
+      "images/bg.jpg",
+      "js/immersed.js",
+      "fonts/mui.ttf",
+      "images/new_bg.jpg",
+      "images/new_bg2.jpg"
+    ],
+    "refer": [
+      "examples/new_main.html",
+      "examples/tabbar.html",
+      "examples/web_index.html",
+      "examples/web_index2.html",
+      "examples/ceshi.html",
+      "examples/web_personal.html",
+      "examples/web_shopkeeper.html",
+      "examples/web_new_main.html",
+      "examples/forget_password.html",
+      "examples/new_tabbar.html",
+      "unlock.html",
+      "examples/maps.html",
+      "examples/city_main.html",
+      "examples/web_city_ej.html"
+    ]
+  },
+  "examples/new_main.html": {
+    "resources": [
+      "images/green@2x.png",
+      "css/style.css",
+      "images/blue@2x.png",
+      "css/awesomplete.css",
+      "css/new_main.css",
+      "images/logo.png",
+      "css/common.css",
+      "images/logo_manage.png",
+      "images/timg.jpg",
+      "css/blue.css",
+      "css/green.css",
+      "css/mui.min.css",
+      "js/awesomplete.js",
+      "js/custom_jquery_based.js",
+      "js/icheck.min.js",
+      "js/jquery-2.2.2.min.js",
+      "js/mui.min.js",
+      "js/custom_common.js"
+    ],
+    "refer": [
+      "examples/web_index.html",
+      "examples/tabbar.html",
+      "examples/web_index2.html",
+      "examples/ceshi.html",
+      "examples/web_personal.html",
+      "examples/web_shopkeeper.html"
+    ]
+  },
+  "examples/web_index.html": {
+    "resources": [
+      "css/_all-skins.min.css",
+      "js/raphael-min.js",
+      "js/echarts.common.min.js",
+      "css/bootstrap.min.css",
+      "js/custom_common.js",
+      "css/ionicons.min.css",
+      "js/fastclick.js",
+      "js/app.min.js",
+      "js/mui.min.js",
+      "css/font-awesome.min.css",
+      "css/AdminLTE.min.css",
+      "js/bootstrap.min.js",
+      "images/user2-160x160.jpg",
+      "js/date_util.js",
+      "css/newmui.min.css",
+      "js/jQuery-2.2.0.min.js",
+      "images/user8-128x128.jpg",
+      "fonts/fontawesome-webfont.woff2",
+      "images/avatar04.png",
+      "examples/web_personal.html",
+      "images/logo.png",
+      "css/mui.min.css",
+      "examples/web_new_main.html",
+      "examples/tabbar.html",
+      "examples/web_message.html",
+      "fonts/mui.ttf",
+      "images/dt2.png",
+      "images/dt1.png",
+      "css/web_index_search.css",
+      "images/dt3.png"
+    ],
+    "refer": [
+      "examples/web_order_detail.html",
+      "login.html",
+      "examples/web_visit_detail.html",
+      "examples/new_main.html",
+      "examples/web_personal.html",
+      "examples/web_user.html",
+      "examples/web_new_main.html",
+      "examples/tabbar.html",
+      "examples/web_message.html",
+      "examples/update_password.html",
+      "examples/dataCard.html",
+      "examples/web_index.html",
+      "examples/maps.html"
+    ]
+  },
+  "examples/web_order_detail.html": {
+    "resources": [
+      "css/_all-skins.min.css",
+      "images/user7-128x128.jpg",
+      "js/raphael-min.js",
+      "css/bootstrap.min.css",
+      "js/custom_common.js",
+      "css/ionicons.min.css",
+      "js/app.min.js",
+      "js/fastclick.js",
+      "js/mui.min.js",
+      "css/font-awesome.min.css",
+      "css/mui.min.css",
+      "css/AdminLTE.min.css",
+      "js/bootstrap.min.js",
+      "js/date_util.js",
+      "css/newmui.min.css",
+      "js/jQuery-2.2.0.min.js",
+      "fonts/mui.ttf",
+      "fonts/fontawesome-webfont.woff2"
+    ],
+    "refer": [
+      "examples/other_web_user.html",
+      "examples/web_portrait.html"
+    ]
+  },
+  "examples/web_visit_detail.html": {
+    "resources": [
+      "css/mui.min.css",
+      "css/_all-skins.min.css",
+      "css/AdminLTE.min.css",
+      "css/bootstrap.min.css",
+      "images/user7-128x128.jpg",
+      "images/user8-128x128.jpg",
+      "js/custom_common.js",
+      "js/fastclick.js",
+      "js/mui.min.js",
+      "js/raphael-min.js",
+      "js/bootstrap.min.js",
+      "js/date_util.js",
+      "js/jQuery-2.2.0.min.js",
+      "css/ionicons.min.css",
+      "css/font-awesome.min.css",
+      "css/newmui.min.css",
+      "images/user2-160x160.jpg",
+      "js/echarts.common.min.js",
+      "js/app.min.js",
+      "images/banner.jpg",
+      "fonts/mui.ttf",
+      "fonts/fontawesome-webfont.woff2"
+    ],
+    "refer": [
+      "examples/web_portrait.html"
+    ]
+  },
+  "examples/tabbar.html": {
+    "resources": [
+      "js/jquery-2.2.2.min.js",
+      "images/icon11.png",
+      "images/icon6.png",
+      "css/style.css",
+      "images/icon36.png",
+      "images/icon3.png",
+      "images/icon2.png",
+      "js/custom_common.js",
+      "images/icon4.png",
+      "css/common.css",
+      "images/icon1.png",
+      "js/mui.min.js",
+      "css/mui.min.css",
+      "images/icon9.png",
+      "css/newmui.min.css",
+      "css/ionicons.min.css",
+      "css/font-awesome.min.css",
+      "css/AdminLTE.min.css",
+      "fonts/fontawesome-webfont.woff2",
+      "css/bootstrap.min.css",
+      "examples/web_new_main.html",
+      "examples/web_index.html",
+      "examples/web_message.html",
+      "css/_all-skins.min.css",
+      "images/men2.jpg",
+      "images/banner.jpg",
+      "images/men3.jpg",
+      "images/user2-160x160.jpg"
+    ],
+    "refer": [
+      "examples/my.html",
+      "examples/user_information.html",
+      "examples/matching_information.html",
+      "examples/store_daily.html",
+      "examples/visiting_information.html",
+      "examples/message.html",
+      "examples/express_list.html",
+      "examples/web_new_main.html",
+      "examples/web_index.html",
+      "examples/web_message.html",
+      "examples/update_password.html",
+      "login.html",
+      "examples/web_shopkeeper.html",
+      "examples/dataCard.html",
+      "examples/maps.html",
+      "examples/storeDataCard.html",
+      "examples/web_guoanxialist.html",
+      "examples/web_information.html",
+      "examples/web_user.html",
+      "examples/web_shopkeeper_new.html"
+    ]
+  },
+  "examples/my.html": {
+    "resources": [
+      "js/jquery-2.2.2.min.js",
+      "js/custom_common.js",
+      "images/icon10.png",
+      "css/my.css",
+      "js/mui.min.js",
+      "css/common.css",
+      "css/mui.min.css",
+      "css/my_card.css",
+      "css/style.css",
+      "images/icon7.png",
+      "images/my_card_bg.jpg",
+      "images/icon33.png",
+      "images/my_card_head.png",
+      "examples/update_password.html",
+      "images/icon9.png",
+      "fonts/mui.ttf"
+    ],
+    "refer": [
+      "examples/web_index.html",
+      "login.html",
+      "examples/new_main.html",
+      "examples/tabbar.html",
+      "examples/set_headimg.html",
+      "examples/visiting_information.html",
+      "examples/express_list.html",
+      "examples/user_information.html",
+      "examples/update_password.html",
+      "examples/message.html"
+    ]
+  },
+  "examples/web_personal.html": {
+    "resources": [
+      "css/_all-skins.min.css",
+      "css/ionicons.min.css",
+      "css/font-awesome.min.css",
+      "css/AdminLTE.min.css",
+      "css/newmui.min.css",
+      "css/bootstrap.min.css",
+      "js/raphael-min.js",
+      "js/echarts.common.min.js",
+      "js/custom_common.js",
+      "js/fastclick.js",
+      "js/app.min.js",
+      "js/mui.min.js",
+      "js/bootstrap.min.js",
+      "js/date_util.js",
+      "js/jQuery-2.2.0.min.js",
+      "images/avatar04.png",
+      "examples/web_index.html",
+      "images/user8-128x128.jpg",
+      "examples/web_user.html",
+      "fonts/fontawesome-webfont.woff2",
+      "images/logo.png",
+      "images/user2-160x160.jpg",
+      "css/mui.min.css",
+      "css/mui.min2.css",
+      "fonts/mui.ttf"
+    ],
+    "refer": [
+      "examples/web_index.html",
+      "examples/web_visit_detail.html",
+      "examples/web_order_detail.html",
+      "login.html",
+      "examples/web_user.html",
+      "examples/new_main.html"
+    ]
+  },
+  "examples/web_user.html": {
+    "resources": [
+      "css/_all-skins.min.css",
+      "css/ionicons.min.css",
+      "css/font-awesome.min.css",
+      "css/AdminLTE.min.css",
+      "css/newmui.min.css",
+      "css/bootstrap.min.css",
+      "js/custom_common.js",
+      "js/mui.min.js",
+      "js/date_util.js",
+      "images/user7-128x128.jpg",
+      "js/raphael-min.js",
+      "js/fastclick.js",
+      "js/app.min.js",
+      "js/bootstrap.min.js",
+      "js/jQuery-2.2.0.min.js",
+      "fonts/mui.ttf",
+      "fonts/fontawesome-webfont.woff2",
+      "images/user2-160x160.jpg",
+      "examples/area_meter.html"
+    ],
+    "refer": [
+      "examples/web_index.html",
+      "examples/new_main.html",
+      "examples/web_personal.html",
+      "login.html",
+      "examples/area_meter.html",
+      "examples/house_number.html",
+      "examples/house_users.html",
+      "examples/order_number.html",
+      "examples/customer_num.html",
+      "examples/portrait_six.html",
+      "examples/portrait_eighteen.html"
+    ]
+  },
+  "examples/web_index2.html": {
+    "resources": [
+      "css/_all-skins.min.css",
+      "js/raphael-min.js",
+      "fonts/fontawesome-webfont.woff2",
+      "css/bootstrap.min.css",
+      "css/ionicons.min.css",
+      "js/fastclick.js",
+      "js/app.min.js",
+      "js/mui.min.js",
+      "css/font-awesome.min.css",
+      "css/AdminLTE.min.css",
+      "js/bootstrap.min.js",
+      "css/newmui.min.css",
+      "js/jQuery-2.2.0.min.js",
+      "images/user2-160x160.jpg",
+      "css/mui.min.css"
+    ],
+    "refer": []
+  },
+  "examples/ceshi.html": {
+    "resources": [
+      "js/mui.min.js",
+      "css/mui.min.css",
+      "css/bootstrap.min.css",
+      "css/font-awesome.min.css",
+      "fonts/fontawesome-webfont.woff2",
+      "css/ionicons.min.css",
+      "css/AdminLTE.min.css",
+      "css/_all-skins.min.css",
+      "css/newmui.min.css",
+      "js/custom_common.js",
+      "js/app.min.js",
+      "js/fastclick.js",
+      "js/raphael-min.js",
+      "js/bootstrap.min.js",
+      "js/date_util.js",
+      "js/echarts.common.min.js",
+      "js/jQuery-2.2.0.min.js"
+    ],
+    "refer": [
+      "examples/new_main.html"
+    ]
+  },
+  "examples/set_headimg.html": {
+    "resources": [
+      "js/jquery-2.2.2.min.js",
+      "js/custom_common.js",
+      "css/set_headimg.css",
+      "css/cropper.css",
+      "images/my_card_head.png",
+      "js/mui.min.js",
+      "css/common.css",
+      "css/mui.min.css",
+      "js/cropper.js",
+      "js/bootstrap.min.js"
+    ],
+    "refer": []
+  },
+  "examples/user_information.html": {
+    "resources": [
+      "js/jquery-2.2.2.min.js",
+      "js/custom_common.js",
+      "js/mui.min.js",
+      "css/common.css",
+      "css/mui.min.css",
+      "js/date_util.js",
+      "css/user_information.css",
+      "css/style.css",
+      "css/feedlist.css",
+      "js/mui.min2.js",
+      "fonts/mui.ttf"
+    ],
+    "refer": [
+      "examples/monomer_portrait.html"
+    ]
+  },
+  "examples/matching_information.html": {
+    "resources": [
+      "css/common.css",
+      "css/matching_information.css",
+      "css/mui.min.css",
+      "js/jquery-2.2.2.min.js",
+      "js/date_util.js",
+      "js/custom_common.js",
+      "js/mui.min.js",
+      "css/style.css",
+      "fonts/mui.ttf"
+    ],
+    "refer": [
+      "examples/building_selectandadd.html",
+      "examples/address_selectandadd.html",
+      "examples/house_selectandadd.html"
+    ]
+  },
+  "examples/street_business_information.html": {
+    "resources": [
+      "css/street_business_information.css",
+      "js/mui.picker.js",
+      "js/mui.picker.min.js",
+      "css/express.css",
+      "js/mui.poppicker.js",
+      "js/cityObject.js",
+      "css/mui.picker.min.css",
+      "css/mui.poppicker.css",
+      "css/mui.picker.css",
+      "js/dict.js",
+      "js/custom_jquery_based.js",
+      "css/common.css",
+      "css/mui.min.css",
+      "js/custom_common.js",
+      "js/date_util.js",
+      "js/jquery-2.2.2.min.js",
+      "fonts/mui.ttf",
+      "css/style.css",
+      "js/mui.min.js",
+      "js/newcityObject.js"
+    ],
+    "refer": []
+  },
+  "examples/building_selectandadd.html": {
+    "resources": [
+      "js/jquery-2.2.2.min.js",
+      "css/building_selectandadd.css",
+      "css/common.css",
+      "css/mui.min.css",
+      "css/style.css",
+      "js/custom_common.js",
+      "js/mui.min.js",
+      "js/date_util.js",
+      "fonts/mui.ttf"
+    ],
+    "refer": [
+      "examples/street_business_information.html",
+      "examples/building_information.html"
+    ]
+  },
+  "examples/new_select_house.html": {
+    "resources": [
+      "css/common.css",
+      "css/mui.min.css",
+      "js/awesomplete.js",
+      "css/style.css",
+      "css/awesomplete.css",
+      "js/custom_common.js",
+      "js/custom_jquery_based.js",
+      "js/jquery-2.2.2.min.js",
+      "js/mui.min.js",
+      "fonts/mui.ttf"
+    ],
+    "refer": []
+  },
+  "examples/monomer_portrait.html": {
+    "resources": [
+      "js/custom_common.js",
+      "js/mui.picker.js",
+      "js/mui.picker.min.js",
+      "css/express.css",
+      "js/mui.poppicker.js",
+      "css/mui.picker.min.css",
+      "css/mui.poppicker.css",
+      "js/date_util.js",
+      "css/mui.picker.css",
+      "js/dict.js",
+      "js/custom_jquery_based.js",
+      "css/monomer_portrait.css",
+      "css/common.css",
+      "css/mui.min.css",
+      "css/style.css",
+      "js/jquery-2.2.2.min.js",
+      "js/mui.min.js",
+      "fonts/mui.ttf"
+    ],
+    "refer": [
+      "examples/new_select_house.html",
+      "examples/more_information.html",
+      "examples/apartment_layout_diagram.html"
+    ]
+  },
+  "examples/message.html": {
+    "resources": [
+      "js/jquery-2.2.2.min.js",
+      "js/custom_common.js",
+      "js/mui.min.js",
+      "css/common.css",
+      "css/message.css",
+      "css/mui.min.css",
+      "images/icon8.png",
+      "js/date_util.js",
+      "css/style.css",
+      "images/icon7.png"
+    ],
+    "refer": [
+      "examples/my.html",
+      "examples/tabbar.html",
+      "examples/message_monomer_portrait.html",
+      "examples/message_more_information.html"
+    ]
+  },
+  "examples/express_list.html": {
+    "resources": [
+      "js/jquery-2.2.2.min.js",
+      "js/custom_common.js",
+      "css/express.css",
+      "js/mui.min.js",
+      "css/common.css",
+      "css/mui.min.css",
+      "css/style.css",
+      "images/icon22.png",
+      "js/date_util.js",
+      "examples/express_list_sub.html",
+      "fonts/mui.ttf"
+    ],
+    "refer": [
+      "examples/express_list_sub.html"
+    ]
+  },
+  "examples/store_daily.html": {
+    "resources": [
+      "js/jquery-2.2.2.min.js",
+      "css/style.css",
+      "images/icon14.png",
+      "css/store-daily.css",
+      "js/custom_common.js",
+      "css/my.css",
+      "images/men2.jpg",
+      "images/icon13.png",
+      "css/common.css",
+      "js/mui.min.js",
+      "css/mui.min.css",
+      "images/icon12.png",
+      "js/date_util.js",
+      "examples/store_index.html",
+      "examples/feedback.html",
+      "examples/feedback_list.html",
+      "fonts/mui.ttf"
+    ],
+    "refer": [
+      "examples/express_list.html",
+      "examples/store_index.html",
+      "examples/feedback.html",
+      "examples/feedback_list.html"
+    ]
+  },
+  "examples/express_list_sub.html": {
+    "resources": [
+      "js/jquery-2.2.2.min.js",
+      "css/express.css",
+      "images/icon21.png",
+      "images/icon19.png",
+      "css/style.css",
+      "images/icon18.png",
+      "images/icon16.png",
+      "images/icon17.png",
+      "js/custom_common.js",
+      "js/mui.min.js",
+      "images/icon20.png",
+      "css/mui.min.css",
+      "js/date_util.js"
+    ],
+    "refer": [
+      "examples/order_detail.html"
+    ]
+  },
+  "examples/visiting_information.html": {
+    "resources": [
+      "js/jquery-2.2.2.min.js",
+      "js/custom_common.js",
+      "css/visiting_information.css",
+      "js/mui.min.js",
+      "css/common.css",
+      "css/mui.min.css",
+      "js/date_util.js",
+      "css/style.css",
+      "fonts/mui.ttf"
+    ],
+    "refer": [
+      "examples/visiting_record.html"
+    ]
+  },
+  "examples/visiting_record.html": {
+    "resources": [
+      "js/mui.picker.js",
+      "js/mui.picker.min.js",
+      "css/common.css",
+      "js/mui.poppicker.js",
+      "css/mui.min.css",
+      "css/visiting_record.css",
+      "js/dict.js",
+      "js/custom_jquery_based.js",
+      "js/custom_common.js",
+      "css/express.css",
+      "css/mui.picker.min.css",
+      "css/mui.poppicker.css",
+      "js/date_util.js",
+      "css/mui.picker.css",
+      "images/badge_plus_16px.png",
+      "images/minus_16px.png",
+      "js/jquery-2.2.2.min.js",
+      "js/mui.min.js",
+      "css/style.css",
+      "fonts/mui.ttf"
+    ],
+    "refer": [
+      "examples/new_select_house.html"
+    ]
+  },
+  "examples/message_monomer_portrait.html": {
+    "resources": [
+      "js/jquery-2.2.2.min.js",
+      "js/custom_common.js",
+      "js/mui.picker.js",
+      "js/mui.min.js",
+      "css/common.css",
+      "js/mui.poppicker.js",
+      "css/mui.min.css",
+      "css/style.css",
+      "css/mui.poppicker.css",
+      "js/date_util.js",
+      "css/mui.picker.css",
+      "js/dict.js",
+      "js/custom_jquery_based.js",
+      "css/monomer_portrait.css",
+      "fonts/mui.ttf"
+    ],
+    "refer": [
+      "examples/web_new_main.html",
+      "examples/web_message.html"
+    ]
+  },
+  "examples/other_web_user.html": {
+    "resources": [
+      "css/_all-skins.min.css",
+      "css/AdminLTE.min.css",
+      "css/bootstrap.min.css",
+      "js/custom_common.js",
+      "js/app.min.js",
+      "js/fastclick.js",
+      "js/mui.min.js",
+      "js/raphael-min.js",
+      "js/bootstrap.min.js",
+      "js/date_util.js",
+      "js/jQuery-2.2.0.min.js",
+      "css/ionicons.min.css",
+      "css/font-awesome.min.css",
+      "css/newmui.min.css",
+      "images/user7-128x128.jpg",
+      "fonts/mui.ttf",
+      "fonts/fontawesome-webfont.woff2",
+      "images/user2-160x160.jpg"
+    ],
+    "refer": [
+      "examples/web_index.html",
+      "examples/web_user.html",
+      "examples/web_personal.html"
+    ]
+  },
+  "examples/web_portrait.html": {
+    "resources": [
+      "css/_all-skins.min.css",
+      "images/cbd.jpg",
+      "css/ionicons.min.css",
+      "css/font-awesome.min.css",
+      "css/AdminLTE.min.css",
+      "css/newmui.min.css",
+      "images/user1-128x128.jpg",
+      "css/bootstrap.min.css",
+      "js/custom_common.js",
+      "js/app.min.js",
+      "js/fastclick.js",
+      "js/mui.min.js",
+      "js/raphael-min.js",
+      "js/bootstrap.min.js",
+      "js/jQuery-2.2.0.min.js",
+      "fonts/mui.ttf"
+    ],
+    "refer": [
+      "examples/new_main.html"
+    ]
+  },
+  "examples/building_information.html": {
+    "resources": [
+      "js/custom_common.js",
+      "js/mui.picker.js",
+      "js/mui.picker.min.js",
+      "css/express.css",
+      "css/common.css",
+      "js/mui.poppicker.js",
+      "css/building_information.css",
+      "css/mui.min.css",
+      "js/cityObject.js",
+      "css/mui.picker.min.css",
+      "css/mui.poppicker.css",
+      "js/date_util.js",
+      "css/mui.picker.css",
+      "js/dict.js",
+      "js/custom_jquery_based.js",
+      "js/jquery-2.2.2.min.js",
+      "images/minus_16px.png",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "css/style.css"
+    ],
+    "refer": []
+  },
+  "examples/community_information.html": {
+    "resources": [
+      "js/mui.picker.js",
+      "js/mui.picker.min.js",
+      "css/express.css",
+      "js/mui.poppicker.js",
+      "css/community_information.css",
+      "js/cityObject.js",
+      "css/mui.picker.min.css",
+      "css/mui.poppicker.css",
+      "css/mui.picker.css",
+      "js/dict.js",
+      "js/custom_jquery_based.js",
+      "js/custom_common.js",
+      "css/common.css",
+      "css/mui.min.css",
+      "js/date_util.js",
+      "css/style.css",
+      "js/jquery-2.2.2.min.js",
+      "fonts/mui.ttf",
+      "js/mui.min.js"
+    ],
+    "refer": []
+  },
+  "examples/residential_area_information.html": {
+    "resources": [
+      "js/mui.picker.js",
+      "css/residential_area_information.css",
+      "js/mui.picker.min.js",
+      "css/express.css",
+      "css/common.css",
+      "js/mui.poppicker.js",
+      "css/mui.min.css",
+      "js/cityObject.js",
+      "css/mui.picker.min.css",
+      "css/mui.poppicker.css",
+      "css/mui.picker.css",
+      "js/dict.js",
+      "js/custom_jquery_based.js",
+      "js/newcityObject.js",
+      "js/jquery-2.2.2.min.js",
+      "fonts/mui.ttf",
+      "css/style.css",
+      "js/custom_common.js",
+      "js/mui.min.js",
+      "js/date_util.js"
+    ],
+    "refer": []
+  },
+  "examples/address_selectandadd.html": {
+    "resources": [
+      "css/common.css",
+      "css/mui.min.css",
+      "css/address_selectandadd.css",
+      "js/jquery-2.2.2.min.js",
+      "js/date_util.js",
+      "css/style.css",
+      "js/custom_common.js",
+      "js/mui.min.js",
+      "fonts/mui.ttf"
+    ],
+    "refer": [
+      "examples/community_information.html",
+      "examples/residential_area_information.html"
+    ]
+  },
+  "examples/house_selectandadd.html": {
+    "resources": [
+      "css/house_selectandadd.css",
+      "css/common.css",
+      "css/mui.min.css",
+      "css/style.css",
+      "js/jquery-2.2.2.min.js",
+      "js/custom_common.js",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "js/date_util.js"
+    ],
+    "refer": [
+      "examples/house_information.html",
+      "examples/houseofficebuilding_information.html",
+      "examples/housebuilding_information.html"
+    ]
+  },
+  "examples/order_detail.html": {
+    "resources": [
+      "js/jquery-2.2.2.min.js",
+      "js/mui.picker.js",
+      "js/mui.picker.min.js",
+      "images/icon35.png",
+      "images/progress.png",
+      "images/icon22.png",
+      "js/previewimage.js",
+      "css/mui.picker.css",
+      "images/icon34.png",
+      "js/dict.js",
+      "js/jquery.rotate.min.js",
+      "js/custom_common.js",
+      "css/my.css",
+      "js/mui.zoom.js",
+      "js/common.js",
+      "css/common.css",
+      "js/mui.min.js",
+      "js/mui.poppicker.js",
+      "css/mui.min.css",
+      "images/icon25.png",
+      "css/mui.picker.min.css",
+      "css/mui.poppicker.css",
+      "js/date_util.js",
+      "css/order_detail.css",
+      "css/style.css"
+    ],
+    "refer": [
+      "examples/barcode_scan.html"
+    ]
+  },
+  "examples/house_information.html": {
+    "resources": [
+      "js/mui.picker.js",
+      "js/mui.picker.min.js",
+      "css/express.css",
+      "js/mui.poppicker.js",
+      "js/cityObject.js",
+      "css/mui.picker.min.css",
+      "css/mui.poppicker.css",
+      "css/house_information.css",
+      "css/mui.picker.css",
+      "js/dict.js",
+      "js/custom_jquery_based.js",
+      "css/style.css",
+      "css/common.css",
+      "css/mui.min.css",
+      "images/minus_16px.png",
+      "js/jquery-2.2.2.min.js",
+      "fonts/mui.ttf",
+      "js/custom_common.js",
+      "js/mui.min.js",
+      "js/date_util.js"
+    ],
+    "refer": []
+  },
+  "examples/houseofficebuilding_information.html": {
+    "resources": [
+      "js/jquery-2.2.2.min.js",
+      "js/mui.picker.js",
+      "js/mui.picker.min.js",
+      "css/express.css",
+      "css/mui.picker.css",
+      "js/dict.js",
+      "js/custom_common.js",
+      "css/common.css",
+      "js/mui.min.js",
+      "js/mui.poppicker.js",
+      "css/mui.min.css",
+      "js/cityObject.js",
+      "css/mui.poppicker.css",
+      "css/mui.picker.min.css",
+      "css/houseofficebuilding_information.css",
+      "js/date_util.js",
+      "js/custom_jquery_based.js"
+    ],
+    "refer": []
+  },
+  "examples/housebuilding_information.html": {
+    "resources": [
+      "css/housebuilding_information.css",
+      "css/express.css",
+      "css/common.css",
+      "css/mui.min.css",
+      "images/minus_16px.png",
+      "css/mui.picker.min.css",
+      "css/mui.poppicker.css",
+      "css/mui.picker.css",
+      "js/mui.picker.js",
+      "js/mui.picker.min.js",
+      "js/newcityObject.js",
+      "js/mui.poppicker.js",
+      "js/cityObject.js",
+      "js/dict.js",
+      "js/custom_jquery_based.js"
+    ],
+    "refer": []
+  },
+  "examples/update_password.html": {
+    "resources": [
+      "js/custom_common.js",
+      "js/app.js",
+      "js/mui.min.js",
+      "css/common.css",
+      "css/mui.min.css",
+      "css/style.css",
+      "js/mui.enterfocus.js",
+      "js/md5.js",
+      "examples/my.html",
+      "fonts/mui.ttf"
+    ],
+    "refer": [
+      "examples/my.html"
+    ]
+  },
+  "examples/web_shopkeeper.html": {
+    "resources": [
+      "css/_all-skins.min.css",
+      "js/raphael-min.js",
+      "js/echarts.common.min.js",
+      "fonts/fontawesome-webfont.woff2",
+      "css/bootstrap.min.css",
+      "css/ionicons.min.css",
+      "js/fastclick.js",
+      "js/app.min.js",
+      "js/mui.min.js",
+      "css/font-awesome.min.css",
+      "css/AdminLTE.min.css",
+      "js/bootstrap.min.js",
+      "css/newmui.min.css",
+      "js/jQuery-2.2.0.min.js",
+      "images/user2-160x160.jpg",
+      "js/custom_common.js",
+      "js/date_util.js",
+      "js/require.js",
+      "fonts/mui.ttf",
+      "examples/web_new_main.html",
+      "examples/web_message.html",
+      "examples/tabbar.html"
+    ],
+    "refer": [
+      "examples/web_guoanxialist.html",
+      "examples/web_information.html",
+      "examples/new_main.html",
+      "login.html",
+      "examples/web_index.html",
+      "examples/web_area.html",
+      "examples/other_web_user.html",
+      "examples/web_new_main.html",
+      "examples/web_message.html",
+      "examples/update_password.html",
+      "examples/tabbar.html",
+      "examples/maps.html",
+      "examples/storeDataCard.html"
+    ]
+  },
+  "examples/web_guoanxialist.html": {
+    "resources": [
+      "css/_all-skins.min.css",
+      "images/user7-128x128.jpg",
+      "css/ionicons.min.css",
+      "css/font-awesome.min.css",
+      "css/AdminLTE.min.css",
+      "css/newmui.min.css",
+      "css/bootstrap.min.css",
+      "js/app.min.js",
+      "js/fastclick.js",
+      "js/mui.min.js",
+      "js/raphael-min.js",
+      "js/bootstrap.min.js",
+      "js/jQuery-2.2.0.min.js",
+      "js/custom_common.js",
+      "js/date_util.js",
+      "fonts/mui.ttf"
+    ],
+    "refer": [
+      "examples/web_shopkeeper.html",
+      "examples/web_information.html",
+      "login.html",
+      "examples/other_web_user.html",
+      "examples/new_main.html"
+    ]
+  },
+  "examples/web_information.html": {
+    "resources": [
+      "css/_all-skins.min.css",
+      "images/user7-128x128.jpg",
+      "css/ionicons.min.css",
+      "js/app.min.js",
+      "js/fastclick.js",
+      "js/mui.min.js",
+      "js/raphael-min.js",
+      "css/font-awesome.min.css",
+      "js/bootstrap.min.js",
+      "css/AdminLTE.min.css",
+      "js/jQuery-2.2.0.min.js",
+      "css/newmui.min.css",
+      "css/bootstrap.min.css",
+      "fonts/mui.ttf"
+    ],
+    "refer": [
+      "examples/web_guoanxialist.html",
+      "examples/web_shopkeeper.html",
+      "login.html",
+      "examples/new_main.html"
+    ]
+  },
+  "examples/web_area.html": {
+    "resources": [
+      "css/_all-skins.min.css",
+      "css/ionicons.min.css",
+      "css/font-awesome.min.css",
+      "css/AdminLTE.min.css",
+      "css/newmui.min.css",
+      "css/bootstrap.min.css",
+      "js/raphael-min.js",
+      "js/echarts.common.min.js",
+      "js/custom_common.js",
+      "js/fastclick.js",
+      "js/app.min.js",
+      "js/mui.min.js",
+      "js/bootstrap.min.js",
+      "js/date_util.js",
+      "js/jQuery-2.2.0.min.js",
+      "fonts/mui.ttf",
+      "images/avatar04.png",
+      "images/user8-128x128.jpg",
+      "fonts/fontawesome-webfont.woff2",
+      "images/user2-160x160.jpg"
+    ],
+    "refer": [
+      "examples/web_order_detail.html",
+      "examples/web_visit_detail.html"
+    ]
+  },
+  "examples/more_information.html": {
+    "resources": [
+      "js/jquery-2.2.2.min.js",
+      "js/mui.picker.js",
+      "js/mui.picker.min.js",
+      "css/express.css",
+      "css/mui.picker.css",
+      "js/dict.js",
+      "js/custom_common.js",
+      "css/common.css",
+      "js/mui.min.js",
+      "js/mui.poppicker.js",
+      "css/mui.min.css",
+      "js/cityObject.js",
+      "js/city.data.js",
+      "css/mui.poppicker.css",
+      "css/mui.picker.min.css",
+      "css/more_information.css",
+      "js/date_util.js",
+      "js/custom_jquery_based.js",
+      "css/style.css"
+    ],
+    "refer": []
+  },
+  "examples/apartment_layout_diagram.html": {
+    "resources": [
+      "js/mui.picker.js",
+      "css/qq.css",
+      "css/express.css",
+      "css/common.css",
+      "js/mui.poppicker.js",
+      "css/mui.min.css",
+      "css/mui.poppicker.css",
+      "images/icon22.png",
+      "js/date_util.js",
+      "css/mui.picker.css",
+      "css/monomer_portrait.css",
+      "css/style.css",
+      "js/jquery-2.2.2.min.js",
+      "fonts/mui.ttf",
+      "js/custom_common.js",
+      "js/mui.min.js",
+      "js/custom_jquery_based.js",
+      "icon/logo.png"
+    ],
+    "refer": []
+  },
+  "examples/store_index.html": {
+    "resources": [
+      "js/custom_common.js",
+      "js/app.js",
+      "js/mui.min.js",
+      "css/store_index.css",
+      "css/common.css",
+      "css/mui.min.css",
+      "css/style.css",
+      "images/icon30.png",
+      "js/date_util.js",
+      "js/mui.enterfocus.js",
+      "examples/store_daily.html",
+      "examples/store_index_history.html"
+    ],
+    "refer": [
+      "examples/store_daily.html",
+      "examples/store_index_history.html"
+    ]
+  },
+  "examples/store_index_history_sub.html": {
+    "resources": [
+      "js/custom_common.js",
+      "css/common.css",
+      "css/mui.min.css",
+      "js/jquery-2.2.2.min.js",
+      "js/mui.min.js",
+      "js/date_util.js"
+    ],
+    "refer": []
+  },
+  "examples/store_index_history.html": {
+    "resources": [
+      "js/jquery-2.2.2.min.js",
+      "js/custom_common.js",
+      "js/common.js",
+      "examples/store_index_history_sub.html",
+      "js/mui.min.js",
+      "css/common.css",
+      "css/store_history.css",
+      "css/mui.min.css",
+      "css/style.css",
+      "js/date_util.js",
+      "examples/store_index.html"
+    ],
+    "refer": [
+      "examples/store_index_history_sub.html",
+      "examples/store_index.html"
+    ]
+  },
+  "examples/feedback.html": {
+    "resources": [
+      "css/feedback.css",
+      "images/icon19.png",
+      "css/style.css",
+      "images/icon18.png",
+      "images/icon17.png",
+      "js/custom_common.js",
+      "images/icon27.png",
+      "images/icon26.png",
+      "css/common.css",
+      "js/mui.min.js",
+      "css/mui.min.css",
+      "images/icon29.png",
+      "js/date_util.js",
+      "images/icon28.png",
+      "examples/store_daily.html"
+    ],
+    "refer": [
+      "examples/store_daily.html"
+    ]
+  },
+  "examples/feedback_list.html": {
+    "resources": [
+      "images/icon17.png",
+      "css/feedlist.css",
+      "css/common.css",
+      "images/icon21.png",
+      "images/icon19.png",
+      "css/mui.min2.css",
+      "images/icon18.png",
+      "js/mui.min2.js",
+      "images/icon16.png",
+      "examples/store_daily.html",
+      "js/jquery-2.2.2.min.js",
+      "js/custom_common.js",
+      "js/date_util.js",
+      "css/style.css"
+    ],
+    "refer": [
+      "examples/feedListDetail.html",
+      "examples/feedback.html",
+      "examples/store_daily.html"
+    ]
+  },
+  "examples/feedListDetail.html": {
+    "resources": [
+      "images/icon27.png",
+      "images/icon26.png",
+      "css/feedback.css",
+      "js/mui.min.js",
+      "css/common.css",
+      "css/mui.min.css",
+      "images/icon29.png",
+      "images/icon28.png"
+    ],
+    "refer": []
+  },
+  "examples/message_more_information.html": {
+    "resources": [
+      "js/mui.picker.min.js",
+      "css/express.css",
+      "css/common.css",
+      "css/mui.min.css",
+      "js/cityObject.js",
+      "css/style.css",
+      "css/mui.picker.min.css",
+      "css/mui.poppicker.css",
+      "css/more_information.css",
+      "css/mui.picker.css",
+      "js/mui.picker.js",
+      "js/dict.js",
+      "js/mui.poppicker.js",
+      "js/custom_jquery_based.js"
+    ],
+    "refer": []
+  },
+  "examples/web_new_main.html": {
+    "resources": [
+      "css/_all-skins.min.css",
+      "css/ionicons.min.css",
+      "js/app.min.js",
+      "js/fastclick.js",
+      "js/raphael-min.js",
+      "css/font-awesome.min.css",
+      "js/bootstrap.min.js",
+      "css/AdminLTE.min.css",
+      "js/jQuery-2.2.0.min.js",
+      "css/newmui.min.css",
+      "fonts/fontawesome-webfont.woff2",
+      "css/bootstrap.min.css",
+      "css/mui.min.css",
+      "examples/tabbar.html",
+      "js/mui.min.js",
+      "examples/web_index.html",
+      "examples/web_information.html",
+      "js/date_util.js",
+      "examples/web_message.html",
+      "js/custom_common.js",
+      "examples/web_shopkeeper.html",
+      "images/user2-160x160.jpg",
+      "fonts/mui.ttf"
+    ],
+    "refer": [
+      "examples/tabbar.html",
+      "examples/web_index.html",
+      "examples/web_information.html",
+      "examples/message_notice.html",
+      "examples/web_message.html",
+      "examples/message_monomer_portrait.html",
+      "examples/web_shopkeeper.html",
+      "examples/update_password.html",
+      "login.html",
+      "examples/setting_hand.html",
+      "setting_hand.html",
+      "setting.html",
+      "examples/message_more_information.html",
+      "examples/work_record_result.html",
+      "examples/my.html",
+      "examples/dataCard.html",
+      "examples/visiting_information.html",
+      "examples/user_information.html",
+      "examples/maps.html"
+    ]
+  },
+  "examples/message_notice.html": {
+    "resources": [
+      "js/mui.picker.js",
+      "css/common.css",
+      "js/mui.poppicker.js",
+      "css/mui.min.css",
+      "css/style.css",
+      "js/dict.js",
+      "css/work_record_result.css",
+      "js/custom_jquery_based.js",
+      "fonts/mui.ttf"
+    ],
+    "refer": []
+  },
+  "examples/web_message.html": {
+    "resources": [
+      "fonts/glyphicons-halflings-regular.woff2",
+      "css/_all-skins.min.css",
+      "css/ionicons.min.css",
+      "css/font-awesome.min.css",
+      "css/AdminLTE.min.css",
+      "css/newmui.min.css",
+      "css/bootstrap.min.css",
+      "examples/tabbar.html",
+      "examples/web_new_main.html",
+      "js/mui.min2.js",
+      "js/raphael-min.js",
+      "css/mui.min.css",
+      "css/mui.min2.css",
+      "js/app.min.js",
+      "js/fastclick.js",
+      "js/bootstrap.min.js",
+      "js/jQuery-2.2.0.min.js",
+      "js/custom_common.js",
+      "js/date_util.js",
+      "examples/web_index.html",
+      "css/feedlist.css",
+      "css/common.css",
+      "css/style.css",
+      "css/message.css",
+      "images/icon31.png",
+      "fonts/fontawesome-webfont.woff2",
+      "examples/web_shopkeeper.html",
+      "images/user2-160x160.jpg"
+    ],
+    "refer": [
+      "examples/tabbar.html",
+      "examples/web_new_main.html",
+      "examples/web_index.html",
+      "examples/message_monomer_portrait.html",
+      "examples/work_record_result.html",
+      "examples/message_update_password.html",
+      "examples/web_shopkeeper.html",
+      "examples/update_password.html",
+      "examples/message_more_information.html",
+      "login.html",
+      "examples/message_notice.html",
+      "examples/dataCard.html",
+      "examples/maps.html",
+      "examples/storeDataCard.html",
+      "examples/web_guoanxialist.html",
+      "examples/web_information.html",
+      "examples/city_main.html",
+      "examples/my.html",
+      "examples/cs_my.html",
+      "examples/web_city_ej.html",
+      "examples/city_my.html",
+      "examples/new_city_my.html",
+      "examples/web_shopkeeper_new.html"
+    ]
+  },
+  "examples/forget_password.html": {
+    "resources": [
+      "css/common.css",
+      "css/mui.min.css"
+    ],
+    "refer": []
+  },
+  "examples/work_record_result.html": {
+    "resources": [
+      "css/common.css",
+      "css/mui.min.css",
+      "css/style.css",
+      "css/work_record_result.css",
+      "js/mui.picker.js",
+      "js/mui.poppicker.js",
+      "js/dict.js",
+      "js/custom_jquery_based.js",
+      "js/jquery-2.2.2.min.js"
+    ],
+    "refer": []
+  },
+  "examples/message_update_password.html": {
+    "resources": [
+      "css/common.css",
+      "css/mui.min.css",
+      "js/md5.js"
+    ],
+    "refer": [
+      "examples/web_message.html"
+    ]
+  },
+  "examples/new_tabbar.html": {
+    "resources": [
+      "css/font-awesome.min.css",
+      "css/mui.min.css",
+      "js/mui.min2.js",
+      "examples/web_new_main.html",
+      "fonts/fontawesome-webfont.woff2",
+      "examples/web_message.html",
+      "examples/web_index.html",
+      "examples/tabbar.html",
+      "css/style.css",
+      "js/jquery-2.2.2.min.js",
+      "css/_all-skins.min.css",
+      "js/raphael-min.js",
+      "css/bootstrap.min.css",
+      "css/ionicons.min.css",
+      "js/fastclick.js",
+      "js/app.min.js",
+      "css/message.css",
+      "css/AdminLTE.min.css",
+      "js/bootstrap.min.js",
+      "js/date_util.js",
+      "js/jQuery-2.2.0.min.js",
+      "css/new_main.css",
+      "js/custom_common.js",
+      "css/newmui.min.css"
+    ],
+    "refer": [
+      "examples/tabbar.html",
+      "examples/web_message.html",
+      "examples/web_index.html",
+      "examples/web_new_main.html"
+    ]
+  },
+  "examples/setting_hand.html": {
+    "resources": [
+      "libs/easymob-webim-sdk/easemob.im-1.0.5.js",
+      "libs/easymob-webim-sdk/json2.js",
+      "libs/easymob-webim-sdk/jquery-1.11.1.js",
+      "js/mui.locker.js",
+      "js/feedback.js",
+      "js/feedback-page.js",
+      "libs/easymob-webim-sdk/strophe-custom-2.0.0.js",
+      "js/mui.view.js",
+      "css/mui.min.css"
+    ],
+    "refer": []
+  },
+  "unlock.html": {
+    "resources": [
+      "js/mui.locker.js",
+      "css/mui.min.css"
+    ],
+    "refer": [
+      "login.html"
+    ]
+  },
+  "setting_hand.html": {
+    "resources": [
+      "libs/easymob-webim-sdk/easemob.im-1.0.5.js",
+      "css/mui.min.css",
+      "libs/easymob-webim-sdk/json2.js",
+      "libs/easymob-webim-sdk/jquery-1.11.1.js",
+      "js/mui.locker.js",
+      "js/feedback.js",
+      "css/feedback-page.css",
+      "js/feedback-page.js",
+      "libs/easymob-webim-sdk/strophe-custom-2.0.0.js",
+      "js/mui.view.js",
+      "fonts/mui.ttf"
+    ],
+    "refer": []
+  },
+  "setting.html": {
+    "resources": [
+      "libs/easymob-webim-sdk/easemob.im-1.0.5.js",
+      "fonts/mui.ttf",
+      "css/mui.min.css",
+      "libs/easymob-webim-sdk/json2.js",
+      "libs/easymob-webim-sdk/jquery-1.11.1.js",
+      "js/mui.locker.js",
+      "js/feedback.js",
+      "css/feedback-page.css",
+      "js/feedback-page.js",
+      "libs/easymob-webim-sdk/strophe-custom-2.0.0.js",
+      "js/mui.view.js"
+    ],
+    "refer": [
+      "login.html"
+    ]
+  },
+  "examples/dataCard.html": {
+    "resources": [
+      "css/common.css",
+      "css/mui.min2.css",
+      "css/style.css",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "images/icons5.png",
+      "images/icons3.png",
+      "images/icons2.png",
+      "images/icons1.png",
+      "js/jquery-2.2.2.min.js",
+      "js/custom_common.js"
+    ],
+    "refer": [
+      "examples/user_information.html",
+      "examples/express_list.html",
+      "examples/visiting_information.html"
+    ]
+  },
+  "examples/maps.html": {
+    "refer": [
+      "examples/tabbar.html",
+      "examples/web_message.html",
+      "examples/web_index.html",
+      "examples/update_password.html",
+      "examples/dataCard.html",
+      "login.html",
+      "examples/web_shopkeeper.html",
+      "examples/storeDataCard.html",
+      "examples/web_information.html",
+      "examples/web_guoanxialist.html",
+      "examples/web_user.html",
+      "examples/barcode_scan.html",
+      "examples/scan_login.html",
+      "examples/web_shopkeeper_new.html",
+      "examples/pc_login.html"
+    ],
+    "resources": []
+  },
+  "examples/city_main.html": {
+    "refer": [
+      "examples/web_message.html",
+      "login.html",
+      "examples/tabbar.html",
+      "examples/update_password.html",
+      "examples/scan_login.html",
+      "examples/cs_my.html"
+    ],
+    "resources": []
+  },
+  "examples/web_shopkeeper_new.html": {
+    "refer": [
+      "examples/web_message.html",
+      "login.html",
+      "examples/web_guoanxialist.html",
+      "examples/maps.html",
+      "examples/storeDataCard.html",
+      "examples/other_web_user.html",
+      "examples/tabbar.html"
+    ],
+    "resources": []
+  },
+  "examples/cs_my.html": {
+    "refer": [
+      "examples/city_main.html",
+      "examples/web_message.html",
+      "examples/update_password.html",
+      "login.html",
+      "examples/web_city_ej.html"
+    ],
+    "resources": []
+  },
+  "examples/web_city_ej.html": {
+    "refer": [
+      "login.html",
+      "examples/web_message.html",
+      "examples/cs_my.html",
+      "examples/update_password.html",
+      "examples/city_my.html",
+      "examples/new_city_my.html"
+    ],
+    "resources": []
+  },
+  "examples/city_my.html": {
+    "refer": [
+      "examples/update_password.html",
+      "examples/web_city_ej.html",
+      "examples/web_message.html",
+      "login.html"
+    ]
+  },
+  "examples/new_city_my.html": {
+    "refer": [
+      "examples/web_city_ej.html",
+      "examples/web_message.html",
+      "login.html"
+    ]
+  }
+}

@@ -1,0 +1,37 @@
+.list-item{font-size:0.28rem; display: block;background-color:#fff;color:#666;}
+.list-item li{overflow: hidden;}
+.list-item li input{float:left;width:100%;border:1px solid #dbdbdb;}
+.select_btn button{width:49%; height: 0.7rem;color:#fff;font-size: 0.32rem;background-color: #18bc9c; text-align: center; margin-top: 0.3rem;border-radius: 0.1rem;}
+.customer_row{margin-top: 0.2rem;border-bottom: 1px solid #ccc; padding-bottom: 0.1rem;}
+
+.customer_row ul li{
+	vertical-align: middle;
+	height: 0.5rem;
+	line-height: 0.5rem;
+	color: #000000;
+}
+.customer_count{font-size: 0.26rem; color: #888;text-align: center;margin-bottom: 0.1rem;
+}
+.customer_count span span{font-size: 0.3rem;color: #333;
+	
+}
+.radio_li{
+	line-height: 1rem;
+	padding-right: 10px !important;
+	padding: 10px 0 0 15px;
+}
+.mui-checkbox input[type=checkbox], .mui-radio input[type=radio] {
+	position: initial;
+	top: 4px;
+	display: inline-block;
+	width:50px;
+	height: 26px;
+	border: 0;
+	outline: 0!important;
+	background-color: transparent;
+	-webkit-appearance: none;
+}
+.building_no{width: 30%;margin-right: 7px;}
+.building_floor{width: 30%;margin-right: 7px;}
+.building_nuit{width: 60%; margin-left: 5px;}
+.building_room{width: 60%; margin-left: 5px;}

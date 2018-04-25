@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>地址选择</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<!--标准mui.css-->
+		<link href="../css/awesomplete.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="../css/common.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/style.css"/>
+		<!--<link href="../css/monomer_portrait.css" rel="stylesheet" />-->
+
+		<style type="text/css">
+			table{
+				margin: 0.9rem 0 0 5%;
+				font-size: 12px;
+				width: 90%;
+			}
+			div.awesomplete input {
+				margin-top: 1px;
+				margin-bottom:1px;
+				/*float:right;*/ 
+				width:100%; 
+				margin-left:2%; 
+				height:0.8rem; 
+				border:0;
+				color:#777; 
+				font-size:0.32rem;
+				border-radius: 0!important;
+				padding: 0;
+			}
+
+		</style>
+	</head>
+
+
+	<body>
+		<header class="mui-bar mui-bar-nav titleheader" style="background-color: #000000;">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">地址</h1>
+			<div class="save"><a href="javascript:doSave();">保存</a></div>
+		</header>
+		<div style="background-color: white;margin-top: 1.1rem;">
+			<table cellpadding="0" cellspacing="0">
+				<tr valign="middle" style="border-bottom: 1px solid #c8c7cc;">
+					<td width="20%" valign="middle">
+						<label id="town">街道</label>
+					</td>
+					<td width="80%" valign="middle" >
+						<input type="text" id="town_name" name="town_name" class="input_class awesomplete">
+						<input type="hidden" id="town_id" name="town_id">
+						<input type="hidden" id="city_id" name="city_id">
+					</td>
+				</tr>
+				<tr valign="middle" style="border-bottom: 1px solid #c8c7cc;">
+					<td width="20%" valign="middle">
+						<label id="village">社区</label>
+					</td>
+					<td width="80%" valign="middle" >
+						<input type="text" id="village_name" name="village_name" class="input_class awesomplete">
+						<input type="hidden" id="village_id" name="village_id">
+					</td>
+				</tr>
+				<tr valign="middle" style="border-bottom: 1px solid #c8c7cc;">
+					<td width="20%" valign="middle">
+						<label id="label_tv_name">小区名称</label>
+					</td>
+					<td width="80%" valign="middle" >
+						<input type="hidden" id="house_type" name="house_type">
+						<input type="hidden" id="tv_id" name="tv_id">
+						<input type="text" id="tv_name" name="tv_name" class="input_class awesomplete">
+					</td>
+				</tr>
+				<tr valign="middle"  id="address_color">
+					<td  valign="middle" style="border-bottom: 1px solid #c8c7cc;">
+						小区地址
+					</td>
+					<td  valign="middle" style="border-bottom: 1px solid #c8c7cc;">
+						<input type="text" id="tv_address" name="tv_address"  class="input_class awesomplete">
+					</td>
+				</tr>
+				
+				<tr style="border-bottom: 1px solid #c8c7cc;" valign="middle" class="building">
+					<td  valign="middle">
+						<label id="label_building_name">楼号</label>
+					</td>
+					<td  valign="middle">
+						<input type="hidden" id="building_id" name="building_id">
+						<input type="text" id="building_name" name="building_name" class="input_class awesomplete">
+ 					</td>
+				</tr>
+				<tr style="border-bottom: 1px solid #c8c7cc;" valign="middle" class="building"> 
+					<td  valign="middle">
+						单元号
+					</td>
+					<td  valign="middle">
+						<input type="text" id="unit_no" name="unit_no" class="input_class awesomplete">
+					</td>
+				</tr>
+				<tr style="border-bottom: 1px solid #c8c7cc;" valign="middle">
+					<td  valign="middle" id="lable_house_id">
+						房间号
+					</td>
+					<td  valign="middle">
+						<input type="hidden" id="house_id" name="house_id">
+						<input type="text" id="house_no" name="house_no" class="input_class awesomplete">
+					</td>
+				</tr>
+			</table>
+		</div>
+		
+	</body>
+
+	<script type="text/javascript" src="../js/mui.min.js"></script>
+	<script type="text/javascript" src="../js/jquery-2.2.2.min.js"></script>
+	<script type="text/javascript" src="../js/custom_common.js"></script>
+	<script type="text/javascript" src="../js/custom_jquery_based.js"></script>
+	<script type="text/javascript" src="../js/awesomplete.js"></script>
+	<script type="text/javascript">
+		var lst_select_tiny = null;
+		var lst_building = null;
+		var map_house = null;
+		var lst_house = null;
+		var main = null;
+	 	var tinAwesoplete = null;
+		var buildingAwesoplete = null;
+		var unitAwesoplete = null;
+		var houseAwesoplete = null;
+		var default_city=null;
+		var employee = JSON.parse(localStorage.getItem('employee'));
+		var store=JSON.parse(localStorage.getItem('store'));
+		
+		var main = null;
+		mui.plusReady(function () {
+			default_city=JSON.parse(localStorage.getItem('default_city'));
+			main = plus.webview.currentWebview().opener();
+			var self = plus.webview.currentWebview();
+			if(self != null && self.address_customer != null) {
+				var address_customer = self.address_customer;
+				if(address_customer.village_name!=null&&address_customer.tv_name!=null){
+					$("#address_color").hide();
+				}else{
+					$("#address_color").show();
+				}
+				
+				if(address_customer.house_id == null){
+					$('input').val('');
+					$('#house_type').val(address_customer.house_type);
+				}else{
+					setFormSimpleData(address_customer);
+				}
+//				if(checkValue(default_city.town_name)){
+//					$('#town_name').val(default_city.town_name);
+//					$('#town_id').val(default_city.town_id);
+//					$('#city_id').val(default_city.city_id);
+//				}
+                if(address_customer.town_id==null||address_customer.town_id==""){
+					$('#town_name').val(default_city.town_name);
+					$('#town_id').val(default_city.town_id);
+					$('#city_id').val(default_city.city_id);
+				}else{
+					$('#town_name').val(address_customer.town_name);
+					$('#town_id').val(address_customer.town_id);
+					$('#city_id').val(default_city.city_id);
+				}
+				if(address_customer.house_type == 0){
+					$('#label_tv_name').text('街(道)');
+					$('#lable_house_id').text('门牌号');
+					$('.building').hide();
+					$('#address_color').hide();
+				}else{
+					$('#label_tv_name').text('小区名称');
+					$('#lable_house_id').text('房间号');
+					$('.building').show();
+				}
+			}
+			
+		});
+		
+		function closeMenu () {
+			mui.back();
+		}
+		
+		//左滑显示出来的菜单，只需监听右滑，然后将菜单关闭即可；在该菜单上左滑，不做任何操作；
+//		window.addEventListener("swiperight",closeMenu);
+//		
+//		document.getElementById("tv_name").addEventListener('input',function(){
+//			  tv_option();
+//		});
+		
+		if(mui.os.android){
+			document.getElementById('town_name').addEventListener('input',function(e){
+			  cleartown_id();
+		      town_option();
+		     
+		    });
+		    document.getElementById('village_name').addEventListener('input',function(e){
+		      clearVillage_id();	
+		      village_option();
+		    });
+		    document.getElementById('tv_name').addEventListener('input',function(e){
+		      clearHouse_id();	
+		      house_option();
+		    });
+	
+		}else{
+			$('#town_name').change(function(){
+			  cleartown_id();
+			  town_option();
+			});
+			$('#village_name').change(function(){
+			  clearVillage_id();
+			  village_option();
+			});
+			$('#tv_name').change(function(){
+			  clearHouse_id();	
+			  house_option();
+			});
+			
+		}
+		//获取街道下小区名称
+		function tv_option(){
+			var str_name = $('#tv_name').val();
+	        if(str_name == null || tv_name == ""){
+	            return;
+	        }
+	        var house_type = $('#house_type').val();
+	        if(house_type == '' || house_type == null){
+	        	house_type = 1;
+	        }
+	       
+	        if(tinAwesoplete != null){
+	        	tinAwesoplete.close();
+	        }
+			doManager('TinyVillageManager','getTinyVillageByName',[str_name,house_type],function(data){
+				if(data.result){
+					lst_select_tiny = JSON.parse(data.data);
+					var array = new Array();
+					$(lst_select_tiny).each(function(index,element){
+						array.push(element.name);
+					});
+					var input = document.getElementById("tv_name");
+					tinAwesoplete = new Awesomplete(input, {
+						list: array
+					},function(text){
+						$(lst_select_tiny).each(function(index,element){
+							if(element.name == text){
+								$('#tv_address').val(element.address);
+								$('#tv_id').val(element.id);
+								clearBuilding();
+								building_option();
+							}
+						});
+					}).evaluate();
+				}else{
+					mui.toast(data.message);
+				}
+			});
+		}
+		//清除街道及以下数据
+		function cleartown(){
+			$('#town_name').val('');
+			$('#town_id').val('');
+			clearVillage();
+		}
+		function cleartown_id(){
+			$('#town_id').val('');
+			$("#tv_address").attr("disabled",false);
+			clearVillage();
+		}
+		//清除社区及以下数据
+		function clearVillage(){
+			$('#village_name').val('');
+			$('#village_id').val('');
+			clearHouse_name();
+		}
+		function clearVillage_id(){
+			$('#village_id').val('');
+			$("#tv_address").attr("disabled",false);
+			clearHouse_name();
+		}
+		//清除小区名称及以下数据
+		function clearHouse_name(){
+			$('#tv_name').val('');
+			$('#tv_id').val('');
+			clearAddress();
+		}
+		function clearHouse_id(){
+			$('#tv_id').val('');
+			$("#tv_address").attr("disabled",false);
+			clearAddress();
+		}
+		//清除小区地址及以下数据
+		function clearAddress(){
+			$('#tv_address').val('');
+			clearBuilding();
+		}
+		//清除楼号及以下数据
+		function clearBuilding(){
+			$('#building_id').val('');
+			$('#building_name').val('');
+			clearHouse();
+		}
+		//清除单元号号及以下数据
+		function clearHouse(){
+			$('#house_id').val('');
+			$('#house_no').val('');
+			$('#unit_no').val('');
+		}
+        //根据小区获取楼房信息
+		function building_option(){
+			var tv_id = $('#tv_id').val();
+			if(tv_id == '' || tv_id == null){
+				return;
+			}
+	        if(buildingAwesoplete != null){
+	        	buildingAwesoplete.close();
+	        }
+			doManager('BuildingManager','getBuildingListByTinyVillageId',tv_id,function(data){
+				if(data.result){
+					lst_building = JSON.parse(data.data)
+					var array = new Array();
+					$(lst_building).each(function(index,element){
+						array.push(element.name);
+					});
+					var input = document.getElementById('building_name');
+					buildingAwesoplete = new Awesomplete(input, {
+						list: array
+					},function(text){
+						clearHouse();
+						building_value();
+					});
+				}else{
+					mui.toast(data.message);
+				}
+			});
+		}
+		
+		function building_value(){
+			for(var key in lst_building){
+				if(lst_building[key].name == $('#building_name').val()){
+					$('#building_id').val(lst_building[key].id);
+					break;
+				}
+			}
+		}
+	
+		
+		function doSave(){
+			var house_type = $('#house_type').val();
+			var address = new Object();
+			var town_id=$("#town_id").val();
+			var town_name=$("#town_name").val();
+			var village_id=$("#village_id").val();
+			var village_name=$("#village_name").val();
+			var tv_name=$("#tv_name").val();
+			var tv_address=$("#tv_address").val();
+			var building_id=$("#building_id").val();
+			var building_name=$("#building_name").val();
+			var house_no=$("#house_no").val();
+			var unit_no=$("#unit_no").val();
+			
+            address.customer_address = {
+    			 town_id:town_id,
+    			 town_name:town_name,
+    	         village_id:village_id,
+    	         village_name:village_name,
+    	         tv_name:tv_name,
+    	         tv_address:tv_address,
+                 building_id:building_id,
+                 building_name:building_name,
+                 house_no:house_no,
+                 unit_no:unit_no,
+                 house_type:house_type,
+                 update_user_id:employee.id,
+                 update_user:employee.name,
+                 store_id:store.store_id
+            };
+//			var address = getFormSimpleData();
+//			var store = JSON.parse(localStorage.getItem('store'));
+			if(town_id == '' || town_id == null){
+					mui.toast('没有该街道请到地址采集添加街道！');
+					return;
+			}
+			if(house_type == 0){
+				if(tv_name == '' ||tv_name == null||tv_name.toString().trim().length==0){
+					mui.toast('请输入街(道)！');
+					return;
+				}
+				if(house_no == '' || house_no == null ||house_no.toString().trim().length==0){
+					mui.toast('请输入门牌号！');
+					return;
+				}
+				
+				
+			}else{
+				
+				if(tv_name == '' || tv_name == null||tv_name.toString().trim().length==0){
+					mui.toast('请输入小区名称！');
+					return;
+				}
+				if(building_name == '' || building_name == null||building_name.toString().trim().length==0){
+					mui.toast('请输入楼号！');
+					return;
+				}
+				if(unit_no == '' || unit_no == null ||unit_no.toString().trim().length==0){
+					mui.toast('请输单元号！');
+					return;
+				}
+				if(house_no == '' || house_no == null||house_no.toString().trim().length==0){
+					mui.toast('请输入房间号！');
+					return;
+				}
+			}
+			
+			if(!checkValue(village_id)){
+				mui.toast("该社区不存在，请到地址采集维护！");
+			}else{
+				save(address);
+			}
+			
+			
+		}
+		//保存
+		function save(address){
+			doManager('ViewAddressCustomerManager','saveOrUpdateCustomerAddressInfo',address,function(data){
+				if(data.result){
+					var jsonData = JSON.parse(data.data);
+					mui.fire(main,"getHouse_id",{address_customer:jsonData});
+					mui.toast('住址保存成功');
+					setTimeout(function() {
+						closeMenu();
+					}, 100);
+				}else{
+					mui.toast("住址保存失败");
+				}
+			});
+		}
+		function checkValue(value){
+			if(value == null || value == ''){
+				return false;
+			}
+			return true;
+		}
+		//模糊查询街道信息
+		function town_option(){
+			var str_name = $('#town_name').val();
+	        if(str_name == null || str_name == ""){
+	            return;
+	        }
+	        var str_id = $('#city_id').val();
+	        if(str_id == '' || str_id == null){
+	        	 return;
+	        }
+	       
+	        if(tinAwesoplete != null){
+	        	tinAwesoplete.close();
+	        }
+			doManager('TownManager','selectAllTownByName',[str_name,str_id],function(data){
+				if(data.result){
+					lst_select_tiny = JSON.parse(data.data);
+					var array = new Array();
+					$(lst_select_tiny).each(function(index,element){
+						array.push(element.name);
+					});
+					var input = document.getElementById("town_name");
+					tinAwesoplete = new Awesomplete(input, {
+						list: array
+					},function(text){
+						$(lst_select_tiny).each(function(index,element){
+							if(element.name == text){
+								$('#town_name').val(element.name);
+								$('#town_id').val(element.id);
+								clearVillage();
+								village_option();
+							}
+						});
+					}).evaluate();
+				}else{
+					mui.toast(data.message);
+				}
+			});
+		}
+		//社区模糊查询
+		function village_option(){
+			var str_name = $('#village_name').val();
+	        if(str_name == null || str_name == ""){
+	            return;
+	        }
+	        var str_id = $('#town_id').val();
+	        if(str_id == '' || str_id == null){
+	        	 return;
+	        }
+	       
+	        if(tinAwesoplete != null){
+	        	tinAwesoplete.close();
+	        }
+			doManager('VillageManager','searchVillageByTownAndName',[str_id,str_name],function(data){
+				if(data.result){
+					lst_select_tiny = JSON.parse(data.data);
+					var array = new Array();
+					$(lst_select_tiny).each(function(index,element){
+						array.push(element.name);
+					});
+					var input = document.getElementById("village_name");
+					tinAwesoplete = new Awesomplete(input, {
+						list: array
+					},function(text){
+						$(lst_select_tiny).each(function(index,element){
+							if(element.name == text){
+								$('#village_name').val(element.name);
+								$('#village_id').val(element.id);
+								clearHouse_name();
+								house_option();
+							}
+						});
+					}).evaluate();
+				}else{
+					mui.toast(data.message);
+				}
+			});
+		}
+		//根据街道Id查找小区对象
+		function house_option(){
+			var str_name = $('#tv_name').val();
+	        if(str_name == null || str_name == ""){
+	            return;
+	        }
+	        var town_id = $('#town_id').val();
+	        if(town_id == '' || town_id == null){
+	        	return;
+	        } 
+	        var village_id = $('#village_id').val();
+	        
+	        var tinvillage_type = $('#house_type').val();
+	        if(tinvillage_type == '' || tinvillage_type == null){
+	        	return;
+	        }
+	        if(tinAwesoplete != null){
+	        	tinAwesoplete.close();
+	        }
+			doManager('TinyVillageManager','getTinyVillageByNameAndTown',[str_name,tinvillage_type,town_id,village_id],function(data){
+				if(data.result){
+					lst_select_tiny = JSON.parse(data.data);
+					var array = new Array();
+					$(lst_select_tiny).each(function(index,element){
+						array.push(element.name);
+							
+					});
+					var input = document.getElementById("tv_name");
+					tinAwesoplete = new Awesomplete(input, {
+						list: array
+					},function(text){
+						$(lst_select_tiny).each(function(index,element){
+							if(element.name == text){
+								$('#village_name').val(element.village_name);
+								$('#village_id').val(element.village_id);
+								$('#tv_name').val(element.name);
+								$('#tv_id').val(element.id);
+								clearAddress();
+								if(element.address!=null&&element.address!=''){
+									$('#tv_address').val(element.address);
+									document.getElementById('tv_address').addEventListener('input',function(e){
+								      mui.toast('小区地址无法在此修改，请到地址采集页面进行维护!');
+								      $('#tv_address').val('');
+								      $('#tv_address').val(element.address);
+								    });
+								}else{
+									document.getElementById('tv_address').addEventListener('input',function(e){
+								      mui.toast('小区地址无法在此修改，请到地址采集页面进行维护!');
+								      $('#tv_address').val('');
+								    });
+								}
+								
+							}
+						});
+					}).evaluate();
+				}else{
+					mui.toast(data.message);
+				}
+			});
+		}
+	</script>
+</html>

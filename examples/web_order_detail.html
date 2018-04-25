@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>订单详情页面</title>
+		<!-- Tell the browser to be responsive to screen width -->
+		<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+		<!-- Bootstrap 3.3.6 -->
+		<link rel="stylesheet" href="../css/bootstrap.min.css">
+		<!-- Font Awesome -->
+		<link rel="stylesheet" href="../css/font-awesome.min.css">
+		<!-- Ionicons -->
+		<link rel="stylesheet" href="../css/ionicons.min.css">
+		<!-- Theme style -->
+		<link rel="stylesheet" href="../css/AdminLTE.min.css">
+		<!-- AdminLTE Skins. Choose a skin from the css/skins
+       folder instead of downloading all of them to reduce the load. -->
+		<link rel="stylesheet" href="../css/_all-skins.min.css">
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<link rel="stylesheet" href="../css/newmui.min.css">
+
+		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+		<!--[if lt IE 9]>
+  <script src="IE 9/html5shiv.min.js"></script>
+  <script src="IE 9/respond.min.js"></script>
+  <![endif]-->
+		<style>
+			body {
+				background: #f2f2f2;
+			}
+			
+			.wrapper {
+				background-color: transparent!important;
+			}
+			
+			.navbar {
+				position: relative;
+			}
+			
+			.navbar>a {
+				line-height: 50px;
+				color: #fff;
+				position: absolute;
+				left: 14px;
+				top: 13px;
+			}
+			
+			.navbar-custom-menu {
+				margin-top: 0;
+			}
+			
+			.navbar-nav>.user-menu>.dropdown-menu>li.user-header>p {
+				line-height: 22px;
+			}
+			
+			header {
+				position: fixed!important;
+				width: 100%;
+			}
+			
+			section {
+				margin-top: 50px;
+			}
+			
+			.modal-content {
+				margin-top: 15px;
+			}
+			
+			.box-body img {
+				width: 100%
+			}
+			
+			.dl-horizontal dt {
+				width: 100px;
+				font-weight: normal;
+			}
+			
+			.dl-horizontal .w3 {
+				letter-spacing: 8px;
+			}
+			
+			.dl-horizontal .w2 {
+				letter-spacing: 30px;
+			}
+			
+			.servicer {
+				height: 80px;
+			}
+			
+			.servicer .col-xs-10 {
+				line-height: 50px;
+			}
+		</style>
+	</head>
+
+	<body class="hold-transition skin-blue sidebar-mini">
+		<!-- Site wrapper -->
+		<div class="wrapper">
+
+			<header class="main-header">
+				<!-- Logo -->
+				<nav class="navbar navbar-static-top text-center">
+					<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+					<span> 订单详情</span>
+				</nav>
+				<!-- Header Navbar: style can be found in header.less -->
+
+			</header>
+
+			<!-- =============================================== -->
+
+			<!-- Content Wrapper. Contains page content -->
+			<section style="padding-top: 15px;">
+				<div class="modal-content">
+					<div class="box-header with-border"><i class="fa fa-newspaper-o"></i><b>客户信息</b></div>
+					<div class="box-body" id="user_click">
+						<p style="line-height: 30px;padding-top: 10px;"><span class="margin-r-5" id="short_name"></span><span id="use_phone"></span><a id="to_customer" style="border: 1px solid #18bc9c;padding:0px 8px; color: #18bc9c;float: right;border-radius: 5px;display: none;">用户画像</a></p>
+						<p id="user_address"></p>
+					</div>
+
+				</div>
+				<div class="modal-content">
+					<div class="box-header" id="item_div"><i class="fa fa-home"></i><b id="order_type">商品信息</b></div>
+					<!--<div class="box-body box-header with-border">
+        <div class="col-xs-3 no-padding"><img src="../images/user8-128x128.jpg"></div>
+        <div class="col-xs-9">
+          <p id="order_context">长款羽绒服</p>
+          <p><span class="margin-r-5" id="oreder_num"></span><span class="text-red" id="oreder_price">￥15元</span></p>
+        </div>
+      </div>-->
+					<div class="box-body">
+						<dl class="dl-horizontal no-margin">
+							<!--<dt class="pull-left">商品金额</dt>
+          <dd class="text-right"><b id="oreder_money"></b></dd>-->
+							<dt class="pull-left w2">合计</dt>
+							<dd class="text-right text-red"><b id="oreder_sum_money"></b></dd>
+						</dl>
+					</div>
+				</div>
+				<div class="modal-content">
+					<div class="box-body servicer" id="employee_click">
+						<div class="col-xs-2 no-padding img-circle"><img src="" class="img-circle"></div>
+						<div class="col-xs-10"><span id='employee_name'>服务人：</span><span style="display: none;" id="employee_id"></span></div>
+					</div>
+
+				</div>
+				<div class="modal-content">
+					<div class="box-header with-bordere"><i class="fa fa-file-zip-o"></i><b>订单详情</b></div>
+					<div class="box-body">
+						<p id='order_sn'>订单编号：</p>
+						<p id='setorder_time'>下单时间:</p>
+						<!--<p id='delivery_time'>配送时间:</p>-->
+						<p id='signed_time' style="color: #dd4b39;">签收时间:</p>
+						<p id='order_area' style="color: #18bc9c;">订单区块:</p>
+						<p id='remarks'>订单备注：无</p>
+					</div>
+				</div>
+			</section>
+
+			<!-- /.content -->
+
+		</div>
+		<!-- ./wrapper -->
+
+		<!-- jQuery 2.2.0 -->
+		<script src="../js/jQuery-2.2.0.min.js"></script>
+		<!-- Bootstrap 3.3.6 -->
+		<script src="../js/bootstrap.min.js"></script>
+		<!-- Morris.js charts -->
+		<script src="../js/raphael-min.js"></script>
+		<!--<script src="plugins/morris/morris.min.js"></script>-->
+		<!-- FastClick -->
+		<script src="../js/fastclick.js"></script>
+		<!-- AdminLTE App -->
+		<script src="../js/app.min.js"></script>
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript" src="../js/custom_common.js"></script>
+		<script src="../js/date_util.js"></script>
+		<script>
+			var employee = JSON.parse(localStorage.getItem('employee'));
+			var guoanxia_img=null;
+			mui.init({
+				swipeBack: false
+			});
+			mui.plusReady(function() {
+				var self = plus.webview.currentWebview();
+				if(self != null && self.order_detail != null) {
+					order_detail = JSON.parse(self.order_detail);
+					setData(order_detail)
+					getOrderDetail(order_detail.order_sn);
+				}
+				document.getElementById('employee_click').addEventListener('tap', function(event) {
+					if($("#employee_id").text()==null||$("#employee_id").text()==""){
+						mui.toast('无法获取该员工详细信息！');
+					}else{
+						toOther_web_user($("#employee_id").text());
+					}
+					
+				});
+//				document.getElementById('user_click').addEventListener('tap', function(event) {
+//					var phone = $('#use_phone').text();
+//					if(phone != null && phone != "" && phone != "无用户电话") {
+//						getIsCustomer(phone);
+//					} else {
+//						mui.toast('该用户没有用户画像！');
+//					}
+//
+//				});
+			});
+            //根据订单sn编号 查询明细信息 
+			function getOrderDetail(order_sn) {
+				doManager('InterManager', 'queryOrderInfoBySN', order_sn, function(data) {
+					if(data.result == true) {
+						var jsonData = JSON.parse(data.data);
+						if(jsonData.dataMap != null && jsonData.dataMap != "") {
+							if(jsonData.dataMap.employee==null||jsonData.dataMap.employee==""){
+								$(".img-circle").attr("src","../images/my_card_head.png");
+							}else{
+								if(jsonData.dataMap.employee.pngUrl != null && jsonData.dataMap.employee.pngUrl != "" && jsonData.dataMap.employee.pngUrl != "https://imgcdn.guoanshequ.com/"){
+									$(".img-circle").attr("src",decodeURI(jsonData.dataMap.employee.pngUrl));
+								    guoanxia_img=jsonData.dataMap.employee.pngUrl;
+								}else{
+									$(".img-circle").attr("src","../images/my_card_head.png");
+								}
+								
+							}
+							
+							
+							$("#oreder_sum_money").html(jsonData.dataMap.payable_price + '元');
+							$("#oreder_num").html('数量:' + jsonData.dataMap.total_quantity);
+							$("#setorder_time").html('下单时间:' + new Date(jsonData.dataMap.create_time).Format('YYYY-MM-DD'));
+							if(jsonData.dataMap.seller_remark == null || jsonData.dataMap.seller_remark == "") {
+								$("#remarks").html('订单备注:' + "无");
+							} else {
+								$("#remarks").html('订单备注:' + jsonData.dataMap.seller_remark);
+							}
+							var $div = $('#item_div');
+
+							$(jsonData.dataMap.item_list).each(function(index, order) {
+								var html = '<div class="box-body box-header with-border">' +
+									'<div class="col-xs-3 no-padding"><img src="' + decodeURI(order.first_url) + '"></div>' +
+									'<div class="col-xs-9">' +
+									'<p id="order_context">' + order.eshop_pro_name + '</p>' +
+									'<p><span class="margin-r-5" id="oreder_num">' + order.quantity + order.unit + '</span>' +
+									'<span class="text-red" id="oreder_price">￥' + order.unit_price + '元</span></p>' +
+									' </div> </div>';
+								$div.append(html);
+
+							});
+
+						}
+
+					}
+				});
+			}
+
+			function toOther_web_user(other_user_id) {
+				setTimeout(function() {
+					var webview = plus.webview.getWebviewById('other_web_user');
+					if(webview != null) {
+						webview.close();
+					}
+					mui.openWindow({
+						url: 'other_web_user.html',
+						id: 'other_web_user',
+						createNew: true,
+						extras: {
+							other_user_id: other_user_id,
+							guoanxia_img:guoanxia_img
+						},
+						show: {
+							aniShow: 'slide-in-right'
+						},
+						waiting: {
+							autoShow: false
+						}
+					});
+				}, 0);
+			};
+            //查询用户是否有用户画像
+			function getIsCustomer(phone) {
+				doManager('CustomerManager', 'checkCustomerByPhone', phone, function(data) {
+					if(data.result == true) {
+						var jsonData = JSON.parse(data.data);
+						if(jsonData.count > 0) {
+							$("#to_customer").css('display','');
+							document.getElementById('to_customer').addEventListener('tap', function(event) {
+								var phone = $('#use_phone').text();
+								if(phone != null && phone != "" && phone != "无用户电话") {
+									toWeb_portrait(phone);
+								} else {
+									mui.toast('该用户没有用户画像！');
+								}
+			
+							});
+						} else {
+//							mui.toast('该用户没有用户画像！');
+						}
+
+					}
+				});
+			}
+
+			function toWeb_portrait(portrait_phone) {
+				setTimeout(function() {
+					var webview = plus.webview.getWebviewById('web_portrait');
+					if(webview != null) {
+						webview.close();
+					}
+					mui.openWindow({
+						url: 'web_portrait.html',
+						id: 'web_portrait',
+						createNew: true,
+						extras: {
+							portrait_phone: portrait_phone
+						},
+						show: {
+							aniShow: 'slide-in-right'
+						},
+						waiting: {
+							autoShow: false
+						}
+					});
+				}, 0);
+			};
+			function setData(order_data){
+				if(order_data.customer_name == null || order_data.customer_name== '') {
+					$("#short_name").html('未录入用户名称');
+				} else {
+					$("#short_name").html(order_data.customer_name);
+				}
+				if(order_data.mobilephone == null || order_data.mobilephone == "") {
+					$("#use_phone").html('未录入用户电话');
+				} else {
+					$("#use_phone").html(order_data.mobilephone);
+					getIsCustomer(order_data.mobilephone);
+				}
+				if(order_data.address == null || order_data.address == "") {
+					$("#user_address").html('无地址信息');
+				} else {
+					$("#user_address").html(order_data.address);
+				}
+				if(order_data.employee_name==null||order_data.employee_name==""){
+					$("#employee_name").html('服务人:' + '未录入');
+				}else{
+					if(order_data.employee_name.split("+").length > 1) {
+						$("#employee_name").html('服务人:' +order_data.employee_name.split("+")[0]);
+						$("#employee_id").html(order_data.employee_name.split("+")[1]);
+					} else {
+						$("#employee_name").html('服务人:' + order_data.employee_name);
+					}
+					
+				}
+				
+				$("#order_sn").html('订单编号:' + order_data.order_sn);
+				if(order_data.df_signed_time == null || order_data.df_signed_time == "") {
+								$("#signed_time").html('签收时间:' + '无');
+							} else {
+								$("#signed_time").html('签收时间:' + new Date(order_data.df_signed_time).Format('YYYY-MM-DD'));
+				}
+				if(order_data.placename == null || order_data.placename == "") {
+					$("#order_area").html('未录入订单区块');
+				} else {
+					$("#order_area").html('订单区块:'+order_data.placename);
+				}
+	
+			}
+		</script>
+	</body>
+
+</html>

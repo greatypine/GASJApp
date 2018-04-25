@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>消息列表页面</title>
+		<!-- Tell the browser to be responsive to screen width -->
+		<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+		<!-- Bootstrap 3.3.6 -->
+		<link rel="stylesheet" href="../css/bootstrap.min.css">
+		<!-- Font Awesome -->
+		<link rel="stylesheet" href="../css/font-awesome.min.css">
+		<!-- Ionicons -->
+		<link rel="stylesheet" href="../css/ionicons.min.css">
+		<!-- Theme style -->
+		<link rel="stylesheet" href="../css/AdminLTE.min.css">
+		<!-- AdminLTE Skins. Choose a skin from the css/skins
+       folder instead of downloading all of them to reduce the load. -->
+		<link rel="stylesheet" href="../css/_all-skins.min.css">
+		<link rel="stylesheet" href="../css/img_preview.css">
+		<link rel="stylesheet" href="../css/newmui.min.css">
+		<style>
+			html,body{
+				height: 100%; background-size: cover; min-height: 100%;
+			}
+			
+			footer {
+				position: fixed;
+				bottom: 0;
+				left: 0;
+				width: 100%;
+				border-top: 1px solid #c3c3c3;
+				background-color: #fff;
+				text-align: center;
+				color: #666;
+				height: 50px;
+				padding-top: 2px;
+				z-index: 100;
+			}
+			
+			footer p {
+				font-size: 20px;
+				margin: 0 0 -3px 0;
+			}
+			
+			footer a,
+			footer a:hover,
+			footer a:active,
+			footer a:visited {
+				color: #666;
+			}
+			
+			.mark-green {
+				color: #169a80!important;
+			}
+			
+			  .wrapper,.content-wrapper{background-color: transparent!important;}
+    .modal-content{ margin-bottom: 15px;}
+    .box-body img{width: 100%}
+    .dl-horizontal dt{width: 100px; font-weight: normal;}
+    .dl-horizontal .w3{letter-spacing:8px;}
+    .dl-horizontal .w2{letter-spacing:30px;}
+    .servicer{height: 80px; }
+    .servicer .col-xs-10{line-height: 50px;}
+
+    .bg-head-green{background-color:#18bc9c; color: #fff; border-radius: 0;}
+    .bg-head-green .col-xs-4 img{border-radius: 50%; max-height: 150px; box-shadow: 0px 3px 5px rgba(0,0,0,0.3);}
+    .return-arrow a{color: #fff; padding: 20px; font-size: 26px;width: 100%;}
+    .bg-shade{background-color: rgba(0,0,0,0.1); padding: 10px 0; margin-top: 10px;}
+    .image{color: #fff;}
+    .mui-page-content {
+				font-size: 16px;
+				padding:20px 20px;
+			}
+			
+			.mui-page-content ul li {
+				margin-left: -40px;
+				/*background-color: red;*/
+				height: 40px;
+				line-height: 40px;
+				border-bottom: 1px solid #dbdbdb;
+			}
+			
+			.mui-page-content ul li a {
+				color: #666;
+				font-size: 16px;
+				display: block;
+				background: url(../images/icon33.png) no-repeat center right;
+				background-size: 5px;
+			}
+			.mui-botton button {
+				width: 100%;
+				height: 40px;
+				text-align: center;
+				background-color: #e3e3e3;
+				color: #666;
+				margin-top: 200px;
+				display: block;
+				margin-bottom: 50px;
+			}
+		</style>
+	</head>
+
+	<body class="hold-transition skin-blue sidebar-mini">
+		<!-- Site wrapper -->
+		<!--主页部分-->
+		<div class=" mui-off-canvas-wrap mui-slide-in" id="offCanvasWrapper">
+
+			<div class="mui-inner-wrap wrapper">
+				<header class="main-header">
+						<nav class="navbar navbar-static-top text-center">
+							<span> 个人中心</span>
+						</nav>
+					</header>
+					<div class="box-body no-padding bg-head-green text-center" style="height: 180px;">
+						<div class="clearfix">
+							<div class="col-xs-4"></div>
+							<div class="col-xs-4"><img src="../images/my_card_head.png" id="head_img">
+								<p class="h4" id="employee_name"></p>
+							</div>
+						</div>
+						<div id="employee_zw">
+						</div>
+					</div>
+					<div class="mui-page-content">
+					<ul>
+						<li >
+							<a onclick="toUpdatePassword()">密码修改</a>
+						</li>
+					</ul>
+					<div class="mui-botton"><button id='btnLogout'>退出登录</button></div>
+				</div>
+
+				
+				<div class="mui-off-canvas-backdrop"></div>
+				<footer>
+					<a class="col-xs-4" id="web_city_ej" path="web_city_ej.html" onclick="jump(this)">
+						<p><i class="fa fa-bar-chart-o"></i></p>动态</a>
+					<a class="col-xs-4" id="web_message" path="web_message.html" onclick="jump(this)">
+						<p><i class="fa fa-envelope-o"></i></p>消息
+						<div id="message_state_div"></div>
+					</a>
+					
+					<a class="col-xs-4  mark-green" id="new_city_my" href="javascript:void(0)">
+						<p><i class="fa fa-user"></i></p>我</a>
+				</footer>
+			</div>
+
+		</div>
+		<!-- ./wrapper -->
+
+		<!-- jQuery 2.2.0 -->
+		<script src="../js/jQuery-2.2.0.min.js"></script>
+		<!-- Bootstrap 3.3.6 -->
+		<script src="../js/bootstrap.min.js"></script>
+		<!-- Morris.js charts -->
+		<script src="../js/raphael-min.js"></script>
+		<!--<script src="plugins/morris/morris.min.js"></script>-->
+		<!-- FastClick -->
+		<script src="../js/fastclick.js"></script>
+		<!-- AdminLTE App -->
+		<script src="../js/app.min.js"></script>
+		<!--<script src="../js/mui.min.js"></script>-->
+		<script src="../js/mui.min2.js" type="text/javascript" charset="utf-8"></script>
+		<script src="https://pv.sohu.com/cityjson?ie=utf-8"></script>
+		<script type="text/javascript" src="../js/custom_common.js"></script>
+		<script src="../js/date_util.js"></script>
+		<script src="../js/previewimage.js"></script>
+	<script src="../js/mui.zoom.js"></script>
+		<script>
+			var employee = JSON.parse(localStorage.getItem('employee'));
+	var employee_pic = JSON.parse(localStorage.getItem('employee_pic'));
+	mui.init({
+    swipeBack: false
+  });
+
+  mui.plusReady(function (){
+  	initView();
+  	if('Android' == plus.os.name) {
+					var first = null;
+					mui.back = function() {
+						if(!first) {
+							first = new Date().getTime();
+							mui.toast('再按一次退出应用');
+							setTimeout(function() {
+								first = null;
+							}, 1000);
+						} else {
+							if(new Date().getTime() - first < 1000) {
+								plus.runtime.quit();
+							}
+						}
+					}
+				}
+				//退出
+				var t_username = localStorage.getItem("employee_key");
+				mui('#btnLogout')[0].addEventListener('click', function(event) {
+					setTimeout(function() {
+						var webview = plus.webview.getWebviewById('login');
+						if(webview != null) {
+							webview.close();
+						}
+						localStorage.clear();
+						localStorage.setItem("employee_key", t_username);
+						mui.openWindow({
+							url: '../login.html',
+							id: 'login',
+							createNew: true,
+							show: {
+								aniShow: "slide-in-right"
+							},
+							waiting: {
+								autoShow: false
+							}
+						});
+					}, 50);
+				});
+			
+  });
+  
+  function initView() {
+				if(employee != null) {
+					if(employee.name == null || employee.name == "") {
+						$("#employee_name").html("无数据");
+					} else {
+						$("#employee_name").html(employee.name);
+					}
+					$("#employee_zw").text(employee.zw+employee.employeeId);
+
+				}
+				if(employee_pic != null) {
+					if(employee_pic.pngUrl != null && employee_pic.pngUrl != "" && employee_pic.pngUrl != "https://imgcdn.guoanshequ.com/") {
+						$("#head_img").attr("src", decodeURI(employee_pic.pngUrl));
+					} else {
+						$("#head_img").attr("src", "../images/my_card_head.png");
+					}
+
+				} else {
+					$("#head_img").attr("src", "../images/my_card_head.png");
+				}
+
+			}
+  //跳转到修改密码
+			function toUpdatePassword() {
+				setTimeout(function() {
+					var webview = plus.webview.getWebviewById('update_password');
+					if(webview != null) {
+						webview.close();
+					}
+					mui.openWindow({
+						url: 'update_password.html',
+						id: 'update_password',
+						createNew: true,
+						show: {
+							aniShow: 'slide-in-right'
+						},
+						waiting: {
+							autoShow: false
+						}
+					});
+				}, 0);
+			};
+	
+		</script>
+
+	</body>
+
+</html>

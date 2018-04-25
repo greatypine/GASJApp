@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>门店历史经营指数title页面</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<!--标准mui.css-->
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="../css/common.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/style.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/store_history.css"/>
+		<script type="text/javascript" src="../js/common.js"></script>
+		
+	</head>
+	<body>
+		<!--<header class="mui-bar mui-bar-nav titleheader">
+			<div>门店历史经营指数</div>
+			<div class="back"><a class="mui-action-back"></a></div>		
+		</header>-->
+		<header class="mui-bar mui-bar-nav titleheader">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">门店历史经营指数</h1>
+		</header>
+		
+		<div class="mui-content"></div>
+		
+	</body>
+	<script src="../js/mui.min.js"></script>
+	<script src="../js/date_util.js"></script>
+	<script src="../js/jquery-2.2.2.min.js"></script>
+	<script src="../js/custom_common.js"></script>
+	<script type="text/javascript">
+	
+//		mui.back =function(){
+//			mui.openWindow({
+//				url:'store_index.html',
+//				id:'store_index',
+//				createNew:true
+//			});
+//		};
+		function openhome(){
+			var webview = plus.webview.getWebviewById('tabbar');
+			if(webview != null){
+				webview.close();
+			}
+			mui.openWindow({
+				url:'tabbar.html',
+				id:'tabbar',
+				createNew:true,
+				show: {
+						aniShow: 'slide-in-right'
+					},
+					waiting: {
+						autoShow: false
+					}
+			});
+		}
+		function openmessage(){
+			var webview = plus.webview.getWebviewById('message');
+			if(webview != null){
+				webview.close();
+			}
+			mui.openWindow({
+				url:'message.html',
+				id:'message',
+				createNew:true,
+				show: {
+						aniShow: 'slide-in-right'
+					},
+					waiting: {
+						autoShow: false
+					}
+			});
+		}
+		function openmy(){
+			var webview = plus.webview.getWebviewById('my');
+			if(webview != null){
+				webview.close();
+			}
+			mui.openWindow({
+				url:'my.html',
+				id:'my',
+				createNew:true,
+				show: {
+						aniShow: 'slide-in-right'
+					},
+					waiting: {
+						autoShow: false
+					}
+			});
+		}
+		
+		mui.plusReady(function(){
+				var fontSize = $('body').css('font-size');
+				fontSize = fontSize.substring(0,fontSize.length - 2);
+				var strTop = parseInt(fontSize) * 1.1 + 'px';
+				var strBottom = parseInt(fontSize) * 0 + 'px';
+				mui.init({
+					beforeback: function() {
+					var subweb = plus.webview.getWebviewById('store_index_history_sub');
+					if(subweb != null) {
+						subweb.close();
+					}
+					return true;
+				},
+				    subpages:[{
+				    	url:"store_index_history_sub.html",//下拉刷新内容页面地址
+				  	  	id:"store_index_history_sub",//内容页面标志
+				  	  	styles:{
+							top: strTop,
+							bottom:strBottom
+						}
+				  	}]
+				});
+		});
+		
+
+		var contentWebview = null;
+		document.querySelector('header').addEventListener('doubletap',function () {
+			if(contentWebview==null){
+				contentWebview = plus.webview.currentWebview().children()[0];
+			}
+			contentWebview.evalJS("mui('#pullrefresh').pullRefresh().scrollTo(0,0,100)");
+		});
+		
+		
+		
+	
+		
+	</script>
+</html>

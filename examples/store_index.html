@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>门店经营指数</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<!--标准mui.css-->
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="../css/common.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/style.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/store_index.css"/>
+		<style>
+			.userinfostyle{
+				height: 1.6rem;
+				width: 1.6rem;
+				border: 1px ;
+				background:#ffab33;
+				border-radius: 50%;
+				margin: 0.2rem auto 0.2rem auto;
+				
+			}
+			.express img{
+				height: 1.5rem;
+				width: 1.5rem;
+				margin: 0.3rem 0 0.15rem 0;
+			}
+			.item-title1{
+				background:url(../images/icon30.png) no-repeat 0 0.13rem;
+				background-size:0.35rem;
+				height: 0.6rem;
+				padding: 0 0 0 0.2rem;
+			}
+			.item-title1-text{
+				padding-left: 0.25rem;
+				font-size:0.3rem;
+				color: #c00a12;
+				overflow: hidden;
+			}
+			
+		</style>
+		
+		
+	</head>
+
+	<body>
+		<!--<header class="mui-bar mui-bar-nav titleheader">
+			<div>门店经营指数</div>
+			<div class="back"><a href="store_daily.html"></a></div>
+			<div class="history"><a href="store_index_history.html">历史</a></div>
+		</header>-->
+		<header class="mui-bar mui-bar-nav titleheader">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">门店经营指数</h1>
+			<div class="history"><a href="store_index_history.html">历史</a></div>
+		</header>
+		<div class="item-time">
+			
+		</div>
+		<div class="list-item " style="display: block;padding-top: 0.5rem;">
+			<ul class="layout">
+				<li class="item-title1"><i style="background:url(../images/icon30.png)"></i><span class="item-title1-text">门店日常</span></li>
+				<li><span>进店客数</span><input type="tel" id="enter_num" name="enter_num"/>人</li>
+				<li><span>体验人数</span><input type="tel" id="test_num" name="test_num"/>人</li>
+				<li><span>店内注册APP</span><input type="tel" id="reg_num" name="reg_num"/>人</li>
+				<li><span>店内下单</span><input type="tel" id="purchase_num" name="purchase_num"/>人</li>
+			</ul>
+					
+		</div>
+		
+		<div class="list-item layout" style="display: block; margin-top: 0.5rem;" >
+			<ul>
+				
+				<li class="item-title1"><span class="item-title1-text">生活宝试用</span></li>
+				<li ><span>体验人数</span><input type="tel" id="life_test" name="life_test"/>人</li>
+				<li ><span>办卡人数</span><input type="tel" id="life_card" name="life_card"/>人</li>
+				<li ><span>健康屋的业务</span><input type="tel" id="health_request" name="health_request"/>人</li>
+			</ul>
+			<div class="order_btn"><a href="#" onclick="doSave();">保存</a></div>
+		</div>
+		
+	</body>
+	<script src="../js/date_util.js"></script>
+	<script src="../js/custom_common.js"></script>
+	<script src="../js/mui.enterfocus.js"></script>
+	<script src="../js/app.js"></script>
+	<script type="text/javascript" src="../js/mui.min.js"></script>
+	<script>
+	
+//	    mui.back =function(){
+//			mui.openWindow({
+//				url:'store_daily.html',
+//				id:'store_daily',
+//				createNew:true
+//			});
+//		};
+		
+	
+		
+		var currDate = null;
+		
+		var store = JSON.parse(localStorage.getItem("store"));
+		
+		mui.ready(function(){
+			currDate = new Date().Format('YYYY-MM-DD');
+			mui('.item-time')[0].innerHTML = currDate;
+			initView();
+		});
+		//获取当天经营指数
+		function initView(){
+			var daily = {
+				store_id:store.store_id,
+				report_date:currDate
+			};
+			
+			doManager('DailyReportManager','findDailyReportByStoreIdAndDate',daily,function(data){
+				if(data.result == true){
+					var jsonDaily = JSON.parse(data.data);
+					if(jsonDaily == null){
+						return;
+					}
+					mui("#enter_num")[0].value = jsonDaily.enter_num;
+					mui("#test_num")[0].value = jsonDaily.test_num;
+					mui("#reg_num")[0].value = jsonDaily.reg_num;
+					mui("#purchase_num")[0].value = jsonDaily.purchase_num;
+					mui("#life_test")[0].value = jsonDaily.life_test;
+					mui("#life_card")[0].value = jsonDaily.life_card;
+					mui("#health_request")[0].value = jsonDaily.health_request;
+				}else{
+					mui.toast("读取数据失败！");
+				}
+			});
+		}
+		
+		function doSave(){
+			var employee = JSON.parse(localStorage.getItem("employee"));
+			var str_enter_num = mui("#enter_num")[0].value;
+			if(!checkValue(str_enter_num)){
+				mui("#enter_num")[0].focus();
+				mui.toast("请输入数字类型的进店客数。");
+				return;
+			}
+			
+			var str_test_num = mui("#test_num")[0].value;
+			if(!checkValue(str_test_num)){
+				mui("#test_num")[0].focus();
+				mui.toast("请输入数字类型的体验人数。");
+				return;
+			}
+			
+			var str_reg_num = mui("#reg_num")[0].value;
+			if(!checkValue(str_reg_num)){
+				mui("#reg_num")[0].focus();
+				mui.toast("请输入数字类型的店内注册APP人数。");
+				return;
+			}
+			
+			var str_purchase_num = mui("#purchase_num")[0].value;
+			if(!checkValue(str_purchase_num)){
+				mui("#purchase_num")[0].focus();
+				mui.toast("请输入数字类型的店内下单人数。");
+				return;
+			}
+			
+			
+			var str_life_test = mui("#life_test")[0].value;
+			if(!checkValue(str_life_test)){
+				mui("#life_test")[0].focus();
+				mui.toast("请输入数字类型的生活宝体验人数。");
+				return;
+			}
+			
+			var str_life_card = mui("#life_card")[0].value;
+			if(!checkValue(str_life_card)){
+				mui("#life_card")[0].focus();
+				mui.toast("请输入数字类型的生活宝办卡人数。");
+				return;
+			}
+			
+			var str_health_request = mui("#health_request")[0].value;
+			if(!checkValue(str_health_request)){
+				mui("#health_request")[0].focus();
+				mui.toast("请输入数字类型的健康屋业务人数。");
+				return;
+			}
+			
+
+			var daily = {
+				store_id:store.store_id,
+				report_date:currDate,
+				enter_num:str_enter_num,
+				test_num:str_test_num,
+				reg_num:str_reg_num,
+				purchase_num:str_purchase_num,
+				life_test:str_life_test,
+				life_card:str_life_card,
+				health_request:str_health_request,
+				status:0,
+				create_user:employee.id,
+				create_time:currDate,
+				update_user:employee.id,
+				update_time:currDate
+			}
+			
+			doManager('DailyReportManager','saveOrUpdateStoreDaily',daily,function(data){
+				if(data.result == true){
+					var jsonResult = JSON.parse(data.data);
+					if(jsonResult.code == 200){
+						mui.toast("保存成功");
+					}else{
+						mui.toast(jsonResult.message);
+					}
+				}else{
+					mui.toast("保存失败");
+				}
+			});
+		}
+		
+		
+		function checkValue(value){
+			if(value == null || value.trim() == '' || isNaN(value)){
+				return false;
+			}
+			return true;
+		}
+	
+	
+	</script> 
+</html>

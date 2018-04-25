@@ -1,0 +1,1127 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>数据动态页面</title>
+		<!-- Tell the browser to be responsive to screen width -->
+		<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+		<!-- Bootstrap 3.3.6 -->
+		<link rel="stylesheet" href="../css/bootstrap.min.css">
+		<!-- Font Awesome -->
+		<link rel="stylesheet" href="../css/font-awesome.min.css">
+		<!-- Ionicons -->
+		<link rel="stylesheet" href="../css/ionicons.min.css">
+		<!-- Theme style -->
+		<link rel="stylesheet" href="../css/AdminLTE.min.css">
+		<!-- AdminLTE Skins. Choose a skin from the css/skins
+       folder instead of downloading all of them to reduce the load. -->
+		<link rel="stylesheet" href="../css/_all-skins.min.css">
+		<link rel="stylesheet" href="../css/newmui.min.css">
+		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+		<!--[if lt IE 9]>
+  <script src="IE 9/html5shiv.min.js"></script>
+  <script src="IE 9/respond.min.js"></script>
+  <![endif]-->
+		<style>
+			html,
+			body {
+				min-height: 100%;
+				background-size: cover;
+			}
+			
+			.select {
+				height: 3rem;
+				width: 50%;
+				margin-left: 20px;
+				background: #000;
+			}
+			
+			.navbar-nav>.user-menu>.dropdown-menu>li.user-header>p {
+				line-height: 22px;
+			}
+			
+			header {
+				position: fixed!important;
+				width: 100%;
+			}
+			
+			.mui-scroll-wrapper {
+				padding-top: 15px;
+			}
+			
+			section {
+				margin-top: 50px;
+				margin-bottom: 70px;
+			}
+			
+			.modal-content {
+				margin-top: 15px;
+			}
+			
+			.box-body img {
+				width: 100%
+			}
+			
+			.remindimg {
+				padding: 0 10px;
+				font-size: 24px;
+				text-align: center;
+			}
+			
+			footer {
+				position: fixed;
+				bottom: 0;
+				left: 0;
+				width: 100%;
+				border-top: 1px solid #c3c3c3;
+				background-color: #fff;
+				text-align: center;
+				color: #666;
+				height: 50px;
+				padding-top: 2px;
+			}
+			
+			footer p {
+				font-size: 20px;
+				margin: 0 0 -3px 0;
+			}
+			
+			footer a {
+				margin: 0;
+				font-size: 14px;
+			}
+			
+			footer a,
+			footer a:hover,
+			footer a:active,
+			footer a:visited {
+				color: #666;
+			}
+			
+			.mark-green {
+				color: #169a80!important;
+			}
+			
+			.notice_active {
+				height: 75px;
+				overflow: hidden;
+				line-height: 30px;
+			}
+			
+			.notice_active ul {
+				padding: 0 0 0 10px;
+			}
+			
+			.notice_active .pull-right {
+				font-size: 12px;
+				color: rgba(0, 0, 0, 0.5);
+			}
+			
+			.no_message {
+				text-align: center;
+				margin: 30px auto
+			}
+			
+			.no_areamessage {
+				text-align: center;
+				margin: 15px auto
+			}
+		</style>
+	</head>
+
+	<body class="hold-transition skin-blue sidebar-mini">
+		<!-- Site wrapper -->
+		<div class="wrapper mui-off-canvas-wrap mui-slide-in" id="offCanvasWrapper">
+			<aside id="offCanvasSide" class="main-sidebar mui-off-canvas-left" style="padding-top: 20px;">
+				<!-- sidebar: style can be found in sidebar.less -->
+				<section id="offCanvasSideScroll" class="sidebar">
+					<!-- Sidebar user panel -->
+					<div class="user-panel">
+						<div class="text-center image">
+							<img src="../images/my_card_head.png" class="img-circle" alt="User Image">
+							<p style="margin-top: 10px;"><strong id="user_name"></strong></p>
+							<p><span id="user_zw"></span><span id="user_employeeid"></span></p>
+							<!--<span id="div_title" style="display: block;margin-top:10px;"></span>
+							<select class="select" id="select">
+							</select>
+							<p id="store_num" style="display: block;margin-top:10px;"><span>门店编号：</span><span id="storeid"></span></p>-->
+						</div>
+					</div>
+					<!-- sidebar menu: : style can be found in sidebar.less -->
+					<ul class="sidebar-menu">
+						<div style="padding:0px 0px 0px 18px;">
+							<a>
+							<span>所属门店：</span>
+							<span id="div_title"></span>
+							<select class="select" id="select" style="margin-left: 0px;">
+							</select>
+							</a>
+						</div>
+						<div  id="store_num" style="padding:18px 0px 0px 18px;">
+								<a><span>门店编号：</span><span id="storeid" style="margin-left: 4px;"></span>
+							</a>
+						</div>
+						
+						<li class="treeview" style="display: none; padding-top: 10px;" id="datacard">
+							<a onclick="toCard()">
+								<span>国安侠数据卡</span> <i class="fa  fa-angle-right pull-right"></i>
+							</a>
+						</li>
+
+						<li class="treeview">
+							<a onclick="toUpdatePassword()">
+								<span>修改密码</span> <i class="fa  fa-angle-right pull-right"></i>
+							</a>
+						</li>
+						<li class="text-center" style="margin-top: 2rem;">
+							<a id="btnLogout">退出登录</a>
+						</li>
+						
+						<li class="text-center" style="margin-top: 2rem;">
+							<a id="btnmaps" onclick="toMaps()">地图</a>
+						</li>
+
+					</ul>
+
+				</section>
+				<!-- /.sidebar -->
+			</aside>
+
+			<div class="mui-inner-wrap">
+				<header class="main-header">
+					<!-- Logo -->
+					<nav class="navbar navbar-static-top text-center">
+						<span> 数据动态</span>
+						<a href="#offCanvasSide" class="sidebar-toggle fa fa-navicon mui-icon-bars"></a>
+
+					</nav>
+
+					<!-- Header Navbar: style can be found in header.less -->
+
+				</header>
+				<!-- =============================================== -->
+				<div class="mui-content mui-scroll-wrapper">
+					<!-- Content Wrapper. Contains page content -->
+					<section>
+
+						<div class="modal-content">
+							<div class="box-header with-border"><i class="fa fa-home"></i><b>片区动态</b></div>
+							<div class="box-body notice_active">
+								<ul class='areamessage_ul'>
+									<!--<li class="notice_active_ch"><span class="margin-r-5 text-red">李先生</span>在国安社区下单<span class="pull-right">昨天</span></li>
+              <li class="notice_active_ch"><span class="margin-r-5 text-light-blue">王春</span>录入拜访记录<span class="pull-right">6:40</span></li>
+              <li class="notice_active_ch"><span class="margin-r-5 text-red">赵先生</span>在国安社区下单<span class="pull-right">14:40</span></li>
+              <li class="notice_active_ch"><span class="margin-r-5 text-light-blue">李雪</span>录入拜访记录<span class="pull-right">16:40</span></li>-->
+								</ul>
+							</div>
+
+						</div>
+						<div class="modal-content" style="min-height:105px;">
+							<div class="box-header with-border"><i class="fa fa-bullhorn"></i><b>待处理消息</b></div>
+							<div class="box-body no-padding">
+
+							</div>
+
+						</div>
+						<div class="modal-content">
+							<div class="box-header with-border"><i class="fa fa-bar-chart" style="padding-top: 5px;"></i><b id="dataCard_name"></b>
+								<select style="float: right;width: 20%;height: 25px;" id="crm_date" onchange="reloadByDate()"></select>
+							</div>
+							<div class="box-body">
+								<div class="real-time text-center" style="height: 280px;">
+
+								</div>
+							</div>
+
+						</div>
+
+					</section>
+				</div>
+				<!-- /.content -->
+				<!-- footer -->
+				<footer style="display: none;">
+					<a class="col-xs-3 mark-green" id="dataState" href="javascript:void(0)">
+						<p><i class="fa fa-bar-chart-o"></i></p>动态</a>
+					<a class="col-xs-3" id="tabbar" path="tabbar.html" onclick="jump(this)">
+						<p><i class="fa fa-file-text-o"></i></p>录入</a>
+					<a class="col-xs-3" id="web_message" path="web_message.html" onclick="jump(this)">
+						<p><i class="fa fa-envelope-o"></i></p>消息
+						<div id="message_state_div"></div>
+					</a>
+					<a class="col-xs-3" id="areaState" onclick="selectherf()">
+						<p><i class="fa fa-user"></i></p>混片儿</a>
+				</footer>
+				<!-- /.footer-->
+				<div class="mui-off-canvas-backdrop"></div>
+			</div>
+
+		</div>
+		<!-- ./wrapper -->
+
+		<!-- jQuery 2.2.0 -->
+		<script src="../js/jQuery-2.2.0.min.js"></script>
+		<!-- Bootstrap 3.3.6 -->
+		<script src="../js/bootstrap.min.js"></script>
+		<!-- Morris.js charts -->
+		<script src="../js/raphael-min.js"></script>
+		<!--<script src="plugins/morris/morris.min.js"></script>-->
+		<!-- FastClick -->
+		<script src="../js/fastclick.js"></script>
+		<!-- AdminLTE App -->
+		<script src="https://pv.sohu.com/cityjson?ie=utf-8"></script>
+		<script type="text/javascript" src="../js/custom_common.js"></script>
+		<script src="../js/app.min.js"></script>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/date_util.js"></script>
+
+		<script>
+			var employee = JSON.parse(localStorage.getItem('employee'));
+			var selectArea_list = JSON.parse(localStorage.getItem('selectArea_list'));
+			var store_list = JSON.parse(localStorage.getItem('storelist'));
+			var store = null;
+			var storelist = null;
+			var suffix = ".html";
+			var mDate = new Date();
+			var myear = mDate.getFullYear(); //当前年
+			var mmonth = mDate.getMonth(); //上一月
+			if(window.plus) {
+				plusReady();
+			} else {
+				document.addEventListener('plusready', plusReady, false);
+			}
+
+			function plusReady() {
+				if(employee.usergroup != null) {
+					if(employee.usergroup.code=='ZHGLY' || employee.usergroup.code == 'DZ' || employee.usergroup.code == 'GAX'|| employee.usergroup.code == 'FDZJSZ') {
+						$("footer").css("display", "");
+					} else {
+						$("footer").css("display", "");
+						$("#tabbar").attr("style", "display:none;");
+						$("#dataState").attr("class", "col-xs-4 mark-green");
+						$("#areaState").attr("class", "col-xs-4 ");
+						$("#web_message").attr("class", "col-xs-4");
+					}
+					if(employee.usergroup.code == 'GAX'){
+						$("#datacard").css("display","");
+					}
+				}
+				message_isread();
+				initView();
+				initStore();
+				initDate();
+				if(employee.usergroup != null) {
+					if(employee.usergroup.code == 'DZ') {
+						if(mmonth==0){
+							ShopownerOtherMonthResult(mmonth+1);
+						}else{
+							ShopownerOtherMonthResult(mmonth);
+						}
+						
+					} else if(employee.usergroup.code == 'GAX'|| employee.usergroup.code == 'FDZJSZ'||employee.usergroup.code=='ZHGLY') {
+						
+						if(mmonth==0){
+							GuoanxiaOtherMonthResult(mmonth+1);
+						}else{
+							GuoanxiaOtherMonthResult(mmonth);
+						}
+					}
+				}
+				window.addEventListener('refresh', function(e) { //执行刷新
+					location.reload();
+				});
+				getNewMessage();
+				areaNewMessage();
+				if('Android' == plus.os.name) {
+					var first = null;
+					mui.back = function() {
+						if(!first) {
+							first = new Date().getTime();
+							mui.toast('再按一次退出应用');
+							setTimeout(function() {
+								first = null;
+							}, 1000);
+						} else {
+							if(new Date().getTime() - first < 1000) {
+								plus.runtime.quit();
+							}
+						}
+					}
+				}
+
+				//退出
+				var t_username = localStorage.getItem("employee_key");
+				mui('#btnLogout')[0].addEventListener('click', function(event) {
+					setTimeout(function() {
+						var webview = plus.webview.getWebviewById('login');
+						if(webview != null) {
+							webview.close();
+						}
+						localStorage.clear();
+						localStorage.setItem("employee_key", t_username);
+						mui.openWindow({
+							url: '../login.html',
+							id: 'login',
+							createNew: true,
+							show: {
+								aniShow: "slide-in-right"
+							},
+							waiting: {
+								autoShow: false
+							}
+						});
+					}, 50);
+
+				});
+
+			}
+
+			function timer(opj) {
+				$(opj).find('ul').animate({
+					marginTop: "-1.6rem"
+				}, 500, function() {
+					$(this).css({
+						marginTop: "0"
+					}).find("li:first").appendTo(this);
+				})
+			}
+			//
+			function selectherf() {
+				if(employee.usergroup != null) {
+					if(employee.usergroup.code == 'DZ') {
+						tojump("web_shopkeeper_new", "web_shopkeeper_new.html");
+					}else{
+						if(selectArea_list == null || selectArea_list == "" || selectArea_list.length == 0) {
+							mui.toast("暂无划片区域");
+						} else {
+							tojump("web_index", "web_index.html");
+						}
+					}
+				}
+
+			}
+
+			//最新消息（待处理消息）
+			function getNewMessage() {
+				var myDate = new Date();
+				var message = {
+					receiveId: employee.employeeId
+				};
+				doManager('MessageNewManager', 'queryMessageOfNew', message, function(data) {
+					if(data.result == true) {
+						var jsonData = JSON.parse(data.data);
+						var $div = $('.no-padding');
+						if(jsonData.data == null || jsonData.data == "") {
+							var html = '<div class="no_message">暂无新消息</div>';
+							$div.append(html);
+						} else {
+							$(jsonData.data).each(function(index, element) {
+								var html = '<div class="clearfix" style="margin-top: 10px;">' +
+									'<div class="col-xs-1 text-light-blue remindimg"><i class="fa fa-bell"></i> </div>' +
+									'<div class="col-xs-11">' +
+									'<p class="no-margin"><strong>' + element.title + '</strong><span class="pull-right">' + getDateDiff(element.create_time) + '</span></p>' +
+									'<p class="info-box-text" style="padding-right: 40px;">' + element.content + '</p>' +
+									'</div></div>';
+								$div.append(html);
+								var $item_div = $div.find('.clearfix').last();
+								$item_div[0].addEventListener('click', function(event) {
+									message_state(element.id);
+									//公告
+									if(element.type == "other_notice"||element.type == "abnormal_order") {
+										var webview = plus.webview.getWebviewById(element.jump_path);
+										if(webview != null) {
+											webview.close();
+										}
+										mui.openWindow({
+											url: element.jump_path + suffix,
+											id: element.jump_path,
+											createNew: true,
+											show: {
+												aniShow: 'slide-in-right'
+											},
+											waiting: {
+												autoShow: false
+											},
+											extras: {
+												message_content: element.content,
+												message_title: element.title,
+												message_id: element.id
+											}
+										});
+
+									} else {
+										var webview = plus.webview.getWebviewById(element.jump_path);
+										if(webview != null) {
+											webview.close();
+										}
+										mui.openWindow({
+											url: element.jump_path + suffix,
+											id: element.jump_path,
+											createNew: true,
+											show: {
+												aniShow: 'slide-in-right'
+											},
+											waiting: {
+												autoShow: false
+											},
+											extras: {
+												pk_id: element.pk_id,
+												message_id: element.id,
+												message_to: 'main'
+											}
+										});
+
+									}
+
+								});
+
+							});
+
+						}
+
+					}
+				});
+			}
+			//JavaScript函数：
+			var minute = 1000 * 60;
+			var hour = minute * 60;
+			var day = hour * 24;
+			var halfamonth = day * 15;
+			var month = day * 30;
+			//时间戳转换为发布时间  
+			function getDateDiff(dateTimeStamp) {
+				var now = new Date().getTime();
+				var diffValue = now - dateTimeStamp;
+				var monthC = diffValue / month;
+				var weekC = diffValue / (7 * day);
+				var dayC = diffValue / day;
+				var hourC = diffValue / hour;
+				var minC = diffValue / minute;
+				if(monthC >= 1) {
+					result = new Date(dateTimeStamp).Format('YYYY-MM-DD HH:mm');
+				} else if(weekC >= 1) {
+					result = new Date(dateTimeStamp).Format('YYYY-MM-DD HH:mm');
+				} else if(dayC >= 1) {
+					result = new Date(dateTimeStamp).Format('YYYY-MM-DD HH:mm');
+				} else if(hourC >= 1) {
+					result = parseInt(hourC) + "个小时前";
+				} else if(minC >= 1) {
+					result = parseInt(minC) + "分钟前";
+				} else
+					result = "刚刚";
+				return result;
+			}
+
+			//消息阅读状态更改
+			function message_state(message_id) {
+				var message = {
+					id: message_id,
+					isRead: 1
+				};
+				doManager('MessageNewManager', 'readMessage', message, function(data) {
+					if(data.result == true) {
+						var jsonData = JSON.parse(data.data);
+
+					}
+				});
+			}
+			//查看消息列表是否有未读信息，如有未读信息消息显示红点
+			function message_isread() {
+				var message = {
+					receiveId: employee.employeeId
+				};
+				doManager('MessageNewManager', 'getUnReadMessageAmount', message, function(data) {
+					if(data.result == true) {
+						var jsonData = JSON.parse(data.data);
+						if(jsonData == 0 || jsonData == null) {
+							$('#message_state_div').removeClass("message-dian1");
+						} else {
+							$('#message_state_div').addClass("message-dian1");
+						}
+
+					}
+				});
+			}
+
+			//查询片区最新动态消息
+			function areaNewMessage() {
+				var message = {
+					receiveId: employee.employeeId
+				};
+				doManager('MessageNewManager', 'getMessageOfNews', message, function(data) {
+					if(data.result == true) {
+						var jsonData = JSON.parse(data.data);
+						var $div = $('.areamessage_ul');
+						var m_content="";
+						var m_title="";
+						
+						var is_zero="";
+						
+						if(jsonData.data == null || jsonData.data == "") {
+							var html = '<div class="no_areamessage">暂无新消息</div>';
+							$div.append(html);
+						} else {
+							$(jsonData.data).each(function(index, element) {
+								var m_message="";
+								var m_phone=null;
+								var content_length=""
+								m_content=element.content.split(' ');
+								m_title=m_content[0];
+								if(m_content.length==5){
+									m_phone=m_content[4];
+									content_length=m_content.length-1;
+								}else{
+									content_length=m_content.length;
+								}
+								for(var i=1;i<content_length;i++){
+									m_message+=m_content[i];
+								}
+								if(index%2==0){
+									is_zero='<span class="margin-r-5 text-red">';
+								}else{
+									is_zero='<span class="margin-r-5 text-light-blue">';
+								}
+								var html = '<li class="notice_active_ch">' +
+								is_zero +
+								m_title +
+								'</span>'+
+								m_message+
+								'<span class="pull-right">' + getDateDiff(element.create_time) + '</span>' +
+								'</li>'
+								$div.append(html);
+								$div.find('li:last-child').click(function(){
+									if(element.type!=null||element.type!=""){
+										if(element.type=="news_relation"){
+											var webview = plus.webview.getWebviewById('visiting_information');
+											if(webview != null){
+												webview.close();
+											}
+											mui.openWindow({
+												url:'visiting_information.html',
+												id:"visiting_information",
+												createNew:true,
+												show: {
+													aniShow: 'slide-in-right'
+												},
+												waiting: {
+													autoShow: false
+												},
+												extras:{
+													select_name:element.content.split(' ')[0],
+													select_phone:m_phone
+												}
+											});
+										}else if(element.type=="news_customer"){
+											var webview = plus.webview.getWebviewById('user_information');
+											if(webview != null){
+												webview.close();
+											}
+											mui.openWindow({
+												url:'user_information.html',
+												id:"user_information",
+												createNew:true,
+												show: {
+													aniShow: 'slide-in-right'
+												},
+												waiting: {
+													autoShow: false
+												},
+												extras:{
+													select_name:element.content.split(' ')[0],
+													select_phone:m_phone
+												}
+											});
+											
+										}
+										
+									}
+								});
+							});
+
+						}
+						
+						//消息滚动事件
+						var num = $('.notice_active').find('li').length;
+						if(num > 2) {
+							var time = setInterval('timer(".notice_active")', 3500);
+							$('.gg_more a').mousemove(function() {
+								clearInterval(time);
+							}).mouseout(function() {
+								time = setInterval('timer(".notice_active")', 3500);
+							});
+						}
+
+					}
+				});
+			}
+
+			function initView() {
+				if(employee != null) {
+					if(employee.name == null || employee.name == "") {
+						$("#user_name").html("无数据");
+					} else {
+						$("#user_name").html(employee.name);
+					}
+					if(employee.zw == null || employee.zw == "") {
+						$("#user_zw").text("无数据");
+					} else {
+						$("#user_zw").text(employee.zw);
+					}
+
+					if(employee.employeeId == null || employee.employeeId == "") {
+						$("#user_employeeid").text("无数据");
+					} else {
+						$("#user_employeeid").text(employee.employeeId);
+					}
+//					if(employee.employeeId == null || employee.employeeId == "") {
+//						$("#user_employeeid").text("无数据");
+//					} else {
+//						$("#user_employeeid").text(employee.employeeId);
+//					}
+				}
+			}
+			//跳转到修改密码
+			function toUpdatePassword() {
+				setTimeout(function() {
+					var webview = plus.webview.getWebviewById('update_password');
+					if(webview != null) {
+						webview.close();
+					}
+					mui.openWindow({
+						url: 'update_password.html',
+						id: 'update_password',
+						createNew: true,
+						show: {
+							aniShow: 'slide-in-right'
+						},
+						waiting: {
+							autoShow: false
+						}
+					});
+				}, 0);
+			};
+			//跳转本月数据动态
+			function toCard() {
+				setTimeout(function() {
+					var webview = plus.webview.getWebviewById('dataCard');
+					if(webview != null) {
+						webview.close();
+					}
+					mui.openWindow({
+						url: 'dataCard.html',
+						id: 'dataCard',
+						createNew: true,
+						show: {
+							aniShow: 'slide-in-right'
+						},
+						waiting: {
+							autoShow: false
+						}
+					});
+				}, 0);
+			};
+
+			function initStore() {
+				store = JSON.parse(localStorage.getItem("store"));
+				storelist = JSON.parse(localStorage.getItem("storelist"));
+				getStorelist();
+				if(store != null) {
+					if(storelist.length <= 1) {
+						mui("#div_title")[0].innerHTML = store.name;
+						mui("#storeid")[0].innerHTML = store.storeno;
+						$("#select").hide();
+					} else {
+						$("#select").show();
+						$("div_title").hide();
+						mui("#storeid")[0].innerHTML = store.storeno;
+					}
+
+				} else {
+					getStore($('.select option:selected').val());
+				}
+
+			}
+
+			function getStorelist() {
+				if(storelist != null || storelist != "") {
+
+					$(storelist).each(function(index, element) {
+						if(index == 0) {
+							$('#select').append('<option selected="selected" value=' + element.store_id + '>' + element.name + '</option>');
+						} else {
+							$('#select').append('<option value=' + element.store_id + '>' + element.name + '</option>');
+						}
+					});
+					if(store != null) {
+						$('#select').val(store.store_id);
+					}
+
+				} else {
+					mui("#div_title")[0].innerHTML = "国安社区";
+					$('#select').hide();
+					$('#store_num').hide();
+				}
+
+			}
+            //获取门店信息
+			function getStore(store_id) {
+				if(store_id == null || store_id == "" || store_id == "null") {
+					mui("#div_title")[0].innerHTML = "国安社区";
+					$("#select").hide();
+					$("#store_num").hide();
+					return;
+				}
+				doManager("StoreManager", "findStore", store_id, function(data) {
+					if(data.result == true) {
+						var jsonStore = JSON.parse(data.data);
+						localStorage.setItem("store", JSON.stringify(jsonStore));
+						mui("#div_title")[0].innerHTML = jsonStore.name;
+						mui("#storeid")[0].innerHTML = jsonStore.storeno;
+						if(storelist.length <= 1) {
+							$("#select").hide();
+						} else {
+							$("#select").show();
+							$("#div_title").hide();
+						}
+
+					} else {
+						$("#select").hide();
+						$("#store_num").hide();
+						mui("#div_title")[0].innerHTML = "国安社区";
+
+					}
+				});
+
+			}
+			$(document).ready(function() {
+				$('#select').change(function() {
+					var a = $('#select option:selected').text();
+					$('#select span').text(a);
+					getStore($('#select option:selected').val());
+					if(mui.os.ios) {
+						setTimeout(function() {
+							window.location.reload();
+						}, 200);
+					} else {
+						window.location.reload();
+					}
+				})
+			});
+
+			function reloadByDate() {
+				s_date = $("#crm_date").val();
+				var last_selectmouth = $("#dataCard_name").text().split("月");
+				var myDate = new Date();
+				var c_year = myDate.getFullYear(); //当前年
+				var c_month = myDate.getMonth(); //当前月
+				var year_month = c_month + 1;
+//				var btnArray = ['确定', '取消'];
+//				if(s_date == year_month) {
+//					mui.confirm('查询当月数据需数分钟时间，是否继续？', '提示', btnArray, function(e) {
+//						if(e.index == 0) {
+//							$("#dataCard_name").text(s_date + "月数据卡");
+//							if(employee.zw != null) {
+//								if(employee.zw == '店长' || employee.zw == "综合管理") {
+//									ShopownerMonthResult();
+//								} else if(employee.zw == '国安侠') {
+//									GuoanxiaMonthResult();
+//								}
+//							}
+//						} else {
+//							$("#crm_date").val(last_selectmouth);
+//						}
+//
+//					});
+//				} else {
+					$("#dataCard_name").text(s_date + "月数据卡");
+					if(employee.zw != null) {
+						if(employee.zw == '店长') {
+							ShopownerOtherMonthResult(s_date);
+						} else if(employee.zw == '国安侠'|| employee.zw == "综合管理" || employee.zw == "副店长") {
+							GuoanxiaOtherMonthResult(s_date);
+						}
+					}
+//				}
+
+			}
+
+			var curMonth = ""; //当月
+			var curYear = "";
+			var curDate = "";
+
+			function initDate() {
+				var myDate = new Date();
+				var c_year = myDate.getFullYear(); //当前年
+				var c_month = myDate.getMonth()+1; //当前月
+
+				curMonth = c_month;
+				curYear = c_year;
+				curDate = c_year + "-" + c_month; //当前日期
+				var date_option = "";
+				var year_month=null;
+				var y_m=null;
+				if(c_month==1){
+					y_m='1月'
+				    date_option = date_option + "<option value='" + i + "' selected>" + y_m + "</option>";
+					$("#dataCard_name").html("1月数据卡");
+				}else{
+					for(var i = 1; i <= c_month-1; i++) {
+					 year_month = i;
+					 y_m = i + "月";
+					if(i == (c_month - 1)) { //上一个月
+						date_option = date_option + "<option value='" + i + "' selected>" + y_m + "</option>";
+						$("#dataCard_name").html((parseInt(c_month) - 1) + "月数据卡");
+					} else if(c_month == 1) { //当前月是一月
+						date_option = date_option + "<option value='" + i + "' selected>" + y_m + "</option>";
+						$("#dataCard_name").html("1月数据卡");
+					} else {
+						date_option = date_option + "<option value='" + i + "' >" + y_m + "</option>";
+					}
+				}
+					
+				}
+				
+				$("#crm_date").append(date_option);
+			}
+
+			//国安侠本月成绩
+			function GuoanxiaMonthResult() {
+				var myDate = new Date();
+				var c_year = myDate.getFullYear(); //当前年
+				var c_month = myDate.getMonth() + 1; //当前月
+
+				var store_id = "";
+				if(store == null || store == "") {
+					store_id = employee.store_id;
+				} else {
+					store_id = store.store_id;
+				}
+				var dynamicDto = {        
+					cityId: "",
+					employeeNo: employee.employeeId,
+					employeeName: employee.name,
+					        year: c_year,
+					        storeId: store_id,
+					        month: c_month,
+					        target: 3   
+				}
+				doManager('DynamicManager', 'getDataCardInfoOfCurMonth', dynamicDto, function(data) {
+					if(data.result == true) {
+						var jsonData = JSON.parse(data.data);
+						var $div = $('.real-time');
+						$div.children().remove();
+						if(jsonData == null || jsonData == "") {
+							var html = '<div class="no_message">暂无内容</div>';
+							$div.append(html);
+						} else {
+							var html = '<div class="col-xs-4 circle">' +
+								'<div class="hexagon">' + jsonData.sendorders + '</div>' +
+								'<h4>送单量</h4></div>' +
+								'<div class="col-xs-4 circle">' +
+								'<div class="hexagon">' + jsonData.relation + '</div>' +
+								'<h4>拜访记录</h4></div>' +
+								'<div class="col-xs-4 circle">' +
+								'<div class="hexagon">' + jsonData.customer + '</div>' +
+								'<h4>客户画像</h4>' +
+								'</div>';
+							$div.append(html);
+						}
+					}
+				});
+			}
+			//国安侠其他月份成绩
+			function GuoanxiaOtherMonthResult(c_month) {
+				var myDate = new Date();
+				var c_year = myDate.getFullYear(); //当前年
+
+				var store_id = "";
+				if(store == null || store == "") {
+					store_id = employee.store_id;
+				} else {
+					store_id = store.store_id;
+				}
+				var dynamicDto = {        
+					cityId: "",
+					employeeNo: employee.employeeId,
+					employeeName: employee.name,
+			        year: c_year,
+			        storeId: store_id,
+			        month: c_month,
+			        target: 3   
+				}
+				doManager('DynamicManager', 'getDataCardInfo', dynamicDto, function(data) {
+					if(data.result == true) {
+						var jsonData = JSON.parse(data.data);
+						var $div = $('.real-time');
+						$div.children().remove();
+						if(jsonData == null || jsonData == "") {
+							var html = '<div class="no_message">暂无内容</div>';
+							$div.append(html);
+						} else {
+							var html = '<div class="col-xs-4 circle">' +
+								'<div class="hexagon" style="font-size:14px">' + jsonData.sendorders + '</div>' +
+								'<h4>送单量</h4></div>' +
+								'<div class="col-xs-4 circle">' +
+								'<div class="hexagon" style="font-size:14px">' + jsonData.relation + '</div>' +
+								'<h4>拜访记录</h4></div>' +
+								'<div class="col-xs-4 circle">' +
+								'<div class="hexagon" style="font-size:14px">' + jsonData.customer + '</div>' +
+								'<h4>客户画像</h4>' +
+								'</div>';
+							$div.append(html);
+						}
+					}
+				});
+			}
+
+			//店长、综合管理本月成绩
+			function ShopownerMonthResult() {
+				var myDate = new Date();
+				var c_year = myDate.getFullYear(); //当前年
+				var c_month = myDate.getMonth() + 1; //当前月
+				var store_id = "";
+				if(store == null || store == "") {
+					store_id = employee.store_id;
+				} else {
+					store_id = store.store_id;
+				}
+				var dynamicDto = {        
+					cityId: "",
+					        employeeNo: employee.employeeId,
+					employeeName: employee.name,
+					        year: c_year,
+					        storeId: store_id,
+					        month: c_month,
+					        target: 2   
+				}
+				doManager('DynamicManager', 'getDataCardInfoOfCurMonth', dynamicDto, function(data) {
+					if(data.result == true) {
+						var jsonData = JSON.parse(data.data);
+						var $div = $('.real-time');
+						$div.children().remove();
+						if(jsonData == null || jsonData == "") {
+							var html = '<div class="no_message">暂无内容</div>';
+							$div.append(html);
+						} else {
+							var html = '<div class="col-xs-4 circle">' +
+								'<div class="hexagon">' + jsonData.newaddcus + '</div>' +
+								'<h4>付费用户</h4></div>' +
+								'<div class="col-xs-4 circle">' +
+								'<div class="hexagon">' + jsonData.rebuycus + '</div>' +
+								'<h4>复购客户</h4></div>' +
+								'<div class="col-xs-4 circle">' +
+								'<div class="hexagon">' + jsonData.storetrade + '</div>' +
+								'<h4>绩效GMV</h4></div>' +
+								'<div class="col-xs-4 circle">' +
+								'<div class="hexagon">' + jsonData.sendorders + '</div>' +
+								'<h4>送单量</h4></div>' +
+								'<div class="col-xs-4 circle">' +
+								'<div class="hexagon">' + jsonData.rewardtimes + '</div>' +
+								'<h4>好评次数</h4></div>' +
+								'<div class="col-xs-4 circle">' +
+								'<div class="hexagon">--</div>' +
+								'<h4>商业信息</h4></div>' +
+								'<div class="col-xs-4 circle">' +
+								'<div class="hexagon">--</div>' +
+								'<h4>写字楼</h4></div>' +
+								'<div class="col-xs-4 circle">' +
+								'<div class="hexagon">' + jsonData.relation + '</div>' +
+								'<h4>拜访记录</h4></div>' +
+								'<div class="col-xs-4 circle">' +
+								'<div class="hexagon">' + jsonData.customer + '</div>' +
+								'<h4>客户画像</h4>' +
+								'</div>';
+							$div.append(html);
+						}
+					}
+				});
+			}
+
+			//店长、综合管理非本月成绩
+			function ShopownerOtherMonthResult(c_month) {
+				var myDate = new Date();
+				var c_year = myDate.getFullYear(); //当前年
+				var store_id = "";
+				if(store == null || store == "") {
+					store_id = employee.store_id;
+				} else {
+					store_id = store.store_id;
+				}
+				var dynamicDto = {        
+					cityId: "",
+					employeeNo: employee.employeeId,
+					employeeName: employee.name,
+					        year: c_year,
+					        storeId: store_id,
+					        month: c_month,
+					        target: 2   
+				}
+				doManager('DynamicManager', 'getDataCardInfo', dynamicDto, function(data) {
+					if(data.result == true) {
+						var jsonData = JSON.parse(data.data);
+						var $div = $('.real-time');
+						$div.children().remove();
+						if(jsonData == null || jsonData == "") {
+							var html = '<div class="no_message">暂无内容</div>';
+							$div.append(html);
+						} else {
+							var html = '<div class="col-xs-4 circle">' +
+								'<div class="hexagon" style="font-size:14px">' + jsonData.newaddcus + '</div>' +
+								'<h4>付费用户</h4></div>' +
+								'<div class="col-xs-4 circle">' +
+								'<div class="hexagon" style="font-size:14px">' + jsonData.rebuycus + '</div>' +
+								'<h4>复购客户</h4></div>' +
+								'<div class="col-xs-4 circle">' +
+								'<div class="hexagon" style="font-size:14px">' + jsonData.storetrade + '</div>' +
+								'<h4>绩效GMV</h4></div>' +
+								'<div class="col-xs-4 circle">' +
+								'<div class="hexagon" style="font-size:14px">' + jsonData.sendorders + '</div>' +
+								'<h4>送单量</h4></div>' +
+								'<div class="col-xs-4 circle">' +
+								'<div class="hexagon" style="font-size:14px">' + jsonData.rewardtimes + '</div>' +
+								'<h4>好评次数</h4></div>' +
+								'<div class="col-xs-4 circle">' +
+								'<div class="hexagon">--</div>' +
+								'<h4>商业信息</h4></div>' +
+								'<div class="col-xs-4 circle">' +
+								'<div class="hexagon">--</div>' +
+								'<h4>写字楼</h4></div>' +
+								'<div class="col-xs-4 circle">' +
+								'<div class="hexagon" style="font-size:14px">' + jsonData.relation + '</div>' +
+								'<h4>拜访记录</h4></div>' +
+								'<div class="col-xs-4 circle">' +
+								'<div class="hexagon" style="font-size:14px">' + jsonData.customer + '</div>' +
+								'<h4>客户画像</h4>' +
+								'</div>';
+							$div.append(html);
+						}
+					}
+				});
+			}
+			
+			function toMaps() {
+				setTimeout(function() {
+					var webview = plus.webview.getWebviewById('maps');
+					if(webview != null) {
+						webview.close();
+					}
+					mui.openWindow({
+						url: 'maps.html',
+						id: 'maps',
+						createNew: true,
+						show: {
+							aniShow: 'slide-in-right'
+						},
+						waiting: {
+							autoShow: false
+						}
+					});
+				}, 0);
+			};
+		</script>
+
+	</body>
+
+</html>
