@@ -211,6 +211,9 @@
 	var message_id = null;
 	mui.plusReady(function(){
 		getdata();
+		mui.back = function() {
+			   backMenu();
+			}
 			
 	});
        //获取消息内容
@@ -277,24 +280,25 @@
 				});
 				
 			}else{
-				var webview = plus.webview.getWebviewById('web_message');
-				if(webview != null){
-					webview.close();
-				}
-				mui.openWindow({
-					id: 'web_message',
-					url: 'web_message.html',
-					createNew:true,
-					show: {
-						aniShow: "slide-in-right"
-						},
-					waiting: {
-						autoShow: false
-					},
-					extras:{
-						messagepk_id: cus_id
-					}
-				});
+//				var webview = plus.webview.getWebviewById('web_message');
+//				if(webview != null){
+//					webview.close();
+//				}
+//				mui.openWindow({
+//					id: 'web_message',
+//					url: 'web_message.html',
+//					createNew:true,
+//					show: {
+//						aniShow: "slide-in-right"
+//						},
+//					waiting: {
+//						autoShow: false
+//					},
+//					extras:{
+//						messagepk_id: cus_id
+//					}
+//				});
+				backMenu();
 			}
 			
 		}
@@ -359,6 +363,16 @@
 				}, 300);
 			});
 
+		}
+		function backMenu(){
+			
+			var _current = plus.webview.currentWebview();
+			var main = _current.opener();
+			mui.fire(main,"setMessageCount",{message_count:{
+				message_count:'message_count'
+				
+			}});
+			_current.close();
 		}
     
     

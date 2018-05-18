@@ -48,6 +48,9 @@
 	    var message_id=""
 	    mui.plusReady(function() {
 			getdata();
+			mui.back = function() {
+			   backMenu();
+			   }
 		});
 	    function getdata(){
 	    	var self = plus.webview.currentWebview();
@@ -75,6 +78,16 @@
 	    	mui('#work_context')[0].value = work_result.remark;
 	    	
 	    }
+	    function backMenu(){
+			
+			var _current = plus.webview.currentWebview();
+			var main = _current.opener();
+			mui.fire(main,"setMessageCount",{message_count:{
+				message_count:'message_count'
+				
+			}});
+			_current.close();
+		}
 		
 	</script>
 

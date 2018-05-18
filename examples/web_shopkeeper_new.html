@@ -319,12 +319,14 @@
 								<p><i class="fa fa-globe"></i></p>地图</a>
 							<a class="col-xs-3 mark-green" id="areaState" href="javascript:void(0)">
 								<p><i class="fa fa-user"></i></p>混片儿</a>
-							<a class="col-xs-3" id="web_message" path="web_message.html" onclick="jump(this)">
+							<a class="col-xs-3" id="new_web_message" path="new_web_message.html" onclick="jump(this)">
 								<p><i class="fa fa-envelope-o"></i></p>消息
 								<div id="message_state_div"></div>
 							</a>
 							<a class="col-xs-3" id="tabbar" path="tabbar.html" onclick="jump(this)">
 								<p><i class="fa fa-file-text-o"></i></p>录入</a>
+							<a class="col-xs-3" id="work" path="work_list.html" onclick="jump(this)">
+						<p><i class="fa fa-calendar-check-o"></i></p>工单</a>
 							
 
 						</footer>
@@ -691,6 +693,7 @@
 					} else {
 						$("footer").css("display", "");
 						$("#tabbar").attr("style", "display:none;");
+						$("#work").attr("style", "display:none;");
 						$("#maps").attr("class", "col-xs-4 ");
 						$("#areaState").attr("class", "col-xs-4 mark-green");
 						$("#web_message").attr("class", "col-xs-4 ");
@@ -769,22 +772,39 @@
 
 			});
 			//查看消息列表是否有未读信息，如有未读信息消息显示红点
-			function message_isread() {
-				var message = {
-					receiveId: employee.employeeId
-				};
-				doManager('MessageNewManager', 'getUnReadMessageAmount', message, function(data) {
+		//查看消息列表是否有未读信息，如有未读信息消息显示红点
+		function message_isread() {
+			var message = {
+				receiveId: employee.employeeId
+			};
+			var message_count=0;
+			var notice_count=0;
+			doManager('MessageNewManager', 'getUnReadMessageAmount', message, function(data) {
+				if(data.result == true) {
+					var jsonData = JSON.parse(data.data);
+					message_count=jsonData;
+					
+				}
+			},false);
+			
+			doManager('NoticeReciverManager', 'getUnReadNotice', employee.employeeId, function(data) {
 					if(data.result == true) {
 						var jsonData = JSON.parse(data.data);
-						if(jsonData == 0 || jsonData == null) {
-							$('#message_state_div').removeClass("message-dian1");
-						} else {
-							$('#message_state_div').addClass("message-dian1");
-						}
-
+						notice_count=jsonData;
+					
 					}
-				});
-			}
+				},false);
+				setTimeout(function() {
+					if(message_count == 0 && notice_count ==0) {
+					$('#message_state_div').removeClass("message-dian1");
+				} else {
+					$('#message_state_div').addClass("message-dian1");
+				}
+							
+						}, 200);
+				
+				
+		}
 			function initView() {
 				if(employee != null) {
 					if(employee.name == null || employee.name == "") {

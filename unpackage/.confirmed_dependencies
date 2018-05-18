@@ -110,7 +110,9 @@
       "examples/update_password.html",
       "examples/dataCard.html",
       "examples/web_index.html",
-      "examples/maps.html"
+      "examples/maps.html",
+      "examples/message_new.html",
+      "examples/new_web_message.html"
     ]
   },
   "examples/web_order_detail.html": {
@@ -219,7 +221,9 @@
       "examples/web_guoanxialist.html",
       "examples/web_information.html",
       "examples/web_user.html",
-      "examples/web_shopkeeper_new.html"
+      "examples/web_shopkeeper_new.html",
+      "examples/new_web_message.html",
+      "examples/work_list.html"
     ]
   },
   "examples/my.html": {
@@ -654,7 +658,8 @@
     ],
     "refer": [
       "examples/web_new_main.html",
-      "examples/web_message.html"
+      "examples/web_message.html",
+      "examples/new_web_message.html"
     ]
   },
   "examples/other_web_user.html": {
@@ -1503,9 +1508,20 @@
       "examples/barcode_scan.html",
       "examples/scan_login.html",
       "examples/web_shopkeeper_new.html",
-      "examples/pc_login.html"
+      "examples/pc_login.html",
+      "examples/new_web_message.html",
+      "examples/index.html",
+      "examples/pullrefresh_with_tab.html",
+      "examples/work_list.html"
     ],
-    "resources": []
+    "resources": [
+      "js/custom_common.js",
+      "js/mui.zoom.js",
+      "js/common.js",
+      "js/mui.min.js",
+      "js/previewimage.js",
+      "js/jQuery-2.2.0.min.js"
+    ]
   },
   "examples/city_main.html": {
     "refer": [
@@ -1547,7 +1563,8 @@
       "examples/cs_my.html",
       "examples/update_password.html",
       "examples/city_my.html",
-      "examples/new_city_my.html"
+      "examples/new_city_my.html",
+      "examples/new_web_message.html"
     ],
     "resources": []
   },
@@ -1564,6 +1581,51 @@
       "examples/web_city_ej.html",
       "examples/web_message.html",
       "login.html"
+    ]
+  },
+  "examples/message_new.html": {
+    "refer": [
+      "examples/maps.html",
+      "examples/web_message.html",
+      "examples/message_notice.html"
+    ]
+  },
+  "examples/new_web_message.html": {
+    "refer": [
+      "examples/maps.html",
+      "examples/new_city_my.html",
+      "examples/web_index.html",
+      "examples/message_notice.html",
+      "login.html",
+      "examples/dataCard.html",
+      "examples/tabbar.html",
+      "examples/notice_details.html",
+      "examples/work_list.html",
+      "examples/message_monomer_portrait.html"
+    ],
+    "resources": [
+      "js/custom_common.js",
+      "js/mui.pullToRefresh.js",
+      "js/app.min.js",
+      "js/fastclick.js",
+      "js/mui.zoom.js",
+      "js/mui.min.js",
+      "js/mui.pullToRefresh.material.js",
+      "js/raphael-min.js",
+      "js/bootstrap.min.js",
+      "js/previewimage.js",
+      "js/date_util.js",
+      "js/jQuery-2.2.0.min.js"
+    ]
+  },
+  "examples/work_list.html": {
+    "refer": [
+      "examples/tabbar.html",
+      "examples/new_web_message.html",
+      "examples/maps.html",
+      "login.html",
+      "examples/work_details.html",
+      "examples/new_city_my.html"
     ]
   }
 }

@@ -7,7 +7,7 @@
 	"id": "H546CAEF8",/*应用的标识，创建应用时自动生成，勿手动修改*/
 	"name": "国安数据",/*应用名称，程序桌面图标名称*/
 	"version": {
-		"name": "B2.1.5",/*应用版本名称*/
+		"name": "V2.2.0",/*应用版本名称*/
 		"code": "83"
 	},
 	"description": "",/*应用描述信息*/
@@ -431,7 +431,9 @@
 					"examples/web_guoanxialist.html",
 					"examples/web_information.html",
 					"examples/web_user.html",
-					"examples/web_shopkeeper_new.html"
+					"examples/web_shopkeeper_new.html",
+					"examples/new_web_message.html",
+					"examples/work_list.html"
 				],
 				"priority": 0
 			},
@@ -955,7 +957,8 @@
 					"examples/select_house.html",
 					"examples/user_information.html",
 					"examples/web_new_main.html",
-					"examples/web_message.html"
+					"examples/web_message.html",
+					"examples/new_web_message.html"
 				],
 				"priority": 0
 			},
@@ -1547,7 +1550,9 @@
 					"examples/update_password.html",
 					"examples/dataCard.html",
 					"examples/web_index.html",
-					"examples/maps.html"
+					"examples/maps.html",
+					"examples/message_new.html",
+					"examples/new_web_message.html"
 				],
 				"priority": 0
 			},
@@ -2165,7 +2170,14 @@
 				"priority": 0
 			},
 			"examples/maps.html": {
-				"resources": [],
+				"resources": [
+					"js/custom_common.js",
+					"js/mui.zoom.js",
+					"js/common.js",
+					"js/mui.min.js",
+					"js/previewimage.js",
+					"js/jQuery-2.2.0.min.js"
+				],
 				"refer": [
 					"examples/tabbar.html",
 					"examples/web_message.html",
@@ -2181,7 +2193,11 @@
 					"examples/barcode_scan.html",
 					"examples/scan_login.html",
 					"examples/web_shopkeeper_new.html",
-					"examples/pc_login.html"
+					"examples/pc_login.html",
+					"examples/new_web_message.html",
+					"examples/index.html",
+					"examples/pullrefresh_with_tab.html",
+					"examples/work_list.html"
 				],
 				"priority": 0
 			},
@@ -2229,7 +2245,8 @@
 					"examples/cs_my.html",
 					"examples/update_password.html",
 					"examples/city_my.html",
-					"examples/new_city_my.html"
+					"examples/new_city_my.html",
+					"examples/new_web_message.html"
 				],
 				"priority": 0
 			},
@@ -2249,6 +2266,56 @@
 					"examples/web_city_ej.html",
 					"examples/web_message.html",
 					"login.html"
+				],
+				"priority": 0
+			},
+			"examples/message_new.html": {
+				"resources": [],
+				"refer": [
+					"examples/maps.html",
+					"examples/web_message.html",
+					"examples/message_notice.html"
+				],
+				"priority": 0
+			},
+			"examples/new_web_message.html": {
+				"resources": [
+					"js/custom_common.js",
+					"js/mui.pullToRefresh.js",
+					"js/app.min.js",
+					"js/fastclick.js",
+					"js/mui.zoom.js",
+					"js/mui.min.js",
+					"js/mui.pullToRefresh.material.js",
+					"js/raphael-min.js",
+					"js/bootstrap.min.js",
+					"js/previewimage.js",
+					"js/date_util.js",
+					"js/jQuery-2.2.0.min.js"
+				],
+				"refer": [
+					"examples/maps.html",
+					"examples/new_city_my.html",
+					"examples/web_index.html",
+					"examples/message_notice.html",
+					"login.html",
+					"examples/dataCard.html",
+					"examples/tabbar.html",
+					"examples/notice_details.html",
+					"examples/work_list.html",
+					"examples/message_monomer_portrait.html"
+				],
+				"priority": 0
+			},
+			"examples/work_list.html": {
+				"resources": [],
+				"refer": [
+					"examples/tabbar.html",
+					"examples/new_web_message.html",
+					"examples/maps.html",
+					"login.html",
+					"examples/work_details.html",
+					"examples/new_city_my.html"
 				],
 				"priority": 0
 			}

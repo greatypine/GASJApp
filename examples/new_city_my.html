@@ -229,6 +229,7 @@
 					$("#employee_zw").text(employee.zw+employee.employeeId);
 
 				}
+				message_isread();
 				if(employee_pic != null) {
 					if(employee_pic.pngUrl != null && employee_pic.pngUrl != "" && employee_pic.pngUrl != "https://imgcdn.guoanshequ.com/") {
 						$("#head_img").attr("src", decodeURI(employee_pic.pngUrl));
@@ -261,6 +262,36 @@
 					});
 				}, 0);
 			};
+			//查看消息列表是否有未读信息，如有未读信息消息显示红点
+		function message_isread() {
+			var message = {
+				receiveId: employee.employeeId
+			};
+			var message_count=0;
+			var notice_count=0;
+			doManager('MessageNewManager', 'getUnReadMessageAmount', message, function(data) {
+				if(data.result == true) {
+					var jsonData = JSON.parse(data.data);
+					message_count=jsonData;
+					
+				}
+			},false);
+			
+			doManager('NoticeReciverManager', 'getUnReadNotice', employee.employeeId, function(data) {
+					if(data.result == true) {
+						var jsonData = JSON.parse(data.data);
+						notice_count=jsonData;
+					
+					}
+				},false);
+				if(message_count == 0 && notice_count ==0) {
+					$('#message_state_div').removeClass("message-dian1");
+				} else {
+					$('#message_state_div').addClass("message-dian1");
+				}
+				
+		}
+			
 	
 		</script>
 

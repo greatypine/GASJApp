@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>公告详情页面</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<!--标准mui.css-->
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="../css/common.css" />
+		<link rel="stylesheet" type="text/css" href="../css/style.css" />
+		<link rel="stylesheet" type="text/css" href="../css/work_record_result.css" />
+		<style>
+	
+		</style>
+
+	</head>
+
+	<body style="height: auto;">
+		
+		<header class="mui-bar mui-bar-nav titleheader">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">公告</h1>
+		</header>
+		
+		<label class='work_context_title' id='work_context_title'></label>
+		<div style="font-size: 16px;padding-top: 20px;margin: 0rem 0.3rem;">标题:&nbsp;&nbsp;&nbsp;&nbsp;<span id="notice_title"></span></div>
+		<div style="width: 100%;height: auto;padding-left: 0.3rem;">
+			<div style="font-size: 16px;padding-top: 20px;width: 13%;float: left;">内容:</div>
+		<div id="work_context" style="font-size: 16px;padding-left: 54px;padding-top: 20px;padding-right:10px;word-break: break-all;">
+			
+		</div>
+			
+		</div>
+		
+	
+		
+		
+
+	</body>
+	<script type="text/javascript" src="../js/mui.min.js"></script>
+	<script type="text/javascript" src="../js/jquery-2.2.2.min.js"></script>
+	<script type="text/javascript" src="../js/custom_jquery_based.js"></script>
+	<script type="text/javascript" src="../js/custom_common.js"></script>
+	<script type="text/javascript" src="../js/date_util.js"></script>
+	<script type="text/javascript" src="../js/mui.picker.js"></script>
+	<script type="text/javascript" src="../js/mui.poppicker.js"></script>
+	<script type="text/javascript" src="../js/dict.js"></script>
+	<script type="text/javascript" type="text/javascript">
+		mui.init({
+		    beforeback: function() {
+		　　　　 //获得父页面的webview
+		        var list = plus.webview.currentWebview().opener();
+		　　　　 //触发父页面的自定义事件(refresh),从而进行刷新
+		        mui.fire(list, 'refresh');
+		        //返回true,继续页面关闭逻辑
+		        return true;
+		    }
+		});
+	
+	    mui.plusReady(function() {
+			getdata();
+			mui.back = function() {
+			   closeMenu();
+			}
+		});
+		
+	    function getdata(){
+	    	var self = plus.webview.currentWebview();
+			notice_content=self.notice_content;
+			notice_title=self.notice_title;
+			if(notice_title != null || notice_title != '') {
+				$('#notice_title').html(notice_title);
+			}
+			if(notice_content!=null||notice_content!=""){
+				$('#work_context').html(notice_content);
+//				mui('#work_context')[0].value = notice_content;
+			}
+		
+		}
+	    
+		function closeMenu(){
+			
+			var _current = plus.webview.currentWebview();
+			var main = _current.opener();
+			mui.fire(main,"setNoticeCount",{notice_count:{
+				notice_count:'notice_count'
+				
+			}});
+			_current.close();
+		}
+	  
+		
+	</script>
+
+</html>

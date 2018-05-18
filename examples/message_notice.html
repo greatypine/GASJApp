@@ -53,6 +53,9 @@
 	
 	    mui.plusReady(function() {
 			getdata();
+			mui.back = function() {
+			   closeMenu();
+			}
 		});
 		
 	    function getdata(){
@@ -69,6 +72,16 @@
 				mui('#work_context')[0].value = message_content;
 			}
 		
+		}
+	    function closeMenu(){
+			
+			var _current = plus.webview.currentWebview();
+			var main = _current.opener();
+			mui.fire(main,"setMessageCount",{message_count:{
+				message_count:'message_count'
+				
+			}});
+			_current.close();
 		}
 	  
 		

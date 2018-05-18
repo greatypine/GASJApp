@@ -1,0 +1,1318 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>消息列表页面</title>
+		<!-- Tell the browser to be responsive to screen width -->
+		<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+		<!-- Bootstrap 3.3.6 -->
+		<link rel="stylesheet" href="../css/bootstrap.min.css">
+		<!-- Font Awesome -->
+		<link rel="stylesheet" href="../css/font-awesome.min.css">
+		<!-- Ionicons -->
+		<link rel="stylesheet" href="../css/ionicons.min.css">
+		<!-- Theme style -->
+		<link rel="stylesheet" href="../css/AdminLTE.min.css">
+		<!-- AdminLTE Skins. Choose a skin from the css/skins
+       folder instead of downloading all of them to reduce the load. -->
+		<link rel="stylesheet" href="../css/_all-skins.min.css">
+		<link rel="stylesheet" type="text/css" href="../css/message.css" />
+		<link rel="stylesheet" href="../css/img_preview.css">
+		<link rel="stylesheet" href="../css/newmui.message.css">
+		<!--<link rel="stylesheet" href="../css/mui.min.new.css">-->
+
+		<style>
+			.hang{position: relative;}
+			.time{position: absolute; top: 10px; right: 0;}
+			html,
+			body {
+				height: 100%;
+				background-size: cover;
+				min-height: 100%;
+			}
+			
+			.select {
+				height: 3rem;
+				width: 50%;
+				margin-left: 20px;
+				background: #000; 
+			}
+			
+			.navbar-nav>.user-menu>.dropdown-menu>li.user-header>p {
+				line-height: 22px;
+			}
+			
+			header {
+				position: fixed!important;
+				width: 100%;
+			}
+			
+			/*.mui-scroll-wrapper {
+				padding-top: 15px;
+			}*/
+			
+			ul {
+				margin-top: 70px;
+				margin-bottom: 60px;
+				font-size: 16px;
+			}
+			ul a {
+				display: block;
+				overflow: hidden;
+				/*margin: 0 0 20px 10px;*/
+				border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+				/*padding-bottom: 10px;*/
+			}
+			
+			ul a:nth-last-child(1) {
+				border: none;
+			}
+			
+			ul .col-xs-2 div {
+				width: 48px;
+				height: 48px;
+				line-height: 48px;
+				border-radius: 8px;
+				font-size: 30px;
+				text-align: center;
+				color: #fff;
+				margin: 0 auto;
+			}
+			
+			ul .col-xs-10 {
+				position: relative;
+			}
+			
+			ul h5 {
+				color: #333;
+				margin: 6px 0;
+				font-size: 16px;
+				white-space:nowrap; text-overflow:ellipsis; -o-text-overflow:ellipsis; overflow:hidden;
+				margin-right: 32%;
+			}
+			
+			ul h5 span {
+				font-size: 14px;
+			}
+			
+			.baifang {
+				background-color: #d8505c;
+			}
+			
+			.yonghu {
+				background-color: #ffb220;
+			}
+			
+			.mima {
+				background-color: #76bd3d;
+			}
+			
+			.kaoqin {
+				background-color: #538ef1;
+			}
+			
+			.gonggao {
+				background-color: #ff7100;
+			}
+			
+			footer {
+				position: fixed;
+				bottom: 0;
+				left: 0;
+				width: 100%;
+				border-top: 1px solid #c3c3c3;
+				background-color: #fff;
+				text-align: center;
+				color: #666;
+				height: 50px;
+				padding-top: 2px;
+				z-index: 100;
+			}
+			
+			footer p {
+				font-size: 20px;
+				margin: 0 0 -3px 0;
+			}
+			
+			footer a,
+			footer a:hover,
+			footer a:active,
+			footer a:visited {
+				color: #666;
+			}
+			
+			.mark-green {
+				color: #169a80!important;
+			}
+			
+			.clean-all {
+				position: absolute;
+				right: 20px;
+				top: 30px;
+				display: inline-block;
+				color: #fff;
+				font-size: 16px;
+				
+				
+			}
+			a:link { 
+			color:#fff; 
+			text-decoration:none; 
+			} 
+			a:visited { 
+			color:#fff; 
+			text-decoration:none; 
+			} 
+			a:hover { 
+			color:#fff; 
+			text-decoration:none; 
+			} 
+			a:active { 
+			color:#fff; 
+			text-decoration:none; 
+			} 
+						
+			.mui-bar~.mui-content .mui-fullscreen {
+				top: 44px;
+				height: auto;
+			}
+			
+			.mui-pull-top-tips {
+				position: absolute;
+				top: -20px;
+				left: 50%;
+				margin-left: -25px;
+				width: 40px;
+				height: 40px;
+				border-radius: 100%;
+				z-index: 1;
+			}
+			
+			.mui-bar~.mui-pull-top-tips {
+				top: 24px;
+			}
+			
+			.mui-pull-top-wrapper {
+				width: 42px;
+				height: 42px;
+				display: block;
+				text-align: center;
+				background-color: #efeff4;
+				border: 1px solid #ddd;
+				border-radius: 25px;
+				background-clip: padding-box;
+				box-shadow: 0 4px 10px #bbb;
+				overflow: hidden;
+			}
+			
+			.mui-pull-top-tips.mui-transitioning {
+				-webkit-transition-duration: 200ms;
+				transition-duration: 200ms;
+			}
+			
+			.mui-pull-top-tips .mui-pull-loading {
+				/*-webkit-backface-visibility: hidden;
+				-webkit-transition-duration: 400ms;
+				transition-duration: 400ms;*/
+				margin: 0;
+			}
+			
+			.mui-pull-top-wrapper .mui-icon,
+			.mui-pull-top-wrapper .mui-spinner {
+				margin-top: 7px;
+			}
+			
+			.mui-pull-top-wrapper .mui-icon.mui-reverse {
+				/*-webkit-transform: rotate(180deg) translateZ(0);*/
+			}
+			
+			.mui-pull-bottom-tips {
+				text-align: center;
+				background-color: #efeff4;
+				font-size: 15px;
+				line-height: 40px;
+				color: #777;
+			}
+			
+			.mui-pull-top-canvas {
+				overflow: hidden;
+				background-color: #fafafa;
+				border-radius: 40px;
+				box-shadow: 0 4px 10px #bbb;
+				width: 40px;
+				height: 40px;
+				margin: 0 auto;
+			}
+			
+			.mui-pull-top-canvas canvas {
+				width: 40px;
+			}
+			
+			.mui-slider-indicator.mui-segmented-control {
+				background-color: #fff;
+			}
+			.mui-bar~.mui-content .mui-fullscreen {
+top: 44px;
+height: auto;
+}
+.mui-slider-progress-bar {
+position: fixed;
+background-color: #007aff;
+}
+.count_css{
+	position: absolute;background-color: #FF0000; font-size: 10px; border-radius: 50%; line-height: 18px; width: 16px; height: 16px; color: #fff; left: 50%; margin-left: 10px;
+	
+}
+.message_css{
+	position: absolute;background-color: #FF0000; font-size: 10px; border-radius: 50%; line-height: 18px; width: 16px; height: 16px; color: #fff; left: 50%; margin-left: 10px;
+	
+}
+		</style>
+	</head>
+
+	<body class="hold-transition skin-blue sidebar-mini">
+		<!-- Site wrapper -->
+		<!--主页部分-->
+		<div class=" mui-off-canvas-wrap mui-slide-in" id="offCanvasWrapper">
+
+			<div class="mui-inner-wrap wrapper">
+				<header class="main-header">
+					<!-- Logo -->
+					<nav class="navbar navbar-static-top text-center">
+						<a href="#offCanvasSide" class="sidebar-toggle fa fa-navicon mui-icon-bars"></a>
+						<span> 消息中心</span>
+						<a href="#" onclick="clearMessage()" class="clean-all" style="display: none;" id="clear_a">清空</a>
+
+					</nav>
+
+
+				</header>
+
+				<div id="slider" class="mui-slider mui-fullscreen" style="padding-top: 66px;margin-top: 0;">
+					<div id="sliderSegmentedControl" class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted" style="box-shadow: 0px 1px 5px rgba(0,0,0,0.2);">
+						<div class="mui-scroll">
+							<a class="mui-control-item mui-active" href="#item1mobile" style="width: 50%; position: relative; border-right: 1px solid rgba(0,0,0,0.05);" id="notice_a">公告<span  class="count_css" id="notice_count" style="display: none;"></span>
+							</a>
+							<a class="mui-control-item" href="#item2mobile"style="width: 50%; position: relative; border-right: 1px solid rgba(0,0,0,0.05);" id="message_a">消息<span  class="message_css" id="message_count" style="display: none;"></span>
+								
+							</a>
+						</div>
+						<div id="sliderProgressBar" class="mui-slider-progress-bar mui-col-xs-5"></div>
+					</div>
+					<div class="mui-slider-group">
+						<div id="item1mobile" class="item1mobile mui-slider-item mui-control-content mui-active">
+							<div id="scroll1" class="mui-scroll-wrapper">
+								<div class="mui-scroll aaa" style="padding-bottom: 90px;">
+									<ul class="mui-table-view" id="notice_list">
+										
+									</ul>
+								</div>
+							</div>
+						</div>
+						<div id="item2mobile" class="item2mobile mui-slider-item mui-control-content">
+							<div class="mui-scroll-wrapper">
+								<div class="mui-scroll bbb" style="padding-bottom: 90px;">
+									<ul class="mui-table-view" id="message_list">
+										
+									</ul>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+
+				<div class="mui-off-canvas-backdrop"></div>
+				<footer style="display: none;">
+					<a class="col-xs-4" id="web_city_ej" path="web_city_ej.html" onclick="jump(this)">
+						<p><i class="fa fa-bar-chart-o"></i></p>动态</a>
+
+					<a class="col-xs-3" id="maps" path="maps.html" onclick="jump(this)">
+						<p><i class="fa fa-globe"></i></p>地图</a>
+					<a class="col-xs-3" id="areaState" onclick="selectherf()">
+						<p><i class="fa fa-user"></i></p>混片儿</a>
+					<a class="col-xs-3 mark-green" id="message" href="javascript:void(0)">
+						<p><i class="fa fa-envelope-o"></i></p>消息
+						<div id="message_state_div"></div>
+					</a>
+					<a class="col-xs-3" id="tabbar" path="tabbar.html" onclick="jump(this)">
+						<p><i class="fa fa-file-text-o"></i></p>录入</a>
+					<a class="col-xs-3" id="work" path="work_list.html" onclick="jump(this)">
+						<p><i class="fa  fa-calendar-check-o"></i></p>工单</a>
+					<a class="col-xs-4" id="new_city_my" path="new_city_my.html" onclick="jump(this)">
+						<p><i class="fa fa-user"></i></p>我</a>
+				</footer>
+			</div>
+			<!--侧滑部分-->
+			<aside id="offCanvasSide" class="main-sidebar mui-off-canvas-left">
+				<section id="offCanvasSideScroll" class="sidebar">
+					<!-- Sidebar user panel -->
+					<div class="user-panel">
+						<div class="text-center image">
+							<img src="" class="img-circle" data-preview-src="" data-preview-group="1">
+							<p style="margin-top: 10px;"><strong id="user_name"></strong></p>
+							<p><span id="user_zw"></span><span id="user_employeeid"></span></p>
+
+						</div>
+					</div>
+					<!-- sidebar menu: : style can be found in sidebar.less -->
+					<ul class="sidebar-menu" style="font-size: 14px;">
+						<div style="padding:0px 0px 0px 18px;">
+							<a>
+								<span>所属门店：</span>
+								<span id="div_title"></span>
+								<select class="select" id="select" style="margin-left: 0px;">
+								</select>
+							</a>
+						</div>
+						<div id="store_num" style="padding:18px 0px 0px 18px;">
+							<a><span>门店编号：</span><span id="storeid" style="margin-left: 4px;"></span>
+							</a>
+						</div>
+						<li class="treeview" style="display: none; padding-top: 10px;" id="store_datacard">
+							<a onclick="toStoreDataCard()">
+								<span>门店数据卡</span> <i class="fa  fa-angle-right pull-right"></i>
+							</a>
+						</li>
+						<li class="treeview" style="display: none;" id="shopkeeper_information">
+							<a onclick="toInfromation()">
+								<span>个人信息</span> <i class="fa  fa-angle-right pull-right"></i>
+							</a>
+						</li>
+						<li class="treeview" style="display: none;" id="shopuser_information">
+							<a onclick="toGuoAnXiaList()">
+								<span>门店人员</span> <i class="fa  fa-angle-right pull-right"></i>
+							</a>
+						</li>
+						<li class="treeview" style="display: none; padding-top: 10px;" id="datacard">
+							<a onclick="toCard()">
+								<span>国安侠数据卡</span> <i class="fa  fa-angle-right pull-right"></i>
+							</a>
+						</li>
+						<li class="treeview" style="display: none;" id="my_area">
+							<a onclick="toUser()">
+								<span>我的片区</span> <i class="fa  fa-angle-right pull-right"></i>
+							</a>
+						</li>
+						<li class="treeview">
+							<a onclick="toUpdatePassword()">
+								<span>修改密码</span> <i class="fa  fa-angle-right pull-right"></i>
+							</a>
+						</li>
+
+						<li class="text-center" style="margin-top: 2rem;">
+							<a id="btnLogout">退出登录</a>
+						</li>
+
+					</ul>
+
+				</section>
+			</aside>
+
+		</div>
+		<!-- ./wrapper -->
+
+		<!-- jQuery 2.2.0 -->
+		<script src="../js/jQuery-2.2.0.min.js"></script>
+		<!-- Bootstrap 3.3.6 -->
+		<script src="../js/bootstrap.min.js"></script>
+		<!-- Morris.js charts -->
+		<script src="../js/raphael-min.js"></script>
+		<!--<script src="plugins/morris/morris.min.js"></script>-->
+		<!-- FastClick -->
+		<script src="../js/fastclick.js"></script>
+		<!-- AdminLTE App -->
+		<script src="../js/app.min.js"></script>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/mui.pullToRefresh.js"></script>
+		<script src="../js/mui.pullToRefresh.material.js"></script>
+		<!--<script src="../js/mui.min2.js" type="text/javascript" charset="utf-8"></script>-->
+	
+		<script src="https://pv.sohu.com/cityjson?ie=utf-8"></script>
+		<script type="text/javascript" src="../js/custom_common.js"></script>
+		<script src="../js/date_util.js"></script>
+		<script src="../js/previewimage.js"></script>
+		<script src="../js/mui.zoom.js"></script>
+		<script>
+			var employee = JSON.parse(localStorage.getItem('employee'));
+			var selectArea_list = JSON.parse(localStorage.getItem('selectArea_list'));
+			var employee_pic = JSON.parse(localStorage.getItem('employee_pic'));
+			var store = null;
+			var storelist = null;
+			var pageInfo = {
+				currentPage: 0,
+				recordsPerPage: 10,
+				totalRecords: 0,
+				tooManySearchReturn: false
+			};
+			var NoticepageInfo = {
+				currentPage: 0,
+				recordsPerPage: 10,
+				totalRecords: 0,
+				tooManySearchReturn: false
+			};
+			var messagetype=null;
+			var noticetype=null;
+			var suffix = ".html";
+			mui.previewImage();
+			window.addEventListener('setNoticeCount',function(event){
+			var notice_count = event.detail.notice_count;
+				if(notice_count != null) {
+					Notice_Count();
+				
+				}
+		    });
+		    window.addEventListener('setMessageCount',function(event){
+			var message_count = event.detail.message_count;
+				if(message_count != null) {
+					Message_Count();
+					initView(reverse);
+				
+				}
+		    });
+			mui.init();
+			(function($) {
+				var deceleration = mui.os.ios ? 0.003 : 0.0009;
+				$('.mui-scroll-wrapper').scroll({
+					bounce: false,
+					indicators: true, //是否显示滚动条
+					deceleration: deceleration
+				});
+
+				$.ready(function() {
+
+					//循环初始化所有下拉刷新，上拉加载。
+					$.each(document.querySelectorAll('.aaa'), function(index, pullRefreshEl) {
+						
+						$(pullRefreshEl).pullToRefresh({
+							
+							down: {
+								callback: function() {
+									var self = this;
+									noticetype=false;
+									self.endPullUpToRefresh();
+									self.refresh(true);
+									NoticepageInfo = {
+										currentPage: 0,
+										recordsPerPage: 10,
+										totalRecords: 0,
+										tooManySearchReturn: false
+									};
+									setTimeout(function() {
+										var ul = self.element.querySelector('#notice_list');
+										ul.insertBefore(createFragment(index,true), ul.firstChild);
+										self.endPullDownToRefresh();
+									}, 1000);
+								}
+							},
+							up: {
+								callback: function() {
+									var self = this;
+									setTimeout(function() {
+										var ul = self.element.querySelector('#notice_list');
+										ul.appendChild(createFragment(index));
+										self.endPullUpToRefresh(noticetype);
+										
+									}, 1000);
+									
+									
+								}
+							}
+						});
+					});
+					
+					$.each(document.querySelectorAll('.item2mobile .bbb'), function(index, pullRefreshEl) {
+						$(pullRefreshEl).pullToRefresh({
+							down: {
+								callback: function() {
+									var self = this;
+									messagetype=false;
+									self.endPullUpToRefresh();
+									self.refresh(true);
+									pageInfo = {
+										currentPage: 0,
+										recordsPerPage: 10,
+										totalRecords: 0,
+										tooManySearchReturn: false
+									};
+									setTimeout(function() {
+										var ul = self.element.querySelector('#message_list');
+										ul.insertBefore(createNewFragment(index,true), ul.firstChild);
+										self.endPullDownToRefresh();
+									}, 1000);
+								}
+							},
+							up: {
+								callback: function() {
+									var self = this;
+									setTimeout(function() {
+										var ul = self.element.querySelector('#message_list');
+										ul.appendChild(createNewFragment(index));
+										self.endPullUpToRefresh(messagetype);
+										
+									}, 1000);
+									
+									
+								}
+							}
+						});
+					});
+					var createFragment = function(index, reverse) {
+						var fragment = document.createDocumentFragment();
+							initNotice(reverse);
+							Notice_Count();
+						return fragment;
+					};
+					var createNewFragment = function(index, reverse) {
+						var fragment = document.createDocumentFragment();
+							initView(reverse);
+							 Message_Count();
+						return fragment;
+					};
+				});
+			})(mui);
+			mui.plusReady(function() {
+                 var reverse=false;
+				initView(reverse);
+				initNotice(reverse);
+                Notice_Count();
+                Message_Count(); 
+				var maps_webview = plus.webview.getWebviewById('maps_web');
+				if(maps_webview != null) {
+					maps_webview.close();
+				}
+				if(employee.usergroup != null) {
+					if(employee.usergroup.code == 'ZHGLY' || employee.usergroup.code == 'DZ' || employee.usergroup.code == 'GAX' || employee.usergroup.code == 'FDZJSZ') {
+						$("footer").css("display", "");
+						$("#web_city_ej").attr("style", "display:none;");
+						$("#my").attr("style", "display:none;");
+					} else if(employee.usergroup.code == 'CSMDGLZ') {
+						$("footer").css("display", "");
+						$("#tabbar").attr("style", "display:none;");
+						$("#work").attr("style", "display:none;");
+						$("#maps").attr("style", "display:none;");
+						$("#areaState").attr("style", "display:none;");
+						$("#message").attr("class", "col-xs-4 mark-green");
+					} else {
+						$("footer").css("display", "");
+						$("#tabbar").attr("style", "display:none;");
+						$("#work").attr("style", "display:none;");
+						$("#web_city_ej").attr("style", "display:none;");
+						$("#my").attr("style", "display:none;");
+						$("#maps").attr("class", "col-xs-4 ");
+						$("#areaState").attr("class", "col-xs-4");
+						$("#message").attr("class", "col-xs-4 mark-green");
+					}
+
+					if(employee.usergroup.code == 'GAX') {
+						$("#datacard").css("display", "");
+						$("#my_area").css("display", "");
+					} else if(employee.usergroup.code == 'DZ') {
+						$("#store_datacard").css("display", "");
+						$("#shopkeeper_information").css("display", "");
+						$("#shopuser_information").css("display", "");
+					}
+				}
+				setMy();
+				initStore();
+				var t_username = localStorage.getItem("employee_key");
+				mui('#btnLogout')[0].addEventListener('click', function(event) {
+					setTimeout(function() {
+						var webview = plus.webview.getWebviewById('login');
+						if(webview != null) {
+							webview.close();
+						}
+						localStorage.clear();
+						localStorage.setItem("employee_key", t_username);
+						mui.openWindow({
+							url: '../login.html',
+							id: 'login',
+							createNew: true,
+							show: {
+								aniShow: "slide-in-right"
+							},
+							waiting: {
+								autoShow: false
+							}
+						});
+					}, 50);
+				});
+				mui('#notice_a')[0].addEventListener('tap', function(event) {
+						$("#clear_a").css("display", "none");
+				});
+				mui('#message_a')[0].addEventListener('tap', function(event) {
+						$("#clear_a").css("display", "");
+				});
+				
+
+			});
+			
+
+			//获取所有消息列表
+			function initView(reverse) {
+				message_isread();
+				var message = {
+					receiveId: employee.employeeId,
+					isRead: 2
+				};
+				pageInfo.currentPage = pageInfo.currentPage + 1;
+				doManager('MessageNewManager', 'queryMessageOfHistory', [message, pageInfo], function(data) {
+					if(data.result == true) {
+						var jsonData = JSON.parse(data.data);
+						var $feedlist = $("#message_list");
+						if(jsonData.data == null || jsonData.data.length < 10) {
+							messagetype=(jsonData.data.length < 10);
+						}else{
+							messagetype=false;
+						}
+						if(reverse){
+							$feedlist.empty();
+						}
+						$(jsonData.data).each(function(index, message) {
+							var t_html = "";
+							var d_html = "";
+							//用户画像
+							if(message.type == "customer_edit") {
+								t_html = '<div class="yonghu"><i class="fa fa-users"></i></div>';
+								//用户画像更多信息
+							} else if(message.type == "monomer") {
+								t_html = '<div class="yonghu"><i class="fa fa-users"></i></div>';
+								//密码修改
+							} else if(message.type == "update_password") {
+								t_html = '<div class="mima"><i class="fa fa-cog"></i></div>';
+								//公告、通知
+							} else if(message.type == "other_notice") {
+								t_html = '<div class="kaoqin"><i class="fa fa-bullhorn"></i></div>';
+								// 异常订单
+							} else if(message.type == "abnormal_order") {
+								t_html = '<div class="kaoqin"><i class="fa fa-bullhorn"></i></div>';
+								// 考勤
+							} else if(message.type == "work_record") {
+								t_html = '<div class="gonggao"><i class="fa fa-calendar-check-o"></i></div>';
+							} else {
+								t_html = '<div class="yonghu"><i class="fa fa-users"></i></div>';
+							}
+							if(message.isRead == '1') {
+								d_html = '<div></div>';
+							} else {
+								d_html = '<div class="message-dian2"></div>';
+							}
+							var html = '<li class="mui-table-view-cell item_div" style="margin-bottom:0px">' +
+								'<div class="mui-slider-right mui-disabled">' +
+								'<a class="mui-btn mui-btn-red" style="background-color: red;">删除</a>' +
+								'</div>' +
+								'<div class="message-div mui-slider-handle">' +
+								'<div class="col-xs-2 no-padding">' +
+								t_html +
+								'</div>' +
+								'<div class="col-xs-10 hang">' +
+								'<h5><b>' + message.title + '</b><span class="pull-right text-muted time" style="width: 30%;">' + getDateDiff(message.create_time) + '</span></h5>' +
+								'<p class="text-muted info-box-text">' + message.content + '</p>' +
+								d_html +
+								'</div></div>' +
+								'</li>';
+							$feedlist.append(html);
+							var $item_div = $feedlist.find('.item_div').last();
+							$item_div.find('.mui-slider-handle').bind('tap',function() {
+								message_state(message.id);
+								$(this).find('.message-dian2').remove();
+								//公告
+								if(message.jump_path != null || message.jump_path != "") {
+									if(message.type == "other_notice" || message.type == "abnormal_order") {
+										var webview = plus.webview.getWebviewById(message.jump_path);
+										if(webview != null) {
+											webview.close();
+										}
+										mui.openWindow({
+											url: message.jump_path + suffix,
+											id: message.jump_path,
+											createNew: true,
+											show: {
+												aniShow: 'slide-in-right'
+											},
+											waiting: {
+												autoShow: false
+											},
+											extras: {
+												message_content: message.content,
+												message_title: message.title,
+												message_id: message.id
+											}
+										});
+
+									} else {
+										var webview = plus.webview.getWebviewById(message.jump_path);
+										if(webview != null) {
+											webview.close();
+										}
+										mui.openWindow({
+											url: message.jump_path + suffix,
+											id: message.jump_path,
+											createNew: true,
+											show: {
+												aniShow: 'slide-in-right'
+											},
+											waiting: {
+												autoShow: false
+											},
+											extras: {
+												pk_id: message.pk_id,
+												message_id: message.id,
+												message_to: 'web_message'
+											}
+										});
+
+									}
+
+								}
+
+							});
+							$item_div.find('.mui-btn-red').bind('tap',function() {
+								var btnArray = ['否', '是'];
+								mui.confirm('确定要删除当前数据吗？', '提示', btnArray, function(e) {
+									if(e.index == 1) {
+										newDeleteMessage(message.id, $item_div);
+
+									}
+								});
+							});
+
+						});
+
+					} else {
+						mui.toast(data.message);
+						mui('#pullrefresh').pullRefresh().endPullup(true);
+					}
+				})
+			}
+
+			function selectherf() {
+				if(employee.usergroup != null) {
+					if(employee.usergroup.code == 'DZ') {
+						tojump("web_shopkeeper_new", "web_shopkeeper_new.html");
+					} else {
+						if(selectArea_list == null || selectArea_list == "" || selectArea_list.length == 0) {
+							mui.toast("暂无划片区域");
+						} else {
+							tojump("web_index", "web_index.html");
+						}
+
+					}
+
+				}
+
+			}
+			//JavaScript函数：
+			var minute = 1000 * 60;
+			var hour = minute * 60;
+			var day = hour * 24;
+			var halfamonth = day * 15;
+			var month = day * 30;
+			//时间戳转换为发布时间  
+			function getDateDiff(dateTimeStamp) {
+				var now = new Date().getTime();
+				var diffValue = now - dateTimeStamp;
+				var monthC = diffValue / month;
+				var weekC = diffValue / (7 * day);
+				var dayC = diffValue / day;
+				var hourC = diffValue / hour;
+				var minC = diffValue / minute;
+				if(monthC >= 1) {
+					result = new Date(dateTimeStamp).Format('YYYY-MM-DD');
+				} else if(weekC >= 1) {
+					result = new Date(dateTimeStamp).Format('YYYY-MM-DD');
+				} else if(dayC >= 1) {
+					result = new Date(dateTimeStamp).Format('YYYY-MM-DD');
+				} else if(hourC >= 1) {
+					result = parseInt(hourC) + "个小时前";
+				} else if(minC >= 1) {
+					result = parseInt(minC) + "分钟前";
+				} else
+					result = "刚刚";
+				return result;
+			}
+
+			
+			//消息阅读状态更改
+			function message_state(message_id) {
+				var message = {
+					id: message_id,
+					isRead: 1
+				};
+				doManager('MessageNewManager', 'readMessage', message, function(data) {
+					if(data.result == true) {
+						var jsonData = JSON.parse(data.data);
+
+					}
+				});
+			}
+			//公告阅读状态更改
+			function notice_state(noticeNo) {
+				
+				doManager('NoticeReciverManager', 'updateNoticeReciverIsRead', [noticeNo,employee.employeeId], function(data) {
+					if(data.result == true) {
+						var jsonData = JSON.parse(data.data);
+
+					}
+				});
+			}
+			//删除消息
+			function newDeleteMessage(message_id, delate_div) {
+
+				if(message_id == null || message_id == '') {
+					return;
+				}
+				var message = {
+					id: message_id
+				};
+
+				doManager('MessageNewManager', 'delateMessage', message, function(data) {
+					setTimeout(function() {
+						if(data.result) {
+							var jsonData = JSON.parse(data.data);
+							delate_div.remove();
+							mui.toast('删除成功！');
+						} else {
+							mui.toast(data.message);
+						}
+					}, 300);
+				});
+
+			}
+			//清空所有消息
+			function clearMessage() {
+				var message = {
+					receiveId: employee.employeeId
+				}
+
+				var btnArray = ['否', '是'];
+				mui.confirm('确定要清空当前数据吗？', '系统提示', btnArray, function(e) {
+					if(e.index == 1) {
+						doManager('MessageNewManager', 'deleteAllMessage', message, function(data) {
+							if(data.result) {
+								var jsonData = JSON.parse(data.data);
+								mui.toast('删除成功');
+								$('#message_list').children().remove();
+								$('#message_state_div').removeClass("message-dian1");
+							} else {
+								mui.toast(data.message);
+							}
+						});
+					}
+				});
+
+			}
+
+			function setMy() {
+				if(employee != null) {
+					if(employee.name == null || employee.name == "") {
+						$("#user_name").html("无数据");
+					} else {
+						$("#user_name").html(employee.name);
+					}
+					if(employee.zw == null || employee.zw == "") {
+						$("#user_zw").text("无数据");
+					} else {
+						$("#user_zw").text(employee.zw);
+					}
+
+					if(employee.employeeId == null || employee.employeeId == "") {
+						$("#user_employeeid").text("无数据");
+					} else {
+						$("#user_employeeid").text(employee.employeeId);
+					}
+				}
+				if(employee_pic != null) {
+					if(employee_pic.pngUrl != null && employee_pic.pngUrl != "" && employee_pic.pngUrl != "https://imgcdn.guoanshequ.com/") {
+						$(".img-circle").attr("src", decodeURI(employee_pic.pngUrl));
+					} else {
+						$(".img-circle").attr("src", "../images/my_card_head.png");
+					}
+
+				} else {
+					$(".img-circle").attr("src", "../images/my_card_head.png");
+				}
+			}
+			//跳转到修改密码
+			function toUpdatePassword() {
+				setTimeout(function() {
+					var webview = plus.webview.getWebviewById('update_password');
+					if(webview != null) {
+						webview.close();
+					}
+					mui.openWindow({
+						url: 'update_password.html',
+						id: 'update_password',
+						createNew: true,
+						show: {
+							aniShow: 'slide-in-right'
+						},
+						waiting: {
+							autoShow: false
+						}
+					});
+				}, 0);
+			};
+
+			function initStore() {
+				store = JSON.parse(localStorage.getItem("store"));
+				storelist = JSON.parse(localStorage.getItem("storelist"));
+				getStorelist();
+				if(store != null) {
+					if(storelist.length <= 1) {
+						mui("#div_title")[0].innerHTML = store.name;
+						mui("#storeid")[0].innerHTML = store.storeno;
+						$("#select").hide();
+					} else {
+						$("#select").show();
+						$("div_title").hide();
+						mui("#storeid")[0].innerHTML = store.storeno;
+					}
+
+				} else {
+					getStore($('.select option:selected').val());
+				}
+
+			}
+
+			function getStorelist() {
+				if(storelist != null || storelist != "") {
+
+					$(storelist).each(function(index, element) {
+						if(index == 0) {
+							$('#select').append('<option selected="selected" value=' + element.store_id + '>' + element.name + '</option>');
+						} else {
+							$('#select').append('<option value=' + element.store_id + '>' + element.name + '</option>');
+						}
+					});
+					if(store != null) {
+						$('#select').val(store.store_id);
+					}
+
+				} else {
+					mui("#div_title")[0].innerHTML = "国安社区";
+					$('#select').hide();
+					$("#store_num").hide();
+				}
+
+			}
+			//获取门店信息
+			function getStore(store_id) {
+				if(store_id == null || store_id == "" || store_id == "null") {
+					mui("#div_title")[0].innerHTML = "国安社区";
+					$("select").hide();
+					$("#store_num").hide();
+					return;
+				}
+				doManager("StoreManager", "findStore", store_id, function(data) {
+					if(data.result == true) {
+						var jsonStore = JSON.parse(data.data);
+						localStorage.setItem("store", JSON.stringify(jsonStore));
+						mui("#div_title")[0].innerHTML = jsonStore.name;
+						mui("#storeid")[0].innerHTML = store.storeno;
+						if(storelist.length <= 1) {
+							$("#select").hide();
+						} else {
+							$("#select").show();
+							$("#div_title").hide();
+						}
+
+					} else {
+						$("#select").hide();
+						$("#store_num").hide();
+						mui("#div_title")[0].innerHTML = "国安社区";
+
+					}
+				});
+
+			}
+			$(document).ready(function() {
+				$('#select').change(function() {
+					var a = $('#select option:selected').text();
+					$('#select span').text(a);
+					getStore($('#select option:selected').val());
+					if(mui.os.ios) {
+						setTimeout(function() {
+							window.location.reload();
+						}, 200);
+					} else {
+						window.location.reload();
+					};
+				});
+			});
+			//跳转本月数据动态
+			function toCard() {
+				setTimeout(function() {
+					var webview = plus.webview.getWebviewById('dataCard');
+					if(webview != null) {
+						webview.close();
+					}
+					mui.openWindow({
+						url: 'dataCard.html',
+						id: 'dataCard',
+						createNew: true,
+						show: {
+							aniShow: 'slide-in-right'
+						},
+						waiting: {
+							autoShow: false
+						}
+					});
+				}, 0);
+			};
+			//跳转到片区信息
+			function toUser() {
+				if(selectArea_list == null || selectArea_list == "" || selectArea_list.length == 0) {
+					mui.toast("暂无划片区域");
+				} else {
+					setTimeout(function() {
+						var webview = plus.webview.getWebviewById('web_user');
+						if(webview != null) {
+							webview.close();
+						}
+						mui.openWindow({
+							url: 'web_user.html',
+							id: 'web_user',
+							createNew: true,
+							show: {
+								aniShow: 'slide-in-right'
+							},
+							waiting: {
+								autoShow: false
+							}
+						});
+					}, 100);
+				}
+
+			};
+			//跳转到门店数据卡
+			function toStoreDataCard() {
+				setTimeout(function() {
+					var webview = plus.webview.getWebviewById('storeDataCard');
+					if(webview != null) {
+						webview.close();
+					}
+					mui.openWindow({
+						url: 'storeDataCard.html',
+						id: 'storeDataCard',
+						createNew: true,
+						show: {
+							aniShow: 'slide-in-right'
+						},
+						waiting: {
+							autoShow: false
+						}
+					});
+				}, 0);
+			};
+			//跳转到店长个人信息
+			function toInfromation() {
+				setTimeout(function() {
+					var webview = plus.webview.getWebviewById('web_information');
+					if(webview != null) {
+						webview.close();
+					}
+					mui.openWindow({
+						url: 'web_information.html',
+						id: 'web_information',
+						createNew: true,
+						show: {
+							aniShow: 'slide-in-right'
+						},
+						waiting: {
+							autoShow: false
+						}
+					});
+				}, 0);
+			};
+			//跳转到国安侠列表
+			function toGuoAnXiaList() {
+				setTimeout(function() {
+					var webview = plus.webview.getWebviewById('web_guoanxialist');
+					if(webview != null) {
+						webview.close();
+					}
+					mui.openWindow({
+						url: 'web_guoanxialist.html',
+						id: 'web_guoanxialist',
+						createNew: true,
+						show: {
+							aniShow: 'slide-in-right'
+						},
+						waiting: {
+							autoShow: false
+						}
+					});
+				}, 0);
+			};
+
+			function initNotice(reverse) {
+				message_isread();
+				var NoticeReciver = {
+					employeeNo: employee.employeeId
+				};
+				NoticepageInfo.currentPage = NoticepageInfo.currentPage + 1;
+				doManager('NoticeReciverManager', 'selectNoticeReciver',[NoticeReciver,NoticepageInfo], function(data) {
+					if(data.result == true) {
+						var jsonData = JSON.parse(data.data);
+						var $feedlist = $("#notice_list");
+						if(jsonData.data == null || jsonData.data.length < 10) {
+							noticetype=(jsonData.data.length < 10);
+						}else{
+							noticetype=false;
+						}
+						if(reverse){
+							$feedlist.empty();
+						}
+						$(jsonData.data).each(function(index, notice) {
+							var t_html = "";
+							var d_html = "";
+							//业务公告
+							if(notice.type == "1") {
+								t_html = '<div class="gonggao"><i class="fa fa-bullhorn"></i></div>';
+								//事务公告
+							} else if(notice.type == "2") {
+								t_html = '<div class="gonggao"><i class="fa fa-bullhorn"></i></div>';
+							}
+							if(notice.isRead == '1') {
+								d_html = '<div></div>';
+							} else {
+								d_html = '<div class="message-dian2"></div>';
+							}
+							var html = '<li class="mui-table-view-cell item_div" style="margin-bottom:0px">' +
+//								'<div class="mui-slider-right mui-disabled">' +
+//								//								         '<a class="mui-btn mui-btn-green">确定</a>'+
+//								'<a class="mui-btn mui-btn-red" style="background-color: red;">删除</a>' +
+//								'</div>' +
+								'<div class="message-div mui-slider-handle">' +
+								'<div class="col-xs-2 no-padding">' +
+								t_html +
+								'</div>' +
+								'<div class="col-xs-10 hang">' +
+								'<h5><b>' + notice.title + '</b><span class="pull-right text-muted time" style="width: 30%;">' + getDateDiff(notice.create_time) + '</span></h5>' +
+								'<p class="text-muted info-box-text">' + notice.content + '</p>' +
+								d_html +
+								'</div></div>' +
+								'</li>';
+
+							$feedlist.append(html);
+							var $item_div = $feedlist.find('.item_div').last();
+							$item_div.find('.mui-slider-handle').bind('tap',function() {
+								notice_state(notice.noticeNo);
+								$(this).find('.message-dian2').remove();
+								//公告
+										var webview = plus.webview.getWebviewById('notice_details');
+										if(webview != null) {
+											webview.close();
+										}
+										mui.openWindow({
+											url: 'notice_details.html',
+											id: 'notice_details',
+											createNew: true,
+											show: {
+												aniShow: 'slide-in-right'
+											},
+											waiting: {
+												autoShow: false
+											},
+											extras: {
+												notice_content: notice.content,
+												notice_title: notice.title
+											}
+										});
+
+
+							});
+							$item_div.find('.mui-btn-red').bind('tap',function() {
+								var btnArray = ['否', '是'];
+								mui.confirm('确定要删除当前数据吗？', '提示', btnArray, function(e) {
+									if(e.index == 1) {
+										newDeleteMessage(message.id, $item_div);
+
+									}
+								});
+							});
+
+						});
+
+					} else {
+						mui.toast(data.message);
+					}
+				})
+			}
+			function Notice_Count() {
+
+				doManager('NoticeReciverManager', 'getUnReadNotice', employee.employeeId, function(data) {
+					if(data.result == true) {
+						var jsonData = JSON.parse(data.data);
+						if(jsonData==0||jsonData==''){
+							$("#notice_count").css("display", "none");
+						}else{
+							$("#notice_count").css("display","");
+							$('#notice_count').html(jsonData);
+						}
+                        
+					}
+				});
+
+			}
+			function Message_Count() {
+
+				var message = {
+					receiveId: employee.employeeId
+				};
+				doManager('MessageNewManager', 'getUnReadMessageAmount', message, function(data) {
+					if(data.result == true) {
+						var jsonData = JSON.parse(data.data);
+						if(jsonData == 0 || jsonData == null) {
+							$("#message_count").css("display", "none");
+						} else {
+							$("#message_count").css("display","");
+							$('#message_count').html(jsonData);
+						}
+
+					}
+				});
+
+			}
+			//查看消息列表是否有未读信息，如有未读信息消息显示红点
+		function message_isread() {
+			var message = {
+				receiveId: employee.employeeId
+			};
+			var message_count=0;
+			var notice_count=0;
+			doManager('MessageNewManager', 'getUnReadMessageAmount', message, function(data) {
+				if(data.result == true) {
+					var jsonData = JSON.parse(data.data);
+					message_count=jsonData;
+					
+				}
+			},false);
+			
+			doManager('NoticeReciverManager', 'getUnReadNotice', employee.employeeId, function(data) {
+					if(data.result == true) {
+						var jsonData = JSON.parse(data.data);
+						notice_count=jsonData;
+					
+					}
+				},false);
+				setTimeout(function() {
+					if(message_count == 0 && notice_count ==0) {
+					$('#message_state_div').removeClass("message-dian1");
+				} else {
+					$('#message_state_div').addClass("message-dian1");
+				}
+							
+						}, 200);
+				
+				
+		}
+			
+		</script>
+
+	</body>
+
+</html>

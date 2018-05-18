@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>工单详情</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<!--标准mui.css-->
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="../css/common.css" />
+		<link rel="stylesheet" type="text/css" href="../css/style.css" />
+		<link rel="stylesheet" type="text/css" href="../css/my.css" />
+		<link rel="stylesheet" type="text/css" href="../css/order_detail.css" />
+		<link rel="stylesheet" type="text/css" href="../css/mui.picker.min.css" />
+		<link href="../css/mui.picker.css" rel="stylesheet" />
+		<link href="../css/mui.poppicker.css" rel="stylesheet" />
+		<script type="text/javascript" src="../js/common.js"></script>
+		<style>
+			.userinfostyle {
+				height: 1.6rem;
+				width: 1.6rem;
+				border: 1px;
+				background: #ffab33;
+				border-radius: 50%;
+				margin: 0.2rem auto 0.2rem auto;
+			}
+			
+			.express img {
+				height: 1.5rem;
+				width: 1.5rem;
+				margin: 0.3rem 0 0.15rem 0;
+			}
+			
+			.mui-table-view {
+				line-height: 1rem;
+				font-size: 0.36rem;
+			}
+			
+			.mui-table-view a {
+				display: block;
+			}
+			
+			.hdata {
+				color: #e1673e;
+				font-size: 14px;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+			}
+			
+			.mui-preview-image.mui-fullscreen {
+				position: fixed;
+				z-index: 20;
+				background-color: #000;
+			}
+			
+			.mui-preview-header,
+			.mui-preview-footer {
+				position: absolute;
+				width: 100%;
+				left: 0;
+				z-index: 10;
+			}
+			
+			.mui-preview-header {
+				height: 44px;
+				top: 0;
+			}
+			
+			.mui-preview-footer {
+				height: 50px;
+				bottom: 0px;
+			}
+			
+			.mui-preview-header .mui-preview-indicator {
+				display: block;
+				line-height: 25px;
+				color: #fff;
+				text-align: center;
+				margin: 15px auto 4;
+				width: 70px;
+				background-color: rgba(0, 0, 0, 0.4);
+				border-radius: 12px;
+				font-size: 16px;
+			}
+			
+			.mui-preview-image {
+				display: none;
+				-webkit-animation-duration: 0.5s;
+				animation-duration: 0.5s;
+				-webkit-animation-fill-mode: both;
+				animation-fill-mode: both;
+			}
+			
+			.mui-preview-image.mui-preview-in {
+				-webkit-animation-name: fadeIn;
+				animation-name: fadeIn;
+			}
+			
+			.mui-preview-image.mui-preview-out {
+				background: none;
+				-webkit-animation-name: fadeOut;
+				animation-name: fadeOut;
+			}
+			
+			.mui-preview-image.mui-preview-out .mui-preview-header,
+			.mui-preview-image.mui-preview-out .mui-preview-footer {
+				display: none;
+			}
+			
+			.mui-zoom-scroller {
+				position: absolute;
+				display: -webkit-box;
+				display: -webkit-flex;
+				display: flex;
+				-webkit-box-align: center;
+				-webkit-align-items: center;
+				align-items: center;
+				-webkit-box-pack: center;
+				-webkit-justify-content: center;
+				justify-content: center;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				top: 0;
+				width: 100%;
+				height: 100%;
+				margin: 0;
+				-webkit-backface-visibility: hidden;
+			}
+			
+			.mui-zoom {
+				-webkit-transform-style: preserve-3d;
+				transform-style: preserve-3d;
+			}
+			
+			.mui-slider .mui-slider-group .mui-slider-item img {
+				width: auto;
+				height: auto;
+				max-width: 100%;
+				max-height: 100%;
+			}
+			
+			.mui-android-4-1 .mui-slider .mui-slider-group .mui-slider-item img {
+				width: 100%;
+			}
+			
+			.mui-android-4-1 .mui-slider.mui-preview-image .mui-slider-group .mui-slider-item {
+				display: inline-table;
+			}
+			
+			.mui-android-4-1 .mui-slider.mui-preview-image .mui-zoom-scroller img {
+				display: table-cell;
+				vertical-align: middle;
+			}
+			
+			.mui-preview-loading {
+				position: absolute;
+				width: 100%;
+				height: 100%;
+				top: 0;
+				left: 0;
+				display: none;
+			}
+			
+			.mui-preview-loading.mui-active {
+				display: block;
+			}
+			
+			.mui-preview-loading .mui-spinner-white {
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				margin-left: -25px;
+				margin-top: -25px;
+				height: 50px;
+				width: 50px;
+			}
+			
+			.mui-preview-image img.mui-transitioning {
+				-webkit-transition: -webkit-transform 0.5s ease, opacity 0.5s ease;
+				transition: transform 0.5s ease, opacity 0.5s ease;
+			}
+			
+			@-webkit-keyframes fadeIn {
+				0% {
+					opacity: 0;
+				}
+				100% {
+					opacity: 1;
+				}
+			}
+			
+			@keyframes fadeIn {
+				0% {
+					opacity: 0;
+				}
+				100% {
+					opacity: 1;
+				}
+			}
+			
+			@-webkit-keyframes fadeOut {
+				0% {
+					opacity: 1;
+				}
+				100% {
+					opacity: 0;
+				}
+			}
+			
+			@keyframes fadeOut {
+				0% {
+					opacity: 1;
+				}
+				100% {
+					opacity: 0;
+				}
+			}
+			
+			.img {
+				max-width: 100%;
+				height: auto;
+			}
+			
+			.mui-table-view {
+				line-height: 0.8rem;
+				font-size: 0.32rem;
+			}
+		</style>
+
+	</head>
+
+	<body style="background-color: #fff;">
+
+		<header class="mui-bar mui-bar-nav titleheader">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">工单详情</h1>
+
+		</header>
+		<div class="list-item layout" style="display: block;">
+			<ul>
+				<li class="item-ordername" style="margin-top: 90px;">
+					<span>客户姓名<font style="color:red">*</font></span>
+					<input type="text" id='user_name' name='user_name' />
+				</li>
+				<li class="item-ordername">
+					<span>客户电话<font style="color:red">*</font></span>
+					<input type="text" pattern="\d*" id='user_phone' name='user_phone' maxlength="11" oninput="if(value.length>11)value=value.slice(0,11)"/>
+				</li>
+				<li class="item-ordername">
+					<span>收货电话<font style="color:red">*</font></span>
+					<input type="text" pattern="\d*" id='address_phone' name='address_phone' maxlength="11" oninput="if(value.length>11)value=value.slice(0,11)" />
+				</li>
+				<li class="item-address">
+					<span>收货地址<font style="color:red">*</font></span>
+					<textarea id="user_address" name="user_address"></textarea>
+				</li>
+				<li class="item-ordername">
+					<span>工单内容<font style="color:red">*</font></span>
+					<input type="text" id='work_context' name='work_context' />
+				</li>
+				<li class="item-radio" id="type_li">
+					<span>类型<font style="color:red">*</font></span>
+					<input class="business" type="text" id='work_type' name='work_type' readonly="readonly" />
+					<input type="hidden" id='work_value' name='work_value' />
+				</li>
+				<li class="item-man">
+					<span>国安侠<font style="color:red">*</font></span>
+					<input type="text" id='employee' name='employee' readonly="readonly" />
+					<input type="hidden" id='employee_id' name='employee_id' />
+					<input type="hidden" id='employee_no' name='employee_no' />
+					<input type="hidden" id='id' name='id' />
+				</li>
+				<li class="item-radio" id="state_li">
+					<span>状态<font style="color:red">*</font></span>
+					<input  type="text" id='state' name='state' readonly="readonly" />
+					<input type="hidden" id='state_value' name='state_value' />
+				</li>
+
+			</ul>
+			<div class="order_btn">
+				<a href="#" onclick="doSave();">保存</a>
+			</div>
+		</div>
+
+	</body>
+	<script type="text/javascript" src="../js/jquery-2.2.2.min.js"></script>
+	<script src="../js/mui.min.js"></script>
+	<script src="../js/mui.picker.js"></script>
+	<script src="../js/mui.picker.min.js"></script>
+	<script src="../js/mui.poppicker.js"></script>
+	<script src="../js/custom_common.js"></script>
+	<!--<script type="text/javascript" src="../js/work_common.js"></script>-->
+	<script src="../js/date_util.js"></script>
+	<script src="../js/jquery.rotate.min.js"></script>
+	<script src="../js/previewimage.js"></script>
+	<script src="../js/mui.zoom.js"></script>
+	<script type="text/javascript" src="../js/dict.js"></script>
+
+	<script>
+		mui.init({
+			swipeBack: true //启用右滑关闭功能
+		});
+
+		var store = JSON.parse(localStorage.getItem('store'));
+
+		var express = null;
+
+		var employee = JSON.parse(localStorage.getItem('employee'));
+
+		var express = JSON.parse(localStorage.getItem('express'));
+
+		var currIndex = -1;
+
+		var strCode = null;
+
+		var strId = null;
+		var typePicker = null;
+		var type_data = null;
+		var statePicker = null;
+		var state_data = null;
+
+		mui.plusReady(function() {
+			initEmployeeSelect();
+			type_data = [{
+				value: 0,
+				text: '产品类'
+			}, {
+				value: 1,
+				text: '服务类'
+			}];
+			state_data = [{
+				value: 0,
+				text: '待确认'
+			}, {
+				value: 1,
+				text: '已确认'
+			}, {
+				value: 2,
+				text: '取消'
+			}, {
+				value: 3,
+				text: '已完成'
+			}];
+			
+			typePicker = initDictFotData('type_li', 'work_value', 'work_type', type_data, '0', '');
+//			statePicker = initDictFotData('state_li', 'state_value', 'state', state_data, '0', '');
+
+			var self = plus.webview.currentWebview();
+			if(self != null && self.work_detail != null) {
+				var work_detail = JSON.parse(self.work_detail);
+				initView(work_detail);
+
+			}else{
+				$("#state").val('待确认');
+			    $("#state_value").val('0');
+			}
+
+		});
+
+		function initView(work_detail) {
+			
+			
+			
+			if(work_detail.id == null || work_detail.id == "") {
+				$("#id").val('');
+			} else {
+				$("#id").val(work_detail.id);
+			}
+			
+
+			if(work_detail.username == null || work_detail.username == "") {
+				$("#user_name").val('');
+			} else {
+				$("#user_name").val(work_detail.username);
+			}
+			if(work_detail.phone == null || work_detail.phone == "") {
+				$("#user_phone").val('');
+			} else {
+				$("#user_phone").val(work_detail.phone);
+			}
+			if(work_detail.rcv_phone == null || work_detail.rcv_phone == "") {
+				$("#address_phone").val('');
+			} else {
+				$("#address_phone").val(work_detail.rcv_phone);
+			}
+			if(work_detail.address == null || work_detail.address == "") {
+				$("#user_address").val('未录入');
+			} else {
+				$("#user_address").val(work_detail.address);
+			}
+			if(work_detail.wcontent == null || work_detail.wcontent == "") {
+				$("#work_context").val('未录入');
+			} else {
+				$("#work_context").val(work_detail.wcontent);
+			}
+			if(work_detail.worder_type == null || work_detail.worder_type == "") {
+				$("#work_type").val('未录入');
+			} else if(work_detail.worder_type == 0) {
+				$("#work_type").val('产品类');
+			} else if(work_detail.worder_type == 1) {
+				$("#work_type").val('服务类');
+			}
+			if(work_detail.employee_name == null || work_detail.employee_name == "") {
+				$("#employee").val('未录入');
+			} else {
+				$("#employee").val(work_detail.employee_name);
+			}
+			if(work_detail.worder_status == null || work_detail.worder_status == "") {
+				$("#state").val('未录入');
+			} else if(work_detail.worder_status == '待确认') {
+				$("#state").val(work_detail.worder_status);
+				 $("#state_value").val('0');
+			} else if(work_detail.worder_status == '已确认') {
+				$("#state").val(work_detail.worder_status);
+				 $("#state_value").val('1');
+			} else if(work_detail.worder_status == '取消') {
+				$("#state").val(work_detail.worder_status);
+				 $("#state_value").val('2');
+			} else if(work_detail.worder_status == '已完成') {
+				$("#state").val(work_detail.worder_status);
+				 $("#state_value").val('3');
+			}
+
+		}
+
+		function doSave() {
+			var username = $("#user_name").val();
+			var phone = $("#user_phone").val();
+			var address = $("#user_address").val();
+			var wcontent = $("#work_context").val();
+			var worder_type = $("#work_value").val();
+			var employee_name = $("#employee").val();
+			var employee_no = $("#employee_no").val();
+			var store_id = employee.store_id;
+			var worder_status = $("#state_value").val();
+			var rcv_phone= $("#address_phone").val();
+			var work_id= $("#id").val();
+			
+
+			if(!checkValue(username)) {
+				mui.toast('请输入客户姓名！');
+				return;
+			}
+			if(!checkValue(phone)) {
+				mui.toast('请输入客户电话！');
+				return;
+			}
+			if(!checkValue(rcv_phone)) {
+				mui.toast('请输入收货电话！');
+				return;
+			}
+			if(!checkValue(address)) {
+				mui.toast('请输入收货地址！');
+				return;
+			}
+			if(!checkValue(wcontent)) {
+				mui.toast('请输入工单内容！');
+				return;
+			}
+			if(!checkValue(worder_type)) {
+				mui.toast('请选择工单类型！');
+				return;
+			}
+			if(!checkValue(employee_name)) {
+				mui.toast('请选择国安侠！');
+				return;
+			}
+			if(!checkValue(employee_no)) {
+				mui.toast('请选择国安侠！');
+				return;
+			}
+			if(!checkValue(worder_status)) {
+				mui.toast('请选择工单状态！');
+				return;
+			}
+			
+			var StoreOrderInfo = {
+				worder_type: worder_type,
+				wcontent: wcontent,
+				store_id: store_id,
+				employee_name: employee_name,
+				employee_no: employee_no,
+				worder_status: worder_status,
+				username: username,
+				phone: phone,
+				address: address,
+				rcv_phone:rcv_phone,
+				id:work_id
+			};
+			var methodName = 'saveStoreOrderInfoForApp';
+			if(work_id != null && work_id != '') {
+				methodName = 'updateStoreOrderInfoForApp';
+			} 
+
+			doManager_GASM('InterManager',methodName , StoreOrderInfo, function(data) {
+				if(data.result == true) {
+					var jsonData = JSON.parse(data.data);
+					if(jsonData.code == 200) {
+						mui.toast('保存成功');
+						closeMenu();
+					
+					} else {
+						mui.toast('保存失败');
+					}
+
+				} else {
+					mui.toast('保存失败');
+				}
+			});
+
+		}
+		//根据门店id查询所有 员工信息
+		function initEmployeeSelect() {
+
+			var employeePicker = new mui.PopPicker();
+			var txtEmployee = mui('#employee')[0];
+			var txtEmployeeNo = mui('#employee_no')[0];
+			var store_id = store.store_id + '';
+			doManager('UserManager', 'findNamesBySid', store_id, function(data) {
+				if(data.result == true) {
+					var employeeData = new Array();
+					var jsonData = JSON.parse(data.data);
+
+					for(var index in jsonData.userList) {
+						var itemData = {
+							value: jsonData.userList[index].employeeId,
+							text: jsonData.userList[index].name
+						};
+						employeeData.push(itemData);
+					}
+					employeePicker.setData(employeeData);
+				}
+			});
+			txtEmployee.value = employee.name;
+
+			txtEmployeeNo.value = employee.employeeId;
+
+			txtEmployee.addEventListener('tap', function(event) {
+				employeePicker.show(function(items) {
+					txtEmployee.value = items[0].text;
+					txtEmployeeNo.value = items[0].value;
+					document.getElementById("employee_no").value = txtEmployeeNo.value;
+
+				});
+			}, false);
+		}
+
+		
+        function closeMenu(){
+			
+			var _current = plus.webview.currentWebview();
+			var main = _current.opener();
+			mui.fire(main,"saveSuccess",{save:{
+				save:true
+				
+			}});
+			_current.close();
+		}
+      
+	</script>
+
+</html>

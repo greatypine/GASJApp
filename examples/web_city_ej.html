@@ -338,7 +338,7 @@
 				<footer>
 					<a class="col-xs-4 mark-green" id="web_city_ej" href="javascript:void(0)">
 						<p><i class="fa fa-bar-chart-o"></i></p>动态</a>
-					<a class="col-xs-4" id="web_message" path="web_message.html" onclick="jump(this)">
+					<a class="col-xs-4" id="new_web_message" path="new_web_message.html" onclick="jump(this)">
 						<p><i class="fa fa-envelope-o"></i></p>消息
 						<div id="message_state_div"></div>
 					</a>
@@ -978,6 +978,7 @@
 					}
 
 				}
+				message_isread();
 				if(employee_pic != null) {
 					if(employee_pic.pngUrl != null && employee_pic.pngUrl != "" && employee_pic.pngUrl != "https://imgcdn.guoanshequ.com/") {
 						$(".img-circle").attr("src", decodeURI(employee_pic.pngUrl));
@@ -1329,6 +1330,35 @@
 				week_max_newcount = arr[arr.length - 1];
 
 			}
+			//查看消息列表是否有未读信息，如有未读信息消息显示红点
+		function message_isread() {
+			var message = {
+				receiveId: employee.employeeId
+			};
+			var message_count=0;
+			var notice_count=0;
+			doManager('MessageNewManager', 'getUnReadMessageAmount', message, function(data) {
+				if(data.result == true) {
+					var jsonData = JSON.parse(data.data);
+					message_count=jsonData;
+					
+				}
+			},false);
+			
+			doManager('NoticeReciverManager', 'getUnReadNotice', employee.employeeId, function(data) {
+					if(data.result == true) {
+						var jsonData = JSON.parse(data.data);
+						notice_count=jsonData;
+					
+					}
+				},false);
+				if(message_count == 0 && notice_count ==0) {
+					$('#message_state_div').removeClass("message-dian1");
+				} else {
+					$('#message_state_div').addClass("message-dian1");
+				}
+				
+		}
 			
 		
 		</script>
