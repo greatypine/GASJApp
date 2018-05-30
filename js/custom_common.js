@@ -1,9 +1,9 @@
 //var projectpath = 'https://data.guoanshequ.top/daqWeb/';
 //var projectpath = 'http://10.16.31.236:8081/daqWeb/';
-//var projectpath = 'http://10.16.31.242/daqWeb/';
-//var gasmpath = 'http://10.16.31.242:8888/GASM/';
-var gasmpath = 'https://store.guoanshuju.com/GASM/';
-var projectpath = 'https://data.guoanshequ.com/daqWeb/';
+var projectpath = 'http://10.16.31.242/daqWeb/';
+var gasmpath = 'http://10.16.31.242:8888/GASM/';
+//var gasmpath = 'https://store.guoanshuju.com/GASM/';
+//var projectpath = 'https://data.guoanshequ.com/daqWeb/';
 var img_path = 'https://imagedata.guoanshequ.com/file_manager/';
 //var img_path = 'http://10.16.42.201:8080/file_manager/';
 //var img_path = 'http://10.16.31.242/file_manager/';
@@ -686,3 +686,35 @@ function doManager_GASM(managerName, methodName, params, callback, isAsync, erro
 	}
 
 }
+//复制到剪切板
+function copyShareUrl(_this){
+	mui.plusReady(function(){
+//		var id = _this.getAttribute('id');
+//		alert(id);
+		//复制链接到剪切板
+		var copy_content = document.getElementById("mycode").innerText;
+		
+		//判断是安卓还是ios
+		if(mui.os.ios){
+			//ios
+			var UIPasteboard = plus.ios.importClass("UIPasteboard");
+		    var generalPasteboard = UIPasteboard.generalPasteboard();
+		    //设置/获取文本内容:
+		    generalPasteboard.plusCallMethod({
+		        setValue:copy_content,
+		        forPasteboardType: "public.utf8-plain-text"
+		    });
+		    generalPasteboard.plusCallMethod({
+		        valueForPasteboardType: "public.utf8-plain-text"
+		    });
+		    mui.toast("复制成功");
+		}else{
+			//安卓
+			var context = plus.android.importClass("android.content.Context");
+		  	var main = plus.android.runtimeMainActivity();
+		  	var clip = main.getSystemService(context.CLIPBOARD_SERVICE);
+		  	plus.android.invoke(clip,"setText",copy_content);
+		  	mui.toast("复制成功");
+		}
+	});
+} 
