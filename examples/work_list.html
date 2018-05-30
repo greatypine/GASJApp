@@ -270,6 +270,10 @@
 								<span>修改密码</span> <i class="fa  fa-angle-right pull-right"></i>
 							</a>
 						</li>
+						<div id="store_num" style="padding:10px 0px 0px 18px;">
+							<a style="line-height: 30px;"><span>社员邀请码：</span><span id="mycode" style="margin-left: 4px;"></span><span style="border:1px solid #eee;font-size: 12px;margin-left: 10px;padding-left: 5px;padding-right: 5px;border-radius: 3px;" onclick="copyShareUrl(this)">复制</span>
+							</a>
+						</div>
 
 						<li class="text-center" style="margin-top: 2rem;">
 							<a id="btnLogout">退出登录</a>
@@ -312,17 +316,31 @@
 			mui.previewImage();
 			window.addEventListener('saveSuccess',function(event){
 			var save = event.detail.save;
-			location.reload();
+
 				if(save != null) {
 						var btnArray = ['否', '是'];
 						mui.confirm('保存成功，是否打开微信？', '提示', btnArray, function(e) {
 							if(e.index == 1) {
 								openWeixin();
+							
+							}else{
+								location.reload();
 							}
 						});
 				
 				}
 		    });
+		    mui.init({
+			  gestureConfig:{
+			   tap: true, //默认为true
+			   doubletap: true, //默认为false
+			   longtap: true, //默认为false
+			   swipe: true, //默认为true
+			   drag: true, //默认为true
+			   hold:false,//默认为false，不监听
+			   release:false//默认为false，不监听
+			  }
+			});
 			mui.plusReady(function() {
 				var maps_webview = plus.webview.getWebviewById('maps_web');
 				if(maps_webview != null) {
@@ -362,6 +380,7 @@
 				}
 				setMy();
 				initStore();
+				
 				var t_username = localStorage.getItem("employee_key");
 				mui('#btnLogout')[0].addEventListener('click', function(event) {
 					setTimeout(function() {
@@ -689,6 +708,11 @@
 					} else {
 						$("#user_zw").text(employee.zw);
 					}
+					if(employee.inviteCode == null || employee.inviteCode == "") {
+						$("#mycode").text("无数据");
+					} else {
+						$("#mycode").text(employee.inviteCode);
+					}
 
 					if(employee.employeeId == null || employee.employeeId == "") {
 						$("#user_employeeid").text("无数据");
@@ -949,6 +973,7 @@
 						}
 					});
 				});
+				location.reload();
 			} else if(plus.os.name == "iOS") {
 				plus.runtime.launchApplication({
 					action: "weixin://RnUbAwvEilb1rU9g9yBU"
@@ -959,6 +984,7 @@
 						}
 					});
 				});
+				location.reload();
 			}
 			//	var url = "http://weixin.qq.com/r/RnUbAwvEilb1rU9g9yBU";
 			//	plus.runtime.openURL( url );

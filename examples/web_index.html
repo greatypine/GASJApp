@@ -454,6 +454,10 @@
 							<select class="select" onchange="changetip(this.value)" style="margin-left: 12px;">
 							</select>
 						</li>
+						<div id="store_num" style="padding:18px 0px 0px 18px;">
+							<a style="line-height: 30px;"><span>社员邀请码：</span><span id="mycode" style="margin-left: 4px;"></span><span style="border:1px solid #eee;font-size: 12px;margin-left: 10px;padding-left: 5px;padding-right: 5px;border-radius: 3px;" onclick="copyShareUrl(this)">复制</span>
+							</a>
+						</div>
 
 						<li class="text-center" style="margin-top: 2rem;">
 							<a id="btnLogout">退出登录</a>
@@ -529,7 +533,17 @@
 			mui.previewImage();
 
 			mui.init({
-				swipeBack: false
+				swipeBack: false,
+				gestureConfig:{
+			   tap: true, //默认为true
+			   doubletap: true, //默认为false
+			   longtap: true, //默认为false
+			   swipe: true, //默认为true
+			   drag: true, //默认为true
+			   hold:false,//默认为false，不监听
+			   release:false//默认为false，不监听
+			  }
+				
 			});
 			window.addEventListener('setarea', function(event) {
 				var id = event.detail.id;
@@ -692,6 +706,7 @@
 				$(document).on('click', '#noMoreRelation', function() {
 					getRelation(employee.employeeId, select_areaid);
 				});
+				
 				//  $(document).on('click', '#noMoreExpress', function(){
 				//       getExpress(employee.employeeId);
 				//  });
@@ -865,6 +880,11 @@
 						$("#user_zw").text("无数据");
 					} else {
 						$("#user_zw").text(employee.zw);
+					}
+					if(employee.inviteCode == null || employee.inviteCode == "") {
+						$("#mycode").text("无数据");
+					} else {
+						$("#mycode").text(employee.inviteCode);
 					}
 
 					if(employee.employeeId == null || employee.employeeId == "") {
