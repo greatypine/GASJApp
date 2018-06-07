@@ -13,31 +13,41 @@
 		<link rel="stylesheet" type="text/css" href="../css/style.css" />
 		<link rel="stylesheet" type="text/css" href="../css/work_record_result.css" />
 		<style>
-	
+
 		</style>
 
 	</head>
 
 	<body style="height: auto;">
-		
+
 		<header class="mui-bar mui-bar-nav titleheader">
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 			<h1 class="mui-title">公告</h1>
 		</header>
-		
+
 		<label class='work_context_title' id='work_context_title'></label>
 		<div style="font-size: 16px;padding-top: 20px;margin: 0rem 0.3rem;">标题:&nbsp;&nbsp;&nbsp;&nbsp;<span id="notice_title"></span></div>
 		<div style="width: 100%;height: auto;padding-left: 0.3rem;">
 			<div style="font-size: 16px;padding-top: 20px;width: 13%;float: left;">内容:</div>
-		<div id="work_context" style="font-size: 16px;padding-left: 54px;padding-top: 20px;padding-right:10px;word-break: break-all;">
-			
+			<div id="work_context" style="font-size: 16px;padding-left: 54px;padding-top: 20px;padding-right:10px;word-break: break-all;">
+
+			</div>
+
 		</div>
-			
+		<div style="padding-left: 0.3rem; width: 100%; font-size: 14px;margin-top: 20px;">
+			附件:
+			<a style="font-size: 14px;" id="enclosure1" onclick="createDownload(this)"></a>
+			<a style="font-size: 14px; display: none;" id="enclosure1_path"></a>
+			<div style="padding-left: 36px; width: 100%; font-size: 14px;margin-top: 10px;">
+				<a style="font-size: 14px;" id="enclosure2" onclick="createDownload(this)"></a>
+				<a style="font-size: 14px; display: none;" id="enclosure2_path"></a>
+			</div>
+			<div style="padding-left: 36px; width: 100%; font-size: 14px;margin-top: 10px;">
+				<a style="font-size: 14px;" id="enclosure3" onclick="createDownload(this)"></a>
+				<a style="font-size: 14px; display: none;" id="enclosure3_path"></a>
+			</div>
+
 		</div>
-		
-	
-		
-		
 
 	</body>
 	<script type="text/javascript" src="../js/mui.min.js"></script>
@@ -50,49 +60,147 @@
 	<script type="text/javascript" src="../js/dict.js"></script>
 	<script type="text/javascript" type="text/javascript">
 		mui.init({
-		    beforeback: function() {
-		　　　　 //获得父页面的webview
-		        var list = plus.webview.currentWebview().opener();
-		　　　　 //触发父页面的自定义事件(refresh),从而进行刷新
-		        mui.fire(list, 'refresh');
-		        //返回true,继续页面关闭逻辑
-		        return true;
-		    }
-		});
-	
-	    mui.plusReady(function() {
-			getdata();
-			mui.back = function() {
-			   closeMenu();
+			beforeback: function() {　　　　 //获得父页面的webview
+				var list = plus.webview.currentWebview().opener();　　　　 //触发父页面的自定义事件(refresh),从而进行刷新
+				mui.fire(list, 'refresh');
+				//返回true,继续页面关闭逻辑
+				return true;
 			}
 		});
-		
-	    function getdata(){
-	    	var self = plus.webview.currentWebview();
-			notice_content=self.notice_content;
-			notice_title=self.notice_title;
+
+		mui.plusReady(function() {
+			getdata();
+			mui.back = function() {
+				closeMenu();
+			}
+		});
+
+		function getdata() {
+			var self = plus.webview.currentWebview();
+			notice_content = self.notice_content;
+			notice_title = self.notice_title;
+			notice_ = self.notice_;
+
 			if(notice_title != null || notice_title != '') {
 				$('#notice_title').html(notice_title);
 			}
-			if(notice_content!=null||notice_content!=""){
+			if(notice_content != null || notice_content != "") {
 				$('#work_context').html(notice_content);
-//				mui('#work_context')[0].value = notice_content;
+				//				mui('#work_context')[0].value = notice_content;
 			}
-		
-		}
-	    
-		function closeMenu(){
+			if(notice_ != null || notice_ != '') {
+				setEnclosure(notice_);
+			}
 			
+
+		}
+
+		function closeMenu() {
+
 			var _current = plus.webview.currentWebview();
 			var main = _current.opener();
-			mui.fire(main,"setNoticeCount",{notice_count:{
-				notice_count:'notice_count'
-				
-			}});
+			mui.fire(main, "setNoticeCount", {
+				notice_count: {
+					notice_count: 'notice_count'
+
+				}
+			});
 			_current.close();
 		}
-	  
-		
+
+		function createDownload(t) {
+			var id = $(t).attr("id")
+			var pat = null;
+			if(id == 'enclosure1') {
+				path = $("#enclosure1_path").text();
+			} else if(id == 'enclosure2') {
+				path = $("#enclosure2_path").text();
+			} else if(id == 'enclosure3') {
+				path = $("#enclosure3_path").text();
+			}
+
+			var dtask = plus.downloader.createDownload(path,{});
+			var w = plus.nativeUI.showWaiting("开始下载...");
+            dtask.addEventListener("statechanged", function (task, status) {
+            	
+                switch (task.state) {
+                    case 3: // 已接收到数据
+                 
+                        if (w) {
+                        	setTimeout(function() {
+							w.setTitle("下载中：" + task.downloadedSize + "/"+task.totalSize);
+						},300);
+                            
+                        }
+                        break;
+                    case 4: // 下载完成
+                        if (status == 200) {
+                            if (w) {
+                                w.close();
+                            }
+                           var index = task.filename.lastIndexOf("\/");
+					var name = task.filename.substring(index + 1, task.filename.length);
+					var myDate = new Date();
+					var file = '{"date":"' + myDate.toLocaleString() + '","id":"' + task.filename + '","name":"' + name + '"}';
+					var file1 = localStorage.getItem("fileList");
+
+					if(file1 != null) { //不是第一次下载文件
+						//判断是否已经存在
+						file = file + "," + file1;
+						localStorage.setItem("fileList", file);
+						
+					} else {
+						var jsonList = [];
+						var jsonarray = eval(jsonList); //定义追加格式
+						jsonarray.push(file);
+						var files = JSON.stringify(jsonarray);
+						localStorage.setItem("fileList", file); //第一次下载文件存储字符串
+					}
+					var btnArray = ['否', '是']; //弹框消息确认是否打开附件
+					mui.confirm('是否打开附件查看？', '下载成功', btnArray, function(e) {
+						if(e.index == 1) { //打开附件
+							plus.runtime.openFile(task.filename, {}, function(e) {
+								plus.nativeUI.alert("无法打开此文件：" + e.emssage);
+							});
+						} else { //不打开
+						}
+					})
+                        } else {
+                          alert("下载失败,请从新下载!");
+                            plus.nativeUI.closeWaiting();
+                        }
+                        break;
+                }
+                });
+
+			dtask.start();
+		}
+
+		function setEnclosure(notice) {
+			if(notice.fileName == null || notice.fileName == "") {
+				$("#enclosure1").text('无');
+			} else {
+				$("#enclosure1").text(notice.fileName);
+				$("#enclosure1_path").text(notice.filePath);
+			}
+
+			if(notice.fileName2 == null || notice.fileName2 == "") {
+				$("#enclosure2").text('无');
+				$("#enclosure2").attr("style", "display:none;");
+			} else {
+				$("#enclosure2").text(notice.fileName2);
+				$("#enclosure2_path").text(notice.filePath2);
+			}
+
+			if(notice.fileName3 == null || notice.fileName3 == "") {
+				$("#enclosure3").text('无');
+				$("#enclosure3").attr("style", "display:none;");
+			} else {
+				$("#enclosure3").text(notice.fileName3);
+				$("#enclosure3_path").text(notice.filePath3);
+			}
+
+		}
 	</script>
 
 </html>

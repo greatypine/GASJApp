@@ -1189,6 +1189,7 @@ background-color: #007aff;
 							$feedlist.empty();
 						}
 						$(jsonData.data).each(function(index, notice) {
+							
 							var t_html = "";
 							var d_html = "";
 							//业务公告
@@ -1241,7 +1242,8 @@ background-color: #007aff;
 											},
 											extras: {
 												notice_content: notice.content,
-												notice_title: notice.title
+												notice_title: notice.title,
+												notice_:notice
 											}
 										});
 
