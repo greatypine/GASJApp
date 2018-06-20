@@ -85,7 +85,7 @@
 				$('#notice_title').html(notice_title);
 			}
 			if(notice_content != null || notice_content != "") {
-				$('#work_context').html(notice_content);
+				$('#work_context').html(notice_content.replace(/\n|\r\n/g,"<br/>"));
 				//				mui('#work_context')[0].value = notice_content;
 			}
 			if(notice_ != null || notice_ != '') {
@@ -109,8 +109,29 @@
 		}
 
 		function createDownload(t) {
-			var id = $(t).attr("id")
-			var pat = null;
+			var id = $(t).attr("id");
+			
+			if(id == 'enclosure1') {
+				if($("#enclosure1").text()=="无"){
+					mui.toast("暂无附件");
+					return;
+				}
+				
+			} else if(id == 'enclosure2') {
+				if($("#enclosure2").text()=="无"){
+					mui.toast("暂无附件");
+					return;
+				}
+				
+			} else if(id == 'enclosure3') {
+				
+				if($("#enclosure3").text()=="无"){
+					mui.toast("暂无附件");
+					return;
+				}
+				
+			}
+			var path = null;
 			if(id == 'enclosure1') {
 				path = $("#enclosure1_path").text();
 			} else if(id == 'enclosure2') {
@@ -118,18 +139,22 @@
 			} else if(id == 'enclosure3') {
 				path = $("#enclosure3_path").text();
 			}
+			
 
 			var dtask = plus.downloader.createDownload(path,{});
 			var w = plus.nativeUI.showWaiting("开始下载...");
             dtask.addEventListener("statechanged", function (task, status) {
-            	
+          
                 switch (task.state) {
+                
+                	
                     case 3: // 已接收到数据
                  
                         if (w) {
                         	setTimeout(function() {
 							w.setTitle("下载中：" + task.downloadedSize + "/"+task.totalSize);
 						},300);
+						 
                             
                         }
                         break;
@@ -163,11 +188,12 @@
 								plus.nativeUI.alert("无法打开此文件：" + e.emssage);
 							});
 						} else { //不打开
+							
 						}
 					})
                         } else {
-                          alert("下载失败,请从新下载!");
                             plus.nativeUI.closeWaiting();
+                            mui.toast("暂无附件");
                         }
                         break;
                 }
