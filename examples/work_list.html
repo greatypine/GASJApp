@@ -436,7 +436,7 @@
 			function initView() {
 				message_isread();
 				pageInfo.currentPage = pageInfo.currentPage + 1;
-				doManager_GASM('InterManager', 'queryStoreOrderListForApp', [pageInfo, employee.employeeId,'0,1,2,3'], function(data) {
+				doManager_GASM('InterManager', 'queryStoreOrderListForApp', [pageInfo, employee.employeeId,'0,1,2,3,4',""], function(data) {
 					if(data.result == true) {
 						var jsonData = JSON.parse(data.data);
 						
@@ -466,11 +466,13 @@
 							if(work.worder_status == 0){
 								work.worder_status = "待确认";
 							}else if(work.worder_status == 1){
+								work.worder_status = "客户确认中";
+							}else  if(work.worder_status == 2){
 								work.worder_status = "已确认";
-							}else if(work.worder_status == 2){
-								work.worder_status = "取消";
 							}else if(work.worder_status == 3){
 								work.worder_status = "已完成";
+							}else if(work.worder_status == 4){
+								work.worder_status = "已取消";
 							}else if(work.worder_status == null || work.worder_status == "") {
 								work.worder_status = "未录入";
 							}
@@ -489,7 +491,7 @@
 								'<p class="order_p">电话:' + work.phone + '</p></div>' +
 								'<div style="width: 50%; float: right;font-size: 12px;color: #888888;">' + work.wcontent+ '</div></div>' +
 								'<div class="box-header" >' +
-								'<div style="font-size: 12px; width: 70%;float: left;">订单编号:' + work.worder_sn + '</br>国安侠:' + work.employee_name + '</br>下单日期:' +  new Date(work.create_time).Format('YYYY-MM-DD')+ '</div>' +
+								'<div style="font-size: 12px; width: 70%;float: left;">订单编号:' + work.worder_sn + '</br>服务人员:' + work.employee_name + '</br>下单日期:' +  new Date(work.create_time).Format('YYYY-MM-DD')+ '</div>' +
 								'<div style="float: right;padding-top: 14px;color: #F32D2D;padding-right: 6px;">' + work.worder_status + '</div>' +
 								'</div></section></li>';
 

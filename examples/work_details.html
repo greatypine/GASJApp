@@ -247,12 +247,16 @@
 					<input type="text" id='user_name' name='user_name' />
 				</li>
 				<li class="item-ordername">
-					<span>客户电话<font style="color:red">*</font></span>
-					<input type="text" pattern="\d*" id='user_phone' name='user_phone' maxlength="11" oninput="if(value.length>11)value=value.slice(0,11)"/>
+					<span>客户手机<font style="color:red">*</font></span>
+					<input type="text" pattern="\d*" id='user_phone' name='user_phone' maxlength="11" onkeyup="value=this.value.replace(/\D+/g,'')" />
 				</li>
 				<li class="item-ordername">
-					<span>收货电话<font style="color:red">*</font></span>
-					<input type="text" pattern="\d*" id='address_phone' name='address_phone' maxlength="11" oninput="if(value.length>11)value=value.slice(0,11)" />
+					<span>收货人姓名</span>
+					<input type="text" id='userAddress_name' name='userAddress_name' />
+				</li>
+				<li class="item-ordername">
+					<span>收货电话</span>
+					<input type="text" pattern="\d*" id='address_phone' name='address_phone' maxlength="11" onkeyup="value=this.value.replace(/\D+/g,'')" />
 				</li>
 				<li class="item-address">
 					<span>收货地址<font style="color:red">*</font></span>
@@ -260,28 +264,30 @@
 				</li>
 				<li class="item-ordername">
 					<span>工单内容<font style="color:red">*</font></span>
-					<input type="text" id='work_context' name='work_context' />
+					<textarea id='work_context' name='work_context' /></textarea>
 				</li>
 				<li class="item-radio" id="type_li">
-					<span>类型<font style="color:red">*</font></span>
-					<input class="business" type="text" id='work_type' name='work_type' readonly="readonly" />
+					<span>工单类型</span>
+					<!--<input class="business" type="text" id='work_type' name='work_type' readonly="readonly" />-->
 					<input type="hidden" id='work_value' name='work_value' />
+					<input class="business" type="text" id='work_type' name='work_type' readonly="readonly" value="服务类" />
 				</li>
 				<li class="item-man">
-					<span>国安侠<font style="color:red">*</font></span>
+					<span>服务人员<font style="color:red">*</font></span>
 					<input type="text" id='employee' name='employee' readonly="readonly" />
 					<input type="hidden" id='employee_id' name='employee_id' />
 					<input type="hidden" id='employee_no' name='employee_no' />
 					<input type="hidden" id='id' name='id' />
 				</li>
-				<li class="item-radio" id="state_li">
-					<span>状态<font style="color:red">*</font></span>
-					<input  type="text" id='state' name='state' readonly="readonly" />
+
+				<li class="item-radio" id="state_li" style="display: none;">
+					<span>工单状态</span>
+					<input type="text" id='state' name='state' readonly="readonly" />
 					<input type="hidden" id='state_value' name='state_value' />
 				</li>
 
 			</ul>
-			<div class="order_btn">
+			<div class="order_btn" id="order_btn">
 				<a href="#" onclick="doSave();">保存</a>
 			</div>
 		</div>
@@ -325,6 +331,49 @@
 
 		mui.plusReady(function() {
 			initEmployeeSelect();
+			document.getElementById('user_name').addEventListener('blur', function(event) {
+				if($("#userAddress_name").val() == null || $("#userAddress_name").val() == "") {
+					$("#userAddress_name").val($("#user_name").val());
+				}
+				if($("#address_phone").val() == null || $("#address_phone").val() == "") {
+					$("#address_phone").val($("#user_phone").val());
+				}
+			});
+
+			document.getElementById('user_phone').addEventListener('blur', function(event) {
+				if($("#userAddress_name").val() == null || $("#userAddress_name").val() == "") {
+					$("#userAddress_name").val($("#user_name").val());
+				}
+				if($("#address_phone").val() == null || $("#address_phone").val() == "") {
+					$("#address_phone").val($("#user_phone").val());
+				}
+			});
+			document.getElementById('user_address').addEventListener('blur', function(event) {
+				if($("#userAddress_name").val() == null || $("#userAddress_name").val() == "") {
+					$("#userAddress_name").val($("#user_name").val());
+				}
+				if($("#address_phone").val() == null || $("#address_phone").val() == "") {
+					$("#address_phone").val($("#user_phone").val());
+				}
+			});
+
+			document.getElementById('work_context').addEventListener('blur', function(event) {
+				if($("#userAddress_name").val() == null || $("#userAddress_name").val() == "") {
+					$("#userAddress_name").val($("#user_name").val());
+				}
+				if($("#address_phone").val() == null || $("#address_phone").val() == "") {
+					$("#address_phone").val($("#user_phone").val());
+				}
+			});
+
+			document.getElementById('employee').addEventListener('tap', function(event) {
+				if($("#userAddress_name").val() == null || $("#userAddress_name").val() == "") {
+					$("#userAddress_name").val($("#user_name").val());
+				}
+				if($("#address_phone").val() == null || $("#address_phone").val() == "") {
+					$("#address_phone").val($("#user_phone").val());
+				}
+			});
 			type_data = [{
 				value: 0,
 				text: '产品类'
@@ -345,32 +394,30 @@
 				value: 3,
 				text: '已完成'
 			}];
-			
-			typePicker = initDictFotData('type_li', 'work_value', 'work_type', type_data, '0', '');
-//			statePicker = initDictFotData('state_li', 'state_value', 'state', state_data, '0', '');
+
+			//			typePicker = initDictFotData('type_li', 'work_value', 'work_type', type_data, '0', '');
+			//			statePicker = initDictFotData('state_li', 'state_value', 'state', state_data, '0', '');
 
 			var self = plus.webview.currentWebview();
 			if(self != null && self.work_detail != null) {
 				var work_detail = JSON.parse(self.work_detail);
+				$("#state_li").css('display', "");
 				initView(work_detail);
 
-			}else{
+			} else {
 				$("#state").val('待确认');
-			    $("#state_value").val('0');
+				$("#state_value").val('0');
 			}
 
 		});
 
 		function initView(work_detail) {
-			
-			
-			
+//			alert(JSON.stringify(work_detail));
 			if(work_detail.id == null || work_detail.id == "") {
 				$("#id").val('');
 			} else {
 				$("#id").val(work_detail.id);
 			}
-			
 
 			if(work_detail.username == null || work_detail.username == "") {
 				$("#user_name").val('');
@@ -387,6 +434,11 @@
 			} else {
 				$("#address_phone").val(work_detail.rcv_phone);
 			}
+			if(work_detail.rcv_name == null || work_detail.rcv_name == "") {
+				$("#userAddress_name").val('');
+			} else {
+				$("#userAddress_name").val(work_detail.rcv_name);
+			}
 			if(work_detail.address == null || work_detail.address == "") {
 				$("#user_address").val('未录入');
 			} else {
@@ -397,10 +449,15 @@
 			} else {
 				$("#work_context").val(work_detail.wcontent);
 			}
+			//			if(work_detail.worder_type == null || work_detail.worder_type == "") {
+			//				$("#work_type").val('未录入');
+			//			} else if(work_detail.worder_type == 0) {
+			//				$("#work_type").val('产品类');
+			//			} else if(work_detail.worder_type == 1) {
+			//				$("#work_type").val('服务类');
+			//			}
 			if(work_detail.worder_type == null || work_detail.worder_type == "") {
 				$("#work_type").val('未录入');
-			} else if(work_detail.worder_type == 0) {
-				$("#work_type").val('产品类');
 			} else if(work_detail.worder_type == 1) {
 				$("#work_type").val('服务类');
 			}
@@ -409,20 +466,37 @@
 			} else {
 				$("#employee").val(work_detail.employee_name);
 			}
+//			alert(JSON.stringify(work_detail));
+			//当状态为已完成或已取消时，不能再编辑
+			if(work_detail.worder_status == '已确认'||work_detail.worder_status == '已完成'||work_detail.worder_status == '已取消'){
+				
+				$("#user_name").attr("disabled","true");
+				$("#user_phone").attr("disabled","true");
+				$("#userAddress_name").attr("disabled","true");
+				$("#address_phone").attr("disabled","true");
+				$("#user_address").attr("disabled","true");
+				$("#work_context").attr("disabled","true");
+				$("#employee").attr("disabled","true");
+				$("#order_btn").css("display","none");
+			}
+			
 			if(work_detail.worder_status == null || work_detail.worder_status == "") {
 				$("#state").val('未录入');
 			} else if(work_detail.worder_status == '待确认') {
 				$("#state").val(work_detail.worder_status);
-				 $("#state_value").val('0');
+				$("#state_value").val('0');
+			} else if(work_detail.worder_status == '客户确认中') {
+				$("#state").val(work_detail.worder_status);
+				$("#state_value").val('1');
 			} else if(work_detail.worder_status == '已确认') {
 				$("#state").val(work_detail.worder_status);
-				 $("#state_value").val('1');
-			} else if(work_detail.worder_status == '取消') {
-				$("#state").val(work_detail.worder_status);
-				 $("#state_value").val('2');
+				$("#state_value").val('2');
 			} else if(work_detail.worder_status == '已完成') {
 				$("#state").val(work_detail.worder_status);
-				 $("#state_value").val('3');
+				$("#state_value").val('3');
+			} else if(work_detail.worder_status == '已取消') {
+				$("#state").val(work_detail.worder_status);
+				$("#state_value").val('4');
 			}
 
 		}
@@ -431,15 +505,18 @@
 			var username = $("#user_name").val();
 			var phone = $("#user_phone").val();
 			var address = $("#user_address").val();
+			var userAddress_name=$("#userAddress_name").val();
 			var wcontent = $("#work_context").val();
-			var worder_type = $("#work_value").val();
+			var worder_type = 1;
 			var employee_name = $("#employee").val();
 			var employee_no = $("#employee_no").val();
 			var store_id = employee.store_id;
 			var worder_status = $("#state_value").val();
-			var rcv_phone= $("#address_phone").val();
-			var work_id= $("#id").val();
-			
+			//收货人姓名
+			var rcv_name=$("#userAddress_name").val();
+			//收货人电话
+			var rcv_phone = $("#address_phone").val();
+			var work_id = $("#id").val();
 
 			if(!checkValue(username)) {
 				mui.toast('请输入客户姓名！');
@@ -449,8 +526,8 @@
 				mui.toast('请输入客户电话！');
 				return;
 			}
-			if(!checkValue(rcv_phone)) {
-				mui.toast('请输入收货电话！');
+			if(phone.length!=11) {
+				mui.toast('请输入正确的手机号');
 				return;
 			}
 			if(!checkValue(address)) {
@@ -461,23 +538,23 @@
 				mui.toast('请输入工单内容！');
 				return;
 			}
-			if(!checkValue(worder_type)) {
-				mui.toast('请选择工单类型！');
-				return;
-			}
+			//			if(!checkValue(worder_type)) {
+			//				mui.toast('请选择工单类型！');
+			//				return;
+			//			}
 			if(!checkValue(employee_name)) {
-				mui.toast('请选择国安侠！');
+				mui.toast('请选择服务人员！');
 				return;
 			}
 			if(!checkValue(employee_no)) {
-				mui.toast('请选择国安侠！');
+				mui.toast('请选择服务人员！');
 				return;
 			}
-			if(!checkValue(worder_status)) {
-				mui.toast('请选择工单状态！');
-				return;
-			}
-			
+			//			if(!checkValue(worder_status)) {
+			//				mui.toast('请选择工单状态！');
+			//				return;
+			//			}
+
 			var StoreOrderInfo = {
 				worder_type: worder_type,
 				wcontent: wcontent,
@@ -488,21 +565,22 @@
 				username: username,
 				phone: phone,
 				address: address,
-				rcv_phone:rcv_phone,
-				id:work_id
+				rcv_phone: rcv_phone,
+				rcv_name:rcv_name,
+				id: work_id
 			};
 			var methodName = 'saveStoreOrderInfoForApp';
 			if(work_id != null && work_id != '') {
 				methodName = 'updateStoreOrderInfoForApp';
-			} 
+			}
 
-			doManager_GASM('InterManager',methodName , StoreOrderInfo, function(data) {
+			doManager_GASM('InterManager', methodName, StoreOrderInfo, function(data) {
 				if(data.result == true) {
 					var jsonData = JSON.parse(data.data);
 					if(jsonData.code == 200) {
 						mui.toast('保存成功');
 						closeMenu();
-					
+
 					} else {
 						mui.toast('保存失败');
 					}
@@ -549,18 +627,18 @@
 			}, false);
 		}
 
-		
-        function closeMenu(){
-			
+		function closeMenu() {
+
 			var _current = plus.webview.currentWebview();
 			var main = _current.opener();
-			mui.fire(main,"saveSuccess",{save:{
-				save:true
-				
-			}});
+			mui.fire(main, "saveSuccess", {
+				save: {
+					save: true
+
+				}
+			});
 			_current.close();
 		}
-      
 	</script>
 
 </html>
