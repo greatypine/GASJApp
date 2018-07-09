@@ -41,7 +41,7 @@ footer a p{margin-top:-0.05rem;}
 .back a{position: absolute;left:0.4rem;top:0.2rem;background:url(../images/icon15.png) no-repeat;width:0.4rem;height:0.4rem;background-size: 0.2rem;}
 .camera a{position:absolute;right:0.2rem;top:0.5rem;background: url(../images/icon22.png) no-repeat;width: 0.5rem;height: 0.5rem;background-size: 0.4rem;}
 .camera label{position:absolute;right:0.2rem;top:0.25rem;background: url(../images/icon22.png) no-repeat;width: 0.5rem;height: 0.5rem;background-size: 0.4rem;}
-.save a{position:absolute;right:0rem;top:0.15rem;no-repeat;width: 2rem;height: 0.5rem;color: white;font-size: 18px;}
+.save a{position:absolute;right:0rem;top:0.15rem;width: 2rem;height: 0.5rem;color: white;font-size: 18px;}
 .mui-icon-left-nav{position: absolute;top:0rem;width:1rem;height:0.6rem;background-size: 0.2rem;color: white;}
 .mui-icon-left-nav:before {
 	/*content:none;*/
@@ -56,3 +56,13 @@ footer a p{margin-top:-0.05rem;}
 	font-size: 0.32rem;
 	color: white;
 }
+
+@media screen and (device-width:375px) and (device-height:812px){
+    header {
+        height: 88px;
+        padding-top: 44px !important;
+    }
+    .mui-content {
+        padding-top: 88px !important;
+    }
+  }

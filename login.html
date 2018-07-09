@@ -172,7 +172,7 @@
 					<button id='login' class="mui-btn mui-btn-block mui-btn-warning button">登录</button>
 				</div>
 			</div>
-			<div class="fr forget_password" onclick="toforget_password()">忘记密码？</div>
+			<div class="fr forget_password" onclick="toforget_password()">找回密码？</div>
 		</div>
 		<div class="aaa"><p id="version" style="color: #fff;"></p></div>
 		<script src="js/mui.min.js"></script>
@@ -361,14 +361,14 @@
 		}
 	    //忘记密码
 	    function toforget_password(){
-			var webview = plus.webview.getWebviewById('forget_password');
+			var webview = plus.webview.getWebviewById('findPassword');
 				if(webview != null){
 					webview.hide();
 					webview.close();
 				}
 				mui.openWindow({
-					url: 'examples/forget_password.html',
-					id: 'forget_password',
+					url: 'examples/findPassword.html',
+					id: 'findPassword',
 					createNew: true,
 					show: {
 						aniShow: 'slide-in-right'

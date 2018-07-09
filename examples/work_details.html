@@ -264,7 +264,7 @@
 				</li>
 				<li class="item-ordername">
 					<span>工单内容<font style="color:red">*</font></span>
-					<textarea id='work_context' name='work_context' /></textarea>
+					<textarea id='work_context' name='work_context'></textarea>
 				</li>
 				<li class="item-radio" id="type_li">
 					<span>工单类型</span>
@@ -328,41 +328,94 @@
 		var type_data = null;
 		var statePicker = null;
 		var state_data = null;
-
+		var find_status = true;
+		var oldphones = null;
 		mui.plusReady(function() {
 			initEmployeeSelect();
 			document.getElementById('user_name').addEventListener('blur', function(event) {
-				if($("#userAddress_name").val() == null || $("#userAddress_name").val() == "") {
-					$("#userAddress_name").val($("#user_name").val());
-				}
-				if($("#address_phone").val() == null || $("#address_phone").val() == "") {
-					$("#address_phone").val($("#user_phone").val());
+				var phones = $("#user_phone").val();
+				if(phones != null && phones != "" && find_status == true && oldphones != phones) {
+					oldphones = phones;
+					findUser();
+				} else {
+					if($("#userAddress_name").val() == null || $("#userAddress_name").val() == "") {
+						$("#userAddress_name").val($("#user_name").val());
+					}
+					if($("#address_phone").val() == null || $("#address_phone").val() == "") {
+						$("#address_phone").val($("#user_phone").val());
+					}
 				}
 			});
 
 			document.getElementById('user_phone').addEventListener('blur', function(event) {
-				if($("#userAddress_name").val() == null || $("#userAddress_name").val() == "") {
-					$("#userAddress_name").val($("#user_name").val());
+				var phones = $("#user_phone").val();
+				if(phones != null && phones != "" && find_status == true && oldphones != phones) {
+					oldphones = phones;
+					findUser();
+				} else {
+					if($("#userAddress_name").val() == null || $("#userAddress_name").val() == "") {
+						$("#userAddress_name").val($("#user_name").val());
+					}
+					if($("#address_phone").val() == null || $("#address_phone").val() == "") {
+						$("#address_phone").val($("#user_phone").val());
+					}
 				}
-				if($("#address_phone").val() == null || $("#address_phone").val() == "") {
-					$("#address_phone").val($("#user_phone").val());
+			});
+			document.getElementById('userAddress_name').addEventListener('blur', function(event) {
+				var phones = $("#user_phone").val();
+				if(phones != null && phones != "" && find_status == true && oldphones != phones) {
+					oldphones = phones;
+					findUser();
+				} else {
+					if($("#userAddress_name").val() == null || $("#userAddress_name").val() == "") {
+						$("#userAddress_name").val($("#user_name").val());
+					}
+					if($("#address_phone").val() == null || $("#address_phone").val() == "") {
+						$("#address_phone").val($("#user_phone").val());
+					}
+				}
+			});
+			document.getElementById('address_phone').addEventListener('blur', function(event) {
+				var phones = $("#user_phone").val();
+				if(phones != null && phones != "" && find_status == true && oldphones != phones) {
+					oldphones = phones;
+					findUser();
+				} else {
+					if($("#userAddress_name").val() == null || $("#userAddress_name").val() == "") {
+						$("#userAddress_name").val($("#user_name").val());
+					}
+					if($("#address_phone").val() == null || $("#address_phone").val() == "") {
+						$("#address_phone").val($("#user_phone").val());
+					}
 				}
 			});
 			document.getElementById('user_address').addEventListener('blur', function(event) {
-				if($("#userAddress_name").val() == null || $("#userAddress_name").val() == "") {
-					$("#userAddress_name").val($("#user_name").val());
-				}
-				if($("#address_phone").val() == null || $("#address_phone").val() == "") {
-					$("#address_phone").val($("#user_phone").val());
+				var phones = $("#user_phone").val();
+				if(phones != null && phones != "" && find_status == true && oldphones != phones) {
+					oldphones = phones;
+					findUser();
+				} else {
+					if($("#userAddress_name").val() == null || $("#userAddress_name").val() == "") {
+						$("#userAddress_name").val($("#user_name").val());
+					}
+					if($("#address_phone").val() == null || $("#address_phone").val() == "") {
+						$("#address_phone").val($("#user_phone").val());
+					}
 				}
 			});
 
 			document.getElementById('work_context').addEventListener('blur', function(event) {
-				if($("#userAddress_name").val() == null || $("#userAddress_name").val() == "") {
-					$("#userAddress_name").val($("#user_name").val());
-				}
-				if($("#address_phone").val() == null || $("#address_phone").val() == "") {
-					$("#address_phone").val($("#user_phone").val());
+				var phones = $("#user_phone").val();
+				if(phones != null && phones != "" && find_status == true && oldphones != phones) {
+					oldphones = phones;
+					findUser();
+				} else {
+					if($("#userAddress_name").val() == null || $("#userAddress_name").val() == "") {
+						$("#userAddress_name").val($("#user_name").val());
+					}
+					if($("#address_phone").val() == null || $("#address_phone").val() == "") {
+						$("#address_phone").val($("#user_phone").val());
+					}
 				}
 			});
 
@@ -412,7 +465,8 @@
 		});
 
 		function initView(work_detail) {
-//			alert(JSON.stringify(work_detail));
+			//			alert(JSON.stringify(work_detail));
+			find_status = false;
 			if(work_detail.id == null || work_detail.id == "") {
 				$("#id").val('');
 			} else {
@@ -466,20 +520,20 @@
 			} else {
 				$("#employee").val(work_detail.employee_name);
 			}
-//			alert(JSON.stringify(work_detail));
+			//			alert(JSON.stringify(work_detail));
 			//当状态为已完成或已取消时，不能再编辑
-			if(work_detail.worder_status == '已确认'||work_detail.worder_status == '已完成'||work_detail.worder_status == '已取消'){
-				
-				$("#user_name").attr("disabled","true");
-				$("#user_phone").attr("disabled","true");
-				$("#userAddress_name").attr("disabled","true");
-				$("#address_phone").attr("disabled","true");
-				$("#user_address").attr("disabled","true");
-				$("#work_context").attr("disabled","true");
-				$("#employee").attr("disabled","true");
-				$("#order_btn").css("display","none");
+			if(work_detail.worder_status == '已确认' || work_detail.worder_status == '已完成' || work_detail.worder_status == '已取消') {
+
+				$("#user_name").attr("disabled", "true");
+				$("#user_phone").attr("disabled", "true");
+				$("#userAddress_name").attr("disabled", "true");
+				$("#address_phone").attr("disabled", "true");
+				$("#user_address").attr("disabled", "true");
+				$("#work_context").attr("disabled", "true");
+				$("#employee").attr("disabled", "true");
+				$("#order_btn").css("display", "none");
 			}
-			
+
 			if(work_detail.worder_status == null || work_detail.worder_status == "") {
 				$("#state").val('未录入');
 			} else if(work_detail.worder_status == '待确认') {
@@ -505,7 +559,7 @@
 			var username = $("#user_name").val();
 			var phone = $("#user_phone").val();
 			var address = $("#user_address").val();
-			var userAddress_name=$("#userAddress_name").val();
+			var userAddress_name = $("#userAddress_name").val();
 			var wcontent = $("#work_context").val();
 			var worder_type = 1;
 			var employee_name = $("#employee").val();
@@ -513,7 +567,7 @@
 			var store_id = employee.store_id;
 			var worder_status = $("#state_value").val();
 			//收货人姓名
-			var rcv_name=$("#userAddress_name").val();
+			var rcv_name = $("#userAddress_name").val();
 			//收货人电话
 			var rcv_phone = $("#address_phone").val();
 			var work_id = $("#id").val();
@@ -526,8 +580,12 @@
 				mui.toast('请输入客户电话！');
 				return;
 			}
-			if(phone.length!=11) {
+			if(phone.length != 11) {
 				mui.toast('请输入正确的手机号');
+				return;
+			}
+			if(rcv_phone.length != 11) {
+				mui.toast('请输入正确的收货人电话');
 				return;
 			}
 			if(!checkValue(address)) {
@@ -566,7 +624,7 @@
 				phone: phone,
 				address: address,
 				rcv_phone: rcv_phone,
-				rcv_name:rcv_name,
+				rcv_name: rcv_name,
 				id: work_id
 			};
 			var methodName = 'saveStoreOrderInfoForApp';
@@ -638,6 +696,63 @@
 				}
 			});
 			_current.close();
+		}
+
+		function findUser() {
+			var phone = $("#user_phone").val();
+			doManager_GASM('InterManager', "queryStoreOrderByPhone", phone, function(data) {
+				if(data.result == true) {
+					var jsonData = JSON.parse(data.data);
+					//					alert(JSON.stringify(jsonData))
+					if(jsonData.code == 200) {
+//						find_status = false;
+						var work_detail = jsonData.data;
+						if(work_detail.id == null || work_detail.id == "") {
+							$("#id").val('');
+						} else {
+							$("#id").val(work_detail.id);
+						}
+
+						if(work_detail.username == null || work_detail.username == "") {
+							$("#user_name").val('');
+						} else {
+							$("#user_name").val(work_detail.username);
+						}
+						if(work_detail.phone == null || work_detail.phone == "") {
+							$("#user_phone").val('');
+						} else {
+							$("#user_phone").val(work_detail.phone);
+						}
+						if(work_detail.rcv_phone == null || work_detail.rcv_phone == "") {
+							$("#address_phone").val('');
+						} else {
+							$("#address_phone").val(work_detail.rcv_phone);
+						}
+						if(work_detail.rcv_name == null || work_detail.rcv_name == "") {
+							$("#userAddress_name").val('');
+						} else {
+							$("#userAddress_name").val(work_detail.rcv_name);
+						}
+						if(work_detail.address == null || work_detail.address == "") {
+							$("#user_address").val('未录入');
+						} else {
+							$("#user_address").val(work_detail.address);
+						}
+						if(work_detail.wcontent == null || work_detail.wcontent == "") {
+							$("#work_context").val('未录入');
+						} else {
+							$("#work_context").val(work_detail.wcontent);
+						}
+
+					} else {
+						find_status = false;
+						//						mui.toast('保存失败');
+					}
+
+				} else {
+					//					mui.toast('保存失败');
+				}
+			});
 		}
 	</script>
 
