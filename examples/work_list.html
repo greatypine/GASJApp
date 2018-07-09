@@ -437,9 +437,7 @@
 				message_isread();
 				pageInfo.currentPage = pageInfo.currentPage + 1;
 				doManager_GASM('InterManager', 'queryStoreOrderListForApp', [pageInfo, employee.employeeId,'0,1,2,3,4',""], function(data) {
-					setTimeout(function() {
-					
-				}, 100);
+				
 					if(data.result == true) {
 						
 						var jsonData = JSON.parse(data.data);
