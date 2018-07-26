@@ -15,7 +15,8 @@
       "js/immersed.js",
       "fonts/mui.ttf",
       "images/new_bg.jpg",
-      "images/new_bg2.jpg"
+      "images/new_bg2.jpg",
+      "images/new_bg2.png"
     ],
     "refer": [
       "examples/new_main.html",

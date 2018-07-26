@@ -976,14 +976,14 @@
 			var files = [];
 			files.push({name:new Date().Format('YYYYMMDDhhmmss'),path:imgpath});
 			wt=plus.nativeUI.showWaiting("正在上传。。。");
-			var task=plus.uploader.createUpload(file_server+"?img_type=1&file_name=user_image",
+			var task=plus.uploader.createUpload(file_server+"?storeDir=daqWeb/user_image/",
 				{method:"POST"},
 				function(t,status){ //上传完成
+					
 					if(status==200){
 						var data = JSON.parse(t.responseText);
-						if(data.result == true){
-							var pmsfile = JSON.parse(data.data);
-							$('#customer_pic').val(pmsfile.name)
+						if(data.status == "success"){
+							$('#customer_pic').val(data.fileName)
 							wt.close();
 							doSubmit(_type);
 						}else{

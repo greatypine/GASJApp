@@ -1,14 +1,17 @@
 //var projectpath = 'https://data.guoanshequ.top/daqWeb/';
-//var projectpath = 'http://10.16.31.236:8081/daqWeb/';
-var projectpath = 'http://10.16.31.242/daqWeb/';
+var projectpath = 'http://10.16.31.44:8082/daqWeb/';
+//var projectpath = 'http://10.16.31.242/daqWeb/';
 var gasmpath = 'http://10.16.31.242:8888/GASM/';
 //var gasmpath = 'https://store.guoanshuju.com/GASM/';
 //var projectpath = 'https://data.guoanshequ.com/daqWeb/';
-var img_path = 'https://imagedata.guoanshequ.com/file_manager/';
+//var img_path = 'https://imagedata.guoanshequ.com/file_manager/';
+var img_path='https://cdn.guoanshuju.com/daqWeb';
 //var img_path = 'http://10.16.42.201:8080/file_manager/';
 //var img_path = 'http://10.16.31.242/file_manager/';
 var server = projectpath + 'AppUploaderAction.action?businessType=bidAttachment';
-var file_server = projectpath + 'fileUpload.action';
+//var file_server = projectpath + 'fileUpload.action';
+
+var file_server = projectpath + 'uploadFileToOss.action';
 var filepath = projectpath;
 var img_filepath = img_path;
 
@@ -87,7 +90,7 @@ function doManager(managerName, methodName, params, callback, isAsync, errormeth
 						if(methodName != "queryActualMothlyTurnover") {
 							wt.close();
 						}
-						mui.toast("服务器链接异常，请联系管理员4");
+						mui.toast("服务器链接异常，请联系管理员");
 						if(errormethod == null || typeof(errormethod) == 'undefined') {
 							return;
 						}
@@ -127,7 +130,7 @@ function doManager(managerName, methodName, params, callback, isAsync, errormeth
 						if(methodName != "queryActualMothlyTurnover") {
 							wt.close();
 						}
-						mui.toast("服务器链接异常，请联系管理员5");
+						mui.toast("服务器链接异常，请联系管理员");
 						if(errormethod == null || typeof(errormethod) == 'undefined') {
 							return;
 						}
@@ -143,7 +146,7 @@ function doManager(managerName, methodName, params, callback, isAsync, errormeth
 			if(methodName != "queryActualMothlyTurnover") {
 				wt.close();
 			}
-			mui.toast("服务器链接异常，请联系管理员6");
+			mui.toast("服务器链接异常，请联系管理员");
 			if(errormethod == null || typeof(errormethod) == 'undefined') {
 				return;
 			}

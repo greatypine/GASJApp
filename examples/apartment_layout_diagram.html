@@ -236,14 +236,13 @@
 			var files = [];
 			files.push({name:new Date().Format('YYYYMMDDhhmmss'),path:imgpath});
 			var wt=plus.nativeUI.showWaiting("正在上传。。。");
-			var task=plus.uploader.createUpload(file_server+'?img_type=1&file_name=house_type_image',
+			var task=plus.uploader.createUpload(file_server+"?storeDir=daqWeb/house_type_image/",
 				{method:"POST"},
 				function(t,status){ //上传完成
 					if(status==200){
 						var data = JSON.parse(t.responseText);
-						if(data.result == true){ 
-							var pmsfile = JSON.parse(data.data);
-							imgpath = pmsfile.name;
+						if(data.status == "success"){ 
+							imgpath = data.fileName;
 							mui.fire(main, 'getHouse_pic', {
 								pic_name: imgpath
 							});
