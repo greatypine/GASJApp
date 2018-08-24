@@ -1,18 +1,20 @@
 //var projectpath = 'https://data.guoanshequ.top/daqWeb/';
-var projectpath = 'http://10.16.31.44:8082/daqWeb/';
+//var projectpath = 'http://10.16.31.49:8082/daqWeb/';
 //var projectpath = 'http://10.16.31.242/daqWeb/';
-var gasmpath = 'http://10.16.31.242:8888/GASM/';
-//var gasmpath = 'https://store.guoanshuju.com/GASM/';
-//var projectpath = 'https://data.guoanshequ.com/daqWeb/';
+//var gasmpath = 'http://10.16.31.242:8888/GASM/';
+var gasmpath = 'https://store.guoanshuju.com/GASM/';
+var projectpath = 'https://data.guoanshequ.com/daqWeb/';
 //var img_path = 'https://imagedata.guoanshequ.com/file_manager/';
 var img_path='https://cdn.guoanshuju.com/daqWeb';
 //var img_path = 'http://10.16.42.201:8080/file_manager/';
 //var img_path = 'http://10.16.31.242/file_manager/';
+//快递订单图片上传
 var server = projectpath + 'AppUploaderAction.action?businessType=bidAttachment';
 //var file_server = projectpath + 'fileUpload.action';
 
 var file_server = projectpath + 'uploadFileToOss.action';
 var filepath = projectpath;
+//广告位图片地址
 var img_filepath = img_path;
 
 function doManager(managerName, methodName, params, callback, isAsync, errormethod) {
@@ -253,6 +255,7 @@ function update(isupdate, file_name) {
 	} else if(isupdate == 1) {
 		btnArray = ['是'];
 		messagecontext = '有新版本升级，请升级！';
+		
 	}
 
 	if(btnArray != null) {
@@ -269,13 +272,15 @@ function update(isupdate, file_name) {
 					saveDownLoadLog("Android");
 				}
 			}
+			
 		});
 	}
+	
 
 }
 
 function downWgt(key, version) {
-	var wgtUrl = img_path + version;
+	var wgtUrl = img_path +"/static/"+ version;
 	var w;
 
 	if(key) {

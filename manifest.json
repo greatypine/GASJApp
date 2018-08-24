@@ -7,7 +7,7 @@
 	"id": "H546CAEF8",/*应用的标识，创建应用时自动生成，勿手动修改*/
 	"name": "国安数据",/*应用名称，程序桌面图标名称*/
 	"version": {
-		"name": "V2.2.2",/*应用版本名称*/
+		"name": "V2.2.3",/*应用版本名称*/
 		"code": "83"
 	},
 	"description": "",/*应用描述信息*/
@@ -341,7 +341,8 @@
 					"examples/new_tabbar.html",
 					"examples/maps.html",
 					"examples/city_main.html",
-					"examples/web_city_ej.html"
+					"examples/web_city_ej.html",
+					"examples/findPassword.html"
 				],
 				"priority": 0
 			},
@@ -1526,7 +1527,8 @@
 					"examples/web_index.html",
 					"examples/maps.html",
 					"examples/message_new.html",
-					"examples/new_web_message.html"
+					"examples/new_web_message.html",
+					"examples/work_list.html"
 				],
 				"priority": 0
 			},
@@ -2289,7 +2291,15 @@
 					"examples/maps.html",
 					"login.html",
 					"examples/work_details.html",
-					"examples/new_city_my.html"
+					"examples/new_city_my.html",
+					"examples/web_index.html"
+				],
+				"priority": 0
+			},
+			"examples/findPassword.html": {
+				"resources": [],
+				"refer": [
+					"examples/validation.html"
 				],
 				"priority": 0
 			}

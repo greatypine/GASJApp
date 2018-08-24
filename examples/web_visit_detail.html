@@ -281,7 +281,9 @@
 			function headInitView(jsonData) {
 				if(jsonData != null) {
 					if(jsonData.customer.cus_pic != null&&jsonData.customer.cus_pic != ""&&jsonData.customer.cus_pic != "https://imgcdn.guoanshequ.com/") {
-						$('#header_img').attr('src', decodeURI(jsonData.customer.cus_pic));
+						
+						isHasImg(jsonData.customer.cus_pic);
+//						$('#header_img').attr('src', decodeURI(jsonData.customer.cus_pic));
 					} else {
 						$('#header_img').attr('src', '../images/no_img2.png');
 					}
@@ -346,6 +348,16 @@
 					});
 				}, 0);
 			};
+			function isHasImg(pathImg){
+			    var ImgObj=new Image();
+			    ImgObj.src= pathImg;
+			     if(ImgObj.fileSize > 0 || (ImgObj.width > 0 && ImgObj.height > 0))
+			     {
+			       $('#header_img').attr('src', decodeURI(jsonData.customer.cus_pic));
+			     } else {
+			      $('#header_img').attr('src', '../images/no_img2.png');
+			    }
+			}
 //			//获取国安侠头像
 //			function getEmployeePicByEmployeeId(employee_id) {
 //				var urlpic="";

@@ -24,8 +24,16 @@
 		<!--<link rel="stylesheet" href="../css/mui.min.new.css">-->
 
 		<style>
-			.hang{position: relative;}
-			.time{position: absolute; top: 10px; right: 0;}
+			.hang {
+				position: relative;
+			}
+			
+			.time {
+				position: absolute;
+				top: 10px;
+				right: 0;
+			}
+			
 			html,
 			body {
 				height: 100%;
@@ -37,7 +45,7 @@
 				height: 3rem;
 				width: 50%;
 				margin-left: 20px;
-				background: #000; 
+				background: #000;
 			}
 			
 			.navbar-nav>.user-menu>.dropdown-menu>li.user-header>p {
@@ -48,7 +56,6 @@
 				position: fixed!important;
 				width: 100%;
 			}
-			
 			/*.mui-scroll-wrapper {
 				padding-top: 15px;
 			}*/
@@ -58,6 +65,7 @@
 				margin-bottom: 60px;
 				font-size: 16px;
 			}
+			
 			ul a {
 				display: block;
 				overflow: hidden;
@@ -89,7 +97,10 @@
 				color: #333;
 				margin: 6px 0;
 				font-size: 16px;
-				white-space:nowrap; text-overflow:ellipsis; -o-text-overflow:ellipsis; overflow:hidden;
+				white-space: nowrap;
+				text-overflow: ellipsis;
+				-o-text-overflow: ellipsis;
+				overflow: hidden;
 				margin-right: 32%;
 			}
 			
@@ -154,26 +165,28 @@
 				display: inline-block;
 				color: #fff;
 				font-size: 16px;
-				
-				
 			}
-			a:link { 
-			color:#fff; 
-			text-decoration:none; 
-			} 
-			a:visited { 
-			color:#fff; 
-			text-decoration:none; 
-			} 
-			a:hover { 
-			color:#fff; 
-			text-decoration:none; 
-			} 
-			a:active { 
-			color:#fff; 
-			text-decoration:none; 
-			} 
-						
+			
+			a:link {
+				color: #fff;
+				text-decoration: none;
+			}
+			
+			a:visited {
+				color: #fff;
+				text-decoration: none;
+			}
+			
+			a:hover {
+				color: #fff;
+				text-decoration: none;
+			}
+			
+			a:active {
+				color: #fff;
+				text-decoration: none;
+			}
+			
 			.mui-bar~.mui-content .mui-fullscreen {
 				top: 44px;
 				height: auto;
@@ -253,22 +266,58 @@
 			.mui-slider-indicator.mui-segmented-control {
 				background-color: #fff;
 			}
+			
 			.mui-bar~.mui-content .mui-fullscreen {
-top: 44px;
-height: auto;
-}
-.mui-slider-progress-bar {
-position: fixed;
-background-color: #007aff;
-}
-.count_css{
-	position: absolute;background-color: #FF0000; font-size: 10px; border-radius: 50%; line-height: 18px; width: 16px; height: 16px; color: #fff; left: 50%; margin-left: 10px;
-	
-}
-.message_css{
-	position: absolute;background-color: #FF0000; font-size: 10px; border-radius: 50%; line-height: 18px; width: 16px; height: 16px; color: #fff; left: 50%; margin-left: 10px;
-	
-}
+				top: 44px;
+				height: auto;
+			}
+			
+			.mui-slider-progress-bar {
+				position: fixed;
+				background-color: #007aff;
+			}
+			
+			.count_css {
+				position: absolute;
+				background-color: #FF0000;
+				font-size: 10px;
+				border-radius: 50%;
+				line-height: 18px;
+				width: 16px;
+				height: 16px;
+				color: #fff;
+				left: 50%;
+				margin-left: 10px;
+			}
+			
+			.message_css {
+				position: absolute;
+				background-color: #FF0000;
+				font-size: 10px;
+				border-radius: 50%;
+				line-height: 18px;
+				width: 16px;
+				height: 16px;
+				color: #fff;
+				left: 50%;
+				margin-left: 10px;
+			}
+			
+			.li_bg {
+				width: 90%;
+				margin-left: 5%;
+				height: auto;
+				border-radius: 10px;
+			}
+			
+			.p1 {
+				overflow: hidden;
+				text-overflow: ellipsis;
+				display: -webkit-box;
+				-webkit-box-orient: vertical;
+				-webkit-line-clamp: 4;
+				overflow: hidden;
+			}
 		</style>
 	</head>
 
@@ -287,16 +336,15 @@ background-color: #007aff;
 
 					</nav>
 
-
 				</header>
 
 				<div id="slider" class="mui-slider mui-fullscreen" style="padding-top: 66px;margin-top: 0;">
 					<div id="sliderSegmentedControl" class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted" style="box-shadow: 0px 1px 5px rgba(0,0,0,0.2);">
 						<div class="mui-scroll">
-							<a class="mui-control-item mui-active" href="#item1mobile" style="width: 50%; position: relative; border-right: 1px solid rgba(0,0,0,0.05);" id="notice_a">公告<span  class="count_css" id="notice_count" style="display: none;"></span>
+							<a class="mui-control-item mui-active" href="#item1mobile" style="width: 50%; position: relative; border-right: 1px solid rgba(0,0,0,0.05);" id="notice_a">公告<span class="count_css" id="notice_count" style="display: none;"></span>
 							</a>
-							<a class="mui-control-item" href="#item2mobile"style="width: 50%; position: relative; border-right: 1px solid rgba(0,0,0,0.05);" id="message_a">消息<span  class="message_css" id="message_count" style="display: none;"></span>
-								
+							<a class="mui-control-item" href="#item2mobile" style="width: 50%; position: relative; border-right: 1px solid rgba(0,0,0,0.05);" id="message_a">消息<span class="message_css" id="message_count" style="display: none;"></span>
+
 							</a>
 						</div>
 						<div id="sliderProgressBar" class="mui-slider-progress-bar mui-col-xs-5"></div>
@@ -306,7 +354,7 @@ background-color: #007aff;
 							<div id="scroll1" class="mui-scroll-wrapper">
 								<div class="mui-scroll aaa" style="padding-bottom: 90px;">
 									<ul class="mui-table-view" id="notice_list">
-										
+
 									</ul>
 								</div>
 							</div>
@@ -315,7 +363,7 @@ background-color: #007aff;
 							<div class="mui-scroll-wrapper">
 								<div class="mui-scroll bbb" style="padding-bottom: 90px;">
 									<ul class="mui-table-view" id="message_list">
-										
+
 									</ul>
 								</div>
 							</div>
@@ -433,7 +481,7 @@ background-color: #007aff;
 		<script src="../js/mui.pullToRefresh.js"></script>
 		<script src="../js/mui.pullToRefresh.material.js"></script>
 		<!--<script src="../js/mui.min2.js" type="text/javascript" charset="utf-8"></script>-->
-	
+
 		<script src="https://pv.sohu.com/cityjson?ie=utf-8"></script>
 		<script type="text/javascript" src="../js/custom_common.js"></script>
 		<script src="../js/date_util.js"></script>
@@ -457,37 +505,37 @@ background-color: #007aff;
 				totalRecords: 0,
 				tooManySearchReturn: false
 			};
-			var messagetype=null;
-			var noticetype=null;
+			var messagetype = null;
+			var noticetype = null;
 			var suffix = ".html";
 			mui.previewImage();
-			window.addEventListener('setNoticeCount',function(event){
-			var notice_count = event.detail.notice_count;
+			window.addEventListener('setNoticeCount', function(event) {
+				var notice_count = event.detail.notice_count;
 				if(notice_count != null) {
 					Notice_Count();
-				
+
 				}
-		    });
-		    window.addEventListener('setMessageCount',function(event){
-			var message_count = event.detail.message_count;
+			});
+			window.addEventListener('setMessageCount', function(event) {
+				var message_count = event.detail.message_count;
 				if(message_count != null) {
 					Message_Count();
 					initView(reverse);
-				
+
 				}
-		    });
+			});
 			mui.init({
 				swipeBack: false,
-				gestureConfig:{
-			   tap: true, //默认为true
-			   doubletap: true, //默认为false
-			   longtap: true, //默认为false
-			   swipe: true, //默认为true
-			   drag: true, //默认为true
-			   hold:false,//默认为false，不监听
-			   release:false//默认为false，不监听
-			  }
-				
+				gestureConfig: {
+					tap: true, //默认为true
+					doubletap: true, //默认为false
+					longtap: true, //默认为false
+					swipe: true, //默认为true
+					drag: true, //默认为true
+					hold: false, //默认为false，不监听
+					release: false //默认为false，不监听
+				}
+
 			});
 			(function($) {
 				var deceleration = mui.os.ios ? 0.003 : 0.0009;
@@ -501,13 +549,13 @@ background-color: #007aff;
 
 					//循环初始化所有下拉刷新，上拉加载。
 					$.each(document.querySelectorAll('.aaa'), function(index, pullRefreshEl) {
-						
+
 						$(pullRefreshEl).pullToRefresh({
-							
+
 							down: {
 								callback: function() {
 									var self = this;
-									noticetype=false;
+									noticetype = false;
 									self.endPullUpToRefresh();
 									self.refresh(true);
 									NoticepageInfo = {
@@ -518,7 +566,7 @@ background-color: #007aff;
 									};
 									setTimeout(function() {
 										var ul = self.element.querySelector('#notice_list');
-										ul.insertBefore(createFragment(index,true), ul.firstChild);
+										ul.insertBefore(createFragment(index, true), ul.firstChild);
 										self.endPullDownToRefresh();
 									}, 1000);
 								}
@@ -530,21 +578,20 @@ background-color: #007aff;
 										var ul = self.element.querySelector('#notice_list');
 										ul.appendChild(createFragment(index));
 										self.endPullUpToRefresh(noticetype);
-										
+
 									}, 1000);
-									
-									
+
 								}
 							}
 						});
 					});
-					
+
 					$.each(document.querySelectorAll('.item2mobile .bbb'), function(index, pullRefreshEl) {
 						$(pullRefreshEl).pullToRefresh({
 							down: {
 								callback: function() {
 									var self = this;
-									messagetype=false;
+									messagetype = false;
 									self.endPullUpToRefresh();
 									self.refresh(true);
 									pageInfo = {
@@ -555,7 +602,7 @@ background-color: #007aff;
 									};
 									setTimeout(function() {
 										var ul = self.element.querySelector('#message_list');
-										ul.insertBefore(createNewFragment(index,true), ul.firstChild);
+										ul.insertBefore(createNewFragment(index, true), ul.firstChild);
 										self.endPullDownToRefresh();
 									}, 1000);
 								}
@@ -567,34 +614,33 @@ background-color: #007aff;
 										var ul = self.element.querySelector('#message_list');
 										ul.appendChild(createNewFragment(index));
 										self.endPullUpToRefresh(messagetype);
-										
+
 									}, 1000);
-									
-									
+
 								}
 							}
 						});
 					});
 					var createFragment = function(index, reverse) {
 						var fragment = document.createDocumentFragment();
-							initNotice(reverse);
-							Notice_Count();
+						initNotice(reverse);
+						Notice_Count();
 						return fragment;
 					};
 					var createNewFragment = function(index, reverse) {
 						var fragment = document.createDocumentFragment();
-							initView(reverse);
-							 Message_Count();
+						initView(reverse);
+						Message_Count();
 						return fragment;
 					};
 				});
 			})(mui);
 			mui.plusReady(function() {
-                 var reverse=false;
+				var reverse = false;
 				initView(reverse);
 				initNotice(reverse);
-                Notice_Count();
-                Message_Count(); 
+				Notice_Count();
+				Message_Count();
 				var maps_webview = plus.webview.getWebviewById('maps_web');
 				if(maps_webview != null) {
 					maps_webview.close();
@@ -656,16 +702,13 @@ background-color: #007aff;
 					}, 50);
 				});
 				mui('#notice_a')[0].addEventListener('tap', function(event) {
-						$("#clear_a").css("display", "none");
+					$("#clear_a").css("display", "none");
 				});
 				mui('#message_a')[0].addEventListener('tap', function(event) {
-						$("#clear_a").css("display", "");
+					$("#clear_a").css("display", "");
 				});
-				
-				
 
 			});
-			
 
 			//获取所有消息列表
 			function initView(reverse) {
@@ -680,16 +723,17 @@ background-color: #007aff;
 						var jsonData = JSON.parse(data.data);
 						var $feedlist = $("#message_list");
 						if(jsonData.data == null || jsonData.data.length < 10) {
-							messagetype=(jsonData.data.length < 10);
-						}else{
-							messagetype=false;
+							messagetype = (jsonData.data.length < 10);
+						} else {
+							messagetype = false;
 						}
-						if(reverse){
+						if(reverse) {
 							$feedlist.empty();
 						}
 						$(jsonData.data).each(function(index, message) {
 							var t_html = "";
 							var d_html = "";
+							 
 							//用户画像
 							if(message.type == "customer_edit") {
 								t_html = '<div class="yonghu"><i class="fa fa-users"></i></div>';
@@ -732,7 +776,7 @@ background-color: #007aff;
 								'</li>';
 							$feedlist.append(html);
 							var $item_div = $feedlist.find('.item_div').last();
-							$item_div.find('.mui-slider-handle').bind('tap',function() {
+							$item_div.find('.mui-slider-handle').bind('tap', function() {
 								message_state(message.id);
 								$(this).find('.message-dian2').remove();
 								//公告
@@ -786,7 +830,7 @@ background-color: #007aff;
 								}
 
 							});
-							$item_div.find('.mui-btn-red').bind('tap',function() {
+							$item_div.find('.mui-btn-red').bind('tap', function() {
 								var btnArray = ['否', '是'];
 								mui.confirm('确定要删除当前数据吗？', '提示', btnArray, function(e) {
 									if(e.index == 1) {
@@ -828,30 +872,29 @@ background-color: #007aff;
 			var halfamonth = day * 15;
 			var month = day * 30;
 			//时间戳转换为发布时间  
-			function getDateDiff(dateTimeStamp) {
-				var now = new Date().getTime();
-				var diffValue = now - dateTimeStamp;
-				var monthC = diffValue / month;
-				var weekC = diffValue / (7 * day);
-				var dayC = diffValue / day;
-				var hourC = diffValue / hour;
-				var minC = diffValue / minute;
-				if(monthC >= 1) {
-					result = new Date(dateTimeStamp).Format('YYYY-MM-DD');
-				} else if(weekC >= 1) {
-					result = new Date(dateTimeStamp).Format('YYYY-MM-DD');
-				} else if(dayC >= 1) {
-					result = new Date(dateTimeStamp).Format('YYYY-MM-DD');
-				} else if(hourC >= 1) {
-					result = parseInt(hourC) + "个小时前";
-				} else if(minC >= 1) {
-					result = parseInt(minC) + "分钟前";
-				} else
-					result = "刚刚";
-				return result;
-			}
+//			function getDateDiff(dateTimeStamp) {
+//				var now = new Date().getTime();
+//				var diffValue = now - dateTimeStamp;
+//				var monthC = diffValue / month;
+//				var weekC = diffValue / (7 * day);
+//				var dayC = diffValue / day;
+//				var hourC = diffValue / hour;
+//				var minC = diffValue / minute;
+//				if(monthC >= 1) {
+//					result = new Date(dateTimeStamp).Format('YYYY-MM-DD');
+//				} else if(weekC >= 1) {
+//					result = new Date(dateTimeStamp).Format('YYYY-MM-DD');
+//				} else if(dayC >= 1) {
+//					result = new Date(dateTimeStamp).Format('YYYY-MM-DD');
+//				} else if(hourC >= 1) {
+//					result = parseInt(hourC) + "个小时前";
+//				} else if(minC >= 1) {
+//					result = parseInt(minC) + "分钟前";
+//				} else
+//					result = "刚刚";
+//				return result;
+//			}
 
-			
 			//消息阅读状态更改
 			function message_state(message_id) {
 				var message = {
@@ -867,8 +910,8 @@ background-color: #007aff;
 			}
 			//公告阅读状态更改
 			function notice_state(noticeNo) {
-				
-				doManager('NoticeReciverManager', 'updateNoticeReciverIsRead', [noticeNo,employee.employeeId], function(data) {
+
+				doManager('NoticeReciverManager', 'updateNoticeReciverIsRead', [noticeNo, employee.employeeId], function(data) {
 					if(data.result == true) {
 						var jsonData = JSON.parse(data.data);
 
@@ -1176,80 +1219,88 @@ background-color: #007aff;
 					employeeNo: employee.employeeId
 				};
 				NoticepageInfo.currentPage = NoticepageInfo.currentPage + 1;
-				doManager('NoticeReciverManager', 'selectNoticeReciver',[NoticeReciver,NoticepageInfo], function(data) {
+				doManager('NoticeReciverManager', 'selectNoticeReciver', [NoticeReciver, NoticepageInfo], function(data) {
 					if(data.result == true) {
 						var jsonData = JSON.parse(data.data);
 						var $feedlist = $("#notice_list");
 						if(jsonData.data == null || jsonData.data.length < 10) {
-							noticetype=(jsonData.data.length < 10);
-						}else{
-							noticetype=false;
+							noticetype = (jsonData.data.length < 10);
+						} else {
+							noticetype = false;
 						}
-						if(reverse){
+						if(reverse) {
 							$feedlist.empty();
 						}
 						$(jsonData.data).each(function(index, notice) {
-							
+
 							var t_html = "";
 							var d_html = "";
 							//业务公告
-							if(notice.type == "1") {
-								t_html = '<div class="gonggao"><i class="fa fa-bullhorn"></i></div>';
-								//事务公告
-							} else if(notice.type == "2") {
-								t_html = '<div class="gonggao"><i class="fa fa-bullhorn"></i></div>';
-							}
+//							if(notice.type == "1") {
+//								t_html = '<div class="gonggao"><i class="fa fa-bullhorn"></i></div>';
+//								//事务公告
+//							} else if(notice.type == "2") {
+//								t_html = '<div class="gonggao"><i class="fa fa-bullhorn"></i></div>';
+//							}
 							if(notice.isRead == '1') {
 								d_html = '<div></div>';
 							} else {
-								d_html = '<div class="message-dian2"></div>';
+								d_html = '<div class="message-dian2" style="margin-top: 10px;"></div>';
 							}
-							var html = '<li class="mui-table-view-cell item_div" style="margin-bottom:0px">' +
-//								'<div class="mui-slider-right mui-disabled">' +
-//								//								         '<a class="mui-btn mui-btn-green">确定</a>'+
-//								'<a class="mui-btn mui-btn-red" style="background-color: red;">删除</a>' +
+							var html='<li class="mui-table-view-cell item_div li_bg" style="margin-bottom:20px;margin-top:10px;">'+
+							         '<div class="mui-slider-handle"><div style="text-align: center;font-size: 18px;">'+notice.title+'</div>'+
+									 '<div style="font-size: 10px;">'+getDateDiff(notice.create_time)+'</div>'+
+									 '<div style="padding-top: 10px;font-size: 14px;" class="p1">'+
+									 notice.content+
+									 d_html+
+									 '</div></div>'+
+									 '</li>';
+							
+//							var html = '<li class="mui-table-view-cell item_div" style="margin-bottom:0px">' +
+//								//								'<div class="mui-slider-right mui-disabled">' +
+//								//								//								         '<a class="mui-btn mui-btn-green">确定</a>'+
+//								//								'<a class="mui-btn mui-btn-red" style="background-color: red;">删除</a>' +
+//								//								'</div>' +
+//								'<div class="message-div mui-slider-handle">' +
+//								'<div class="col-xs-2 no-padding">' +
+//								t_html +
 //								'</div>' +
-								'<div class="message-div mui-slider-handle">' +
-								'<div class="col-xs-2 no-padding">' +
-								t_html +
-								'</div>' +
-								'<div class="col-xs-10 hang">' +
-								'<h5><b>' + notice.title + '</b><span class="pull-right text-muted time" style="width: 30%;">' + getDateDiff(notice.create_time) + '</span></h5>' +
-								'<p class="text-muted info-box-text">' + notice.content + '</p>' +
-								d_html +
-								'</div></div>' +
-								'</li>';
+//								'<div class="col-xs-10 hang">' +
+//								'<h5><b>' + notice.title + '</b><span class="pull-right text-muted time" style="width: 30%;">' + getDateDiff(notice.create_time) + '</span></h5>' +
+//								'<p class="text-muted info-box-text">' + notice.content + '</p>' +
+//								d_html +
+//								'</div></div>' +
+//								'</li>';
 
 							$feedlist.append(html);
 							var $item_div = $feedlist.find('.item_div').last();
-							$item_div.find('.mui-slider-handle').bind('tap',function() {
+							$item_div.find('.mui-slider-handle').bind('tap', function() {
 								notice_state(notice.noticeNo);
 								$(this).find('.message-dian2').remove();
 								//公告
-										var webview = plus.webview.getWebviewById('notice_details');
-										if(webview != null) {
-											webview.close();
-										}
-										mui.openWindow({
-											url: 'notice_details.html',
-											id: 'notice_details',
-											createNew: true,
-											show: {
-												aniShow: 'slide-in-right'
-											},
-											waiting: {
-												autoShow: false
-											},
-											extras: {
-												notice_content: notice.content,
-												notice_title: notice.title,
-												notice_:notice
-											}
-										});
-
+								var webview = plus.webview.getWebviewById('notice_details');
+								if(webview != null) {
+									webview.close();
+								}
+								mui.openWindow({
+									url: 'notice_details.html',
+									id: 'notice_details',
+									createNew: true,
+									show: {
+										aniShow: 'slide-in-right'
+									},
+									waiting: {
+										autoShow: false
+									},
+									extras: {
+										notice_content: notice.content,
+										notice_title: notice.title,
+										notice_: notice
+									}
+								});
 
 							});
-							$item_div.find('.mui-btn-red').bind('tap',function() {
+							$item_div.find('.mui-btn-red').bind('tap', function() {
 								var btnArray = ['否', '是'];
 								mui.confirm('确定要删除当前数据吗？', '提示', btnArray, function(e) {
 									if(e.index == 1) {
@@ -1266,22 +1317,24 @@ background-color: #007aff;
 					}
 				})
 			}
+
 			function Notice_Count() {
 
 				doManager('NoticeReciverManager', 'getUnReadNotice', employee.employeeId, function(data) {
 					if(data.result == true) {
 						var jsonData = JSON.parse(data.data);
-						if(jsonData==0||jsonData==''){
+						if(jsonData == 0 || jsonData == '') {
 							$("#notice_count").css("display", "none");
-						}else{
-							$("#notice_count").css("display","");
+						} else {
+							$("#notice_count").css("display", "");
 							$('#notice_count').html(jsonData);
 						}
-                        
+
 					}
 				});
 
 			}
+
 			function Message_Count() {
 
 				var message = {
@@ -1293,7 +1346,7 @@ background-color: #007aff;
 						if(jsonData == 0 || jsonData == null) {
 							$("#message_count").css("display", "none");
 						} else {
-							$("#message_count").css("display","");
+							$("#message_count").css("display", "");
 							$('#message_count').html(jsonData);
 						}
 
@@ -1302,39 +1355,76 @@ background-color: #007aff;
 
 			}
 			//查看消息列表是否有未读信息，如有未读信息消息显示红点
-		function message_isread() {
-			var message = {
-				receiveId: employee.employeeId
-			};
-			var message_count=0;
-			var notice_count=0;
-			doManager('MessageNewManager', 'getUnReadMessageAmount', message, function(data) {
-				if(data.result == true) {
-					var jsonData = JSON.parse(data.data);
-					message_count=jsonData;
-					
-				}
-			},false);
-			
-			doManager('NoticeReciverManager', 'getUnReadNotice', employee.employeeId, function(data) {
+			function message_isread() {
+				var message = {
+					receiveId: employee.employeeId
+				};
+				var message_count = 0;
+				var notice_count = 0;
+				doManager('MessageNewManager', 'getUnReadMessageAmount', message, function(data) {
 					if(data.result == true) {
 						var jsonData = JSON.parse(data.data);
-						notice_count=jsonData;
-					
+						message_count = jsonData;
+
 					}
-				},false);
+				}, false);
+
+				doManager('NoticeReciverManager', 'getUnReadNotice', employee.employeeId, function(data) {
+					if(data.result == true) {
+						var jsonData = JSON.parse(data.data);
+						notice_count = jsonData;
+
+					}
+				}, false);
 				setTimeout(function() {
-					if(message_count == 0 && notice_count ==0) {
-					$('#message_state_div').removeClass("message-dian1");
-				} else {
-					$('#message_state_div').addClass("message-dian1");
-				}
-							
-						}, 200);
-				
-				
-		}
-			
+					if(message_count == 0 && notice_count == 0) {
+						$('#message_state_div').removeClass("message-dian1");
+					} else {
+						$('#message_state_div').addClass("message-dian1");
+					}
+
+				}, 200);
+
+			}
+	function getDateDiff (dateTimeStamp){
+  
+    var result;
+    var minute = 1000 * 60;
+    var hour = minute * 60;
+    var day = hour * 24;
+    var halfamonth = day * 15;
+    var month = day * 30;
+    var now = new Date().getTime();
+    var diffValue = now - dateTimeStamp;
+    if(diffValue < 0){
+      return "刚刚";
+    }
+    var monthC = diffValue / month;
+    var weekC = diffValue / (7 * day);
+    var dayC = diffValue / day;
+    var hourC = diffValue / hour;
+    var minC = diffValue / minute;
+   
+    if (weekC>=2) {
+      var date = new Date(dateTimeStamp);//时间戳为10位需*1000，时间戳为13位的话不需乘1000
+      var Y = date.getFullYear() + '/';
+      var M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '/';
+      var D = date.getDate() < 10 ? '0' + date.getDate() : date.getDate();
+      result= Y + M + D;
+    }else if(weekC>=1) {
+      result = "" + parseInt(weekC) + "周前";
+    } else if(dayC>=1) {
+      result = "" + parseInt(dayC) + "天前";
+    }else if(hourC>=1) {
+      result = "" + parseInt(hourC) + "小时前";
+    } else if(minC>=1) {
+      result = "" + parseInt(minC) + "分钟前";
+    }else{
+      result="刚刚";
+    }
+
+    return result;
+  }
 		</script>
 
 	</body>

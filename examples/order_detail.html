@@ -503,7 +503,6 @@
 		function setViewData(objExpress) {
 			initEmployeeSelect();
 			mui('#id')[0].value = objExpress.id;
-
 			if(objExpress.expressURL != null) {
 				if(objExpress.expressURL.indexOf('file:') > -1)
 					mui('#express_img')[0].src = objExpress.expressURL;
