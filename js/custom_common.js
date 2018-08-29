@@ -1,9 +1,9 @@
-//var projectpath = 'https://data.guoanshequ.top/daqWeb/';
-//var projectpath = 'http://10.16.31.49:8082/daqWeb/';
+//var projectpath = 'http://10.16.31.67:8082/daqWeb/';
+var projectpath = 'https://www.guoanshuju.com/daqWeb/';
 //var projectpath = 'http://10.16.31.242/daqWeb/';
 //var gasmpath = 'http://10.16.31.242:8888/GASM/';
 var gasmpath = 'https://store.guoanshuju.com/GASM/';
-var projectpath = 'https://data.guoanshequ.com/daqWeb/';
+//var projectpath = 'https://data.guoanshequ.top/daqWeb/';
 //var img_path = 'https://imagedata.guoanshequ.com/file_manager/';
 var img_path='https://cdn.guoanshuju.com/daqWeb';
 //var img_path = 'http://10.16.42.201:8080/file_manager/';
@@ -262,7 +262,7 @@ function update(isupdate, file_name) {
 		mui.confirm(messagecontext, '检查更新', btnArray, function(e) {
 			if(e.index == 0) {
 				if(mui.os.ios) {
-					plus.runtime.openURL('https://data.guoanshequ.com/daqWeb/download/download.html',
+					plus.runtime.openURL('https://www.guoanshuju.com/daqWeb/download/download.html',
 						function onError(error) {
 							mui.toast('打开升级页面失败！');
 						});
