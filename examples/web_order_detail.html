@@ -154,7 +154,7 @@
 						<p id='setorder_time'>下单时间:</p>
 						<!--<p id='delivery_time'>配送时间:</p>-->
 						<p id='signed_time' style="color: #dd4b39;">签收时间:</p>
-						<p id='order_area' style="color: #18bc9c;">订单区块:</p>
+						<p id='order_area' style="color: #18bc9c;">送货地址:</p>
 						<p id='remarks'>订单备注：无</p>
 					</div>
 				</div>
@@ -362,9 +362,9 @@
 								$("#signed_time").html('签收时间:' + new Date(order_data.df_signed_time).Format('YYYY-MM-DD'));
 				}
 				if(order_data.placename == null || order_data.placename == "") {
-					$("#order_area").html('未录入订单区块');
+					$("#order_area").html('未录入送货地址');
 				} else {
-					$("#order_area").html('订单区块:'+order_data.placename);
+					$("#order_area").html('送货地址:'+order_data.placename);
 				}
 	
 			}
