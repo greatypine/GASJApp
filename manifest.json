@@ -2198,7 +2198,8 @@
 					"examples/maps.html",
 					"examples/storeDataCard.html",
 					"examples/other_web_user.html",
-					"examples/tabbar.html"
+					"examples/tabbar.html",
+					"examples/new_web_message.html"
 				],
 				"priority": 0
 			},
@@ -2279,7 +2280,8 @@
 					"examples/tabbar.html",
 					"examples/notice_details.html",
 					"examples/work_list.html",
-					"examples/message_monomer_portrait.html"
+					"examples/message_monomer_portrait.html",
+					"examples/web_shopkeeper_new.html"
 				],
 				"priority": 0
 			},

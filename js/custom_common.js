@@ -1,9 +1,9 @@
-//var projectpath = 'http://10.16.31.67:8082/daqWeb/';
-var projectpath = 'https://www.guoanshuju.com/daqWeb/';
+var projectpath = 'http://10.16.31.175:8082/daqWeb/';
+//var projectpath = 'https://www.guoanshuju.com/daqWeb/';
 //var projectpath = 'http://10.16.31.242/daqWeb/';
 //var gasmpath = 'http://10.16.31.242:8888/GASM/';
 var gasmpath = 'https://store.guoanshuju.com/GASM/';
-//var projectpath = 'https://data.guoanshequ.top/daqWeb/';
+//var projectpath = 'https://daqweb.guoanshequ.top/daqWeb/';
 //var img_path = 'https://imagedata.guoanshequ.com/file_manager/';
 var img_path='https://cdn.guoanshuju.com/daqWeb';
 //var img_path = 'http://10.16.42.201:8080/file_manager/';
