@@ -436,7 +436,7 @@
 						</li>
 						<li class="treeview">
 							<a onclick="toUser()">
-								<span>我的片区</span> <i class="fa  fa-angle-right pull-right"></i>
+								<span>我的客户</span> <i class="fa  fa-angle-right pull-right"></i>
 							</a>
 						</li>
 						<li class="treeview" style="display: none;" id="datacard">
@@ -1063,15 +1063,35 @@
 				}, 50);
 			};
 			//跳转到片区信息
+//			function toUser() {
+//				setTimeout(function() {
+//					var webview = plus.webview.getWebviewById('web_user');
+//					if(webview != null) {
+//						webview.close();
+//					}
+//					mui.openWindow({
+//						url: 'web_user.html',
+//						id: 'web_user',
+//						createNew: true,
+//						show: {
+//							aniShow: 'slide-in-right'
+//						},
+//						waiting: {
+//							autoShow: false
+//						}
+//					});
+//				}, 100);
+//			};
+			//跳转到我的客户列表页面
 			function toUser() {
 				setTimeout(function() {
-					var webview = plus.webview.getWebviewById('web_user');
+					var webview = plus.webview.getWebviewById('myClients');
 					if(webview != null) {
 						webview.close();
 					}
 					mui.openWindow({
-						url: 'web_user.html',
-						id: 'web_user',
+						url: 'myClients.html',
+						id: 'myClients',
 						createNew: true,
 						show: {
 							aniShow: 'slide-in-right'
@@ -1082,7 +1102,6 @@
 					});
 				}, 100);
 			};
-
 			//获取滚动条距离顶端的距离 
 
 			function getScrollTop() {
