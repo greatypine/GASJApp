@@ -1222,6 +1222,7 @@
 				doManager('NoticeReciverManager', 'selectNoticeReciver', [NoticeReciver, NoticepageInfo], function(data) {
 					if(data.result == true) {
 						var jsonData = JSON.parse(data.data);
+						if(jsonData.code==200){
 						var $feedlist = $("#notice_list");
 						if(jsonData.data == null || jsonData.data.length < 10) {
 							noticetype = (jsonData.data.length < 10);
@@ -1311,6 +1312,11 @@
 							});
 
 						});
+							
+						}else{
+							mui.toast(jsonData.message);
+						}
+						
 
 					} else {
 						mui.toast(data.message);

@@ -1,4 +1,4 @@
-var projectpath = 'http://10.16.31.175:8082/daqWeb/';
+var projectpath = 'http://10.16.21.63/daqWeb/';
 //var projectpath = 'https://www.guoanshuju.com/daqWeb/';
 //var projectpath = 'http://10.16.31.242/daqWeb/';
 //var gasmpath = 'http://10.16.31.242:8888/GASM/';
