@@ -296,6 +296,10 @@
 											setTimeout(function(){
 								             toCityMain();		
 									        },200);
+										}if(jsonData.user.usergroup.code=='DZ'){
+											setTimeout(function(){
+								             toDZMain();		
+									        },200);
 										}else {
 											setTimeout(function(){
 								             toMain();		
@@ -380,14 +384,34 @@
 		}
 	    //跳转到主页面
 		function toMain() {
-			var sh_webview = plus.webview.getWebviewById('maps');
+			var sh_webview = plus.webview.getWebviewById('gmv');
 					if(sh_webview != null){
 						sh_webview.close();
 					}
 			setTimeout(function() {
 				mui.openWindow({
-					url:'examples/maps.html',
-					id: 'maps',
+					url:'examples/gmv.html',
+					id: 'gmv',
+					createNew:true,
+					show: {
+						aniShow: 'slide-in-right'
+					},
+					waiting: {
+						autoShow: false
+					}
+				});
+			}, 50);
+		}
+		//跳转到店长主页面
+		function toDZMain() {
+			var sh_webview = plus.webview.getWebviewById('gmv');
+					if(sh_webview != null){
+						sh_webview.close();
+					}
+			setTimeout(function() {
+				mui.openWindow({
+					url:'examples/dzgmv.html',
+					id: 'dzgmv',
 					createNew:true,
 					show: {
 						aniShow: 'slide-in-right'

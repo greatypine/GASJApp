@@ -195,16 +195,16 @@
 					<a class="col-xs-4" id="web_city_ej" path="web_city_ej.html" onclick="jump(this)">
 						<p><i class="fa fa-bar-chart-o"></i></p>动态</a>
 
-					<a class="col-xs-3" id="maps" path="maps.html" onclick="jump(this)">
-						<p><i class="fa fa-globe"></i></p>地图</a>
+					<a class="col-xs-3" id="gmv" path="gmv.html" onclick="jump(this)">
+						<p><i class="fa fa-globe"></i></p>绩效</a>
 					<a class="col-xs-3" id="areaState" onclick="selectherf()">
-						<p><i class="fa fa-user"></i></p>混片儿</a>
+						<p><i class="fa fa-user"></i></p>运营</a>
 					<a class="col-xs-3 " id="message" path="new_web_message.html" onclick="jump(this)">
 						<p><i class="fa fa-envelope-o"></i></p>消息
 						<div id="message_state_div"></div>
 					</a>
-					<a class="col-xs-3" id="tabbar" path="tabbar.html" onclick="jump(this)">
-						<p><i class="fa fa-file-text-o"></i></p>录入</a>
+					<!--<a class="col-xs-3" id="tabbar" path="tabbar.html" onclick="jump(this)">
+						<p><i class="fa fa-file-text-o"></i></p>录入</a>-->
 					<a class="col-xs-3 mark-green" id="work" href="javascript:void(0)">
 						<p><i class="fa  fa-calendar-check-o"></i></p>工单</a>
 					<a class="col-xs-4" id="new_city_my" path="new_city_my.html" onclick="jump(this)">
@@ -265,6 +265,11 @@
 								<span>我的片区</span> <i class="fa  fa-angle-right pull-right"></i>
 							</a>
 						</li>
+						<li class="treeview" style="display: none;" id="new_tabbar">
+							<a onclick="toNewTabbar()">
+								<span>数据录入</span> <i class="fa  fa-angle-right pull-right"></i>
+							</a>
+						</li> 
 						<li class="treeview">
 							<a onclick="toUpdatePassword()">
 								<span>修改密码</span> <i class="fa  fa-angle-right pull-right"></i>
@@ -351,6 +356,15 @@
 						$("footer").css("display", "");
 						$("#web_city_ej").attr("style", "display:none;");
 						$("#my").attr("style", "display:none;");
+						$("#new_tabbar").css("display", "");
+						if(employee.usergroup.code == 'GAX') {
+							$("#datacard").css("display", "");
+							$("#my_area").css("display", "");
+						} else if(employee.usergroup.code == 'DZ') {
+							$("#store_datacard").css("display", "");
+							$("#shopkeeper_information").css("display", "");
+							$("#shopuser_information").css("display", "");
+						}
 					} else if(employee.usergroup.code == 'CSMDGLZ') {
 						$("footer").css("display", "");
 						$("#tabbar").attr("style", "display:none;");
@@ -369,14 +383,7 @@
 						$("#message").attr("class", "col-xs-4 mark-green");
 					}
 
-					if(employee.usergroup.code == 'GAX') {
-						$("#datacard").css("display", "");
-						$("#my_area").css("display", "");
-					} else if(employee.usergroup.code == 'DZ') {
-						$("#store_datacard").css("display", "");
-						$("#shopkeeper_information").css("display", "");
-						$("#shopuser_information").css("display", "");
-					}
+					
 				}
 				setMy();
 				initStore();
@@ -590,7 +597,7 @@
 						if(selectArea_list == null || selectArea_list == "" || selectArea_list.length == 0) {
 							mui.toast("暂无划片区域");
 						} else {
-							tojump("web_index", "web_index.html");
+							tojump("operate", "operate.html");
 						}
 
 					}
@@ -998,6 +1005,26 @@
 function iosAppstore( url ) {
 	plus.runtime.openURL( "itms-apps://"+url );
 }
+//跳转到录入
+			function toNewTabbar() {
+				setTimeout(function() {
+					var webview = plus.webview.getWebviewById('new_tabbar');
+					if(webview != null) {
+						webview.close();
+					}
+					mui.openWindow({
+						url: 'new_tabbar.html',
+						id: 'new_tabbar',
+						createNew: true,
+						show: {
+							aniShow: 'slide-in-right'
+						},
+						waiting: {
+							autoShow: false
+						}
+					});
+				}, 0);
+			};
 		</script>
 
 	</body>

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>录入</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<!--标准mui.css-->
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="../css/common.css" />
+		<link rel="stylesheet" type="text/css" href="../css/style.css" />
+
+		<style>
+			.div_f {
+				margin-top: 90px;
+			}
+			
+			.div_1 {
+				margin: 30px 40px;
+				display: flex;
+				border: 1px solid #649cf1;
+			}
+			
+			.div_l {
+				height: 1.2rem;
+				width: 1.2rem;
+				border: 1px;
+				background: #649cf1;
+				border-radius: 50%;
+				margin: 0.3rem 0.4rem 0.2rem 0.2rem;
+			}
+			
+			.div_l img {
+				height: 0.8rem;
+				width: 0.8rem;
+				margin: 0.2rem;
+			}
+			
+			.div_r {
+				width: 40%;
+				font-size: 20px;
+				line-height: 100px;
+				text-align: center;
+				color:#649cf1;
+				
+			}
+			.div_2 {
+				margin: 30px 40px;
+				display: flex;
+				border: 1px solid #ffab33;
+			}
+			.div_3 {
+				margin: 30px 40px;
+				display: flex;
+				border: 1px solid #70bc24;
+			}
+			.div_4 {
+				margin: 30px 40px;
+				display: flex;
+				border: 1px solid #fd5e5e;
+			}
+		</style>
+
+	</head>
+
+	<body style="background-color: #fff;">
+		<header class="mui-bar mui-bar-nav titleheader">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">录入</h1>
+		</header>
+		<div class="div_f">
+			<div class="div_1" onclick="toStoreDaily()">
+				<div class="div_l"><img src="../images/icon4.png"> </div>
+				<div class="div_r">门店日常</div>
+			</div>
+			<div class="div_2" onclick="toUserInformation()">
+				<div class="div_l" style="background:#ffab33;"><img src="../images/icon1.png"> </div>
+				<div class="div_r" style="color:#ffab33;">用户画像</div>
+			</div>
+			<div class="div_3" onclick="toMatchingInformation()">
+				<div class="div_l" style="background:#70bc24;"><img src="../images/icon3.png"> </div>
+				<div class="div_r" style="color:#70bc24;">地址录入</div>
+			</div>
+			<div class="div_4" onclick="toVisitingInformation()">
+				<div class="div_l" style="background:#fd5e5e;"><img src="../images/icon2.png"> </div>
+				<div class="div_r" style="color:#fd5e5e;">拜访记录</div>
+			</div>
+		</div>
+
+	</body>
+	<script src="../js/mui.min.js"></script>
+	<script src="https://pv.sohu.com/cityjson?ie=utf-8"></script>
+	<script src="../js/custom_common.js"></script>
+	<script src="../js/date_util.js"></script>
+	<script src="../js/jquery-2.2.2.min.js"></script>
+	<script type="text/javascript">
+		//跳转到门店日常
+			function toStoreDaily() {
+				setTimeout(function() {
+					var webview = plus.webview.getWebviewById('store_daily');
+					if(webview != null) {
+						webview.close();
+					}
+					mui.openWindow({
+						url: 'store_daily.html',
+						id: 'store_daily',
+						createNew: true,
+						show: {
+							aniShow: 'slide-in-right'
+						},
+						waiting: {
+							autoShow: false
+						}
+					});
+				}, 0);
+			};
+		//跳转到用户画像
+			function toUserInformation() {
+				setTimeout(function() {
+					var webview = plus.webview.getWebviewById('user_information');
+					if(webview != null) {
+						webview.close();
+					}
+					mui.openWindow({
+						url: 'user_information.html',
+						id: 'user_information',
+						createNew: true,
+						show: {
+							aniShow: 'slide-in-right'
+						},
+						waiting: {
+							autoShow: false
+						}
+					});
+				}, 0);
+			};
+			//跳转到地址录入
+			function toMatchingInformation() {
+				setTimeout(function() {
+					var webview = plus.webview.getWebviewById('matching_information');
+					if(webview != null) {
+						webview.close();
+					}
+					mui.openWindow({
+						url: 'matching_information.html',
+						id: 'matching_information',
+						createNew: true,
+						show: {
+							aniShow: 'slide-in-right'
+						},
+						waiting: {
+							autoShow: false
+						}
+					});
+				}, 0);
+			};
+			//跳转到拜访记录
+			function toVisitingInformation() {
+				setTimeout(function() {
+					var webview = plus.webview.getWebviewById('visiting_information');
+					if(webview != null) {
+						webview.close();
+					}
+					mui.openWindow({
+						url: 'visiting_information.html',
+						id: 'visiting_information',
+						createNew: true,
+						show: {
+							aniShow: 'slide-in-right'
+						},
+						waiting: {
+							autoShow: false
+						}
+					});
+				}, 0);
+			};
+	</script>
+
+</html>
