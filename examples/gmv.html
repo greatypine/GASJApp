@@ -444,8 +444,10 @@
 				message_isread();
 //				getAllAreaOfEmployee(select_area_list);
 				initView();
-				
-                newgetMonthAreaData();
+				setTimeout(function() {
+								newgetMonthAreaData();
+							}, 200);
+                
 			
 				if('Android' == plus.os.name) {
 					var first = null;
@@ -828,7 +830,17 @@
 			};
 			//绩效本月数据
 			function newgetMonthAreaData() {
-				doManager('InterManager', 'queryAreaInfoByAreaCode', employee.employeeId, function(data) {
+				if(employee.employeeId==null||employee.employeeId==""){
+					$('#area_profit').html("--");
+							$('#lst_area_profit').html("--");
+							$('#areaopencard').html("--");
+							$('#lst_areaopencard').html("--");
+							$('#month_zdgmv').html("--");
+							$('#lst_month_zdgmv').html("--");
+							mui.toast("没有该权限");
+					
+				}else{
+					doManager('InterManager', 'queryAreaInfoByAreaCode', employee.employeeId, function(data) {
 					if(data.result == true) {
 						var jsonData = JSON.parse(data.data);
 						if(jsonData.code==200){
@@ -850,6 +862,9 @@
 						
 					}
 				});
+					
+				}
+				
 			}
 		</script>
 	</body>
