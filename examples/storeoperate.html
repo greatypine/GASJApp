@@ -261,8 +261,8 @@
 						<div id="sliderSegmentedControl" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
 
 							<a class="mui-control-item mui-active item1mobile" href="#item1mobile">运营地图</a>
-							<a class="mui-control-item item2mobile" href="#item2mobile">消费记录</a>
-				
+							<a class="mui-control-item item2mobile" href="#item2mobile">运营统计</a>
+
 						</div>
 
 						<div id="sliderProgressBar" class="mui-slider-progress-bar mui-col-xs-5"></div>
@@ -274,36 +274,29 @@
 											<div class="mui-content mui-scroll-wrapper">
 												<div style="margin-top: 80px;text-align: center;">地图加载中...</div>
 											</div>
-										
+
 										</div>
 
 									</div>
 								</div>
-								
-								
+
 							</div>
 
 							<div id="item2mobile" class="mui-slider-item mui-control-content">
-								<div class="mui-input-row mui-search" style="margin-top: 20px;height: 40px;width: 90%;margin-left: 5%;margin-right: 5%;">
-									<input type="search" id="search" class="mui-input-clear" style="border:1px solid #18bc9c ;background-color: white;" placeholder="请输入订单号">
-								</div>
-								<div style="text-align: center; margin:20px auto;" id="orderrefresh">
-									<a>点击刷新</a>
-								</div>
 								<div id="scroll2">
-									<div class="mui-scroll" id="item2div">
-										<div class="mui-loading">
+									<div class="mui-scroll mui-content-padded">
+										<!--<div class="mui-loading">
 											<div class="mui-spinner">
 											</div>
+										</div>-->
+										<div class="box box-primary" style="margin-top: 20px;">
+											<div class="box-header with-border">门店运营统计</div>
+											<div id="main1" style="width: 100%;height:300px;"></div>
 										</div>
-									</div>
-									<div style="text-align: center; margin:30px 0 60px 0">
-										<a style="color: #999;" id="moreorder">点击加载更多</a>
-										<!--<a id="noMoreOrder" style="display: none;">暂无数据,点击刷新</a>-->
+
 									</div>
 								</div>
 							</div>
-
 
 						</div>
 						<footer style="display: none;" id="footer_bottmo">
@@ -318,8 +311,7 @@
 							<!--<a class="col-xs-3" id="tabbar" path="tabbar.html" onclick="jump(this)">
 								<p><i class="fa fa-file-text-o"></i></p>录入</a>-->
 							<a class="col-xs-3" id="work" path="work_list.html" onclick="jump(this)">
-						<p><i class="fa fa-calendar-check-o"></i></p>工单</a>
-							
+								<p><i class="fa fa-calendar-check-o"></i></p>工单</a>
 
 						</footer>
 
@@ -356,7 +348,7 @@
 								<span>个人动态</span> <i class="fa  fa-angle-right pull-right"></i>
 							</a>
 						</li>
-						
+
 						<li class="treeview" style="display: none;" id="datacard">
 							<a onclick="toCard()">
 								<span>国安侠数据卡</span> <i class="fa  fa-angle-right pull-right"></i>
@@ -415,6 +407,59 @@
 		<script src="../js/date_util.js"></script>
 		<!--<script src="../js/jquery.min.js" type="text/javascript"></script>-->
 		<script>
+			var myChart1 = echarts.init(document.getElementById('main1'));
+			// 指定图表的配置项和数据
+			var option1 = {
+
+				tooltip: {
+					trigger: 'axis'
+				},
+				legend: {
+					//					data: ['订单量', '订单金额', '拜访记录', '用户画像']
+					data: ['拜访记录', '用户画像']
+				},
+				grid: {
+					left: '3%',
+					right: '4%',
+					bottom: '3%',
+					top: '15%',
+					containLabel: true
+				},
+				xAxis: {
+					type: 'category',
+					boundaryGap: false,
+					data: []
+				},
+				yAxis: {
+					type: 'value'
+				},
+				series: [
+					//				    {
+					//						name: '订单量',
+					//						type: 'line',
+					//						stack: '总量',
+					//						data: []
+					//					},
+					//					{
+					//						name: '订单金额',
+					//						type: 'line',
+					//						stack: '总量',
+					//						data: []
+					//					},
+					{
+						name: '拜访记录',
+						type: 'line',
+						stack: '总量',
+						data: []
+					},
+					{
+						name: '用户画像',
+						type: 'line',
+						stack: '总量',
+						data: []
+					}
+				]
+			};
 			//消费记录分页
 			var oredrPageInfo = {
 				currentPage: 0,
@@ -422,7 +467,7 @@
 				totalRecords: 0,
 				tooManySearchReturn: false
 			};
-			
+
 			//拜访记录分页
 			var relationPageInfo = {
 				currentPage: 0,
@@ -448,21 +493,21 @@
 			var zw = employee.usergroup.code;
 			var lat = null;
 			var lon = null;
-			
+
 			mui.previewImage();
 
 			mui.init({
 				swipeBack: false,
-				gestureConfig:{
-			   tap: true, //默认为true
-			   doubletap: true, //默认为false
-			   longtap: true, //默认为false
-			   swipe: true, //默认为true
-			   drag: true, //默认为true
-			   hold:false,//默认为false，不监听
-			   release:false//默认为false，不监听
-			  }
-				
+				gestureConfig: {
+					tap: true, //默认为true
+					doubletap: true, //默认为false
+					longtap: true, //默认为false
+					swipe: true, //默认为true
+					drag: true, //默认为true
+					hold: false, //默认为false，不监听
+					release: false //默认为false，不监听
+				}
+
 			});
 			window.addEventListener('setarea', function(event) {
 				var id = event.detail.id;
@@ -485,7 +530,7 @@
 				}, function(e) {
 					initStore();
 				});
-			
+
 				if(employee.usergroup != null) {
 					if(employee.usergroup.code == 'ZHGLY' || employee.usergroup.code == 'DZ' || employee.usergroup.code == 'GAX' || employee.usergroup.code == 'FDZJSZ') {
 						$("footer").css("display", "");
@@ -494,7 +539,7 @@
 							$("#datacard").css("display", "");
 							$("#myclients").css("display", "");
 						}
-						
+
 					} else {
 						$("footer").css("display", "");
 						$("#work").attr("style", "display:none;");
@@ -502,11 +547,11 @@
 						$("#operate").attr("class", "col-xs-4 mark-green");
 						$("#new_web_message").attr("class", "col-xs-4");
 					}
-					
+
 				}
 				h = plus.screen.resolutionHeight;
 				message_isread();
-//				getAllAreaOfEmployee(select_area_list);
+				//				getAllAreaOfEmployee(select_area_list);
 				initView();
 
 				if('Android' == plus.os.name) {
@@ -525,7 +570,7 @@
 						}
 					}
 				}
-				
+
 				$('.mui-control-content').css("height", h);
 				document.querySelector('.mui-icon-bars').addEventListener('tap', function(e) {
 					plus.webview.getWebviewById('maps_web').setStyle({
@@ -549,7 +594,6 @@
 					getmaps(store_no);
 
 				});
-				
 
 				document.getElementById('slider').addEventListener('slide', function(e) {
 					$('[data-toggle="popover"]').popover('hide');
@@ -557,45 +601,45 @@
 					$('#relationrefresh').hide();
 					if(e.detail.slideNumber === 0) {
 						setTimeout(function() {
-							
+
 						}, 500);
 					} else if(e.detail.slideNumber === 1) {
-						$('#orderrefresh').hide();
-						if(item2.querySelector('.mui-loading')) {
-							
+						if(item2.querySelector('.box-primary')) {
+
 							setTimeout(function() {
-//						
-								oredrPageInfo.currentPage = 0;
-								getOrderNew(employee.employeeId, null);
-							}, 500);
+								if(store == null || store == "" || store.store_id == null || store.store_id == "") {
+									getData(employee.store_id);
+
+								} else {
+									getData(store.store_id);
+
+								}
+							}, 200);
 						}
-					} 
-					
-				
-				});
-
-				$(document).on('click', '#moreorder', function() {
-					getOrderMoreNew(employee.employeeId);
-				});
-
-				$(document).on('click', '#orderrefresh', function() {
-					$('#orderrefresh').hide();
-					oredrPageInfo.currentPage = 0;
-					$("#search").val("");
-					getOrderNew(employee.employeeId, null);
-				
-				});
-			
-			
-
-				$(document).on('touchend', '#item2mobile', function() {
-					if(getScrollTop() == 0) {
-						$('#orderrefresh').fadeIn(500);
-					} else {
-						$('#orderrefresh').fadeOut(500);
 					}
+
 				});
-				
+
+//				$(document).on('click', '#moreorder', function() {
+//					getOrderMoreNew(employee.employeeId);
+//				});
+
+//				$(document).on('click', '#orderrefresh', function() {
+//					$('#orderrefresh').hide();
+//					oredrPageInfo.currentPage = 0;
+//					$("#search").val("");
+//					getOrderNew(employee.employeeId, null);
+//
+//				});
+
+//				$(document).on('touchend', '#item2mobile', function() {
+//					if(getScrollTop() == 0) {
+//						$('#orderrefresh').fadeIn(500);
+//					} else {
+//						$('#orderrefresh').fadeOut(500);
+//					}
+//				});
+
 				//搜索功能（android和ios软件盘右下角完成键监听）
 				$('#search').bind('keypress', function(event) {
 					if(event.keyCode == "13") {
@@ -641,8 +685,6 @@
 					});
 				}
 
-				
-
 				var sliderSegmentedControl = document.getElementById('sliderSegmentedControl');
 				$('.mui-input-group').on('change', 'input', function() {
 					if(this.checked) {
@@ -679,16 +721,13 @@
 				var nativeWebview, imm, InputMethodManager;
 				initNativeObjects();
 				showSoftInput();
-			$(function(){ 
-		        $('[data-toggle="popover"]').popover().on('shown.bs.popover', function () {
-		            $(this).parent().siblings().find('[data-toggle="popover"]').popover('hide');
-		        });
-		    });
-	
+				$(function() {
+					$('[data-toggle="popover"]').popover().on('shown.bs.popover', function() {
+						$(this).parent().siblings().find('[data-toggle="popover"]').popover('hide');
+					});
+				});
 
 			});
-			
-			 
 
 			function initView() {
 				if(employee != null) {
@@ -721,15 +760,15 @@
 					}
 
 				}
-				if(employee_pic!=null){
-					if(employee_pic.pngUrl!=null&&employee_pic.pngUrl!=""&&employee_pic.pngUrl!="https://imgcdn.guoanshequ.com/"){
-						$(".img-circle").attr("src",decodeURI(employee_pic.pngUrl));
-					}else{
-						$(".img-circle").attr("src","../images/my_card_head.png");
+				if(employee_pic != null) {
+					if(employee_pic.pngUrl != null && employee_pic.pngUrl != "" && employee_pic.pngUrl != "https://imgcdn.guoanshequ.com/") {
+						$(".img-circle").attr("src", decodeURI(employee_pic.pngUrl));
+					} else {
+						$(".img-circle").attr("src", "../images/my_card_head.png");
 					}
-					
-				}else{
-					$(".img-circle").attr("src","../images/my_card_head.png");
+
+				} else {
+					$(".img-circle").attr("src", "../images/my_card_head.png");
 				}
 
 			}
@@ -774,7 +813,7 @@
 					});
 				}, 50);
 			};
-	
+
 			//跳转到我的客户列表页面
 			function toUser() {
 				setTimeout(function() {
@@ -810,79 +849,78 @@
 			}
 
 			//获取片区信息数据
-//			function getAllAreaOfEmployee(jsonData) {
-//				if(jsonData != null) {
-//					$(jsonData).each(function(index, arealist) {
-//						if(select_areaid == null) {
-//							if(index == 0) {
-//								$('.select').append('<option selected="selected" value=' + arealist.id + '>' + arealist.name + '(' + arealist.area_no + ')' + '</option>');
-//								area_id = arealist.id;
-//								localStorage.setItem("selectArea_id", arealist.id);
-//							} else {
-//								$('.select').append('<option value=' + arealist.id + '>' + arealist.name + '(' + arealist.area_no + ')' + '</option>');
-//							}
-//						} else {
-//							if(select_areaid == arealist.id) {
-//								$('.select').append('<option selected="selected" value=' + arealist.id + '>' + arealist.name + '(' + arealist.area_no + ')' + '</option>');
-//								area_id = arealist.id;
-//							} else {
-//								$('.select').append('<option value=' + arealist.id + '>' + arealist.name + '(' + arealist.area_no + ')' + '</option>');
-//							}
-//
-//						}
-//
-//					});
-//
-//				}
-//			}
+			//			function getAllAreaOfEmployee(jsonData) {
+			//				if(jsonData != null) {
+			//					$(jsonData).each(function(index, arealist) {
+			//						if(select_areaid == null) {
+			//							if(index == 0) {
+			//								$('.select').append('<option selected="selected" value=' + arealist.id + '>' + arealist.name + '(' + arealist.area_no + ')' + '</option>');
+			//								area_id = arealist.id;
+			//								localStorage.setItem("selectArea_id", arealist.id);
+			//							} else {
+			//								$('.select').append('<option value=' + arealist.id + '>' + arealist.name + '(' + arealist.area_no + ')' + '</option>');
+			//							}
+			//						} else {
+			//							if(select_areaid == arealist.id) {
+			//								$('.select').append('<option selected="selected" value=' + arealist.id + '>' + arealist.name + '(' + arealist.area_no + ')' + '</option>');
+			//								area_id = arealist.id;
+			//							} else {
+			//								$('.select').append('<option value=' + arealist.id + '>' + arealist.name + '(' + arealist.area_no + ')' + '</option>');
+			//							}
+			//
+			//						}
+			//
+			//					});
+			//
+			//				}
+			//			}
 
-//			function changetip(value) {
-//				localStorage.setItem("selectArea_id", value);
-//				area_id = value;
-//
-//				if(mui.os.ios) {
-//					setTimeout(function() {
-//						window.location.reload();
-//					}, 200);
-//				} else {
-//					window.location.reload();
-//				}
-//
-//			}
+			//			function changetip(value) {
+			//				localStorage.setItem("selectArea_id", value);
+			//				area_id = value;
+			//
+			//				if(mui.os.ios) {
+			//					setTimeout(function() {
+			//						window.location.reload();
+			//					}, 200);
+			//				} else {
+			//					window.location.reload();
+			//				}
+			//
+			//			}
 
-		//查看消息列表是否有未读信息，如有未读信息消息显示红点
-		function message_isread() {
-			var message = {
-				receiveId: employee.employeeId
-			};
-			var message_count=0;
-			var notice_count=0;
-			doManager('MessageNewManager', 'getUnReadMessageAmount', message, function(data) {
-				if(data.result == true) {
-					var jsonData = JSON.parse(data.data);
-					message_count=jsonData;
-					
-				}
-			},false);
-			
-			doManager('NoticeReciverManager', 'getUnReadNotice', employee.employeeId, function(data) {
+			//查看消息列表是否有未读信息，如有未读信息消息显示红点
+			function message_isread() {
+				var message = {
+					receiveId: employee.employeeId
+				};
+				var message_count = 0;
+				var notice_count = 0;
+				doManager('MessageNewManager', 'getUnReadMessageAmount', message, function(data) {
 					if(data.result == true) {
 						var jsonData = JSON.parse(data.data);
-						notice_count=jsonData;
-					
+						message_count = jsonData;
+
 					}
-				},false);
+				}, false);
+
+				doManager('NoticeReciverManager', 'getUnReadNotice', employee.employeeId, function(data) {
+					if(data.result == true) {
+						var jsonData = JSON.parse(data.data);
+						notice_count = jsonData;
+
+					}
+				}, false);
 				setTimeout(function() {
-					if(message_count == 0 && notice_count ==0) {
-					$('#message_state_div').removeClass("message-dian1");
-				} else {
-					$('#message_state_div').addClass("message-dian1");
-				}
-							
-						}, 200);
-				
-				
-		}
+					if(message_count == 0 && notice_count == 0) {
+						$('#message_state_div').removeClass("message-dian1");
+					} else {
+						$('#message_state_div').addClass("message-dian1");
+					}
+
+				}, 200);
+
+			}
 			//跳转到修改密码
 			function toUpdatePassword() {
 				setTimeout(function() {
@@ -915,7 +953,7 @@
 						store_no = store.storeno;
 						$("#select_store").hide();
 						getmaps(store_no);
-						
+
 					} else {
 						$("#select_store").show();
 						$("div_title").hide();
@@ -950,7 +988,6 @@
 				}
 
 			}
-			
 
 			//获取门店信息
 			function getStore(store_id) {
@@ -1017,25 +1054,12 @@
 				}, false);
 
 			}
+			
 			$(document).ready(function() {
 				$('#select_store').change(function() {
 					var a = $('#select_store option:selected').text();
 					$('#select_store span').text(a);
 					getStore_change($('#select_store option:selected').val());
-					if(mui.os.ios) {
-						setTimeout(function() {
-							window.location.reload();
-						}, 350);
-					} else {
-						window.location.reload();
-					}
-				})
-			});
-			$(document).ready(function() {
-				$('#select_store').change(function() {
-					var a = $('#select_store option:selected').text();
-					$('#select_store span').text(a);
-					getStore($('#select_store option:selected').val());
 					if(mui.os.ios) {
 						setTimeout(function() {
 							window.location.reload();
@@ -1099,7 +1123,7 @@
 							} else {
 								order_employee_name = order.employee_name.split("+")[0];
 							}
-							if(order.jpgUrl == null || order.jpgUrl == ""||order.jpgUrl == "https://imgcdn.guoanshequ.com/") {
+							if(order.jpgUrl == null || order.jpgUrl == "" || order.jpgUrl == "https://imgcdn.guoanshequ.com/") {
 								order_img = "../images/no_img2.png";
 							} else {
 								order_img = decodeURI(order.jpgUrl);
@@ -1176,7 +1200,7 @@
 							} else {
 								order_employee_name = order.employee_name.split("+")[0];
 							}
-							if(order.jpgUrl == null || order.jpgUrl == ""||order.jpgUrl == "https://imgcdn.guoanshequ.com/") {
+							if(order.jpgUrl == null || order.jpgUrl == "" || order.jpgUrl == "https://imgcdn.guoanshequ.com/") {
 								order_img = "../images/no_img2.png";
 							} else {
 								order_img = decodeURI(order.jpgUrl);
@@ -1224,13 +1248,12 @@
 				});
 			}
 			var showSoftInput = function() {
-				if(mui.os.android) {
-				} else {
+				if(mui.os.android) {} else {
 					nativeWebview.plusCallMethod({
 						"setKeyboardDisplayRequiresUserAction": false
 					});
 				}
-			
+
 			};
 			var initNativeObjects = function() {
 				if(mui.os.android) {
@@ -1242,8 +1265,8 @@
 					nativeWebview = plus.webview.currentWebview().nativeInstanceObject();
 				}
 			};
-		
-//跳转到录入
+
+			//跳转到录入
 			function toNewTabbar() {
 				setTimeout(function() {
 					var webview = plus.webview.getWebviewById('new_tabbar');
@@ -1263,6 +1286,7 @@
 					});
 				}, 0);
 			};
+
 			function getmaps(s) {
 				setTimeout(function() {
 					var maps_webview = plus.webview.getWebviewById('maps_web');
@@ -1287,6 +1311,46 @@
 				}, 0);
 				plus.nativeUI.showWaiting().close();
 
+			}
+			//动态统计：门店动态折线图
+			function getData(store_id) {
+				doManager('InterManager', 'queryRelationAndCustomerOfYear_crm_app', store_id, function(data) {
+					if(data.result == true) {
+						var jsonData = JSON.parse(data.data);
+						var dateArry = new Array();
+						var relationArry = new Array();
+						var customerArry = new Array();
+						var orderArry = new Array();
+						var orderpriceArry = new Array();
+						var order_sum = 0;
+						var relation_sum = 0;
+						var customer_sum = 0;
+						$(jsonData.data.relation).each(function(index, relation) {
+							dateArry[index] = relation.date;
+							relationArry[index] = relation.total;
+							relation_sum += relation.total;
+							window.localStorage.setItem("relation_sum", relation_sum);
+						});
+
+						$(jsonData.data.customer).each(function(index, customer) {
+							customerArry[index] = customer.total;
+							customer_sum += customer.total;
+							window.localStorage.setItem("customer_sum", customer_sum);
+						});
+						$(jsonData.data.ordermonth).each(function(index, order) {
+							orderArry[index] = order.total_count;
+							orderpriceArry[index] = order.total_price;
+							order_sum += order.total_count;
+							window.localStorage.setItem("order_sum", order_sum);
+						});
+						option1.xAxis.data = dateArry;
+						//						option1.series[0].data = orderArry;
+						//						option1.series[1].data = orderpriceArry;
+						option1.series[0].data = relationArry;
+						option1.series[1].data = customerArry;
+						myChart1.setOption(option1);
+					}
+				});
 			}
 		</script>
 	</body>

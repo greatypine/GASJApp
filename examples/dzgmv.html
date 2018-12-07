@@ -239,8 +239,8 @@
 						<div class="dt_l pull-left"><img src="../images/dt1.png"> </div>
 						<div class="dt_r pull-right">
 							<!--<div class="pull-right">(截止到昨日24点)</div>-->
-							<h4 style="font-size: 16px;">本月片区毛利<p class="no-margin" id="area_profit"></p></h4>
-							<p class="text-muted text-right" style="margin-top: 6px;">上月片区毛利:<span id="lst_area_profit"></span></p>
+							<h4 style="font-size: 16px;">本月门店毛利<p class="no-margin" id="store_profit"></p></h4>
+							<p class="text-muted text-right" style="margin-top: 6px;">上月门店毛利:<span id="lst_store_profit"></span></p>
 						</div>
 					</div>
 
@@ -248,16 +248,24 @@
 						<div class="dt_l pull-left"><img src="../images/dt2.png"> </div>
 						<div class="dt_r pull-right">
 							<!--<div class="pull-right">(截止到昨日24点)</div>-->
-							<h4 style="font-size: 16px;">本月社员开卡数<p class="no-margin" id="areaopencard"></p></h4>
-							<p class="text-muted text-right" style="margin-top: 6px;">上月社员开卡数:<span id="lst_areaopencard"></span></p>
+							<h4 style="font-size: 16px;">本月门店社员开卡数<p class="no-margin" id="storeopencard"></p></h4>
+							<p class="text-muted text-right" style="margin-top: 6px;">上月社员开卡数:<span id="lst_storeopencard"></span></p>
 						</div>
 					</div>
 
 					<div class="dt3 clearfix">
 						<div class="dt_l pull-left"><img src="../images/dt3.png"> </div>
 						<div class="dt_r pull-right">
-							<h4 style="font-size: 16px;">本月片区消费(超10元)<p class="no-margin" id="month_zdgmv"></p></h4>
-							<p class="text-muted text-right" style="margin-top: 6px;">上月片区消费(超10元):<span id="lst_month_zdgmv"></span></p>
+							<h4 style="font-size: 16px;">本月门店消费(超10元)<p class="no-margin" id="month_storegmv"></p></h4>
+							<p class="text-muted text-right" style="margin-top: 6px;">上月门店消费(超10元):<span id="lst_month_storegmv"></span></p>
+						</div>
+					</div>
+					<div class="dt2 clearfix">
+						<div class="dt_l pull-left"><img src="../images/dt2.png"> </div>
+						<div class="dt_r pull-right">
+							<!--<div class="pull-right">(截止到昨日24点)</div>-->
+							<h4 style="font-size: 16px;">本月店长社员开卡数<p class="no-margin" id="storekeeperopencard"></p></h4>
+							<p class="text-muted text-right" style="margin-top: 6px;">上月店长社员开卡数:<span id="lst_storekeeperopencard"></span></p>
 						</div>
 					</div>
 
@@ -269,7 +277,7 @@
 				<footer style="display: none;" id="footer_bottmo">
 					<a class="col-xs-3 mark-green" id="gmv" href="javascript:void(0)">
 						<p><i class="fa fa-globe"></i></p>绩效</a>
-					<a class="col-xs-3" id="operate" path="operate.html" onclick="jump(this)">
+					<a class="col-xs-3" id="storeoperate" path="storeoperate.html" onclick="jump(this)">
 						<p><i class="fa fa-user"></i></p>运营</a>
 					<a class="col-xs-3" id="new_web_message" path="new_web_message.html" onclick="jump(this)">
 						<p><i class="fa fa-envelope-o"></i></p>消息
@@ -911,21 +919,19 @@
 			};
 			//绩效本月数据
 			function newgetMonthStoreData(storeno,store_id) {
-				alert("2");
-				alert(storeno);
-				alert(store_id);
-				doManager('InterManager', 'queryAreaInfoByStorekeeperEmployNo', [employee.employeeId,storeno, store_id], function(data) {
+				doManager('InterManager', 'queryAreaInfoByAreaCode', employee.employeeId,function(data) {
 					if(data.result == true) {
 						var jsonData = JSON.parse(data.data);
-						alert(JSON.stringify(jsonData));
 						if(jsonData.code == 200) {
 							//国安侠本月毛利
-							//							$('#area_profit').html(jsonData.data.area_profit);
-							//							$('#lst_area_profit').html(jsonData.data.area_lst_profit);
-							//							$('#areaopencard').html(jsonData.data.areaOpenCard);
-							//							$('#lst_areaopencard').html(jsonData.data.areaLastOpenCard);
-							//							$('#month_zdgmv').html(jsonData.data.pay_10_count_month);
-							//							$('#lst_month_zdgmv').html(jsonData.data.pay_10_count_lst_month);
+							$('#store_profit').html(jsonData.data.area_profit);
+							$('#lst_store_profit').html(jsonData.data.area_lst_profit);
+							$('#storeopencard').html(jsonData.data.areaOpenCard);
+							$('#lst_storeopencard').html(jsonData.data.areaLastOpenCard);
+							$('#month_storegmv').html(jsonData.data.pay_10_count_month);
+							$('#lst_month_storegmv').html(jsonData.data.pay_10_count_lst_month);
+							$('#storekeeperopencard').html(jsonData.data.storeOpenCardMonthCount);
+							$('#lst_storekeeperopencard').html(jsonData.data.storeOpenCardLastMonthCount);
 
 						} else {
 

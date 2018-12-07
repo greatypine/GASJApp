@@ -266,12 +266,17 @@
 									setTimeout(function(){
 						             toCityMain()();		
 							        },200);
+								}else if(employee_data.usergroup.code=='DZ'){
+									setTimeout(function(){
+						             toDZMain();	
+							        },200);
 								}else {
 									setTimeout(function(){
-						             toMain();		
+						             toMain();	
 							        },200);
 								}
 							}
+							
 						}else{
 							//登录接口
 							doManager("UserManager","saveTokenAndLogin",employee,function(data){
@@ -296,7 +301,7 @@
 											setTimeout(function(){
 								             toCityMain();		
 									        },200);
-										}if(jsonData.user.usergroup.code=='DZ'){
+										}else if(jsonData.user.usergroup.code=='DZ'){
 											setTimeout(function(){
 								             toDZMain();		
 									        },200);
@@ -306,6 +311,7 @@
 									        },200);
 										}
 									}
+									
 								}else{
 									mui.toast(jsonData.message);
 								}
@@ -382,16 +388,17 @@
 					}
 				});
 		}
-	    //跳转到主页面
-		function toMain() {
-			var sh_webview = plus.webview.getWebviewById('gmv');
+
+		//跳转到主页面
+		function toDZMain() {
+			var sh_webview = plus.webview.getWebviewById('dzgmv');
 					if(sh_webview != null){
 						sh_webview.close();
 					}
 			setTimeout(function() {
 				mui.openWindow({
-					url:'examples/gmv.html',
-					id: 'gmv',
+					url:'examples/dzgmv.html',
+					id: 'dzgmv',
 					createNew:true,
 					show: {
 						aniShow: 'slide-in-right'
@@ -402,16 +409,16 @@
 				});
 			}, 50);
 		}
-		//跳转到店长主页面
-		function toDZMain() {
+		//跳转到国安侠主页面
+		function toMain() {
 			var sh_webview = plus.webview.getWebviewById('gmv');
 					if(sh_webview != null){
 						sh_webview.close();
 					}
 			setTimeout(function() {
 				mui.openWindow({
-					url:'examples/dzgmv.html',
-					id: 'dzgmv',
+					url:'examples/gmv.html',
+					id: 'gmv',
 					createNew:true,
 					show: {
 						aniShow: 'slide-in-right'

@@ -239,8 +239,8 @@
 						<div class="dt_l pull-left"><img src="../images/dt1.png"> </div>
 						<div class="dt_r pull-right">
 							<!--<div class="pull-right">(截止到昨日24点)</div>-->
-							<h4 style="font-size: 16px;">本月片区毛利<p class="no-margin" id="area_profit"></p></h4>
-							<p class="text-muted text-right" style="margin-top: 6px;">上月片区毛利:<span id="lst_area_profit"></span></p>
+							<h4 style="font-size: 16px;">本月国安侠毛利<p class="no-margin" id="area_profit"></p></h4>
+							<p class="text-muted text-right" style="margin-top: 6px;">上月国安侠毛利:<span id="lst_area_profit"></span></p>
 						</div>
 					</div>
 
@@ -256,8 +256,8 @@
 					<div class="dt3 clearfix">
 						<div class="dt_l pull-left"><img src="../images/dt3.png"> </div>
 						<div class="dt_r pull-right">
-							<h4 style="font-size: 16px;">本月片区消费(超10元)<p class="no-margin" id="month_zdgmv"></p></h4>
-							<p class="text-muted text-right" style="margin-top: 6px;">上月片区消费(超10元):<span id="lst_month_zdgmv"></span></p>
+							<h4 style="font-size: 16px;">本月消费用户(超10元)<p class="no-margin" id="month_zdgmv"></p></h4>
+							<p class="text-muted text-right" style="margin-top: 6px;">上月消费用户(超10元):<span id="lst_month_zdgmv"></span></p>
 						</div>
 					</div>
 
@@ -306,18 +306,19 @@
 							</a>
 						</div>
 						<li class="treeview">
-							<a onclick="toPerson()">
+							<a onclick="toPerson()" style="display: none;" id="person_sty">
 								<span>个人动态</span> <i class="fa  fa-angle-right pull-right"></i>
 							</a>
 						</li>
-						<li class="treeview">
-							<a onclick="toUser()">
-								<span>我的客户</span> <i class="fa  fa-angle-right pull-right"></i>
-							</a>
-						</li>
+						
 						<li class="treeview" style="display: none;" id="datacard">
 							<a onclick="toCard()">
 								<span>国安侠数据卡</span> <i class="fa  fa-angle-right pull-right"></i>
+							</a>
+						</li>
+						<li class="treeview">
+							<a onclick="toUser()" style="display: none;" id="myclients">
+								<span>我的客户</span> <i class="fa  fa-angle-right pull-right"></i>
 							</a>
 						</li>
 						<li class="treeview" style="display: none;" id="new_tabbar">
@@ -330,11 +331,11 @@
 								<span>修改密码</span> <i class="fa  fa-angle-right pull-right"></i>
 							</a>
 						</li>
-						<li class="treeview" style="margin-top: 8px;">
+						<!--<li class="treeview" style="margin-top: 8px;">
 							<span style="color:#b8c7ce;padding-left: 20px;">片区选择</span>
 							<select class="select" onchange="changetip(this.value)" style="margin-left: 12px;">
 							</select>
-						</li>
+						</li>-->
 						<div id="store_num" style="padding:18px 0px 0px 18px;">
 							<a style="line-height: 30px;"><span>社员邀请码：</span><span id="mycode" style="margin-left: 4px;"></span><span style="border:1px solid #eee;font-size: 12px;margin-left: 10px;padding-left: 5px;padding-right: 5px;border-radius: 3px;" onclick="copyShareUrl(this)">复制</span>
 							</a>
@@ -426,21 +427,22 @@
 						$("#new_tabbar").css("display", "");
 						if(employee.usergroup.code == 'GAX') {
 							$("#datacard").css("display", "");
+							$("#myclients").css("display", "");
+							
 						}
 
 					} else {
 						$("footer").css("display", "");
-						$("#tabbar").attr("style", "display:none;");
 						$("#work").attr("style", "display:none;");
-						$("#maps").attr("class", "col-xs-4 ");
-						$("#areaState").attr("class", "col-xs-4 mark-green");
-						$("#web_message").attr("class", "col-xs-4");
+						$("#gmv").attr("class", "col-xs-4 mark-green");
+						$("#operate").attr("class", "col-xs-4");
+						$("#new_web_message").attr("class", "col-xs-4");
 					}
 
 				}
 				h = plus.screen.resolutionHeight;
 				message_isread();
-				getAllAreaOfEmployee(select_area_list);
+//				getAllAreaOfEmployee(select_area_list);
 				initView();
 				
                 newgetMonthAreaData();
@@ -586,45 +588,45 @@
 			};
 
 			//获取片区信息数据
-			function getAllAreaOfEmployee(jsonData) {
-				if(jsonData != null) {
-					$(jsonData).each(function(index, arealist) {
-						if(select_areaid == null) {
-							if(index == 0) {
-								$('.select').append('<option selected="selected" value=' + arealist.id + '>' + arealist.name + '(' + arealist.area_no + ')' + '</option>');
-								area_id = arealist.id;
-								localStorage.setItem("selectArea_id", arealist.id);
-							} else {
-								$('.select').append('<option value=' + arealist.id + '>' + arealist.name + '(' + arealist.area_no + ')' + '</option>');
-							}
-						} else {
-							if(select_areaid == arealist.id) {
-								$('.select').append('<option selected="selected" value=' + arealist.id + '>' + arealist.name + '(' + arealist.area_no + ')' + '</option>');
-								area_id = arealist.id;
-							} else {
-								$('.select').append('<option value=' + arealist.id + '>' + arealist.name + '(' + arealist.area_no + ')' + '</option>');
-							}
+//			function getAllAreaOfEmployee(jsonData) {
+//				if(jsonData != null) {
+//					$(jsonData).each(function(index, arealist) {
+//						if(select_areaid == null) {
+//							if(index == 0) {
+//								$('.select').append('<option selected="selected" value=' + arealist.id + '>' + arealist.name + '(' + arealist.area_no + ')' + '</option>');
+//								area_id = arealist.id;
+//								localStorage.setItem("selectArea_id", arealist.id);
+//							} else {
+//								$('.select').append('<option value=' + arealist.id + '>' + arealist.name + '(' + arealist.area_no + ')' + '</option>');
+//							}
+//						} else {
+//							if(select_areaid == arealist.id) {
+//								$('.select').append('<option selected="selected" value=' + arealist.id + '>' + arealist.name + '(' + arealist.area_no + ')' + '</option>');
+//								area_id = arealist.id;
+//							} else {
+//								$('.select').append('<option value=' + arealist.id + '>' + arealist.name + '(' + arealist.area_no + ')' + '</option>');
+//							}
+//
+//						}
+//
+//					});
+//
+//				}
+//			}
 
-						}
-
-					});
-
-				}
-			}
-
-			function changetip(value) {
-				localStorage.setItem("selectArea_id", value);
-				area_id = value;
-
-				if(mui.os.ios) {
-					setTimeout(function() {
-						window.location.reload();
-					}, 200);
-				} else {
-					window.location.reload();
-				}
-
-			}
+//			function changetip(value) {
+//				localStorage.setItem("selectArea_id", value);
+//				area_id = value;
+//
+//				if(mui.os.ios) {
+//					setTimeout(function() {
+//						window.location.reload();
+//					}, 200);
+//				} else {
+//					window.location.reload();
+//				}
+//
+//			}
 			//查看消息列表是否有未读信息，如有未读信息消息显示红点
 			function message_isread() {
 				var message = {
