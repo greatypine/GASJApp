@@ -122,13 +122,13 @@
 								var callPhone =$("#phone");
 								var $div=$li.find("#callPhone").last();
 								$div[0].addEventListener('click', function(event) {
-									var btnArray = ['拨打', '取消'];
+//									var btnArray = ['拨打', '取消'];
 									var Phone =user.mobilephone;
-									mui.confirm('是否拨打 ' + Phone + ' ？', '提示', btnArray, function(e) {
-										if(e.index == 0) {
+//									mui.confirm('是否拨打 ' + Phone + ' ？', '提示', btnArray, function(e) {
+//										if(e.index == 0) {
 											plus.device.dial(Phone, false);
-										}
-									});
+//										}
+//									});
 								});
 //
 							})
