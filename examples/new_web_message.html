@@ -376,7 +376,6 @@
 				<footer style="display: none;">
 					<a class="col-xs-4" id="web_city_ej" path="web_city_ej.html" onclick="jump(this)">
 						<p><i class="fa fa-bar-chart-o"></i></p>动态</a>
-
 					<a class="col-xs-3" id="sel_operate" onclick="selectoperate()">
 						<p><i class="fa fa-globe"></i></p>绩效</a>
 					<a class="col-xs-3" id="areaState" onclick="selectherf()">
@@ -385,8 +384,6 @@
 						<p><i class="fa fa-envelope-o"></i></p>消息
 						<div id="message_state_div"></div>
 					</a>
-					<!--<a class="col-xs-3" id="tabbar" path="tabbar.html" onclick="jump(this)">
-						<p><i class="fa fa-file-text-o"></i></p>录入</a>-->
 					<a class="col-xs-3" id="work" path="work_list.html" onclick="jump(this)">
 						<p><i class="fa  fa-calendar-check-o"></i></p>工单</a>
 					<a class="col-xs-4" id="new_city_my" path="new_city_my.html" onclick="jump(this)">
@@ -668,18 +665,15 @@
 						}
 					} else if(employee.usergroup.code == 'CSMDGLZ') {
 						$("footer").css("display", "");
-//						$("#tabbar").attr("style", "display:none;");
 						$("#work").attr("style", "display:none;");
-						$("#maps").attr("style", "display:none;");
+						$("#sel_operate").attr("style", "display:none;");
 						$("#areaState").attr("style", "display:none;");
 						$("#message").attr("class", "col-xs-4 mark-green");
 					} else {
 						$("footer").css("display", "");
-//						$("#tabbar").attr("style", "display:none;");
 						$("#work").attr("style", "display:none;");
 						$("#web_city_ej").attr("style", "display:none;");
 						$("#my").attr("style", "display:none;");
-						$("#maps").attr("class", "col-xs-4 ");
 						$("#areaState").attr("class", "col-xs-4");
 						$("#message").attr("class", "col-xs-4 mark-green");
 					}
