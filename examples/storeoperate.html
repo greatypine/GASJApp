@@ -321,17 +321,23 @@
 				<div class="mui-off-canvas-backdrop" id="backdrop"></div>
 			</div>
 			<!--侧滑部分-->
-			<aside id="offCanvasSide" class="main-sidebar mui-off-canvas-left" style="padding-top: 30px;">
+			<!--侧滑部分-->
+			<aside id="offCanvasSide" class="main-sidebar mui-off-canvas-left">
+				<!-- sidebar: style can be found in sidebar.less -->
 				<section id="offCanvasSideScroll" class="sidebar">
+					<!-- Sidebar user panel -->
 					<div class="user-panel">
+
 						<div class="text-center image">
 							<img src="" class="img-circle" data-preview-src="" data-preview-group="1">
-							<p style="margin-top: 2px;"><strong id="user_name"></strong></p>
+							<p style="margin-top: 10px;"><strong id="user_name"></strong></p>
 							<p><span id="user_zw"></span><span id="user_employeeid"></span></p>
+
 						</div>
 					</div>
+					<!-- sidebar menu: : style can be found in sidebar.less -->
 					<ul class="sidebar-menu">
-						<div style="padding:0px 0px 5px 18px;">
+						<div style="padding:12px 0px 0px 18px;">
 							<a>
 								<span>所属门店：</span>
 								<span id="div_title"></span>
@@ -339,27 +345,26 @@
 								</select>
 							</a>
 						</div>
-						<div id="store_num" style="padding:18px 0px 8px 18px;">
+						<div id="store_num" style="padding:18px 0px 10px 18px;">
 							<a><span>门店编号：</span><span id="storeid" style="margin-left: 4px;"></span>
 							</a>
 						</div>
-						<li class="treeview" style="display: none;">
-							<a onclick="toPerson()">
-								<span>个人动态</span> <i class="fa  fa-angle-right pull-right"></i>
+						<li class="treeview">
+							<a onclick="toStoreDataCard()">
+								<span>门店数据卡</span> <i class="fa  fa-angle-right pull-right"></i>
 							</a>
 						</li>
-
-						<li class="treeview" style="display: none;" id="datacard">
-							<a onclick="toCard()">
-								<span>国安侠数据卡</span> <i class="fa  fa-angle-right pull-right"></i>
+						<li class="treeview">
+							<a onclick="toInfromation()">
+								<span>个人信息</span> <i class="fa  fa-angle-right pull-right"></i>
 							</a>
 						</li>
-						<li class="treeview" style="display: none;" id="myclients">
-							<a onclick="toUser()">
-								<span>我的客户</span> <i class="fa  fa-angle-right pull-right"></i>
+						<li class="treeview">
+							<a onclick="toGuoAnXiaList()">
+								<span>门店人员</span> <i class="fa  fa-angle-right pull-right"></i>
 							</a>
 						</li>
-						<li class="treeview" style="display: none;" id="new_tabbar">
+						<li class="treeview" id="new_tabbar">
 							<a onclick="toNewTabbar()">
 								<span>数据录入</span> <i class="fa  fa-angle-right pull-right"></i>
 							</a>
@@ -369,12 +374,7 @@
 								<span>修改密码</span> <i class="fa  fa-angle-right pull-right"></i>
 							</a>
 						</li>
-						<!--<li class="treeview" style="margin-top: 8px;">
-							<span style="color:#b8c7ce;padding-left: 20px;">片区选择</span>
-							<select class="select" onchange="changetip(this.value)" style="margin-left: 12px;">
-							</select>
-						</li>-->
-						<div id="store_num" style="padding:8px 0px 0px 18px;">
+						<div id="store_num" style="padding:10px 0px 0px 18px;">
 							<a style="line-height: 30px;"><span>社员邀请码：</span><span id="mycode" style="margin-left: 4px;"></span><span style="border:1px solid #eee;font-size: 12px;margin-left: 10px;padding-left: 5px;padding-right: 5px;border-radius: 3px;" onclick="copyShareUrl(this)">复制</span>
 							</a>
 						</div>
@@ -384,6 +384,7 @@
 						</li>
 
 					</ul>
+
 				</section>
 			</aside>
 		</div>
@@ -1352,6 +1353,66 @@
 					}
 				});
 			}
+			//跳转到门店数据卡
+			function toStoreDataCard() {
+				setTimeout(function() {
+					var webview = plus.webview.getWebviewById('storeDataCard');
+					if(webview != null) {
+						webview.close();
+					}
+					mui.openWindow({
+						url: 'storeDataCard.html',
+						id: 'storeDataCard',
+						createNew: true,
+						show: {
+							aniShow: 'slide-in-right'
+						},
+						waiting: {
+							autoShow: false
+						}
+					});
+				}, 0);
+			};
+			//跳转到店长个人信息
+			function toInfromation() {
+				setTimeout(function() {
+					var webview = plus.webview.getWebviewById('web_information');
+					if(webview != null) {
+						webview.close();
+					}
+					mui.openWindow({
+						url: 'web_information.html',
+						id: 'web_information',
+						createNew: true,
+						show: {
+							aniShow: 'slide-in-right'
+						},
+						waiting: {
+							autoShow: false
+						}
+					});
+				}, 0);
+			};
+			//跳转到国安侠列表
+			function toGuoAnXiaList() {
+				setTimeout(function() {
+					var webview = plus.webview.getWebviewById('web_guoanxialist');
+					if(webview != null) {
+						webview.close();
+					}
+					mui.openWindow({
+						url: 'web_guoanxialist.html',
+						id: 'web_guoanxialist',
+						createNew: true,
+						show: {
+							aniShow: 'slide-in-right'
+						},
+						waiting: {
+							autoShow: false
+						}
+					});
+				}, 0);
+			};
 		</script>
 	</body>
 

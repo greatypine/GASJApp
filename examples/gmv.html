@@ -229,7 +229,7 @@
 			<div class="wrapper mui-inner-wrap">
 				<header class="main-header">
 					<nav class="navbar navbar-static-top text-center">
-						<span> 绩效</span>
+						<span>国安侠绩效</span>
 						<a href="#offCanvasSide" class="sidebar-toggle fa fa-navicon mui-icon-bars"></a>
 					</nav>
 				</header>
@@ -415,8 +415,6 @@
 //			});
 			mui.plusReady(function() {
 				initStore();
-				setTimeout(function(){
-							        },200);
 				var maps_webview = plus.webview.getWebviewById('maps_web');
 				if(maps_webview != null) {
 					maps_webview.close();
@@ -631,6 +629,9 @@
 //			}
 			//查看消息列表是否有未读信息，如有未读信息消息显示红点
 			function message_isread() {
+				if(employee.employeeId==null||employee.employeeId==""){
+					return;
+				}
 				var message = {
 					receiveId: employee.employeeId
 				};

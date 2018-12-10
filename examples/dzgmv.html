@@ -229,7 +229,7 @@
 			<div class="wrapper mui-inner-wrap">
 				<header class="main-header">
 					<nav class="navbar navbar-static-top text-center">
-						<span> 绩效</span>
+						<span>门店绩效</span>
 						<a href="#offCanvasSide" class="sidebar-toggle fa fa-navicon mui-icon-bars"></a>
 					</nav>
 				</header>
@@ -292,7 +292,6 @@
 
 				<div class="mui-off-canvas-backdrop" id="backdrop"></div>
 			</div>
-			<!--侧滑部分-->
 			<!--侧滑部分-->
 			<aside id="offCanvasSide" class="main-sidebar mui-off-canvas-left">
 				<!-- sidebar: style can be found in sidebar.less -->
@@ -845,29 +844,6 @@
 					});
 				}, 0);
 			};
-			//绩效本月数据
-			function newgetMonthAreaData() {
-				doManager('InterManager', 'queryAreaInfoByAreaCode', employee.employeeId, function(data) {
-					if(data.result == true) {
-						var jsonData = JSON.parse(data.data);
-						if(jsonData.code == 200) {
-							//国安侠本月毛利
-							$('#area_profit').html(jsonData.data.area_profit);
-							$('#lst_area_profit').html(jsonData.data.area_lst_profit);
-							$('#areaopencard').html(jsonData.data.areaOpenCard);
-							$('#lst_areaopencard').html(jsonData.data.areaLastOpenCard);
-							$('#month_zdgmv').html(jsonData.data.pay_10_count_month);
-							$('#lst_month_zdgmv').html(jsonData.data.pay_10_count_lst_month);
-
-						} else {
-
-						}
-
-					} else {
-
-					}
-				});
-			}
 			//跳转到门店数据卡
 			function toStoreDataCard() {
 				setTimeout(function() {

@@ -674,6 +674,7 @@
 						$("#work").attr("style", "display:none;");
 						$("#web_city_ej").attr("style", "display:none;");
 						$("#my").attr("style", "display:none;");
+						$("#sel_operate").attr("class", "col-xs-4");
 						$("#areaState").attr("class", "col-xs-4");
 						$("#message").attr("class", "col-xs-4 mark-green");
 					}
@@ -920,6 +921,9 @@
 			}
 			//公告阅读状态更改
 			function notice_state(noticeNo) {
+				if(employee.employeeId==null||employee.employeeId==""){
+					return;
+				}
 
 				doManager('NoticeReciverManager', 'updateNoticeReciverIsRead', [noticeNo, employee.employeeId], function(data) {
 					if(data.result == true) {
@@ -1199,6 +1203,9 @@
 			};
 
 			function initNotice(reverse) {
+				if(employee.employeeId==null||employee.employeeId==""){
+					return;
+				}
 				message_isread();
 				var NoticeReciver = {
 					employeeNo: employee.employeeId
@@ -1310,6 +1317,9 @@
 			}
 
 			function Notice_Count() {
+				if(employee.employeeId==null||employee.employeeId==""){
+					return;
+				}
 
 				doManager('NoticeReciverManager', 'getUnReadNotice', employee.employeeId, function(data) {
 					if(data.result == true) {
@@ -1347,6 +1357,9 @@
 			}
 			//查看消息列表是否有未读信息，如有未读信息消息显示红点
 			function message_isread() {
+				if(employee.employeeId==null||employee.employeeId==""){
+					return;
+				}
 				var message = {
 					receiveId: employee.employeeId
 				};

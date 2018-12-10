@@ -1030,30 +1030,25 @@ function iosAppstore( url ) {
 					});
 				}, 0);
 			};
-			//跳转到片区信息
+			//跳转到我的客户列表页面
 			function toUser() {
-				if(selectArea_list == null || selectArea_list == "" || selectArea_list.length == 0) {
-					mui.toast("暂无划片区域");
-				} else {
-					setTimeout(function() {
-						var webview = plus.webview.getWebviewById('web_user');
-						if(webview != null) {
-							webview.close();
+				setTimeout(function() {
+					var webview = plus.webview.getWebviewById('myClients');
+					if(webview != null) {
+						webview.close();
+					}
+					mui.openWindow({
+						url: 'myClients.html',
+						id: 'myClients',
+						createNew: true,
+						show: {
+							aniShow: 'slide-in-right'
+						},
+						waiting: {
+							autoShow: false
 						}
-						mui.openWindow({
-							url: 'web_user.html',
-							id: 'web_user',
-							createNew: true,
-							show: {
-								aniShow: 'slide-in-right'
-							},
-							waiting: {
-								autoShow: false
-							}
-						});
-					}, 100);
-				}
-
+					});
+				}, 100);
 			};
 		</script>
 
