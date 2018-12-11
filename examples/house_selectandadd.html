@@ -28,7 +28,7 @@
 		</header>
 		
 		
-		<div class="list-item layout" style="display: block;padding-top: 1.2rem;">
+		<div class="list-item layout" style="display: block;padding-top: 1.2rem;" id="list-item">
 			<ul>
 				<li class="radio_li">
 						<div class="input-row-suffix mui-radio">
@@ -131,6 +131,9 @@
 //		});
 		
 		mui.plusReady(function(){
+			if(plus.device.model == "iPhone10,3"||plus.device.model == "iPhone10,6"|| plus.device.model == "iPhone11,8"||plus.device.model == "iPhone11,2"||plus.device.model == "iPhone11,6") {
+					document.getElementById("list-item").style.marginTop= '10px';
+				}
 			var house_type = $('input[name="house_type"]:checked').val();
 			if(house_type == 0){
 				    $('h1').html('平房信息');

@@ -240,7 +240,7 @@
 			<h1 class="mui-title">工单详情</h1>
 
 		</header>
-		<div class="list-item layout" style="display: block;">
+		<div class="list-item layout" style="display: block;" id="list-item">
 			<ul>
 				<li class="item-ordername" style="margin-top: 90px;">
 					<span>客户姓名<font style="color:red">*</font></span>
@@ -331,6 +331,10 @@
 		var find_status = true;
 		var oldphones = null;
 		mui.plusReady(function() {
+			if(plus.device.model == "iPhone10,3"||plus.device.model == "iPhone10,6"|| plus.device.model == "iPhone11,8"||plus.device.model == "iPhone11,2"||plus.device.model == "iPhone11,6") {
+					document.getElementById("list-item").style.marginTop= '100px';
+				}
+			
 			initEmployeeSelect();
 			document.getElementById('user_name').addEventListener('blur', function(event) {
 				var phones = $("#user_phone").val();
