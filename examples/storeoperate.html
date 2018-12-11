@@ -510,16 +510,6 @@
 				}
 
 			});
-			(function($) {
-				$.ready(function() {
-					if(plus.device.model == "iPhone10,3"||plus.device.model == "iPhone10,6"|| plus.device.model == "iPhone11,8"||plus.device.model == "iPhone11,2"||plus.device.model == "iPhone11,6") {
-						document.getElementById("titlenav").style.marginTop = '-20px';
-						document.getElementById("slider").style.marginTop = '-59px';
-						document.getElementById("sliderSegmentedControl").style.marginTop = '24px';
-						document.getElementById("footer_bottmo").style.paddingBottom= '67px';
-					}
-				});
-			})(mui);
 			
 			window.addEventListener('setarea', function(event) {
 				var id = event.detail.id;
@@ -534,6 +524,12 @@
 				}
 			});
 			mui.plusReady(function() {
+				if(plus.device.model == "iPhone10,3"||plus.device.model == "iPhone10,6"|| plus.device.model == "iPhone11,8"||plus.device.model == "iPhone11,2"||plus.device.model == "iPhone11,6") {
+						document.getElementById("titlenav").style.marginTop = '-20px';
+						document.getElementById("slider").style.marginTop = '-59px';
+						document.getElementById("sliderSegmentedControl").style.marginTop = '24px';
+						document.getElementById("footer_bottmo").style.paddingBottom= '67px';
+					}
 				//获取定位坐标
 				plus.geolocation.getCurrentPosition(function(p) {
 					lat = p.coords.latitude;

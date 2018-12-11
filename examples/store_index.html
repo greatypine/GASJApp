@@ -88,18 +88,14 @@
 	<script src="../js/app.js"></script>
 	<script type="text/javascript" src="../js/mui.min.js"></script>
 	<script>
-(function($) {
-				$.ready(function() {
-					if(plus.device.model == "iPhone10,3"||plus.device.model == "iPhone10,6"|| plus.device.model == "iPhone11,8"||plus.device.model == "iPhone11,2"||plus.device.model == "iPhone11,6") {
-					document.getElementById("list-item").style.paddingTop = '0.8rem';
-				}
-				});
-			})(mui);
 		var currDate = null;
 		
 		var store = JSON.parse(localStorage.getItem("store"));
 		
-		mui.ready(function(){
+		mui.plusReady(function(){
+			if(plus.device.model == "iPhone10,3"||plus.device.model == "iPhone10,6"|| plus.device.model == "iPhone11,8"||plus.device.model == "iPhone11,2"||plus.device.model == "iPhone11,6") {
+					document.getElementById("list-item").style.paddingTop = '0.8rem';
+				}
 			currDate = new Date().Format('YYYY-MM-DD');
 			mui('.item-time')[0].innerHTML = currDate;
 			initView();

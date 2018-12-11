@@ -67,15 +67,11 @@
 				return true;
 			}
 		});
-		(function($) {
-			$.ready(function() {
-				if(plus.device.model == "iPhone10,3" || plus.device.model == "iPhone10,6" || plus.device.model == "iPhone11,8" || plus.device.model == "iPhone11,2" || plus.device.model == "iPhone11,6") {
-					document.getElementById("title").style.marginTop= '80px';
-				}
-			});
-		})(mui);
 
 		mui.plusReady(function() {
+			if(plus.device.model == "iPhone10,3" || plus.device.model == "iPhone10,6" || plus.device.model == "iPhone11,8" || plus.device.model == "iPhone11,2" || plus.device.model == "iPhone11,6") {
+					document.getElementById("title").style.marginTop= '80px';
+				}
 			getdata();
 			mui.back = function() {
 				closeMenu();

@@ -55,13 +55,12 @@
 					   store_id:store.store_id
 				    };
 			}
-            (function($) {
-				$.ready(function() {
+			mui.plusReady(function() {
 				if(plus.device.model == "iPhone10,3"||plus.device.model == "iPhone10,6"|| plus.device.model == "iPhone11,8"||plus.device.model == "iPhone11,2"||plus.device.model == "iPhone11,6") {
 					document.getElementById("pullrefresh").style.marginTop= '0px';
 				}
-				});
-			})(mui);
+				
+			});
 			
 			mui.init({
 				pullRefresh: {

@@ -160,16 +160,12 @@
         var employee = JSON.parse(localStorage.getItem('employee'));
         var store=JSON.parse(localStorage.getItem('store'));
 		mui.plusReady(function(){
-			ininView();
-		});
-		(function($) {
-				$.ready(function() {
-					if(plus.device.model == "iPhone10,3"||plus.device.model == "iPhone10,6"|| plus.device.model == "iPhone11,8"||plus.device.model == "iPhone11,2"||plus.device.model == "iPhone11,6") {
+			if(plus.device.model == "iPhone10,3"||plus.device.model == "iPhone10,6"|| plus.device.model == "iPhone11,8"||plus.device.model == "iPhone11,2"||plus.device.model == "iPhone11,6") {
 					document.getElementById("building_div").style.marginTop = '1.5rem';
 					document.getElementById("btnRelation").style.bottom='34px';
 				}
-				});
-			})(mui);
+			ininView();
+		});
 		function ininView(){
 			var self = plus.webview.currentWebview();
 			if(self != null && self.building != null) {

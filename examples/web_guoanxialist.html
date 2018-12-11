@@ -6,7 +6,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<title>门店人员列表</title>
 		<!-- Tell the browser to be responsive to screen width -->
-		<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no,viewport-fit=cover" name="viewport">
+		<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 		<!-- Bootstrap 3.3.6 -->
 		<link rel="stylesheet" href="../css/bootstrap.min.css">
 		<!-- Font Awesome -->
@@ -171,16 +171,12 @@
 			mui.init({
 				swipeBack: false
 			});
-			(function($) {
-				$.ready(function() {
-					if(plus.device.model == "iPhone10,3" || plus.device.model == "iPhone10,6" || plus.device.model == "iPhone11,8" || plus.device.model == "iPhone11,2" || plus.device.model == "iPhone11,6") {
+			
+			mui.plusReady(function() {
+				if(plus.device.model == "iPhone10,3" || plus.device.model == "iPhone10,6" || plus.device.model == "iPhone11,8" || plus.device.model == "iPhone11,2" || plus.device.model == "iPhone11,6") {
 					document.getElementById("titlenav").style.marginTop= '-20px';
 					document.getElementById("itemdiv").style.marginTop= '0px';
 				}
-				});
-			})(mui);
-			
-			mui.plusReady(function() {
 				initView();
 				// 	getStorelist(store_list);
 				if(store != null || store != "") {

@@ -6,7 +6,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<title>消息列表页面</title>
 		<!-- Tell the browser to be responsive to screen width -->
-		<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no,viewport-fit=cover" name="viewport">
+		<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 		<!-- Bootstrap 3.3.6 -->
 		<link rel="stylesheet" href="../css/bootstrap.min.css">
 		<!-- Font Awesome -->
@@ -563,13 +563,9 @@
 					indicators: true, //是否显示滚动条
 					deceleration: deceleration
 				});
-                 if(plus.device.model == "iPhone10,3"||plus.device.model == "iPhone10,6"|| plus.device.model == "iPhone11,8"||plus.device.model == "iPhone11,2"||plus.device.model == "iPhone11,6") {
-					document.getElementById("slider").style.paddingTop = '83px';
-					document.getElementById("titlenav").style.marginTop= '-20px';
-					document.getElementById("footer_bottmo").style.paddingBottom= '67px';
-				}
+                 
 				$.ready(function() {
-
+					
 					//循环初始化所有下拉刷新，上拉加载。
 					$.each(document.querySelectorAll('.aaa'), function(index, pullRefreshEl) {
 
@@ -659,6 +655,12 @@
 				});
 			})(mui);
 			mui.plusReady(function() {
+				if(plus.device.model == "iPhone10,3"||plus.device.model == "iPhone10,6"|| plus.device.model == "iPhone11,8"||plus.device.model == "iPhone11,2"||plus.device.model == "iPhone11,6") {
+					document.getElementById("slider").style.paddingTop = '83px';
+					document.getElementById("titlenav").style.marginTop= '-20px';
+					document.getElementById("footer_bottmo").style.paddingBottom= '67px';
+				}
+
 				var reverse = false;
 				initView(reverse);
 				initNotice(reverse);

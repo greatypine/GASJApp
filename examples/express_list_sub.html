@@ -4,7 +4,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>快递订单列表页面</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" name="viewport">
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport">
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
 		<!--标准mui.css-->
@@ -214,13 +214,6 @@
 		var usergroup = JSON.parse(localStorage.getItem("usergroup"));
 		var express_count=null;
 		var express_count_type=null;
-		(function($) {
-				$.ready(function() {
-				if(plus.device.model == "iPhone10,3"||plus.device.model == "iPhone10,6"|| plus.device.model == "iPhone11,8"||plus.device.model == "iPhone11,2"||plus.device.model == "iPhone11,6") {
-					document.getElementById("mui-scroll").style.marginTop= '-90px';
-				}
-				});
-			})(mui);
 			
 		var pageInfo = {
 			currentPage: 0,
@@ -253,6 +246,9 @@
 		}
 
 		mui.plusReady(function() {
+			if(plus.device.model == "iPhone10,3"||plus.device.model == "iPhone10,6"|| plus.device.model == "iPhone11,8"||plus.device.model == "iPhone11,2"||plus.device.model == "iPhone11,6") {
+					document.getElementById("mui-scroll").style.marginTop= '-90px';
+				}
 			var self = plus.webview.currentWebview();
 			express_count = self.express_counts;
 			express_count_type=self.express_count_types;

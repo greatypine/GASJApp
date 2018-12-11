@@ -205,15 +205,11 @@
 			mui.init({
 				swipeBack: false
 			});
-			(function($) {
-				$.ready(function() {
-					if(plus.device.model == "iPhone10,3" || plus.device.model == "iPhone10,6" || plus.device.model == "iPhone11,8" || plus.device.model == "iPhone11,2" || plus.device.model == "iPhone11,6") {
-						document.getElementById("titlenav").style.marginTop = '-20px';
-					}
-				});
-			})(mui);
 
 			mui.plusReady(function() {
+				if(plus.device.model == "iPhone10,3" || plus.device.model == "iPhone10,6" || plus.device.model == "iPhone11,8" || plus.device.model == "iPhone11,2" || plus.device.model == "iPhone11,6") {
+						document.getElementById("titlenav").style.marginTop = '-20px';
+					}
 				var self = plus.webview.currentWebview();
 				if(self != null && self.other_user_id != null) {
 					var other_user_id = self.other_user_id;

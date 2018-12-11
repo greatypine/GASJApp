@@ -96,13 +96,13 @@
 					}
 				}
 			});
-			(function($) {
-					$.ready(function() {
-							if(plus.device.model == "iPhone10,3" || plus.device.model == "iPhone10,6" || plus.device.model == "iPhone11,8" || plus.device.model == "iPhone11,2" || plus.device.model == "iPhone11,6") {
+
+			mui.plusReady(function() {
+				if(plus.device.model == "iPhone10,3" || plus.device.model == "iPhone10,6" || plus.device.model == "iPhone11,8" || plus.device.model == "iPhone11,2" || plus.device.model == "iPhone11,6") {
 								document.getElementById("pullrefresh").style.marginTop = '-23px';
 							}
-					});
-			})(mui);
+				
+			});
 			//初始获取我的客户列表
 			function initView() {
 				pageInfo.currentPage = pageInfo.currentPage + 1;

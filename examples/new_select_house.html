@@ -134,15 +134,11 @@
 		
 		var main = null;
 		
-		(function($) {
-				$.ready(function() {
-					if(plus.device.model == "iPhone10,3"||plus.device.model == "iPhone10,6"|| plus.device.model == "iPhone11,8"||plus.device.model == "iPhone11,2"||plus.device.model == "iPhone11,6") {
-					document.getElementById("content").style.marginTop = '1.6rem';
-					}
-				});
-			})(mui);
 			
 		mui.plusReady(function () {
+			if(plus.device.model == "iPhone10,3"||plus.device.model == "iPhone10,6"|| plus.device.model == "iPhone11,8"||plus.device.model == "iPhone11,2"||plus.device.model == "iPhone11,6") {
+					document.getElementById("content").style.marginTop = '1.6rem';
+					}
 			default_city=JSON.parse(localStorage.getItem('default_city'));
 			main = plus.webview.currentWebview().opener();
 			var self = plus.webview.currentWebview();

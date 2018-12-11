@@ -153,15 +153,11 @@
 				}
 			});
 		});
-		(function($) {
-				$.ready(function() {
-					if(plus.device.model == "iPhone10,3"||plus.device.model == "iPhone10,6"|| plus.device.model == "iPhone11,8"||plus.device.model == "iPhone11,2"||plus.device.model == "iPhone11,6") {
-					document.getElementById("add_btn").style.bottom='34px';
-					}
-				});
-			})(mui);
 			
 		mui.plusReady(function() {
+			if(plus.device.model == "iPhone10,3"||plus.device.model == "iPhone10,6"|| plus.device.model == "iPhone11,8"||plus.device.model == "iPhone11,2"||plus.device.model == "iPhone11,6") {
+					document.getElementById("add_btn").style.bottom='34px';
+					}
 			mui.init();
 			if(mui.os.ios) {
 				$('.div_bottom').css('margin-bottom', '0.3rem');

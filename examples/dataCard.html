@@ -4,7 +4,7 @@
 	<head>
 		<meta charset="utf-8">
 		<title>国安侠当月数据卡</title>
-		<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no,viewport-fit=cover" name="viewport">
+		<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
 		<link href="../css/mui.min2.css" rel="stylesheet" />
@@ -276,14 +276,11 @@
 					
 				}
 			});
-			(function($) {
-				$.ready(function() {
-					if(plus.device.model == "iPhone10,3"||plus.device.model == "iPhone10,6"|| plus.device.model == "iPhone11,8"||plus.device.model == "iPhone11,2"||plus.device.model == "iPhone11,6") {
+		
+			function plusReady() {
+				if(plus.device.model == "iPhone10,3"||plus.device.model == "iPhone10,6"|| plus.device.model == "iPhone11,8"||plus.device.model == "iPhone11,2"||plus.device.model == "iPhone11,6") {
 					document.getElementById("box").style.marginTop= '80px';
 				}
-				});
-			})(mui);
-			function plusReady() {
 				 employee = JSON.parse(localStorage.getItem('employee'));
 				 store = JSON.parse(localStorage.getItem("store"));
 				var usergroup = JSON.parse(localStorage.getItem("usergroup"));

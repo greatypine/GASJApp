@@ -191,19 +191,15 @@
 
 		var business = null;
 		mui.plusReady(function() {
+			if(plus.device.model == "iPhone10,3"||plus.device.model == "iPhone10,6"|| plus.device.model == "iPhone11,8"||plus.device.model == "iPhone11,2"||plus.device.model == "iPhone11,6") {
+					document.getElementById("content").style.marginTop = '1.5rem';
+				}
 			ininView();
 
 			time_picker('close_time');
 			time_picker('open_time');
 
 		});
-		(function($) {
-				$.ready(function() {
-					if(plus.device.model == "iPhone10,3"||plus.device.model == "iPhone10,6"|| plus.device.model == "iPhone11,8"||plus.device.model == "iPhone11,2"||plus.device.model == "iPhone11,6") {
-					document.getElementById("content").style.marginTop = '1.5rem';
-				}
-				});
-			})(mui);
 
 		function ininView() {
 			var self = plus.webview.currentWebview();

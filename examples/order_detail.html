@@ -446,14 +446,10 @@
 		var businessPicker = null;
 		var bussiness_data=	null;
 		mui.previewImage();
-		(function($) {
-				$.ready(function() {
-					if(plus.device.model == "iPhone10,3"||plus.device.model == "iPhone10,6"|| plus.device.model == "iPhone11,8"||plus.device.model == "iPhone11,2"||plus.device.model == "iPhone11,6") {
+		mui.plusReady(function() {
+			if(plus.device.model == "iPhone10,3"||plus.device.model == "iPhone10,6"|| plus.device.model == "iPhone11,8"||plus.device.model == "iPhone11,2"||plus.device.model == "iPhone11,6") {
 					document.getElementById("my-photo").style.paddingTop = '1.45rem';
 				}
-				});
-			})(mui);
-		mui.plusReady(function() {
 
 			var currDate = new Date().Format('YYYY-MM-DD');
 			mui('.item-time')[0].innerHTML = currDate;

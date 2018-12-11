@@ -47,18 +47,14 @@
 	    var cus_id="";
 	    var message_id=""
 	    mui.plusReady(function() {
+	    	if(plus.device.model == "iPhone10,3" || plus.device.model == "iPhone10,6" || plus.device.model == "iPhone11,8" || plus.device.model == "iPhone11,2" || plus.device.model == "iPhone11,6") {
+					document.getElementById("work_context").style.marginTop= '40px';
+				}
 			getdata();
 			mui.back = function() {
 			   backMenu();
 			   }
 		});
-		(function($) {
-			$.ready(function() {
-				if(plus.device.model == "iPhone10,3" || plus.device.model == "iPhone10,6" || plus.device.model == "iPhone11,8" || plus.device.model == "iPhone11,2" || plus.device.model == "iPhone11,6") {
-					document.getElementById("work_context").style.marginTop= '40px';
-				}
-			});
-		})(mui);
 	    function getdata(){
 	    	var self = plus.webview.currentWebview();
 			cus_id = self.pk_id;

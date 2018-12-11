@@ -46,14 +46,10 @@
 				return true;
 			}
 		});
-		(function($) {
-			$.ready(function() {
-				if(plus.device.model == "iPhone10,3" || plus.device.model == "iPhone10,6" || plus.device.model == "iPhone11,8" || plus.device.model == "iPhone11,2" || plus.device.model == "iPhone11,6") {
+		mui.plusReady(function() {
+			if(plus.device.model == "iPhone10,3" || plus.device.model == "iPhone10,6" || plus.device.model == "iPhone11,8" || plus.device.model == "iPhone11,2" || plus.device.model == "iPhone11,6") {
 					document.getElementById("work_context").style.marginTop= '40px';
 				}
-			});
-		})(mui);
-		mui.plusReady(function() {
 			getdata();
 			mui.back = function() {
 				closeMenu();

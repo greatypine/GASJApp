@@ -231,17 +231,13 @@
 			mui.init({
 				swipeBack: false
 			});
-			(function($) {
-				$.ready(function() {
-					if(plus.device.model == "iPhone10,3" || plus.device.model == "iPhone10,6" || plus.device.model == "iPhone11,8" || plus.device.model == "iPhone11,2" || plus.device.model == "iPhone11,6") {
+
+			mui.plusReady(function() {
+				if(plus.device.model == "iPhone10,3" || plus.device.model == "iPhone10,6" || plus.device.model == "iPhone11,8" || plus.device.model == "iPhone11,2" || plus.device.model == "iPhone11,6") {
 						document.getElementById("titlenav").style.marginTop= '-20px';
 					document.getElementById("slider").style.marginTop= '-59px';
 					document.getElementById("sliderSegmentedControl").style.marginTop= '24px';
 					}
-				});
-			})(mui);
-
-			mui.plusReady(function() {
 				//来自于片区动态的消费记录
 				var self = plus.webview.currentWebview();
 				if(self != null && self.portrait_phone != null) {

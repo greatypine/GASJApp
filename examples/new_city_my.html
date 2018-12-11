@@ -226,15 +226,11 @@
 			mui.init({
 				swipeBack: false
 			});
-			(function($) {
-				$.ready(function() {
-					if(plus.device.model == "iPhone10,3"||plus.device.model == "iPhone10,6"|| plus.device.model == "iPhone11,8"||plus.device.model == "iPhone11,2"||plus.device.model == "iPhone11,6") {
+			mui.plusReady(function() {
+				if(plus.device.model == "iPhone10,3"||plus.device.model == "iPhone10,6"|| plus.device.model == "iPhone11,8"||plus.device.model == "iPhone11,2"||plus.device.model == "iPhone11,6") {
 					document.getElementById("titlenav").style.marginTop= '-20px';
 					document.getElementById("footer_bottmo").style.paddingBottom= '67px';
 				}
-				});
-			})(mui);
-			mui.plusReady(function() {
 				initView();
 				if('Android' == plus.os.name) {
 					var first = null;

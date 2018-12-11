@@ -4,7 +4,7 @@
 	<head>
 		<meta charset="utf-8">
 		<title>录入</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
 		<!--标准mui.css-->
@@ -96,14 +96,12 @@
 	<script src="../js/date_util.js"></script>
 	<script src="../js/jquery-2.2.2.min.js"></script>
 	<script type="text/javascript">
-		
-		(function($) {
-				$.ready(function() {
-					if(plus.device.model == "iPhone10,3"||plus.device.model == "iPhone10,6"|| plus.device.model == "iPhone11,8"||plus.device.model == "iPhone11,2"||plus.device.model == "iPhone11,6") {
+		mui.plusReady(function () {
+			if(plus.device.model == "iPhone10,3"||plus.device.model == "iPhone10,6"|| plus.device.model == "iPhone11,8"||plus.device.model == "iPhone11,2"||plus.device.model == "iPhone11,6") {
 					document.getElementById("content").style.marginTop= '110px';
 				}
-				});
-			})(mui);
+			
+		});
 		//跳转到门店日常
 			function toStoreDaily() {
 				setTimeout(function() {
