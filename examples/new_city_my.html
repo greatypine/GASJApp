@@ -21,8 +21,11 @@
 		<link rel="stylesheet" href="../css/img_preview.css">
 		<link rel="stylesheet" href="../css/newmui.min.css">
 		<style>
-			html,body{
-				height: 100%; background-size: cover; min-height: 100%;
+			html,
+			body {
+				height: 100%;
+				background-size: cover;
+				min-height: 100%;
 			}
 			
 			footer {
@@ -55,23 +58,72 @@
 				color: #169a80!important;
 			}
 			
-			  .wrapper,.content-wrapper{background-color: transparent!important;}
-    .modal-content{ margin-bottom: 15px;}
-    .box-body img{width: 100%}
-    .dl-horizontal dt{width: 100px; font-weight: normal;}
-    .dl-horizontal .w3{letter-spacing:8px;}
-    .dl-horizontal .w2{letter-spacing:30px;}
-    .servicer{height: 80px; }
-    .servicer .col-xs-10{line-height: 50px;}
-
-    .bg-head-green{background-color:#18bc9c; color: #fff; border-radius: 0;}
-    .bg-head-green .col-xs-4 img{border-radius: 50%; max-height: 150px; box-shadow: 0px 3px 5px rgba(0,0,0,0.3);}
-    .return-arrow a{color: #fff; padding: 20px; font-size: 26px;width: 100%;}
-    .bg-shade{background-color: rgba(0,0,0,0.1); padding: 10px 0; margin-top: 10px;}
-    .image{color: #fff;}
-    .mui-page-content {
+			.wrapper,
+			.content-wrapper {
+				background-color: transparent!important;
+			}
+			
+			.modal-content {
+				margin-bottom: 15px;
+			}
+			
+			.box-body img {
+				width: 100%
+			}
+			
+			.dl-horizontal dt {
+				width: 100px;
+				font-weight: normal;
+			}
+			
+			.dl-horizontal .w3 {
+				letter-spacing: 8px;
+			}
+			
+			.dl-horizontal .w2 {
+				letter-spacing: 30px;
+			}
+			
+			.servicer {
+				height: 80px;
+			}
+			
+			.servicer .col-xs-10 {
+				line-height: 50px;
+			}
+			
+			.bg-head-green {
+				background-color: #18bc9c;
+				color: #fff;
+				border-radius: 0;
+			}
+			
+			.bg-head-green .col-xs-4 img {
+				border-radius: 50%;
+				max-height: 150px;
+				box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.3);
+			}
+			
+			.return-arrow a {
+				color: #fff;
+				padding: 20px;
+				font-size: 26px;
+				width: 100%;
+			}
+			
+			.bg-shade {
+				background-color: rgba(0, 0, 0, 0.1);
+				padding: 10px 0;
+				margin-top: 10px;
+			}
+			
+			.image {
+				color: #fff;
+			}
+			
+			.mui-page-content {
 				font-size: 16px;
-				padding:20px 20px;
+				padding: 20px 20px;
 			}
 			
 			.mui-page-content ul li {
@@ -89,6 +141,7 @@
 				background: url(../images/icon33.png) no-repeat center right;
 				background-size: 5px;
 			}
+			
 			.mui-botton button {
 				width: 100%;
 				height: 40px;
@@ -109,39 +162,38 @@
 
 			<div class="mui-inner-wrap wrapper">
 				<header class="main-header">
-						<nav class="navbar navbar-static-top text-center">
-							<span> 个人中心</span>
-						</nav>
-					</header>
-					<div class="box-body no-padding bg-head-green text-center" style="height: 180px;">
-						<div class="clearfix">
-							<div class="col-xs-4"></div>
-							<div class="col-xs-4"><img src="../images/my_card_head.png" id="head_img">
-								<p class="h4" id="employee_name"></p>
-							</div>
-						</div>
-						<div id="employee_zw">
+					<nav class="navbar navbar-static-top text-center" id="titlenav">
+						<span> 个人中心</span>
+					</nav>
+				</header>
+				<div class="box-body no-padding bg-head-green text-center" style="height: 180px;">
+					<div class="clearfix" style="margin-top: 10px;">
+						<div class="col-xs-4"></div>
+						<div class="col-xs-4"><img src="../images/my_card_head.png" id="head_img">
+							<p class="h4" id="employee_name"></p>
 						</div>
 					</div>
-					<div class="mui-page-content">
+					<div id="employee_zw">
+					</div>
+				</div>
+				<div class="mui-page-content">
 					<ul>
-						<li >
+						<li>
 							<a onclick="toUpdatePassword()">密码修改</a>
 						</li>
 					</ul>
 					<div class="mui-botton"><button id='btnLogout'>退出登录</button></div>
 				</div>
 
-				
 				<div class="mui-off-canvas-backdrop"></div>
-				<footer>
+				<footer id="footer_bottmo">
 					<a class="col-xs-4" id="web_city_ej" path="web_city_ej.html" onclick="jump(this)">
 						<p><i class="fa fa-bar-chart-o"></i></p>动态</a>
 					<a class="col-xs-4" id="new_web_message" path="new_web_message.html" onclick="jump(this)">
 						<p><i class="fa fa-envelope-o"></i></p>消息
 						<div id="message_state_div"></div>
 					</a>
-					
+
 					<a class="col-xs-4  mark-green" id="new_city_my" href="javascript:void(0)">
 						<p><i class="fa fa-user"></i></p>我</a>
 				</footer>
@@ -167,17 +219,24 @@
 		<script type="text/javascript" src="../js/custom_common.js"></script>
 		<script src="../js/date_util.js"></script>
 		<script src="../js/previewimage.js"></script>
-	<script src="../js/mui.zoom.js"></script>
+		<script src="../js/mui.zoom.js"></script>
 		<script>
 			var employee = JSON.parse(localStorage.getItem('employee'));
-	var employee_pic = JSON.parse(localStorage.getItem('employee_pic'));
-	mui.init({
-    swipeBack: false
-  });
-
-  mui.plusReady(function (){
-  	initView();
-  	if('Android' == plus.os.name) {
+			var employee_pic = JSON.parse(localStorage.getItem('employee_pic'));
+			mui.init({
+				swipeBack: false
+			});
+			(function($) {
+				$.ready(function() {
+					if(plus.device.model == "iPhone10,3"||plus.device.model == "iPhone10,6"|| plus.device.model == "iPhone11,8"||plus.device.model == "iPhone11,2"||plus.device.model == "iPhone11,6") {
+					document.getElementById("titlenav").style.marginTop= '-20px';
+					document.getElementById("footer_bottmo").style.paddingBottom= '67px';
+				}
+				});
+			})(mui);
+			mui.plusReady(function() {
+				initView();
+				if('Android' == plus.os.name) {
 					var first = null;
 					mui.back = function() {
 						if(!first) {
@@ -216,17 +275,17 @@
 						});
 					}, 50);
 				});
-			
-  });
-  
-  function initView() {
+
+			});
+
+			function initView() {
 				if(employee != null) {
 					if(employee.name == null || employee.name == "") {
 						$("#employee_name").html("无数据");
 					} else {
 						$("#employee_name").html(employee.name);
 					}
-					$("#employee_zw").text(employee.zw+employee.employeeId);
+					$("#employee_zw").text(employee.zw + employee.employeeId);
 
 				}
 				message_isread();
@@ -242,7 +301,7 @@
 				}
 
 			}
-  //跳转到修改密码
+			//跳转到修改密码
 			function toUpdatePassword() {
 				setTimeout(function() {
 					var webview = plus.webview.getWebviewById('update_password');
@@ -263,36 +322,34 @@
 				}, 0);
 			};
 			//查看消息列表是否有未读信息，如有未读信息消息显示红点
-		function message_isread() {
-			var message = {
-				receiveId: employee.employeeId
-			};
-			var message_count=0;
-			var notice_count=0;
-			doManager('MessageNewManager', 'getUnReadMessageAmount', message, function(data) {
-				if(data.result == true) {
-					var jsonData = JSON.parse(data.data);
-					message_count=jsonData;
-					
-				}
-			},false);
-			
-			doManager('NoticeReciverManager', 'getUnReadNotice', employee.employeeId, function(data) {
+			function message_isread() {
+				var message = {
+					receiveId: employee.employeeId
+				};
+				var message_count = 0;
+				var notice_count = 0;
+				doManager('MessageNewManager', 'getUnReadMessageAmount', message, function(data) {
 					if(data.result == true) {
 						var jsonData = JSON.parse(data.data);
-						notice_count=jsonData;
-					
+						message_count = jsonData;
+
 					}
-				},false);
-				if(message_count == 0 && notice_count ==0) {
+				}, false);
+
+				doManager('NoticeReciverManager', 'getUnReadNotice', employee.employeeId, function(data) {
+					if(data.result == true) {
+						var jsonData = JSON.parse(data.data);
+						notice_count = jsonData;
+
+					}
+				}, false);
+				if(message_count == 0 && notice_count == 0) {
 					$('#message_state_div').removeClass("message-dian1");
 				} else {
 					$('#message_state_div').addClass("message-dian1");
 				}
-				
-		}
-			
-	
+
+			}
 		</script>
 
 	</body>

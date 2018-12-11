@@ -102,7 +102,7 @@
 
 			<header class="main-header">
 				<!-- Logo -->
-				<nav class="navbar navbar-static-top text-center">
+				<nav class="navbar navbar-static-top text-center" id="titlenav">
 					<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 					<span> 订单详情</span>
 				</nav>
@@ -113,7 +113,7 @@
 			<!-- =============================================== -->
 
 			<!-- Content Wrapper. Contains page content -->
-			<section style="padding-top: 15px;">
+			<section style="padding-top: 15px;" id="secition">
 				<div class="modal-content">
 					<div class="box-header with-border"><i class="fa fa-newspaper-o"></i><b>客户信息</b></div>
 					<div class="box-body" id="user_click">
@@ -185,6 +185,14 @@
 			mui.init({
 				swipeBack: false
 			});
+			(function($) {
+				$.ready(function() {
+					if(plus.device.model == "iPhone10,3"||plus.device.model == "iPhone10,6"|| plus.device.model == "iPhone11,8"||plus.device.model == "iPhone11,2"||plus.device.model == "iPhone11,6") {
+					document.getElementById("titlenav").style.marginTop= '-20px';
+					document.getElementById("secition").style.paddingTop= '30px';
+				}
+				});
+			})(mui);
 			mui.plusReady(function() {
 				var self = plus.webview.currentWebview();
 				if(self != null && self.order_detail != null) {

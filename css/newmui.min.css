@@ -654,4 +654,14 @@ header .mui-icon {
 .mui-pull-left {
 	float: left;
 }
+.main-header{background-color: rgb(24,188,156);}
+@media screen and (device-width:375px) and (device-height:812px){
+    header {
+        height: 88px;
+        padding-top: 44px !important;
+    }
+    .mui-content {
+        padding-top: 83px !important;
+    }
+  }
 

@@ -96,6 +96,13 @@
 					}
 				}
 			});
+			(function($) {
+					$.ready(function() {
+							if(plus.device.model == "iPhone10,3" || plus.device.model == "iPhone10,6" || plus.device.model == "iPhone11,8" || plus.device.model == "iPhone11,2" || plus.device.model == "iPhone11,6") {
+								document.getElementById("pullrefresh").style.marginTop = '-23px';
+							}
+					});
+			})(mui);
 			//初始获取我的客户列表
 			function initView() {
 				pageInfo.currentPage = pageInfo.currentPage + 1;
@@ -112,25 +119,30 @@
 								mui('#pullrefresh').pullRefresh().endPullup((userList.length < 10)); //参数为true代表没有更多数据了。	
 							}
 							$(userList).each(function(index, user) {
+								//手机后中间显示****
+								var phone = user.mobilephone;
+								var nPhone = phone.substr(0, 3) + '****' + phone.substring(7, 11);
+								
 								$customerlist.append('<li class="list_content" style="margin-bottom: 10px;"></li>');
 								$li = $customerlist.find("li:last");
-								$li.append('<div class="list_item">' + '<div class="title">手&nbsp;&nbsp;&nbsp;机&nbsp;&nbsp;&nbsp;号：</div>' + '<div class="content juzhong" id="callPhone" ><h5 id="phone">' + user.mobilephone + '</h5><img class="phoneStyle" src="../images/phone.png"/></div></div>');
+								$li.append('<div class="list_item">' + '<div class="title">手&nbsp;&nbsp;&nbsp;机&nbsp;&nbsp;&nbsp;号：</div>' + '<div class="content juzhong" id="callPhone" ><h5 id="phone">' + nPhone+ '</h5><img class="phoneStyle" src="../images/phone.png"/></div></div>');
 								$li.append('<div class="list_item">' + '<div class="title">片&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;区：</div>' + '<div class="content juzhong" id="area_no">' + user.area_no + '</div></div>');
 								$li.append('<div class="list_item">' + '<div class="title">推荐产品1：</div>' + '<div class="content juzhong" id="item1">' + user.item1 + '</div></div>');
 								$li.append('<div class="list_item">' + '<div class="title">推荐产品2：</div>' + '<div class="content juzhong" id="item2">' + user.item2 + '</div></div>');
 								$li.append('<div class="list_item pb">' + '<div class="title">推荐产品3：</div>' + '<div class="content juzhong" id="item3">' + user.item3 + '</div></div>');
-								var callPhone =$("#phone");
-								var $div=$li.find("#callPhone").last();
+								var callPhone = $("#phone");
+								
+								var $div = $li.find("#callPhone").last();
 								$div[0].addEventListener('click', function(event) {
-//									var btnArray = ['拨打', '取消'];
-									var Phone =user.mobilephone;
-//									mui.confirm('是否拨打 ' + Phone + ' ？', '提示', btnArray, function(e) {
-//										if(e.index == 0) {
-											plus.device.dial(Phone, false);
-//										}
-//									});
+									//									var btnArray = ['拨打', '取消'];
+									var Phone = user.mobilephone;
+									//									mui.confirm('是否拨打 ' + Phone + ' ？', '提示', btnArray, function(e) {
+									//										if(e.index == 0) {
+									plus.device.dial(Phone, false);
+									//										}
+									//									});
 								});
-//
+								//
 							})
 						} else {
 							mui.toast(data.message);

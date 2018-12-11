@@ -6,7 +6,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<title>运营</title>
 		<!-- Tell the browser to be responsive to screen width -->
-		<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+		<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no,viewport-fit=cover" name="viewport">
 		<!-- Bootstrap 3.3.6 -->
 		<link rel="stylesheet" href="../css/bootstrap.min.css">
 		<!-- Font Awesome -->
@@ -251,7 +251,7 @@
 			<!--主页部分-->
 			<div class="wrapper mui-inner-wrap">
 				<header class="main-header">
-					<nav class="navbar navbar-static-top text-center">
+					<nav class="navbar navbar-static-top text-center" id="titlenav">
 						<span>运营</span>
 						<a href="#offCanvasSide" class="sidebar-toggle fa fa-navicon mui-icon-bars"></a>
 					</nav>
@@ -272,7 +272,7 @@
 									<div class="mui-scroll mui-content-padded">
 										<div class="statistics">
 											<div class="mui-content mui-scroll-wrapper">
-												<div style="margin-top: 80px;text-align: center;">地图加载中...</div>
+												<div style="margin-top: 80px;text-align: center;" id="map_loading">地图加载中...</div>
 											</div>
 										
 										</div>
@@ -464,6 +464,16 @@
 			  }
 				
 			});
+			(function($) {
+				$.ready(function() {
+					if(plus.device.model == "iPhone10,3"||plus.device.model == "iPhone10,6"|| plus.device.model == "iPhone11,8"||plus.device.model == "iPhone11,2"||plus.device.model == "iPhone11,6") {
+						document.getElementById("titlenav").style.marginTop = '-20px';
+						document.getElementById("slider").style.marginTop = '-59px';
+						document.getElementById("sliderSegmentedControl").style.marginTop = '24px';
+						document.getElementById("footer_bottmo").style.paddingBottom= '67px';
+					}
+				});
+			})(mui);
 			window.addEventListener('setarea', function(event) {
 				var id = event.detail.id;
 				if(id != null) {
@@ -1271,13 +1281,23 @@
 					if(maps_webview != null) {
 						maps_webview.close();
 					}
+					var s_top=null;
+					var s_bottom=null;
+					  if(plus.device.model == "iPhone10,3"||plus.device.model == "iPhone10,6"|| plus.device.model == "iPhone11,8"||plus.device.model == "iPhone11,2"||plus.device.model == "iPhone11,6") {
+						s_top="130px";
+						s_bottom="70px";
+					}else{
+						s_top="110px";
+						s_bottom="50px";
+					}
+					
 					mui.openWindow({
 						url: "https://www.guoanshuju.com/daqWeb/app_webview/app_maps.html?e=" + v + "&s=" + s + "&zw=" + zw + "&lat=" + lat + "&lon=" + lon,
 						id: 'maps_web',
 						createNew: true,
 						styles: {
-							top: '110px',
-							bottom: '50px'
+							top: s_top,
+							bottom: s_bottom
 						},
 						show: {
 							aniShow: "none"

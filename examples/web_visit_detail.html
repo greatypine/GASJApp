@@ -77,7 +77,7 @@
 
 			<header class="main-header">
 				<!-- Logo -->
-				<nav class="navbar navbar-static-top text-center">
+				<nav class="navbar navbar-static-top text-center" id="titlenav">
 					<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 					<span> 拜访记录</span>
 				</nav>
@@ -88,7 +88,7 @@
 			<!-- =============================================== -->
 
 			<!-- Content Wrapper. Contains page content -->
-			<section style="padding-top: 15px;">
+			<section style="padding-top: 15px;" id="secition">
 				<div class="modal-content" id="item_div">
 					<div class="box-header with-border"><i class="fa fa-user"></i><b>客户信息</b></div>
 					<div class="box-body" id="user_click">
@@ -142,6 +142,15 @@
 			mui.init({
 				swipeBack: false
 			});
+			(function($) {
+				$.ready(function() {
+					if(plus.device.model == "iPhone10,3" || plus.device.model == "iPhone10,6" || plus.device.model == "iPhone11,8" || plus.device.model == "iPhone11,2" || plus.device.model == "iPhone11,6") {
+						document.getElementById("titlenav").style.marginTop= '-20px';
+						document.getElementById("secition").style.paddingTop= '30px'
+					}
+				});
+			})(mui);
+
 			mui.plusReady(function() {
 				var self = plus.webview.currentWebview();
 				if(self != null && self.relation_detail != null) {
@@ -178,40 +187,40 @@
 
 						var $div = $('#item_div');
 						$(jsonData.dataMap.data).each(function(index, relation) {
-                            var newemployee_pic = ""
+							var newemployee_pic = ""
 							if(relation.employee_pic != null && relation.employee_pic != "") {
-								if(relation.employee_pic.pngUrl == null || relation.employee_pic.pngUrl == ""|| relation.employee_pic.pngUrl == "https://imgcdn.guoanshequ.com/") {
+								if(relation.employee_pic.pngUrl == null || relation.employee_pic.pngUrl == "" || relation.employee_pic.pngUrl == "https://imgcdn.guoanshequ.com/") {
 									newemployee_pic = "../images/my_card_head.png";
 								} else {
 									newemployee_pic = decodeURI(relation.employee_pic.pngUrl);
 								}
 
-							}else{
+							} else {
 								newemployee_pic = "../images/my_card_head.png";
 							}
 							var html2 = '';
-							if(relation.customer_type=="1"){
+							if(relation.customer_type == "1") {
 								html2 = '<p><span class="text-light-blue">拜访事由:</span>' + relation.relation_reason + '</p>' +
-										 '<p><span class="text-light-blue">反馈:</span>' + relation.relation_rcv + '</p>';
-							}else{
+									'<p><span class="text-light-blue">反馈:</span>' + relation.relation_rcv + '</p>';
+							} else {
 								$(relation.relation_content).each(function(index, relation_content) {
 									html2 += '<p><span class="text-light-blue">' + relation_content.resourcetext + ':</span><br>' +
 										'<b class="margin-r-5">' + relation_content.optiontext + '</b>' + relation_content.content + '</p>';
 								});
 							}
 							var html = '<div class="modal-content">' +
-									'<div class="box-header with-border">' + relation.relation_type + '拜访<span class="pull-right">' + new Date(relation.relation_date).Format('YYYY-MM-DD') + '</span></div>' +
-									'<div class="box-body box-header with-border">' +
-									'<div class="col-xs-2 no-padding text-center">' +
-									'<img src="'+newemployee_pic+ '"class="img-circle" style="height:60px;"><br>' + relation.employee_name + '</div>' +
-									'<div class="col-xs-10">' +
-									'' + html2 + '' +
-									'</div></div></div>';
+								'<div class="box-header with-border">' + relation.relation_type + '拜访<span class="pull-right">' + new Date(relation.relation_date).Format('YYYY-MM-DD') + '</span></div>' +
+								'<div class="box-body box-header with-border">' +
+								'<div class="col-xs-2 no-padding text-center">' +
+								'<img src="' + newemployee_pic + '"class="img-circle" style="height:60px;"><br>' + relation.employee_name + '</div>' +
+								'<div class="col-xs-10">' +
+								'' + html2 + '' +
+								'</div></div></div>';
 							$div.after(html);
 						});
 
 					}
-				}); 
+				});
 			}
 
 			//获取更多拜访记录明细
@@ -227,15 +236,15 @@
 
 						var $div = $('#item_div');
 						$(jsonData.dataMap.data).each(function(index, relation) {
-							 var newemployee_pic = ""
+							var newemployee_pic = ""
 							if(relation.employee_pic != null && relation.employee_pic != "") {
-								if(relation.employee_pic.pngUrl == null || relation.employee_pic.pngUrl == ""|| relation.employee_pic.pngUrl == "https://imgcdn.guoanshequ.com/") {
+								if(relation.employee_pic.pngUrl == null || relation.employee_pic.pngUrl == "" || relation.employee_pic.pngUrl == "https://imgcdn.guoanshequ.com/") {
 									newemployee_pic = "../images/my_card_head.png";
 								} else {
 									newemployee_pic = decodeURI(relation.employee_pic.pngUrl);
 								}
 
-							}else{
+							} else {
 								newemployee_pic = "../images/my_card_head.png";
 							}
 							var html2 = '';
@@ -247,7 +256,7 @@
 								'<div class="box-header with-border">' + relation.relation_type + '拜访<span class="pull-right">' + new Date(relation.relation_date).Format('YYYY-MM-DD') + '</span></div>' +
 								'<div class="box-body box-header with-border">' +
 								'<div class="col-xs-2 no-padding text-center">' +
-								'<img src="'+newemployee_pic+ '"class="img-circle" style="height:60px;"><br>' + relation.employee_name + '</div>' +
+								'<img src="' + newemployee_pic + '"class="img-circle" style="height:60px;"><br>' + relation.employee_name + '</div>' +
 								'<div class="col-xs-10">' +
 								'' + html2 + '' +
 
@@ -280,10 +289,10 @@
 
 			function headInitView(jsonData) {
 				if(jsonData != null) {
-					if(jsonData.customer.cus_pic != null&&jsonData.customer.cus_pic != ""&&jsonData.customer.cus_pic != "https://imgcdn.guoanshequ.com/") {
-						
+					if(jsonData.customer.cus_pic != null && jsonData.customer.cus_pic != "" && jsonData.customer.cus_pic != "https://imgcdn.guoanshequ.com/") {
+
 						isHasImg(jsonData.customer.cus_pic);
-//						$('#header_img').attr('src', decodeURI(jsonData.customer.cus_pic));
+						//						$('#header_img').attr('src', decodeURI(jsonData.customer.cus_pic));
 					} else {
 						$('#header_img').attr('src', '../images/no_img2.png');
 					}
@@ -348,32 +357,32 @@
 					});
 				}, 0);
 			};
-			function isHasImg(pathImg){
-			    var ImgObj=new Image();
-			    ImgObj.src= pathImg;
-			     if(ImgObj.fileSize > 0 || (ImgObj.width > 0 && ImgObj.height > 0))
-			     {
-			       $('#header_img').attr('src', decodeURI(jsonData.customer.cus_pic));
-			     } else {
-			      $('#header_img').attr('src', '../images/no_img2.png');
-			    }
+
+			function isHasImg(pathImg) {   
+				var ImgObj = new Image();   
+				ImgObj.src = pathImg;   
+				if(ImgObj.fileSize > 0 || (ImgObj.width > 0 && ImgObj.height > 0))     {      
+					$('#header_img').attr('src', decodeURI(jsonData.customer.cus_pic));    
+				} else {      
+					$('#header_img').attr('src', '../images/no_img2.png');   
+				}
 			}
-//			//获取国安侠头像
-//			function getEmployeePicByEmployeeId(employee_id) {
-//				var urlpic="";
-//				doManager('InterManager','findEmployeePicByEmployeeId',employee_id, function(data) {
-//					if(data.result == true) {
-//						var jsonData = JSON.parse(data.data);
-//						if(jsonData.dataMap!=null&&jsonData.dataMap!=""){
-//							if(jsonData.dataMap.pngUrl!=null&&jsonData.dataMap.pngUrl!=""){
-//								urlpic=jsonData.dataMap.pngUrl;
-//							}
-//						    
-//					    }
-//					}
-//				},false);
-//				return urlpic;
-//			}
+			//			//获取国安侠头像
+			//			function getEmployeePicByEmployeeId(employee_id) {
+			//				var urlpic="";
+			//				doManager('InterManager','findEmployeePicByEmployeeId',employee_id, function(data) {
+			//					if(data.result == true) {
+			//						var jsonData = JSON.parse(data.data);
+			//						if(jsonData.dataMap!=null&&jsonData.dataMap!=""){
+			//							if(jsonData.dataMap.pngUrl!=null&&jsonData.dataMap.pngUrl!=""){
+			//								urlpic=jsonData.dataMap.pngUrl;
+			//							}
+			//						    
+			//					    }
+			//					}
+			//				},false);
+			//				return urlpic;
+			//			}
 		</script>
 	</body>
 

@@ -223,7 +223,7 @@
 			<div class="mui-inner-wrap">
 				<header class="main-header" style="position: fixed;display: block;">
 					<!-- Logo -->
-					<nav class="navbar navbar-static-top text-center">
+					<nav class="navbar navbar-static-top text-center"  id="titlenav">
 						<div style="text-align: center;">
 						      <div style="width: 100%;text-align: center;"id="city_select">
 						      	<span  style="max-width: 100px;min-width: 50px;" id="city_span">城市</span>
@@ -243,7 +243,7 @@
 				<!-- =============================================== -->
 				<div class="mui-content mui-scroll-wrapper">
 					<!-- Content Wrapper. Contains page content -->
-					<section>
+					<section id="section">
 						<div class="customer">
 							<div class="customer_bg clearfix">
 								<div class="pull-left">
@@ -335,7 +335,7 @@
 				</div>
 				<!-- /.content -->
 				<!-- footer -->
-				<footer>
+				<footer id="footer_bottmo">
 					<a class="col-xs-4 mark-green" id="web_city_ej" href="javascript:void(0)">
 						<p><i class="fa fa-bar-chart-o"></i></p>动态</a>
 					<a class="col-xs-4" id="new_web_message" path="new_web_message.html" onclick="jump(this)">
@@ -406,10 +406,15 @@
 		<!-- page script -->
 		<script src="../js/jquery.dataStatistics.js"></script>
 		<script>
-			//			$(document).ready(function() {
-			//				//  $('.dataStatistics').dataStatistics({min:1,max:146,time:200000,len:8});
-			//				
-			//			});
+			(function($) {
+				$.ready(function() {
+					if(plus.device.model == "iPhone10,3"||plus.device.model == "iPhone10,6"|| plus.device.model == "iPhone11,8"||plus.device.model == "iPhone11,2"||plus.device.model == "iPhone11,6") {
+					document.getElementById("titlenav").style.marginTop= '-20px';
+					document.getElementById("section").style.paddingTop= '0px';
+					document.getElementById("footer_bottmo").style.paddingBottom='67px';
+				}
+				});
+			})(mui);
 
 			function timer(opj) {
 				$(opj).find('ul').animate({

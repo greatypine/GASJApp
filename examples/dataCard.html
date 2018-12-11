@@ -4,7 +4,7 @@
 	<head>
 		<meta charset="utf-8">
 		<title>国安侠当月数据卡</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no,viewport-fit=cover" name="viewport">
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
 		<link href="../css/mui.min2.css" rel="stylesheet" />
@@ -146,7 +146,7 @@
 			<h1 class="mui-title">国安侠数据卡</h1>
 		</header>
 
-		<div class="box box-primary" style="margin-top: 60px;">
+		<div class="box box-primary" style="margin-top: 60px;" id="box">
 			<div class="box-header with-border clearfix" style="font-size: 14px;">
 				<span class="pull-left"><i class="fa fa-bar-chart" style="padding-top: 5px;"></i><b id="dataCard_name"></b></span>
 				<span class="pull-right"><select style="float:right;width:70px;height:28px;border: 1px solid #666!important;background-color:#efefef" id="crm_date" onchange="reloadByDate()"></select>
@@ -276,7 +276,13 @@
 					
 				}
 			});
-
+			(function($) {
+				$.ready(function() {
+					if(plus.device.model == "iPhone10,3"||plus.device.model == "iPhone10,6"|| plus.device.model == "iPhone11,8"||plus.device.model == "iPhone11,2"||plus.device.model == "iPhone11,6") {
+					document.getElementById("box").style.marginTop= '80px';
+				}
+				});
+			})(mui);
 			function plusReady() {
 				 employee = JSON.parse(localStorage.getItem('employee'));
 				 store = JSON.parse(localStorage.getItem("store"));

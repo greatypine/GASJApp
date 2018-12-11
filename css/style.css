@@ -56,7 +56,10 @@ footer a p{margin-top:-0.05rem;}
 	font-size: 0.32rem;
 	color: white;
 }
-
+.takephotos{
+	background: url(../images/icon22.png) no-repeat;width: 0.5rem;height: 0.5rem;background-size: 0.4rem;margin-top: 0.2rem;
+}
+.history {width: 3em;font-size: 18px;display: inline-block;color: #fff;margin-top: -10px;}
 @media screen and (device-width:375px) and (device-height:812px){
     header {
         height: 88px;

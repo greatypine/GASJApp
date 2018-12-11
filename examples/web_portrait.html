@@ -1,801 +1,841 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>用户画像详情页面(订单用户存在用户画像)</title>
-  <!-- Tell the browser to be responsive to screen width -->
-  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-  <!-- Bootstrap 3.3.6 -->
-  <link rel="stylesheet" href="../css/bootstrap.min.css">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="../css/font-awesome.min.css">
-  <!-- Ionicons -->
-  <link rel="stylesheet" href="../css/ionicons.min.css">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="../css/AdminLTE.min.css">
-  <!-- AdminLTE Skins. Choose a skin from the css/skins
-       folder instead of downloading all of them to reduce the load. -->
-  <link rel="stylesheet" href="../css/_all-skins.min.css">
-  <link rel="stylesheet" href="../css/newmui.min.css">
-  	<!--<link rel="stylesheet" href="../css/mui.min.css">-->
 
-  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-  <!--[if lt IE 9]>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>用户画像详情页面(订单用户存在用户画像)</title>
+		<!-- Tell the browser to be responsive to screen width -->
+		<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+		<!-- Bootstrap 3.3.6 -->
+		<link rel="stylesheet" href="../css/bootstrap.min.css">
+		<!-- Font Awesome -->
+		<link rel="stylesheet" href="../css/font-awesome.min.css">
+		<!-- Ionicons -->
+		<link rel="stylesheet" href="../css/ionicons.min.css">
+		<!-- Theme style -->
+		<link rel="stylesheet" href="../css/AdminLTE.min.css">
+		<!-- AdminLTE Skins. Choose a skin from the css/skins
+       folder instead of downloading all of them to reduce the load. -->
+		<link rel="stylesheet" href="../css/_all-skins.min.css">
+		<link rel="stylesheet" href="../css/newmui.min.css">
+		<!--<link rel="stylesheet" href="../css/mui.min.css">-->
+
+		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+		<!--[if lt IE 9]>
   <script src="IE 9/html5shiv.min.js"></script>
   <script src="IE 9/respond.min.js"></script>
   <![endif]-->
-  <style>
-    .wrapper{background-color: transparent!important;}
-  
-    .navbar>a{line-height: 50px; color: #fff; position: absolute; left:14px; top: 13px;}
-    header{position: fixed!important; width: 100%;}
-    .mui-slider-indicator{position: fixed; top: 65px;background-color: #fff; z-index: 99;}
-    .mui-slider-progress-bar{margin-top: 89px; position: fixed;}
-    .modal-content{ margin-top: 15px;}
-    .title_line{border-left: 2px solid #f39c12; color: #f39c12; padding-left: 5px;}
-    .modal-content img{width: 100%; height: 100px;}
-    section{margin-top: 15px; }
-  </style>
-</head>
-<body class="hold-transition skin-blue sidebar-mini">
-<!-- Site wrapper -->
-<div class="wrapper">
+		<style>
+			.wrapper {
+				background-color: transparent!important;
+			}
+			
+			.navbar>a {
+				line-height: 50px;
+				color: #fff;
+				position: absolute;
+				left: 14px;
+				top: 13px;
+			}
+			
+			header {
+				position: fixed!important;
+				width: 100%;
+			}
+			
+			.mui-slider-indicator {
+				position: fixed;
+				top: 65px;
+				background-color: #fff;
+				z-index: 99;
+			}
+			
+			.mui-slider-progress-bar {
+				margin-top: 89px;
+				position: fixed;
+			}
+			
+			.modal-content {
+				margin-top: 15px;
+			}
+			
+			.title_line {
+				border-left: 2px solid #f39c12;
+				color: #f39c12;
+				padding-left: 5px;
+			}
+			
+			.modal-content img {
+				width: 100%;
+				height: 100px;
+			}
+			
+			section {
+				margin-top: 15px;
+			}
+		</style>
+	</head>
 
-  <header class="main-header">
-    <!-- Logo -->
-    <nav class="navbar navbar-static-top text-center">
-    	<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-      <span> 用户画像</span>
-    </nav>
-    <!-- Header Navbar: style can be found in header.less -->
+	<body class="hold-transition skin-blue sidebar-mini">
+		<!-- Site wrapper -->
+		<div class="wrapper">
 
-  </header>
+			<header class="main-header">
+				<!-- Logo -->
+				<nav class="navbar navbar-static-top text-center" id="titlenav">
+					<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+					<span> 用户画像</span>
+				</nav>
+				<!-- Header Navbar: style can be found in header.less -->
 
+			</header>
 
-  <!-- =============================================== -->
+			<!-- =============================================== -->
 
-  <!-- Content Wrapper. Contains page content -->
-  <section>
-    <div class="mui-content">
-      <div id="slider" class="mui-slider">
-        <div id="sliderSegmentedControl" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
-          <a class="mui-control-item mui-active" href="#item1mobile">基本信息</a>
-          <a class="mui-control-item" href="#item2mobile">补充信息</a>
-          <a class="mui-control-item" href="#item3mobile">家庭成员</a>
+			<!-- Content Wrapper. Contains page content -->
+			<section>
+				<div class="mui-content">
+					<div id="slider" class="mui-slider">
+						<div id="sliderSegmentedControl" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+							<a class="mui-control-item mui-active" href="#item1mobile">基本信息</a>
+							<a class="mui-control-item" href="#item2mobile">补充信息</a>
+							<a class="mui-control-item" href="#item3mobile">家庭成员</a>
 
-        </div>
-        <div id="sliderProgressBar" class="mui-slider-progress-bar mui-col-xs-4"></div>
-        <div class="mui-slider-group">
-          <div id="item1mobile" class="mui-slider-item mui-control-content mui-active">
-            <div id="scroll1">
-              <div class="mui-scroll">
+						</div>
+						<div id="sliderProgressBar" class="mui-slider-progress-bar mui-col-xs-4"></div>
+						<div class="mui-slider-group">
+							<div id="item1mobile" class="mui-slider-item mui-control-content mui-active">
+								<div id="scroll1">
+									<div class="mui-scroll">
 
-                <div class="modal-content">
-                  <div class="box-header with-border"><b class="title_line">基本信息</b></div>
-                  <div class="box-body">
-                    <p><span class="margin-r-5" id="customer_name"></span><span id="customer_phone"></span></p>
-                    <p><span class="margin-r-5" id="customer_sex"></span><span class="margin-r-5" id="customer_age"></span><span id="customer_house"></span></p>
-                    <p id="customer_address"></p>
-                  </div>
+										<div class="modal-content">
+											<div class="box-header with-border"><b class="title_line">基本信息</b></div>
+											<div class="box-body">
+												<p><span class="margin-r-5" id="customer_name"></span><span id="customer_phone"></span></p>
+												<p><span class="margin-r-5" id="customer_sex"></span><span class="margin-r-5" id="customer_age"></span><span id="customer_house"></span></p>
+												<p id="customer_address"></p>
+											</div>
 
-                </div>
-                <div class="modal-content">
-                  <div class="box-header with-border"><b class="title_line">家庭信息</b></div>
-                  <div class="box-body box-header with-border">
-                    <p><span class="margin-r-5">面积：</span><span id="house_area"></span></p>
-                    <p><span class="margin-r-5">朝向：</span><span id="house_direction"></span></p>
-                    <p><span class="margin-r-5">户型：</span><span id="house_shape"></span></p>
-                    <p id="house_img_title"><span class="margin-r-5">户型图：</span></p>
-                    <p class="col-xs-6" id="house_img"><img src="" id="house_image"></p>
-                  </div>
+										</div>
+										<div class="modal-content">
+											<div class="box-header with-border"><b class="title_line">家庭信息</b></div>
+											<div class="box-body box-header with-border">
+												<p><span class="margin-r-5">面积：</span><span id="house_area"></span></p>
+												<p><span class="margin-r-5">朝向：</span><span id="house_direction"></span></p>
+												<p><span class="margin-r-5">户型：</span><span id="house_shape"></span></p>
+												<p id="house_img_title"><span class="margin-r-5">户型图：</span></p>
+												<p class="col-xs-6" id="house_img"><img src="" id="house_image"></p>
+											</div>
 
-                </div>
+										</div>
 
-              </div>
-            </div>
-          </div>
-          <div id="item2mobile" class="mui-slider-item mui-control-content">
-            <div id="scroll2">
-              <div class="mui-scroll">
+									</div>
+								</div>
+							</div>
+							<div id="item2mobile" class="mui-slider-item mui-control-content">
+								<div id="scroll2">
+									<div class="mui-scroll">
 
-                <div class="modal-content">
-                  <div class="box-header with-border"><b class="title_line">补充信息</b></div>
-                  <div class="box-body">
-                    <p class="pull-right"style="width: 40%;"><img src="" id="customer_header_image"></p>
-                    <p><span class="margin-r-5">民族：</span><span id="customer_nation"></span></p>
-                    <p><span class="margin-r-5">住房性质：</span><span id="customer_house_type"></span></p>
-                    <p><span class="margin-r-5">职业：</span><span id="customer_job"></span></p>
-                    <p><span class="margin-r-5">收入：</span><span id="customer_income"></span></p>
-                    <p><span class="margin-r-5">加班频率：</span><span id="customer_overtime"></span></p>
-                    <p><span class="margin-r-5">其他信息：</span><span id="customer_remark"></span></p>
-                  </div>
+										<div class="modal-content">
+											<div class="box-header with-border"><b class="title_line">补充信息</b></div>
+											<div class="box-body">
+												<p class="pull-right" style="width: 40%;"><img src="" id="customer_header_image"></p>
+												<p><span class="margin-r-5">民族：</span><span id="customer_nation"></span></p>
+												<p><span class="margin-r-5">住房性质：</span><span id="customer_house_type"></span></p>
+												<p><span class="margin-r-5">职业：</span><span id="customer_job"></span></p>
+												<p><span class="margin-r-5">收入：</span><span id="customer_income"></span></p>
+												<p><span class="margin-r-5">加班频率：</span><span id="customer_overtime"></span></p>
+												<p><span class="margin-r-5">其他信息：</span><span id="customer_remark"></span></p>
+											</div>
 
-                </div>
-                <div class="modal-content">
-                  <div class="box-header with-border"><b class="title_line">家庭信息</b></div>
-                  <div class="box-body box-header with-border">
-                    <p><span class="margin-r-5">家庭人口数：</span><span id="customer_family_sum"></span></p>
-                    <p><span class="margin-r-5">学龄前人数：</span><span id="customer_family_school"></span></p>
-                    <p><span class="margin-r-5">未成年人数：</span><span id="customer_family_underage"></span></p>
-                    <p><span class="margin-r-5">宠物种类：</span><span id="customer_pet"></span></p>
-                  </div>
+										</div>
+										<div class="modal-content">
+											<div class="box-header with-border"><b class="title_line">家庭信息</b></div>
+											<div class="box-body box-header with-border">
+												<p><span class="margin-r-5">家庭人口数：</span><span id="customer_family_sum"></span></p>
+												<p><span class="margin-r-5">学龄前人数：</span><span id="customer_family_school"></span></p>
+												<p><span class="margin-r-5">未成年人数：</span><span id="customer_family_underage"></span></p>
+												<p><span class="margin-r-5">宠物种类：</span><span id="customer_pet"></span></p>
+											</div>
 
-                </div>
+										</div>
 
-                <div class="modal-content">
-                  <div class="box-header with-border"><b class="title_line">更多信息</b></div>
-                  <div class="box-body box-header with-border">
-                    <p><span class="margin-r-5">国籍：</span><span id="nationality"></span></p>
-                    <p><span class="margin-r-5">籍贯：</span><span id="origin_pro"></span><span id="origin_city"> </span></p>
-                    <p><span class="margin-r-5">户籍所在地：</span><span id="register_pro"></span><span id="register_city"></span></p>
-                    <p><span class="margin-r-5">婚姻状况：</span><span id="marital_status"></span></p>
-                    <p><span class="margin-r-5">健康状况：</span><span id="health"></span></p>
-                    <p><span class="margin-r-5">教育程度：</span><span id="education"></span></p>
-                    <p><span class="margin-r-5">学校名称：</span><span id="school_name"></span></p>
-                    <p><span class="margin-r-5">汽车信息：</span><span id="car_type"></span></p>
-                    <p><span class="margin-r-5">汽车品牌：</span><span id="car_brand"></span></p>
-                    <p><span class="margin-r-5">理财习惯：</span><span id="financial_habits"></span></p>
-                    <p><span class="margin-r-5">性格：</span><span id="character"></span></p>
-                  </div>
-                </div>
+										<div class="modal-content">
+											<div class="box-header with-border"><b class="title_line">更多信息</b></div>
+											<div class="box-body box-header with-border">
+												<p><span class="margin-r-5">国籍：</span><span id="nationality"></span></p>
+												<p><span class="margin-r-5">籍贯：</span><span id="origin_pro"></span><span id="origin_city"> </span></p>
+												<p><span class="margin-r-5">户籍所在地：</span><span id="register_pro"></span><span id="register_city"></span></p>
+												<p><span class="margin-r-5">婚姻状况：</span><span id="marital_status"></span></p>
+												<p><span class="margin-r-5">健康状况：</span><span id="health"></span></p>
+												<p><span class="margin-r-5">教育程度：</span><span id="education"></span></p>
+												<p><span class="margin-r-5">学校名称：</span><span id="school_name"></span></p>
+												<p><span class="margin-r-5">汽车信息：</span><span id="car_type"></span></p>
+												<p><span class="margin-r-5">汽车品牌：</span><span id="car_brand"></span></p>
+												<p><span class="margin-r-5">理财习惯：</span><span id="financial_habits"></span></p>
+												<p><span class="margin-r-5">性格：</span><span id="character"></span></p>
+											</div>
+										</div>
 
-              </div>
-            </div>
+									</div>
+								</div>
 
-          </div>
-          <div id="item3mobile" class="mui-slider-item mui-control-content">
-            <div id="scroll3">
-              <div class="mui-scroll">
+							</div>
+							<div id="item3mobile" class="mui-slider-item mui-control-content">
+								<div id="scroll3">
+									<div class="mui-scroll">
 
-                <div class="modal-content">
-                  <div class="box-header with-border" id="family_div"><b class="title_line">成员信息</b></div>
-                 <!--<div class="box-body box-header with-border">
+										<div class="modal-content">
+											<div class="box-header with-border" id="family_div"><b class="title_line">成员信息</b></div>
+											<!--<div class="box-body box-header with-border">
                     <p><span class="margin-r-5">成员称谓：</span><span>配偶</span></p>
                     <p><span class="margin-r-5">成员姓名：</span><span>王大妈</span></p>
                     <p><span class="margin-r-5">成员电话：</span><span>12345678901</span></p>
                     <p><span class="margin-r-5">成员年龄：</span><span>60岁</span></p>
                   </div>-->
-                  
 
-                </div>
+										</div>
 
-              </div>
-            </div>
+									</div>
+								</div>
 
-          </div>
+							</div>
 
-        </div>
-      </div>
+						</div>
+					</div>
 
+				</div>
+			</section>
 
-    </div>
-  </section>
+		</div>
+		<!-- ./wrapper -->
 
-
-
-</div>
-<!-- ./wrapper -->
-
-<!-- jQuery 2.2.0 -->
-<script src="../js/jQuery-2.2.0.min.js"></script>
-<!-- Bootstrap 3.3.6 -->
-<script src="../js/bootstrap.min.js"></script>
-<!-- Morris.js charts -->
-<script src="../js/raphael-min.js"></script>
-<!--<script src="plugins/morris/morris.min.js"></script>-->
-<!-- FastClick -->
-<script src="../js/fastclick.js"></script>
-<!-- AdminLTE App -->
-<script src="../js/app.min.js"></script>
-<!-- 滑动js -->
-<script type="text/javascript" src="../js/custom_common.js"></script>
-<script src="../js/mui.min.js"></script>
-<script>
-	var employee = JSON.parse(localStorage.getItem('employee'));
-	mui.init({
-    swipeBack: false
-  });
-
-  mui.plusReady(function (){
-  	//来自于片区动态的消费记录
-	    var self = plus.webview.currentWebview();
-			if(self != null && self.portrait_phone != null) {
-				var portrait_phone = self.portrait_phone;
-				getCustomer(portrait_phone);
-			}
-			//来自于片区动态的拜访记录
-			if(self != null && self.visit_phone != null&&self.customer_id != null&&self.house_id != null) {
-				var visit_phone = self.visit_phone;
-				var customer_id = self.customer_id;
-				var house_id = self.house_id;
-				getCustomerFromVisiv(customer_id,house_id,visit_phone);
-			}
-     initView();
-				//退出
-    var t_username=localStorage.getItem("employee_key");
-//  mui('#btnLogout')[0].addEventListener('click',function(event){
-//  	 setTimeout(function() {
-//        	localStorage.clear();
-//						localStorage.setItem("employee_key",t_username);
-//						mui.openWindow({
-//							url:'../login.html',
-//							id:'login',
-//							createNew:true,
-//							show: {
-//								aniShow: 'slide-in-right'
-//							},
-//							waiting: {
-//								autoShow: false
-//							}
-//						});
-//        }, 50);
-//			  
-//		});
-  	
-  });
-  function initView(){
-  	if(employee !=null){
-  		if(ischeckValue(employee.name)){
-  			$("#employee_name").html(employee.name);
-  		}else{
-  			$("#employee_name").html("无");
-  		}
-  		if(ischeckValue(employee.zw)){
-  			$("#employee_zw").text(employee.zw);
-  		}else{
-  			$("#employee_zw").text("无数据");
-  		}
-  		if(ischeckValue(employee.employeeId)){
-  			$("#employee_id").text(employee.employeeId);
-  		}else{
-  			$("#employee_id").text("无数据");
-  		}
-	
-	    if(ischeckValue(employee.store_name)){
-	    	$("#store_name").html(employee.store_name);
-	    }else{
-	    	$("#store_name").html("无数据");
-	    }
-	  	
-  	}
-  	
-  }
-  //来自于片区动态的消费记录，获取用户画像接口
-  function  getCustomer(phone){
-			doManager('CustomerManager','findCustomerByCustomerPhone_crm',[null,null,phone], function(data) {
-				if(data.result == true) {
-					var jsonData = JSON.parse(data.data);
-					if(jsonData!=null&&jsonData!=""){
-						if(ischeckValue(jsonData.name)){
-							 $('#customer_name').html(jsonData.name);
-						}else{
-							$('#customer_name').html('无用户名');
-						}
-						if(ischeckValue(jsonData.mobilephone)){
-							 $('#customer_phone').html(jsonData.mobilephone);
-						}else{
-							$('#customer_phone').html('无用户电话');
-						}
-						if(jsonData.sex==0){
-							 $('#customer_sex').html('男');
-						}else if(jsonData.sex==1){
-							$('#customer_sex').html('女');
-						}else{
-							$('#customer_sex').html('无性别信息');
-						}
-						if(ischeckValue(jsonData.age)){
-							 $('#customer_age').html(jsonData.age+'岁');
-						}else{
-							$('#customer_age').html('无用户年龄');
-						}
-						if(jsonData.house_type==0){
-							 $('#customer_house').html('平房');
-						}else if(jsonData.house_type==1){
-							$('#customer_house').html('楼房');
-						}else{
-							$('#customer_house').html('无房屋信息');
-						}
-						if(ischeckValue(jsonData.address)){
-							 $('#customer_address').html(jsonData.address);
-						}else{
-							$('#customer_address').html('无地址信息');
-						}
-						if(ischeckValue(jsonData.nationality)){
-							 $('#customer_nation').html(jsonData.nationality);
-						}else{
-							$('#customer_nation').html('无');
-						}
-						if(jsonData.house_property==1){
-							 $('#customer_house_type').html('自有');
-						}else if(jsonData.house_property==2){
-							$('#customer_house_type').html('租住');
-						}else{
-							$('#customer_house_type').html('无');
-						}
-						if(ischeckValue(jsonData.job)){
-							 if(jsonData.job.indexOf('99_')>-1){
-							   $('#customer_job').html(jsonData.job.split("_")[1]);
-						  }else{
-						  	 $('#customer_job').html(jsonData.job);
-						  }
-						}else{
-							 $('#customer_job').html('无');
-						}
-						if(ischeckValue(jsonData.income)){
-							 $('#customer_income').html(jsonData.income);
-						}else{
-							 $('#customer_income').html('无');
-						}
-						if(ischeckValue(jsonData.work_overtime)){
-			    	  if(jsonData.work_overtime==1){
-			    		  $('#customer_overtime').html('从不');
-			    	  }else if(jsonData.work_overtime==2){
-			    		  $('#customer_overtime').html('偶尔');
-			    	  }else  if(jsonData.work_overtime==3){
-			    		  $('#customer_overtime').html('经常');
-			    	  }else if(jsonData.work_overtime==4){
-			    		  $('#customer_overtime').html('每天');
-			    	  }
-			      }else{
-			      	$('#customer_overtime').html('无');
-			      }
-						
-						if(ischeckValue(jsonData.other)){
-							 $('#customer_remark').html(jsonData.other);
-						}else{
-							 $('#customer_remark').html('无');
-						}
-						if(ischeckValue(jsonData.family_num)){
-							 $('#customer_family_sum').html(jsonData.family_num+'人');
-						}else{
-							 $('#customer_family_sum').html('无');
-						}
-						if(ischeckValue(jsonData.preschool_num)){
-							 $('#customer_family_school').html(jsonData.preschool_num+'人');
-						}else{
-							 $('#customer_family_school').html('无');
-						}
-						if(ischeckValue(jsonData.minor_num)){
-							 $('#customer_family_underage').html(jsonData.minor_num+'人');
-						}else{
-							 $('#customer_family_underage').html('无');
-						}
-						if(ischeckValue(jsonData.pet_type)){
-							if(jsonData.pet_type.indexOf('99_')>-1){
-							   $('#customer_pet').html(jsonData.pet_type.split("_")[1]);
-						  }else{
-						  	 $('#customer_pet').html(jsonData.pet_type);
-						  }
-						}else{
-							 $('#customer_pet').html('无');
-						}
-						if(ischeckValue(jsonData.customer_address)){
-							if(ischeckValue(jsonData.customer_address.house_area)){
-							 $('#house_area').html(jsonData.customer_address.house_area);
-							}else{
-								 $('#house_area').html('无');
-							}
-							
-							if(ischeckValue(jsonData.customer_address.house_toward)){
-							   $('#house_direction').html(jsonData.customer_address.house_toward);
-							}else{
-								 $('#house_direction').html('无');
-							}
-							
-							if(ischeckValue(jsonData.customer_address.house_style)){
-							   $('#house_shape').html(jsonData.customer_address.house_style);
-							}else{
-								 $('#house_shape').html('无');
-							}
-							if(jsonData.house_type==0){
-								$('#house_img_title').hide();
-								$('#house_img').hide();
-							   
-							}else if(jsonData.house_type==1){
-								if(ischeckValue(jsonData.customer_address.house_pic)){
-								  $('#house_image').attr('src',decodeURI(jsonData.customer_address.house_pic));
-								}else{
-									$('#house_image').attr('src','../images/cbd.jpg');
-								}
-							}
-							
-							
-						}else{
-							 $('#house_area').html('无');
-							 $('#house_direction').html('无');
-							 $('#house_shape').html('无');
-							 $('#house_image').attr('src','../images/cbd.jpg');
-						}
-						
-						if(ischeckValue(jsonData.cus_pic)){
-							$('#customer_header_image').attr('src',decodeURI(jsonData.cus_pic));
-						}else{
-							$('#customer_header_image').attr('src','../images/no_img2.png');
-						}
-						var $div = $('#family_div');
-						if(ischeckValue(jsonData.childs)){
-							   $(jsonData.childs).each(function(index, family) {
-							   	if(family.family_relation==null||family.family_relation==""){
-										  family.family_relation="无"
-									}
-							   	if(family.family_name==null||family.family_name==""){
-										  family.family_name="无"
-									}
-							   	if(family.family_phone==null||family.family_phone==""){
-										  family.family_phone="无"
-									}
-							   	if(family.family_age==null||family.family_age==""){
-										  family.family_age="无"
-									}else{
-										family.family_age=family.family_age+'岁'
-									}
-								 var html = '<div class="box-body box-header with-border">'+
-								            '<p><span class="margin-r-5">成员称谓：</span><span>'+family.family_relation+'</span></p>'+
-								            '<p><span class="margin-r-5">成员姓名：</span><span>'+family.family_name+'</span></p>'+
-								            '<p><span class="margin-r-5">成员电话：</span><span>'+family.family_phone+'</span></p>'+
-								            '<p><span class="margin-r-5">成员年龄：</span><span>'+family.family_age+'</span></p>'+
-								            '</div>';
-									$div.after(html);
-								});
-							
-						}else{
-							   var html = '<div class="box-body box-header with-border">'+
-								            '<p><span class="margin-r-5">成员称谓：</span><span>无</span></p>'+
-								            '<p><span class="margin-r-5">成员姓名：</span><span>无</span></p>'+
-								            '<p><span class="margin-r-5">成员电话：</span><span>无</span></p>'+
-								            '<p><span class="margin-r-5">成员年龄：</span><span>无</span></p>'+
-								            '</div>';
-									$div.after(html);
-						}
-					
-						
-						getCustomerMoreData(jsonData.id);
-					}
-					
-          
-				}
+		<!-- jQuery 2.2.0 -->
+		<script src="../js/jQuery-2.2.0.min.js"></script>
+		<!-- Bootstrap 3.3.6 -->
+		<script src="../js/bootstrap.min.js"></script>
+		<!-- Morris.js charts -->
+		<script src="../js/raphael-min.js"></script>
+		<!--<script src="plugins/morris/morris.min.js"></script>-->
+		<!-- FastClick -->
+		<script src="../js/fastclick.js"></script>
+		<!-- AdminLTE App -->
+		<script src="../js/app.min.js"></script>
+		<!-- 滑动js -->
+		<script type="text/javascript" src="../js/custom_common.js"></script>
+		<script src="../js/mui.min.js"></script>
+		<script>
+			var employee = JSON.parse(localStorage.getItem('employee'));
+			mui.init({
+				swipeBack: false
 			});
-			
-		}
-  //获取用户画像更多信息接口
-  function  getCustomerMoreData(id){
-  	
-			doManager('CustomerDataManager','getCustomerDataByCustomerId',id, function(data) {
-				if(data.result == true) {
-					var jsonData = JSON.parse(data.data);
-					if(jsonData!=null&&jsonData!=""){
-						if(ischeckValue(jsonData.nationality)){
-							 $('#nationality').html(jsonData.nationality);
-						}else{
-							 $('#nationality').html('无');
-						}
-						if(ischeckValue(jsonData.native_place_city)&&ischeckValue(jsonData.native_place_pro)){
-							$('#origin_pro').html(jsonData.native_place_city);
-							$('#origin_city').html(jsonData.native_place_pro);
-						}else{
-							if(!ischeckValue(jsonData.native_place_city)&&!ischeckValue(jsonData.native_place_pro)){
-								$('#origin_pro').html('无');
-					 	  }else{
-					 	  	if(ischeckValue(jsonData.native_place_city)){
-								 $('#origin_pro').html(jsonData.native_place_city);
-								}else{
-									$('#origin_pro').html('');
-								}
-								if(ischeckValue(jsonData.native_place_pro)){
-								  $('#origin_city').html(jsonData.native_place_pro);
-								}else{
-									$('#origin_city').html('');
-								}
-					 	  }
-							
-						}
-						
-						if(ischeckValue(jsonData.local_pro)&&ischeckValue(jsonData.local_city)){
-							$('#register_pro').html(jsonData.local_pro);
-							$('#register_city').html(jsonData.local_city);
-						}else{
-							if(!ischeckValue(jsonData.local_pro)&&!ischeckValue(jsonData.local_city)){
-								$('#register_pro').html('无');
-						  }else{
-						  	if(ischeckValue(jsonData.local_pro)){
-								 $('#register_pro').html(jsonData.local_pro);
-								}else{
-									$('#register_pro').html('');
-								}
-								if(ischeckValue(jsonData.local_city)){
-								  $('#register_city').html(jsonData.local_city);
-								}else{
-									$('#register_city').html('');
-								}
-						  	
-						  }
-						}
-						
-						if(ischeckValue(jsonData.marital_status)){
-							 $('#marital_status').html(jsonData.marital_status);
-						}else{
-							 $('#marital_status').html('无');
-						}
-						if(ischeckValue(jsonData.health_condition)){
-							 $('#health').html(jsonData.health_condition);
-						}else{
-							 $('#health').html('无');
-						}
-						if(ischeckValue(jsonData.degree_of_education)){
-							 $('#education').html(jsonData.degree_of_education);
-						}else{
-							 $('#education').html('无');
-						}
-						if(ischeckValue(jsonData.school_name)){
-							 $('#school_name').html(jsonData.school_name);
-						}else{
-							 $('#school_name').html('无');
-						}
-						if(jsonData.is_car==0){
-							 $('#car_type').html('有车');
-						}else if(jsonData.is_car==1){
-							$('#car_type').html('无');
-						} else{
-							$('#car_type').html('无');
-						}
-						if(ischeckValue(jsonData.automobile_brand)){
-							 $('#car_brand').html(jsonData.automobile_brand);
-						}else{
-							 $('#car_brand').html('无');
-						}
-						if(ischeckValue(jsonData.money_manage)){
-							 $('#financial_habits').html(jsonData.money_manage);
-						}else{
-							 $('#financial_habits').html('无');
-						}
-						if(ischeckValue(jsonData.character_data)){
-							 $('#character').html(jsonData.character_data);
-						}else{
-							 $('#character').html('无');
-						}
-						
-					}else{
-						 $('#nationality').html('无');
-						 $('#origin_pro').html('无');
-						 $('#register_pro').html('无');
-						 $('#marital_status').html('无');
-						 $('#health').html('无');
-						 $('#education').html('无');
-						 $('#school_name').html('无');
-						 $('#car_type').html('无');
-						 $('#car_brand').html('无');
-						 $('#financial_habits').html('无');
-						 $('#character').html('无');
-					}
-				}
-			});
-	}
-  //跳转到选择页面
-    function toMain() {
-			setTimeout(function() {
-				var webview = plus.webview.getWebviewById('new_main');
-				if(webview != null){
-					webview.close();
-				}
-				mui.openWindow({
-					url:'new_main.html',
-					id: 'new_main',
-					createNew:true,
-					show: {
-						aniShow: 'slide-in-right'
-					},
-					waiting: {
-						autoShow: false
+			(function($) {
+				$.ready(function() {
+					if(plus.device.model == "iPhone10,3" || plus.device.model == "iPhone10,6" || plus.device.model == "iPhone11,8" || plus.device.model == "iPhone11,2" || plus.device.model == "iPhone11,6") {
+						document.getElementById("titlenav").style.marginTop= '-20px';
+					document.getElementById("slider").style.marginTop= '-59px';
+					document.getElementById("sliderSegmentedControl").style.marginTop= '24px';
 					}
 				});
-			}, 50);
-		}
-     //来自于片区动态的拜访记录，获取用户画像接口
-  function  getCustomerFromVisiv(customer_id,house_id,visit_phone){
-			doManager('CustomerManager','findCustomerByCustomerIdAndHouseId_crm',[customer_id,house_id,visit_phone], function(data) {
-				if(data.result == true) {
-					var jsonData = JSON.parse(data.data);
-					if(jsonData!=null&&jsonData!=""){
-						if(ischeckValue(jsonData.name)){
-							 $('#customer_name').html(jsonData.name);
-						}else{
-							$('#customer_name').html('无用户名');
-						}
-						if(ischeckValue(jsonData.mobilephone)){
-							 $('#customer_phone').html(jsonData.mobilephone);
-						}else{
-							$('#customer_phone').html('无用户电话');
-						}
-						if(jsonData.sex==0){
-							 $('#customer_sex').html('男');
-						}else if(jsonData.sex==1){
-							$('#customer_sex').html('女');
-						}else{
-							$('#customer_sex').html('无性别信息');
-						}
-						if(ischeckValue(jsonData.age)){
-							 $('#customer_age').html(jsonData.age+'岁');
-						}else{
-							$('#customer_age').html('无用户年龄');
-						}
-						if(jsonData.customer_address==null||jsonData.customer_address==""){
-							$('#customer_house').html('无房屋信息');
-						}else{
-							if(jsonData.customer_address.house_type==0){
-							 $('#customer_house').html('平房');
-							}else if(jsonData.customer_address.house_type==1){
+			})(mui);
+
+			mui.plusReady(function() {
+				//来自于片区动态的消费记录
+				var self = plus.webview.currentWebview();
+				if(self != null && self.portrait_phone != null) {
+					var portrait_phone = self.portrait_phone;
+					getCustomer(portrait_phone);
+				}
+				//来自于片区动态的拜访记录
+				if(self != null && self.visit_phone != null && self.customer_id != null && self.house_id != null) {
+					var visit_phone = self.visit_phone;
+					var customer_id = self.customer_id;
+					var house_id = self.house_id;
+					getCustomerFromVisiv(customer_id, house_id, visit_phone);
+				}
+				initView();
+				//退出
+				var t_username = localStorage.getItem("employee_key");
+				//  mui('#btnLogout')[0].addEventListener('click',function(event){
+				//  	 setTimeout(function() {
+				//        	localStorage.clear();
+				//						localStorage.setItem("employee_key",t_username);
+				//						mui.openWindow({
+				//							url:'../login.html',
+				//							id:'login',
+				//							createNew:true,
+				//							show: {
+				//								aniShow: 'slide-in-right'
+				//							},
+				//							waiting: {
+				//								autoShow: false
+				//							}
+				//						});
+				//        }, 50);
+				//			  
+				//		});
+
+			});
+
+			function initView() {
+				if(employee != null) {
+					if(ischeckValue(employee.name)) {
+						$("#employee_name").html(employee.name);
+					} else {
+						$("#employee_name").html("无");
+					}
+					if(ischeckValue(employee.zw)) {
+						$("#employee_zw").text(employee.zw);
+					} else {
+						$("#employee_zw").text("无数据");
+					}
+					if(ischeckValue(employee.employeeId)) {
+						$("#employee_id").text(employee.employeeId);
+					} else {
+						$("#employee_id").text("无数据");
+					}
+
+					if(ischeckValue(employee.store_name)) {
+						$("#store_name").html(employee.store_name);
+					} else {
+						$("#store_name").html("无数据");
+					}
+
+				}
+
+			}
+			//来自于片区动态的消费记录，获取用户画像接口
+			function getCustomer(phone) {
+				doManager('CustomerManager', 'findCustomerByCustomerPhone_crm', [null, null, phone], function(data) {
+					if(data.result == true) {
+						var jsonData = JSON.parse(data.data);
+						if(jsonData != null && jsonData != "") {
+							if(ischeckValue(jsonData.name)) {
+								$('#customer_name').html(jsonData.name);
+							} else {
+								$('#customer_name').html('无用户名');
+							}
+							if(ischeckValue(jsonData.mobilephone)) {
+								$('#customer_phone').html(jsonData.mobilephone);
+							} else {
+								$('#customer_phone').html('无用户电话');
+							}
+							if(jsonData.sex == 0) {
+								$('#customer_sex').html('男');
+							} else if(jsonData.sex == 1) {
+								$('#customer_sex').html('女');
+							} else {
+								$('#customer_sex').html('无性别信息');
+							}
+							if(ischeckValue(jsonData.age)) {
+								$('#customer_age').html(jsonData.age + '岁');
+							} else {
+								$('#customer_age').html('无用户年龄');
+							}
+							if(jsonData.house_type == 0) {
+								$('#customer_house').html('平房');
+							} else if(jsonData.house_type == 1) {
 								$('#customer_house').html('楼房');
-							}else{
+							} else {
 								$('#customer_house').html('无房屋信息');
 							}
-							
-						}
-						
-						if(ischeckValue(jsonData.address)){
-							 $('#customer_address').html(jsonData.address);
-						}else{
-							$('#customer_address').html('无地址信息');
-						}
-						if(ischeckValue(jsonData.nationality)){
-							 $('#customer_nation').html(jsonData.nationality);
-						}else{
-							$('#customer_nation').html('无');
-						}
-						if(jsonData.house_property==1){
-							 $('#customer_house_type').html('自有');
-						}else if(jsonData.house_property==2){
-							$('#customer_house_type').html('租住');
-						}else{
-							$('#customer_house_type').html('无');
-						}
-						
-						if(ischeckValue(jsonData.job)){
-							if(jsonData.job.indexOf('99_')>-1){
-							   $('#customer_job').html(jsonData.job.split("_")[1]);
-						  }else{
-						  	 $('#customer_job').html(jsonData.job);
-						  }
-							 
-						}else{
-							 $('#customer_job').html('无');
-						}
-						if(ischeckValue(jsonData.income)){
-							 $('#customer_income').html(jsonData.income);
-						}else{
-							 $('#customer_income').html('无');
-						}
-						if(ischeckValue(jsonData.work_overtime)){
-			    	  if(jsonData.work_overtime==1){
-			    		  $('#customer_overtime').html('从不');
-			    	  }else if(jsonData.work_overtime==2){
-			    		  $('#customer_overtime').html('偶尔');
-			    	  }else  if(jsonData.work_overtime==3){
-			    		  $('#customer_overtime').html('经常');
-			    	  }else if(jsonData.work_overtime==4){
-			    		  $('#customer_overtime').html('每天');
-			    	  }
-			      }else{
-			      	$('#customer_overtime').html('无');
-			      }
-						if(ischeckValue(jsonData.other)){
-							 $('#customer_remark').html(jsonData.other);
-						}else{
-							 $('#customer_remark').html('无');
-						}
-						if(ischeckValue(jsonData.family_num)){
-							 $('#customer_family_sum').html(jsonData.family_num+'人');
-						}else{
-							 $('#customer_family_sum').html('无');
-						}
-						if(ischeckValue(jsonData.preschool_num)){
-							 $('#customer_family_school').html(jsonData.preschool_num+'人');
-						}else{
-							 $('#customer_family_school').html('无');
-						}
-						if(ischeckValue(jsonData.minor_num)){
-							 $('#customer_family_underage').html(jsonData.minor_num+'人');
-						}else{
-							 $('#customer_family_underage').html('无');
-						}
-						if(ischeckValue(jsonData.pet_type)){
-							if(jsonData.pet_type.indexOf('99_')>-1){
-							   $('#customer_pet').html(jsonData.pet_type.split("_")[1]);
-						  }else{
-						  	 $('#customer_pet').html(jsonData.pet_type);
-						  }
-						}else{
-							 $('#customer_pet').html('无');
-						}
-						if(ischeckValue(jsonData.customer_address)){
-							if(ischeckValue(jsonData.customer_address.house_area)){
-							 $('#house_area').html(jsonData.customer_address.house_area);
-							}else{
-								 $('#house_area').html('无');
+							if(ischeckValue(jsonData.address)) {
+								$('#customer_address').html(jsonData.address);
+							} else {
+								$('#customer_address').html('无地址信息');
 							}
-							
-							if(ischeckValue(jsonData.customer_address.house_toward)){
-							   $('#house_direction').html(jsonData.customer_address.house_toward);
-							}else{
-								 $('#house_direction').html('无');
+							if(ischeckValue(jsonData.nationality)) {
+								$('#customer_nation').html(jsonData.nationality);
+							} else {
+								$('#customer_nation').html('无');
 							}
-							
-							if(ischeckValue(jsonData.customer_address.house_style)){
-							   $('#house_shape').html(jsonData.customer_address.house_style);
-							}else{
-								 $('#house_shape').html('无');
+							if(jsonData.house_property == 1) {
+								$('#customer_house_type').html('自有');
+							} else if(jsonData.house_property == 2) {
+								$('#customer_house_type').html('租住');
+							} else {
+								$('#customer_house_type').html('无');
 							}
-							if(jsonData.customer_address.house_type==0){
-								$('#house_img_title').hide();
-								$('#house_img').hide();
-							   
-							}else if(jsonData.customer_address.house_type==1){
-								if(ischeckValue(jsonData.customer_address.house_pic)){
-									$('#house_image').attr('src',decodeURI(jsonData.customer_address.house_pic));
-								}else{
-									$('#house_image').attr('src','../images/cbd.jpg');
+							if(ischeckValue(jsonData.job)) {
+								if(jsonData.job.indexOf('99_') > -1) {
+									$('#customer_job').html(jsonData.job.split("_")[1]);
+								} else {
+									$('#customer_job').html(jsonData.job);
 								}
+							} else {
+								$('#customer_job').html('无');
 							}
-							
-						}else{
-							 $('#house_area').html('无');
-							 $('#house_direction').html('无');
-							 $('#house_shape').html('无');
-							 $('#house_image').attr('src','../images/cbd.jpg');
-						}
-						
-						if(ischeckValue(jsonData.cus_pic)){
-							$('#customer_header_image').attr('src',decodeURI(jsonData.cus_pic));
-						}else{
-							$('#customer_header_image').attr('src','../images/no_img2.png');
-						}
-						var $div = $('#family_div');
-						if(ischeckValue(jsonData.childs)){
-							   $(jsonData.childs).each(function(index, family) {
-							   	if(family.family_relation==null||family.family_relation==""){
-										  family.family_relation="无"
+							if(ischeckValue(jsonData.income)) {
+								$('#customer_income').html(jsonData.income);
+							} else {
+								$('#customer_income').html('无');
+							}
+							if(ischeckValue(jsonData.work_overtime)) {
+								if(jsonData.work_overtime == 1) {
+									$('#customer_overtime').html('从不');
+								} else if(jsonData.work_overtime == 2) {
+									$('#customer_overtime').html('偶尔');
+								} else if(jsonData.work_overtime == 3) {
+									$('#customer_overtime').html('经常');
+								} else if(jsonData.work_overtime == 4) {
+									$('#customer_overtime').html('每天');
+								}
+							} else {
+								$('#customer_overtime').html('无');
+							}
+
+							if(ischeckValue(jsonData.other)) {
+								$('#customer_remark').html(jsonData.other);
+							} else {
+								$('#customer_remark').html('无');
+							}
+							if(ischeckValue(jsonData.family_num)) {
+								$('#customer_family_sum').html(jsonData.family_num + '人');
+							} else {
+								$('#customer_family_sum').html('无');
+							}
+							if(ischeckValue(jsonData.preschool_num)) {
+								$('#customer_family_school').html(jsonData.preschool_num + '人');
+							} else {
+								$('#customer_family_school').html('无');
+							}
+							if(ischeckValue(jsonData.minor_num)) {
+								$('#customer_family_underage').html(jsonData.minor_num + '人');
+							} else {
+								$('#customer_family_underage').html('无');
+							}
+							if(ischeckValue(jsonData.pet_type)) {
+								if(jsonData.pet_type.indexOf('99_') > -1) {
+									$('#customer_pet').html(jsonData.pet_type.split("_")[1]);
+								} else {
+									$('#customer_pet').html(jsonData.pet_type);
+								}
+							} else {
+								$('#customer_pet').html('无');
+							}
+							if(ischeckValue(jsonData.customer_address)) {
+								if(ischeckValue(jsonData.customer_address.house_area)) {
+									$('#house_area').html(jsonData.customer_address.house_area);
+								} else {
+									$('#house_area').html('无');
+								}
+
+								if(ischeckValue(jsonData.customer_address.house_toward)) {
+									$('#house_direction').html(jsonData.customer_address.house_toward);
+								} else {
+									$('#house_direction').html('无');
+								}
+
+								if(ischeckValue(jsonData.customer_address.house_style)) {
+									$('#house_shape').html(jsonData.customer_address.house_style);
+								} else {
+									$('#house_shape').html('无');
+								}
+								if(jsonData.house_type == 0) {
+									$('#house_img_title').hide();
+									$('#house_img').hide();
+
+								} else if(jsonData.house_type == 1) {
+									if(ischeckValue(jsonData.customer_address.house_pic)) {
+										$('#house_image').attr('src', decodeURI(jsonData.customer_address.house_pic));
+									} else {
+										$('#house_image').attr('src', '../images/cbd.jpg');
 									}
-							   	if(family.family_name==null||family.family_name==""){
-										  family.family_name="无"
+								}
+
+							} else {
+								$('#house_area').html('无');
+								$('#house_direction').html('无');
+								$('#house_shape').html('无');
+								$('#house_image').attr('src', '../images/cbd.jpg');
+							}
+
+							if(ischeckValue(jsonData.cus_pic)) {
+								$('#customer_header_image').attr('src', decodeURI(jsonData.cus_pic));
+							} else {
+								$('#customer_header_image').attr('src', '../images/no_img2.png');
+							}
+							var $div = $('#family_div');
+							if(ischeckValue(jsonData.childs)) {
+								$(jsonData.childs).each(function(index, family) {
+									if(family.family_relation == null || family.family_relation == "") {
+										family.family_relation = "无"
 									}
-							   	if(family.family_phone==null||family.family_phone==""){
-										  family.family_phone="无"
+									if(family.family_name == null || family.family_name == "") {
+										family.family_name = "无"
 									}
-							   	if(family.family_age==null||family.family_age==""){
-										  family.family_age="无"
-									}else{
-										family.family_age=family.family_age+'岁'
+									if(family.family_phone == null || family.family_phone == "") {
+										family.family_phone = "无"
 									}
-								 var html = '<div class="box-body box-header with-border">'+
-								            '<p><span class="margin-r-5">成员称谓：</span><span>'+family.family_relation+'</span></p>'+
-								            '<p><span class="margin-r-5">成员姓名：</span><span>'+family.family_name+'</span></p>'+
-								            '<p><span class="margin-r-5">成员电话：</span><span>'+family.family_phone+'</span></p>'+
-								            '<p><span class="margin-r-5">成员年龄：</span><span>'+family.family_age+'</span></p>'+
-								            '</div>';
+									if(family.family_age == null || family.family_age == "") {
+										family.family_age = "无"
+									} else {
+										family.family_age = family.family_age + '岁'
+									}
+									var html = '<div class="box-body box-header with-border">' +
+										'<p><span class="margin-r-5">成员称谓：</span><span>' + family.family_relation + '</span></p>' +
+										'<p><span class="margin-r-5">成员姓名：</span><span>' + family.family_name + '</span></p>' +
+										'<p><span class="margin-r-5">成员电话：</span><span>' + family.family_phone + '</span></p>' +
+										'<p><span class="margin-r-5">成员年龄：</span><span>' + family.family_age + '</span></p>' +
+										'</div>';
 									$div.after(html);
 								});
-							
-						}else{
-							   var html = '<div class="box-body box-header with-border">'+
-								            '<p><span class="margin-r-5">成员称谓：</span><span>无</span></p>'+
-								            '<p><span class="margin-r-5">成员姓名：</span><span>无</span></p>'+
-								            '<p><span class="margin-r-5">成员电话：</span><span>无</span></p>'+
-								            '<p><span class="margin-r-5">成员年龄：</span><span>无</span></p>'+
-								            '</div>';
-									$div.after(html);
-						}
-					
-						
-						getCustomerMoreData(jsonData.id);
-					}
-					
-          
-				}
-			});
-			
-		}  
-</script>
 
-</body>
+							} else {
+								var html = '<div class="box-body box-header with-border">' +
+									'<p><span class="margin-r-5">成员称谓：</span><span>无</span></p>' +
+									'<p><span class="margin-r-5">成员姓名：</span><span>无</span></p>' +
+									'<p><span class="margin-r-5">成员电话：</span><span>无</span></p>' +
+									'<p><span class="margin-r-5">成员年龄：</span><span>无</span></p>' +
+									'</div>';
+								$div.after(html);
+							}
+
+							getCustomerMoreData(jsonData.id);
+						}
+
+					}
+				});
+
+			}
+			//获取用户画像更多信息接口
+			function getCustomerMoreData(id) {
+
+				doManager('CustomerDataManager', 'getCustomerDataByCustomerId', id, function(data) {
+					if(data.result == true) {
+						var jsonData = JSON.parse(data.data);
+						if(jsonData != null && jsonData != "") {
+							if(ischeckValue(jsonData.nationality)) {
+								$('#nationality').html(jsonData.nationality);
+							} else {
+								$('#nationality').html('无');
+							}
+							if(ischeckValue(jsonData.native_place_city) && ischeckValue(jsonData.native_place_pro)) {
+								$('#origin_pro').html(jsonData.native_place_city);
+								$('#origin_city').html(jsonData.native_place_pro);
+							} else {
+								if(!ischeckValue(jsonData.native_place_city) && !ischeckValue(jsonData.native_place_pro)) {
+									$('#origin_pro').html('无');
+								} else {
+									if(ischeckValue(jsonData.native_place_city)) {
+										$('#origin_pro').html(jsonData.native_place_city);
+									} else {
+										$('#origin_pro').html('');
+									}
+									if(ischeckValue(jsonData.native_place_pro)) {
+										$('#origin_city').html(jsonData.native_place_pro);
+									} else {
+										$('#origin_city').html('');
+									}
+								}
+
+							}
+
+							if(ischeckValue(jsonData.local_pro) && ischeckValue(jsonData.local_city)) {
+								$('#register_pro').html(jsonData.local_pro);
+								$('#register_city').html(jsonData.local_city);
+							} else {
+								if(!ischeckValue(jsonData.local_pro) && !ischeckValue(jsonData.local_city)) {
+									$('#register_pro').html('无');
+								} else {
+									if(ischeckValue(jsonData.local_pro)) {
+										$('#register_pro').html(jsonData.local_pro);
+									} else {
+										$('#register_pro').html('');
+									}
+									if(ischeckValue(jsonData.local_city)) {
+										$('#register_city').html(jsonData.local_city);
+									} else {
+										$('#register_city').html('');
+									}
+
+								}
+							}
+
+							if(ischeckValue(jsonData.marital_status)) {
+								$('#marital_status').html(jsonData.marital_status);
+							} else {
+								$('#marital_status').html('无');
+							}
+							if(ischeckValue(jsonData.health_condition)) {
+								$('#health').html(jsonData.health_condition);
+							} else {
+								$('#health').html('无');
+							}
+							if(ischeckValue(jsonData.degree_of_education)) {
+								$('#education').html(jsonData.degree_of_education);
+							} else {
+								$('#education').html('无');
+							}
+							if(ischeckValue(jsonData.school_name)) {
+								$('#school_name').html(jsonData.school_name);
+							} else {
+								$('#school_name').html('无');
+							}
+							if(jsonData.is_car == 0) {
+								$('#car_type').html('有车');
+							} else if(jsonData.is_car == 1) {
+								$('#car_type').html('无');
+							} else {
+								$('#car_type').html('无');
+							}
+							if(ischeckValue(jsonData.automobile_brand)) {
+								$('#car_brand').html(jsonData.automobile_brand);
+							} else {
+								$('#car_brand').html('无');
+							}
+							if(ischeckValue(jsonData.money_manage)) {
+								$('#financial_habits').html(jsonData.money_manage);
+							} else {
+								$('#financial_habits').html('无');
+							}
+							if(ischeckValue(jsonData.character_data)) {
+								$('#character').html(jsonData.character_data);
+							} else {
+								$('#character').html('无');
+							}
+
+						} else {
+							$('#nationality').html('无');
+							$('#origin_pro').html('无');
+							$('#register_pro').html('无');
+							$('#marital_status').html('无');
+							$('#health').html('无');
+							$('#education').html('无');
+							$('#school_name').html('无');
+							$('#car_type').html('无');
+							$('#car_brand').html('无');
+							$('#financial_habits').html('无');
+							$('#character').html('无');
+						}
+					}
+				});
+			}
+			//跳转到选择页面
+			function toMain() {
+				setTimeout(function() {
+					var webview = plus.webview.getWebviewById('new_main');
+					if(webview != null) {
+						webview.close();
+					}
+					mui.openWindow({
+						url: 'new_main.html',
+						id: 'new_main',
+						createNew: true,
+						show: {
+							aniShow: 'slide-in-right'
+						},
+						waiting: {
+							autoShow: false
+						}
+					});
+				}, 50);
+			}
+			//来自于片区动态的拜访记录，获取用户画像接口
+			function getCustomerFromVisiv(customer_id, house_id, visit_phone) {
+				doManager('CustomerManager', 'findCustomerByCustomerIdAndHouseId_crm', [customer_id, house_id, visit_phone], function(data) {
+					if(data.result == true) {
+						var jsonData = JSON.parse(data.data);
+						if(jsonData != null && jsonData != "") {
+							if(ischeckValue(jsonData.name)) {
+								$('#customer_name').html(jsonData.name);
+							} else {
+								$('#customer_name').html('无用户名');
+							}
+							if(ischeckValue(jsonData.mobilephone)) {
+								$('#customer_phone').html(jsonData.mobilephone);
+							} else {
+								$('#customer_phone').html('无用户电话');
+							}
+							if(jsonData.sex == 0) {
+								$('#customer_sex').html('男');
+							} else if(jsonData.sex == 1) {
+								$('#customer_sex').html('女');
+							} else {
+								$('#customer_sex').html('无性别信息');
+							}
+							if(ischeckValue(jsonData.age)) {
+								$('#customer_age').html(jsonData.age + '岁');
+							} else {
+								$('#customer_age').html('无用户年龄');
+							}
+							if(jsonData.customer_address == null || jsonData.customer_address == "") {
+								$('#customer_house').html('无房屋信息');
+							} else {
+								if(jsonData.customer_address.house_type == 0) {
+									$('#customer_house').html('平房');
+								} else if(jsonData.customer_address.house_type == 1) {
+									$('#customer_house').html('楼房');
+								} else {
+									$('#customer_house').html('无房屋信息');
+								}
+
+							}
+
+							if(ischeckValue(jsonData.address)) {
+								$('#customer_address').html(jsonData.address);
+							} else {
+								$('#customer_address').html('无地址信息');
+							}
+							if(ischeckValue(jsonData.nationality)) {
+								$('#customer_nation').html(jsonData.nationality);
+							} else {
+								$('#customer_nation').html('无');
+							}
+							if(jsonData.house_property == 1) {
+								$('#customer_house_type').html('自有');
+							} else if(jsonData.house_property == 2) {
+								$('#customer_house_type').html('租住');
+							} else {
+								$('#customer_house_type').html('无');
+							}
+
+							if(ischeckValue(jsonData.job)) {
+								if(jsonData.job.indexOf('99_') > -1) {
+									$('#customer_job').html(jsonData.job.split("_")[1]);
+								} else {
+									$('#customer_job').html(jsonData.job);
+								}
+
+							} else {
+								$('#customer_job').html('无');
+							}
+							if(ischeckValue(jsonData.income)) {
+								$('#customer_income').html(jsonData.income);
+							} else {
+								$('#customer_income').html('无');
+							}
+							if(ischeckValue(jsonData.work_overtime)) {
+								if(jsonData.work_overtime == 1) {
+									$('#customer_overtime').html('从不');
+								} else if(jsonData.work_overtime == 2) {
+									$('#customer_overtime').html('偶尔');
+								} else if(jsonData.work_overtime == 3) {
+									$('#customer_overtime').html('经常');
+								} else if(jsonData.work_overtime == 4) {
+									$('#customer_overtime').html('每天');
+								}
+							} else {
+								$('#customer_overtime').html('无');
+							}
+							if(ischeckValue(jsonData.other)) {
+								$('#customer_remark').html(jsonData.other);
+							} else {
+								$('#customer_remark').html('无');
+							}
+							if(ischeckValue(jsonData.family_num)) {
+								$('#customer_family_sum').html(jsonData.family_num + '人');
+							} else {
+								$('#customer_family_sum').html('无');
+							}
+							if(ischeckValue(jsonData.preschool_num)) {
+								$('#customer_family_school').html(jsonData.preschool_num + '人');
+							} else {
+								$('#customer_family_school').html('无');
+							}
+							if(ischeckValue(jsonData.minor_num)) {
+								$('#customer_family_underage').html(jsonData.minor_num + '人');
+							} else {
+								$('#customer_family_underage').html('无');
+							}
+							if(ischeckValue(jsonData.pet_type)) {
+								if(jsonData.pet_type.indexOf('99_') > -1) {
+									$('#customer_pet').html(jsonData.pet_type.split("_")[1]);
+								} else {
+									$('#customer_pet').html(jsonData.pet_type);
+								}
+							} else {
+								$('#customer_pet').html('无');
+							}
+							if(ischeckValue(jsonData.customer_address)) {
+								if(ischeckValue(jsonData.customer_address.house_area)) {
+									$('#house_area').html(jsonData.customer_address.house_area);
+								} else {
+									$('#house_area').html('无');
+								}
+
+								if(ischeckValue(jsonData.customer_address.house_toward)) {
+									$('#house_direction').html(jsonData.customer_address.house_toward);
+								} else {
+									$('#house_direction').html('无');
+								}
+
+								if(ischeckValue(jsonData.customer_address.house_style)) {
+									$('#house_shape').html(jsonData.customer_address.house_style);
+								} else {
+									$('#house_shape').html('无');
+								}
+								if(jsonData.customer_address.house_type == 0) {
+									$('#house_img_title').hide();
+									$('#house_img').hide();
+
+								} else if(jsonData.customer_address.house_type == 1) {
+									if(ischeckValue(jsonData.customer_address.house_pic)) {
+										$('#house_image').attr('src', decodeURI(jsonData.customer_address.house_pic));
+									} else {
+										$('#house_image').attr('src', '../images/cbd.jpg');
+									}
+								}
+
+							} else {
+								$('#house_area').html('无');
+								$('#house_direction').html('无');
+								$('#house_shape').html('无');
+								$('#house_image').attr('src', '../images/cbd.jpg');
+							}
+
+							if(ischeckValue(jsonData.cus_pic)) {
+								$('#customer_header_image').attr('src', decodeURI(jsonData.cus_pic));
+							} else {
+								$('#customer_header_image').attr('src', '../images/no_img2.png');
+							}
+							var $div = $('#family_div');
+							if(ischeckValue(jsonData.childs)) {
+								$(jsonData.childs).each(function(index, family) {
+									if(family.family_relation == null || family.family_relation == "") {
+										family.family_relation = "无"
+									}
+									if(family.family_name == null || family.family_name == "") {
+										family.family_name = "无"
+									}
+									if(family.family_phone == null || family.family_phone == "") {
+										family.family_phone = "无"
+									}
+									if(family.family_age == null || family.family_age == "") {
+										family.family_age = "无"
+									} else {
+										family.family_age = family.family_age + '岁'
+									}
+									var html = '<div class="box-body box-header with-border">' +
+										'<p><span class="margin-r-5">成员称谓：</span><span>' + family.family_relation + '</span></p>' +
+										'<p><span class="margin-r-5">成员姓名：</span><span>' + family.family_name + '</span></p>' +
+										'<p><span class="margin-r-5">成员电话：</span><span>' + family.family_phone + '</span></p>' +
+										'<p><span class="margin-r-5">成员年龄：</span><span>' + family.family_age + '</span></p>' +
+										'</div>';
+									$div.after(html);
+								});
+
+							} else {
+								var html = '<div class="box-body box-header with-border">' +
+									'<p><span class="margin-r-5">成员称谓：</span><span>无</span></p>' +
+									'<p><span class="margin-r-5">成员姓名：</span><span>无</span></p>' +
+									'<p><span class="margin-r-5">成员电话：</span><span>无</span></p>' +
+									'<p><span class="margin-r-5">成员年龄：</span><span>无</span></p>' +
+									'</div>';
+								$div.after(html);
+							}
+
+							getCustomerMoreData(jsonData.id);
+						}
+
+					}
+				});
+
+			}
+		</script>
+
+	</body>
+
 </html>

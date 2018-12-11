@@ -23,9 +23,7 @@
 		<header class="mui-bar mui-bar-nav titleheader">
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 			<h1 class="mui-title">客户意见</h1>
-			<div class="history">
-				<a onclick="tofeedback()" id="add">添加</a>
-			</div>
+			<a class="mui-pull-right history" onclick="tofeedback()" id="add">添加</a>
 		</header>
 		<!--下拉刷新容器-->
 		<div id="pullrefresh" class="mui-content express" style="margin-bottom: 0;">
@@ -57,7 +55,14 @@
 					   store_id:store.store_id
 				    };
 			}
-
+            (function($) {
+				$.ready(function() {
+				if(plus.device.model == "iPhone10,3"||plus.device.model == "iPhone10,6"|| plus.device.model == "iPhone11,8"||plus.device.model == "iPhone11,2"||plus.device.model == "iPhone11,6") {
+					document.getElementById("pullrefresh").style.marginTop= '0px';
+				}
+				});
+			})(mui);
+			
 			mui.init({
 				pullRefresh: {
 					container: '#pullrefresh',

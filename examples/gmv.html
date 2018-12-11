@@ -6,7 +6,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<title>绩效</title>
 		<!-- Tell the browser to be responsive to screen width -->
-		<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+		<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no,viewport-fit=cover" name="viewport">
 		<!-- Bootstrap 3.3.6 -->
 		<link rel="stylesheet" href="../css/bootstrap.min.css">
 		<!-- Font Awesome -->
@@ -228,13 +228,13 @@
 			<!--主页部分-->
 			<div class="wrapper mui-inner-wrap">
 				<header class="main-header">
-					<nav class="navbar navbar-static-top text-center">
+					<nav class="navbar navbar-static-top text-center" id="titlenav">
 						<span>国安侠绩效</span>
 						<a href="#offCanvasSide" class="sidebar-toggle fa fa-navicon mui-icon-bars"></a>
 					</nav>
 				</header>
 
-				<div class="statistics mui-control-content">
+				<div class="statistics mui-control-content" id="content">
 					<div class="dt1 clearfix">
 						<div class="dt_l pull-left"><img src="../images/dt1.png"> </div>
 						<div class="dt_r pull-right">
@@ -413,6 +413,16 @@
 //					}
 //				}
 //			});
+			(function($) {
+				$.ready(function() {
+//					alert(plus.device.model); 
+					if(plus.device.model == "iPhone10,3"||plus.device.model == "iPhone10,6"|| plus.device.model == "iPhone11,8"||plus.device.model == "iPhone11,2"||plus.device.model == "iPhone11,6") {
+					document.getElementById("titlenav").style.marginTop= '-20px';
+					document.getElementById("content").style.marginTop= '15px';
+					document.getElementById("footer_bottmo").style.paddingBottom= '67px';
+				}
+				});
+			})(mui);
 			mui.plusReady(function() {
 				initStore();
 				var maps_webview = plus.webview.getWebviewById('maps_web');

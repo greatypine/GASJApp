@@ -4,7 +4,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>快递订单列表页面</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" name="viewport">
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
 		<!--标准mui.css-->
@@ -194,7 +194,7 @@
 		<div class="express_count" id="express_count" style="display: none;"><span>工作统计量(本月)：<span id="month_express_count"></span>条</span></div>
 		<div id="pullRefresh" class="mui-content mui-scroll-wrapper his_con express" style="padding: 0;">
 			
-			<div class="mui-scroll">
+			<div class="mui-scroll" id="mui-scroll">
 				<!--数据列表-->
 				<ul id="ul_history" class="mui-table-view mui-table-view-chevron" style="background-color: transparent;">
 
@@ -214,7 +214,14 @@
 		var usergroup = JSON.parse(localStorage.getItem("usergroup"));
 		var express_count=null;
 		var express_count_type=null;
-
+		(function($) {
+				$.ready(function() {
+				if(plus.device.model == "iPhone10,3"||plus.device.model == "iPhone10,6"|| plus.device.model == "iPhone11,8"||plus.device.model == "iPhone11,2"||plus.device.model == "iPhone11,6") {
+					document.getElementById("mui-scroll").style.marginTop= '-90px';
+				}
+				});
+			})(mui);
+			
 		var pageInfo = {
 			currentPage: 0,
 			recordsPerPage: 10,

@@ -6,7 +6,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<title>工单列表</title>
 		<!-- Tell the browser to be responsive to screen width -->
-		<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+		<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no,viewport-fit=cover" name="viewport">
 		<!-- Bootstrap 3.3.6 -->
 		<link rel="stylesheet" href="../css/bootstrap.min.css">
 		<!-- Font Awesome -->
@@ -167,7 +167,7 @@
 			<div class="mui-inner-wrap wrapper">
 				<header class="main-header">
 					<!-- Logo -->
-					<nav class="navbar navbar-static-top text-center">
+					<nav class="navbar navbar-static-top text-center" id="titlenav">
 						<a href="#offCanvasSide" class="sidebar-toggle fa fa-navicon mui-icon-bars"></a>
 						<span> 工单列表</span>
 						<a href="#" onclick="tofeedback()" class="clean-all">添加</a>
@@ -191,7 +191,7 @@
 				
 				
 				<div class="mui-off-canvas-backdrop"></div>
-				<footer style="display: none;">
+				<footer style="display: none;" id="footer_bottmo">
 					<a class="col-xs-4" id="web_city_ej" path="web_city_ej.html" onclick="jump(this)">
 						<p><i class="fa fa-bar-chart-o"></i></p>动态</a>
 
@@ -345,6 +345,15 @@
 			   release:false//默认为false，不监听
 			  }
 			});
+			(function($) {
+				$.ready(function() {
+					if(plus.device.model == "iPhone10,3"||plus.device.model == "iPhone10,6"|| plus.device.model == "iPhone11,8"||plus.device.model == "iPhone11,2"||plus.device.model == "iPhone11,6") {
+					document.getElementById("titlenav").style.marginTop= '-20px';
+					document.getElementById("pullrefresh").style.marginTop= '-20px';
+					document.getElementById("footer_bottmo").style.paddingBottom= '67px';
+				}
+				});
+			})(mui);
 			mui.plusReady(function() {
 				var maps_webview = plus.webview.getWebviewById('maps_web');
 				if(maps_webview != null) {
@@ -354,7 +363,7 @@
 					if(employee.usergroup.code == 'ZHGLY' || employee.usergroup.code == 'DZ' || employee.usergroup.code == 'GAX' || employee.usergroup.code == 'FDZJSZ') {
 						$("footer").css("display", "");
 						$("#web_city_ej").attr("style", "display:none;");
-						$("#my").attr("style", "display:none;");
+						$("#new_city_my").attr("style", "display:none;");
 						$("#new_tabbar").css("display", "");
 						if(employee.usergroup.code == 'GAX') {
 							$("#datacard").css("display", "");
@@ -377,7 +386,7 @@
 						$("#tabbar").attr("style", "display:none;");
 						$("#work").attr("style", "display:none;");
 						$("#web_city_ej").attr("style", "display:none;");
-						$("#my").attr("style", "display:none;");
+						$("#new_city_my").attr("style", "display:none;");
 						$("#maps").attr("class", "col-xs-4 ");
 						$("#areaState").attr("class", "col-xs-4");
 						$("#message").attr("class", "col-xs-4 mark-green");

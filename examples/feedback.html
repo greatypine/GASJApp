@@ -22,7 +22,7 @@
 			<h1 class="mui-title">客户意见</h1>
 		</header>
 
-		<div class="list-item layout" style="display: block; padding-top:0.8rem;">
+		<div class="list-item layout" style="display: block; padding-top:0.8rem;" id="list-item">
 			<ul>
 				<li class="item-time"></li>
 				<li class="item-name">
@@ -68,6 +68,15 @@
 	<script src="../js/custom_common.js"></script>
 	<script src="../js/date_util.js"></script>
 	<script type="text/javascript">
+		(function($) {
+				$.ready(function() {
+					if(plus.device.model == "iPhone10,3"||plus.device.model == "iPhone10,6"|| plus.device.model == "iPhone11,8"||plus.device.model == "iPhone11,2"||plus.device.model == "iPhone11,6") {
+					document.getElementById("list-item").style.marginTop = '44px';
+				}
+				});
+			})(mui);
+
+		
 		mui.init({
 			swipeBack: true //启用右滑关闭功能
 		});

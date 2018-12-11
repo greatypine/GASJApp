@@ -4,7 +4,7 @@
 	<head>
 		<meta charset="utf-8">
 		<title>录入</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
 		<!--标准mui.css-->
@@ -70,7 +70,7 @@
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 			<h1 class="mui-title">录入</h1>
 		</header>
-		<div class="div_f">
+		<div class="div_f" id="content">
 			<div class="div_1" onclick="toStoreDaily()">
 				<div class="div_l"><img src="../images/icon4.png"> </div>
 				<div class="div_r">门店日常</div>
@@ -96,6 +96,14 @@
 	<script src="../js/date_util.js"></script>
 	<script src="../js/jquery-2.2.2.min.js"></script>
 	<script type="text/javascript">
+		
+		(function($) {
+				$.ready(function() {
+					if(plus.device.model == "iPhone10,3"||plus.device.model == "iPhone10,6"|| plus.device.model == "iPhone11,8"||plus.device.model == "iPhone11,2"||plus.device.model == "iPhone11,6") {
+					document.getElementById("content").style.marginTop= '110px';
+				}
+				});
+			})(mui);
 		//跳转到门店日常
 			function toStoreDaily() {
 				setTimeout(function() {

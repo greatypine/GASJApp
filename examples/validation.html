@@ -95,7 +95,7 @@
 			<h1 class="mui-title">密码重置</h1>
 		</header>
 		<div class="mui-content">
-			<form class="mui-input-group" style="margin-top: 20px;">
+			<form class="mui-input-group" style="margin-top: 20px;" id="content">
 				<div class="mui-input-row" style="overflow:hidden;">
 					<div class="left_view">
 						<label>手机号</label>
@@ -124,6 +124,15 @@
 		<script type="text/javascript" src="../js/custom_common.js"></script>
 		<script src="../js/jquery-2.2.2.min.js"></script>
 		<script type="text/javascript">
+			(function($) {
+				$.ready(function() {
+					if(plus.device.model == "iPhone10,3"||plus.device.model == "iPhone10,6"|| plus.device.model == "iPhone11,8"||plus.device.model == "iPhone11,2"||plus.device.model == "iPhone11,6") {
+					document.getElementById("content").style.marginTop= '0px';
+					
+				}
+				});
+			})(mui);
+			
 			mui.init()
 			mui.plusReady(function() {
 				var user_id = null;

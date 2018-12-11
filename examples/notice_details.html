@@ -26,7 +26,7 @@
 		</header>
 
 		<label class='work_context_title' id='work_context_title'></label>
-		<div style="font-size: 16px;padding-top: 20px;margin: 0rem 0.3rem;">标题:&nbsp;&nbsp;&nbsp;&nbsp;<span id="notice_title"></span></div>
+		<div style="font-size: 16px;padding-top: 20px;margin: 0rem 0.3rem;" id="title">标题:&nbsp;&nbsp;&nbsp;&nbsp;<span id="notice_title"></span></div>
 		<div style="width: 100%;height: auto;padding-left: 0.3rem;">
 			<div style="font-size: 16px;padding-top: 20px;width: 13%;float: left;">内容:</div>
 			<div id="work_context" style="font-size: 16px;padding-left: 54px;padding-top: 20px;padding-right:10px;word-break: break-all;">
@@ -67,6 +67,13 @@
 				return true;
 			}
 		});
+		(function($) {
+			$.ready(function() {
+				if(plus.device.model == "iPhone10,3" || plus.device.model == "iPhone10,6" || plus.device.model == "iPhone11,8" || plus.device.model == "iPhone11,2" || plus.device.model == "iPhone11,6") {
+					document.getElementById("title").style.marginTop= '80px';
+				}
+			});
+		})(mui);
 
 		mui.plusReady(function() {
 			getdata();
@@ -85,13 +92,12 @@
 				$('#notice_title').html(notice_title);
 			}
 			if(notice_content != null || notice_content != "") {
-				$('#work_context').html(notice_content.replace(/\n|\r\n/g,"<br/>"));
+				$('#work_context').html(notice_content.replace(/\n|\r\n/g, "<br/>"));
 				//				mui('#work_context')[0].value = notice_content;
 			}
 			if(notice_ != null || notice_ != '') {
 				setEnclosure(notice_);
 			}
-			
 
 		}
 
@@ -110,26 +116,26 @@
 
 		function createDownload(t) {
 			var id = $(t).attr("id");
-			
+
 			if(id == 'enclosure1') {
-				if($("#enclosure1").text()=="无"){
+				if($("#enclosure1").text() == "无") {
 					mui.toast("暂无附件");
 					return;
 				}
-				
+
 			} else if(id == 'enclosure2') {
-				if($("#enclosure2").text()=="无"){
+				if($("#enclosure2").text() == "无") {
 					mui.toast("暂无附件");
 					return;
 				}
-				
+
 			} else if(id == 'enclosure3') {
-				
-				if($("#enclosure3").text()=="无"){
+
+				if($("#enclosure3").text() == "无") {
 					mui.toast("暂无附件");
 					return;
 				}
-				
+
 			}
 			var path = null;
 			if(id == 'enclosure1') {
@@ -139,65 +145,62 @@
 			} else if(id == 'enclosure3') {
 				path = $("#enclosure3_path").text();
 			}
-			
 
-			var dtask = plus.downloader.createDownload(path,{});
+			var dtask = plus.downloader.createDownload(path, {});
 			var w = plus.nativeUI.showWaiting("开始下载...");
-            dtask.addEventListener("statechanged", function (task, status) {
-          
-                switch (task.state) {
-                
-                	
-                    case 3: // 已接收到数据
-                 
-                        if (w) {
-                        	setTimeout(function() {
-							w.setTitle("下载中：" + task.downloadedSize + "/"+task.totalSize);
-						},300);
-						 
-                            
-                        }
-                        break;
-                    case 4: // 下载完成
-                        if (status == 200) {
-                            if (w) {
-                                w.close();
-                            }
-                           var index = task.filename.lastIndexOf("\/");
-					var name = task.filename.substring(index + 1, task.filename.length);
-					var myDate = new Date();
-					var file = '{"date":"' + myDate.toLocaleString() + '","id":"' + task.filename + '","name":"' + name + '"}';
-					var file1 = localStorage.getItem("fileList");
+			dtask.addEventListener("statechanged", function(task, status) {
 
-					if(file1 != null) { //不是第一次下载文件
-						//判断是否已经存在
-						file = file + "," + file1;
-						localStorage.setItem("fileList", file);
-						
-					} else {
-						var jsonList = [];
-						var jsonarray = eval(jsonList); //定义追加格式
-						jsonarray.push(file);
-						var files = JSON.stringify(jsonarray);
-						localStorage.setItem("fileList", file); //第一次下载文件存储字符串
-					}
-					var btnArray = ['否', '是']; //弹框消息确认是否打开附件
-					mui.confirm('是否打开附件查看？', '下载成功', btnArray, function(e) {
-						if(e.index == 1) { //打开附件
-							plus.runtime.openFile(task.filename, {}, function(e) {
-								plus.nativeUI.alert("无法打开此文件：" + e.emssage);
-							});
-						} else { //不打开
-							
+				switch(task.state) {
+
+					case 3: // 已接收到数据
+
+						if(w) {
+							setTimeout(function() {
+								w.setTitle("下载中：" + task.downloadedSize + "/" + task.totalSize);
+							}, 300);
+
 						}
-					})
-                        } else {
-                            plus.nativeUI.closeWaiting();
-                            mui.toast("暂无附件");
-                        }
-                        break;
-                }
-                });
+						break;
+					case 4: // 下载完成
+						if(status == 200) {
+							if(w) {
+								w.close();
+							}
+							var index = task.filename.lastIndexOf("\/");
+							var name = task.filename.substring(index + 1, task.filename.length);
+							var myDate = new Date();
+							var file = '{"date":"' + myDate.toLocaleString() + '","id":"' + task.filename + '","name":"' + name + '"}';
+							var file1 = localStorage.getItem("fileList");
+
+							if(file1 != null) { //不是第一次下载文件
+								//判断是否已经存在
+								file = file + "," + file1;
+								localStorage.setItem("fileList", file);
+
+							} else {
+								var jsonList = [];
+								var jsonarray = eval(jsonList); //定义追加格式
+								jsonarray.push(file);
+								var files = JSON.stringify(jsonarray);
+								localStorage.setItem("fileList", file); //第一次下载文件存储字符串
+							}
+							var btnArray = ['否', '是']; //弹框消息确认是否打开附件
+							mui.confirm('是否打开附件查看？', '下载成功', btnArray, function(e) {
+								if(e.index == 1) { //打开附件
+									plus.runtime.openFile(task.filename, {}, function(e) {
+										plus.nativeUI.alert("无法打开此文件：" + e.emssage);
+									});
+								} else { //不打开
+
+								}
+							})
+						} else {
+							plus.nativeUI.closeWaiting();
+							mui.toast("暂无附件");
+						}
+						break;
+				}
+			});
 
 			dtask.start();
 		}

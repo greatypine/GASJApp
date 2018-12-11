@@ -95,7 +95,12 @@
 		mui.plusReady(function(){
 				var fontSize = $('body').css('font-size');
 				fontSize = fontSize.substring(0,fontSize.length - 2);
-				var strTop = parseInt(fontSize) * 1.1 + 'px';
+				if(plus.device.model == "iPhone10,3"||plus.device.model == "iPhone10,6"|| plus.device.model == "iPhone11,8"||plus.device.model == "iPhone11,2"||plus.device.model == "iPhone11,6") {
+					var strTop = parseInt(fontSize) * 1.5 + 'px';
+			} else {
+ 					var strTop = parseInt(fontSize) * 1.1 + 'px';
+ 				}
+				
 				var strBottom = parseInt(fontSize) * 0 + 'px';
 				mui.init({
 					beforeback: function() {

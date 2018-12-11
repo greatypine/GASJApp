@@ -19,7 +19,7 @@
 	<body>
 		<div class="history_line"></div>
 		<div id="pullRefresh" class="mui-content mui-scroll-wrapper his_con" style="padding-top: 0;">
-			<div class="mui-scroll">
+			<div class="mui-scroll" id="mui-scroll">
 				<!--数据列表-->
 				<ul id="ul_history" class="mui-table-view mui-table-view-chevron" style="background-color: transparent;">
 
@@ -40,7 +40,13 @@
 			totalRecords: 0,
 			tooManySearchReturn: false
 		};
-
+		 (function($) {
+				$.ready(function() {
+					if(plus.device.model == "iPhone10,3"||plus.device.model == "iPhone10,6"|| plus.device.model == "iPhone11,8"||plus.device.model == "iPhone11,2"||plus.device.model == "iPhone11,6") {
+					document.getElementById("mui-scroll").style.marginTop = '-100px';;
+				}
+				});
+			})(mui);
 		mui.plusReady(function() {
 			if (mui.os.ios) {
 				$('.his_con').css('height', '100%');

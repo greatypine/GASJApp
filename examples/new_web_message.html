@@ -6,7 +6,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<title>消息列表页面</title>
 		<!-- Tell the browser to be responsive to screen width -->
-		<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+		<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no,viewport-fit=cover" name="viewport">
 		<!-- Bootstrap 3.3.6 -->
 		<link rel="stylesheet" href="../css/bootstrap.min.css">
 		<!-- Font Awesome -->
@@ -21,6 +21,7 @@
 		<link rel="stylesheet" type="text/css" href="../css/message.css" />
 		<link rel="stylesheet" href="../css/img_preview.css">
 		<link rel="stylesheet" href="../css/newmui.message.css">
+		<link rel="stylesheet" href="../css/style.css" />
 		<!--<link rel="stylesheet" href="../css/mui.min.new.css">-->
 
 		<style>
@@ -318,6 +319,21 @@
 				-webkit-line-clamp: 4;
 				overflow: hidden;
 			}
+			.sidebar-toggle {
+				font-size: 20px;
+			}
+			header .sidebar-toggle {
+				float: none;
+				position: absolute;
+				top: 30px;
+				left: 15px;
+				color: #fff;
+			}
+			header{
+				background-color: rgb(24,188,156);
+			}
+			.titlenav{
+				height: 64px;line-height: 64px;color: white;font-size: 20px;position: fixed; 				text-align: center;padding: 0.3rem 0 0.7rem 0;
 		</style>
 	</head>
 
@@ -329,7 +345,7 @@
 			<div class="mui-inner-wrap wrapper">
 				<header class="main-header">
 					<!-- Logo -->
-					<nav class="navbar navbar-static-top text-center">
+					<nav class="navbar navbar-static-top text-center"  id="titlenav">
 						<a href="#offCanvasSide" class="sidebar-toggle fa fa-navicon mui-icon-bars"></a>
 						<span> 消息中心</span>
 						<a href="#" onclick="clearMessage()" class="clean-all" style="display: none;" id="clear_a">清空</a>
@@ -338,7 +354,7 @@
 
 				</header>
 
-				<div id="slider" class="mui-slider mui-fullscreen" style="padding-top: 66px;margin-top: 0;">
+				<div id="slider" class="mui-slider mui-fullscreen" style="padding-top: 64px;margin-top: 7px;">
 					<div id="sliderSegmentedControl" class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted" style="box-shadow: 0px 1px 5px rgba(0,0,0,0.2);">
 						<div class="mui-scroll">
 							<a class="mui-control-item mui-active" href="#item1mobile" style="width: 50%; position: relative; border-right: 1px solid rgba(0,0,0,0.05);" id="notice_a">公告<span class="count_css" id="notice_count" style="display: none;"></span>
@@ -373,7 +389,7 @@
 				</div>
 
 				<div class="mui-off-canvas-backdrop"></div>
-				<footer style="display: none;">
+				<footer style="display: none;" id="footer_bottmo">
 					<a class="col-xs-4" id="web_city_ej" path="web_city_ej.html" onclick="jump(this)">
 						<p><i class="fa fa-bar-chart-o"></i></p>动态</a>
 					<a class="col-xs-3" id="sel_operate" onclick="selectoperate()">
@@ -547,7 +563,11 @@
 					indicators: true, //是否显示滚动条
 					deceleration: deceleration
 				});
-
+                 if(plus.device.model == "iPhone10,3"||plus.device.model == "iPhone10,6"|| plus.device.model == "iPhone11,8"||plus.device.model == "iPhone11,2"||plus.device.model == "iPhone11,6") {
+					document.getElementById("slider").style.paddingTop = '83px';
+					document.getElementById("titlenav").style.marginTop= '-20px';
+					document.getElementById("footer_bottmo").style.paddingBottom= '67px';
+				}
 				$.ready(function() {
 
 					//循环初始化所有下拉刷新，上拉加载。
@@ -652,7 +672,7 @@
 					if(employee.usergroup.code == 'ZHGLY' || employee.usergroup.code == 'DZ' || employee.usergroup.code == 'GAX' || employee.usergroup.code == 'FDZJSZ') {
 						$("footer").css("display", "");
 						$("#web_city_ej").attr("style", "display:none;");
-						$("#my").attr("style", "display:none;");
+						$("#new_city_my").attr("style", "display:none;");
 						$("#new_tabbar").css("display", "");
 						if(employee.usergroup.code == 'GAX') {
 							$("#datacard").css("display", "");
@@ -673,7 +693,7 @@
 						$("footer").css("display", "");
 						$("#work").attr("style", "display:none;");
 						$("#web_city_ej").attr("style", "display:none;");
-						$("#my").attr("style", "display:none;");
+						$("#new_city_my").attr("style", "display:none;");
 						$("#sel_operate").attr("class", "col-xs-4");
 						$("#areaState").attr("class", "col-xs-4");
 						$("#message").attr("class", "col-xs-4 mark-green");

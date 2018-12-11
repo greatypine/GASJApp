@@ -37,9 +37,7 @@
 		<header class="mui-bar mui-bar-nav titleheader">
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 			<h1 class="mui-title">拜访记录</h1>
-			<div class="save">
-				<a onclick="doSubmit()">保存</a>
-			</div>
+			<a class="mui-pull-right history" onclick="doSubmit();">保存</a>
 		</header>
 		<div id="div_info" class="mui-content" style="margin-bottom: 0.3rem;">
 			<div id="item1" style="padding-top: 8px" class="mui-control-content mui-active">
@@ -89,7 +87,7 @@
 			    <div id="item4" style="margin-bottom: 1rem;">
 					
 				</div>
-				<div class="add_btn" style="position: fixed; bottom: 0; height: 0.8rem;">
+				<div class="add_btn" style="position: fixed; bottom: 0; height: 0.8rem;"  id="add_btn">
 						<button id="btnRelation">
 							<span class="mui-icon mui-icon-plusempty"></span>
 							个人拜访信息
@@ -155,6 +153,14 @@
 				}
 			});
 		});
+		(function($) {
+				$.ready(function() {
+					if(plus.device.model == "iPhone10,3"||plus.device.model == "iPhone10,6"|| plus.device.model == "iPhone11,8"||plus.device.model == "iPhone11,2"||plus.device.model == "iPhone11,6") {
+					document.getElementById("add_btn").style.bottom='34px';
+					}
+				});
+			})(mui);
+			
 		mui.plusReady(function() {
 			mui.init();
 			if(mui.os.ios) {

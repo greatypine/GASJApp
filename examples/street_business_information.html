@@ -32,12 +32,10 @@
 		<header class="mui-bar mui-bar-nav titleheader">
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 			<h1 class="mui-title">街道商业信息</h1>
-			<div class="save">
-				<a href="#" onclick="findBusiness();">保存</a>
-			</div>
+			<a class="mui-pull-right history" onclick="findBusiness();">保存</a>
 		</header>
 
-		<div style="margin-top:1.1rem;">
+		<div style="margin-top:1.1rem;" id="content">
 			<ul class="mui-table-view mui-table-view-chevron ul_interval">
 				<li id="province" class="mui-table-view-cell select_li">
 					<a>
@@ -199,6 +197,13 @@
 			time_picker('open_time');
 
 		});
+		(function($) {
+				$.ready(function() {
+					if(plus.device.model == "iPhone10,3"||plus.device.model == "iPhone10,6"|| plus.device.model == "iPhone11,8"||plus.device.model == "iPhone11,2"||plus.device.model == "iPhone11,6") {
+					document.getElementById("content").style.marginTop = '1.5rem';
+				}
+				});
+			})(mui);
 
 		function ininView() {
 			var self = plus.webview.currentWebview();
