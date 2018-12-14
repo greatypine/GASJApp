@@ -153,7 +153,6 @@
 			.statistics {
 				background-color: #fff;
 				padding: 100px 25px;
-				;
 				height: 100%;
 			}
 			
@@ -914,9 +913,12 @@
 			//绩效本月数据
 			function newgetMonthStoreData(storeno,store_id) {
 				doManager('InterManager', 'queryAreaInfoByStorekeeperEmployNo', [employee.employeeId, storeno, store_id], function(data) {
+					
 					if(data.result == true) {
 						var jsonData = JSON.parse(data.data);
+						alert(jsonData.code);
 						if(jsonData.code == 200) {
+							alert(JSON.stringify(jsonData));
 							//国安侠本月毛利
 							$('#store_profit').html(jsonData.data.area_profit);
 							$('#lst_store_profit').html(jsonData.data.area_lst_profit);

@@ -74,23 +74,6 @@
 					}
 			});
 		}
-		function openmy(){
-			var webview = plus.webview.getWebviewById('my');
-			if(webview != null){
-				webview.close();
-			}
-			mui.openWindow({
-				url:'my.html',
-				id:'my',
-				createNew:true,
-				show: {
-						aniShow: 'slide-in-right'
-					},
-					waiting: {
-						autoShow: false
-					}
-			});
-		}
 		
 		mui.plusReady(function(){
 				var fontSize = $('body').css('font-size');

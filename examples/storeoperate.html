@@ -488,10 +488,10 @@
 			var area_id = null;
 			var store = null;
 			var storelist = null;
-			var v = employee.employeeId;
+			var v = null;
 			var w = null;
 			var store_no = null;
-			var zw = employee.usergroup.code;
+			var zw = null;
 			var lat = null;
 			var lon = null;
 
@@ -524,6 +524,8 @@
 				}
 			});
 			mui.plusReady(function() {
+				v = employee.employeeId;
+				zw = employee.usergroup.code
 				if(plus.device.model == "iPhone10,3"||plus.device.model == "iPhone10,6"|| plus.device.model == "iPhone11,8"||plus.device.model == "iPhone11,2"||plus.device.model == "iPhone11,6") {
 						document.getElementById("titlenav").style.marginTop = '-20px';
 						document.getElementById("slider").style.marginTop = '-59px';
