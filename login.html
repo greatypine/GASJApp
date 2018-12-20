@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
@@ -7,36 +8,50 @@
 		<link href="css/mui.min.css" rel="stylesheet" />
 		<link href="css/style.css" rel="stylesheet" />
 		<style>
-			body{
-				background: url(images/new_bg2.png) no-repeat ;
+			body {
+				background: url(images/new_bg2.png) no-repeat;
 				background-size: 100%;
 			}
-			#login-form{
-				margin-left:1rem;
+			
+			#login-form {
+				margin-left: 1rem;
 				margin-right: 1rem;
 			}
-			.aaa {font-size: 1rem;text-align: center;position: relative;margin-top: 12rem;}
-			.mui-input-group{
-				background-color: rgba(0,0,0,0);
+			
+			.aaa {
+				font-size: 1rem;
+				text-align: center;
+				position: relative;
+				margin-top: 12rem;
 			}
-			.mui-input-group .mui-input-row:after{
-				background-color: rgba(0,0,0,0);
+			
+			.mui-input-group {
+				background-color: rgba(0, 0, 0, 0);
 			}
-			.mui-input-row:last-child{
+			
+			.mui-input-group .mui-input-row:after {
+				background-color: rgba(0, 0, 0, 0);
+			}
+			
+			.mui-input-row:last-child {
 				background-color: #E6E6E8;
 			}
-			.mui-input-row{
+			
+			.mui-input-row {
 				background-color: #E6E6E8;
 			}
-			.mui-input-group .space{
-				background-color: rgba(0,0,0,0);
+			
+			.mui-input-group .space {
+				background-color: rgba(0, 0, 0, 0);
 				height: 1rem;
 			}
-			.mui-row{
+			
+			.mui-row {
 				margin-top: 4rem;
-				margin-left:1rem;
+				margin-left: 1rem;
 				margin-right: 1rem;
 			}
+			
 			.area {
 				margin: 1rem auto 0 auto;
 			}
@@ -52,7 +67,8 @@
 			.mui-input-group label {
 				width: 16%;
 			}
-			.mui-input-group span{
+			
+			.mui-input-group span {
 				width: 16%;
 			}
 			
@@ -116,37 +132,47 @@
 			.oauth-area .oauth-btn.disabled {
 				background-color: #ddd;
 			}
-			.mui-slider{margin-top:2rem;}
-			.forget_password{padding-right: 1rem; color:#fff;font-size: 0.95rem;}
+			
+			.mui-slider {
+				margin-top: 2rem;
+			}
+			
+			.forget_password {
+				padding-right: 1rem;
+				color: #fff;
+				font-size: 0.95rem;
+			}
+			
 			.button {
-			    position: relative;
-			    border: none;
-			    text-align: center;
-			    -webkit-transition-duration: 0.4s; /* Safari */
-			    transition-duration: 0.4s;
-			    text-decoration: none;
-			    overflow: hidden;
-			    cursor: pointer;
+				position: relative;
+				border: none;
+				text-align: center;
+				-webkit-transition-duration: 0.4s;
+				/* Safari */
+				transition-duration: 0.4s;
+				text-decoration: none;
+				overflow: hidden;
+				cursor: pointer;
 			}
 			
 			.button:after {
-			    content: "";
-			    background: #90EE90;
-			    display: block;
-			    position: absolute;
-			    padding-top: 300%;
-			    padding-left: 350%;
-			    margin-left: -20px!important;
-			    margin-top: -120%;
-			    opacity: 0;
-			    transition: all 0.8s
+				content: "";
+				background: #90EE90;
+				display: block;
+				position: absolute;
+				padding-top: 300%;
+				padding-left: 350%;
+				margin-left: -20px!important;
+				margin-top: -120%;
+				opacity: 0;
+				transition: all 0.8s
 			}
 			
 			.button:active:after {
-			    padding: 0;
-			    margin: 0;
-			    opacity: 1;
-			    transition: 0s
+				padding: 0;
+				margin: 0;
+				opacity: 1;
+				transition: 0s
 			}
 		</style>
 
@@ -160,7 +186,7 @@
 					<input id='account' type="text" class="mui-input-clear mui-input" placeholder="员工编号/手机号/登录账号">
 				</div>
 				<div class="mui-input-row space">
-					
+
 				</div>
 				<div class="mui-input-row">
 					<label><img src="images/password.png" style="height: 1.1rem;"/></label>
@@ -174,64 +200,62 @@
 			</div>
 			<div class="fr forget_password" onclick="toforget_password()">找回密码？</div>
 		</div>
-		<div class="aaa"><p id="version" style="color: #fff;"></p></div>
+		<div class="aaa">
+			<p id="version" style="color: #fff;"></p>
+		</div>
 		<script src="js/mui.min.js"></script>
 		<script src="js/mui.enterfocus.js"></script>
-		<script type="text/javascript" src="js/immersed.js" ></script>
-		<script type="text/javascript" src="js/common.js" ></script>
+		<script type="text/javascript" src="js/immersed.js"></script>
+		<script type="text/javascript" src="js/common.js"></script>
 		<script src="js/jquery-2.2.2.min.js"></script>
 		<script src="https://pv.sohu.com/cityjson?ie=utf-8"></script>
-		<script type="text/javascript" src="js/custom_common.js" ></script>
+		<script type="text/javascript" src="js/custom_common.js"></script>
 		<script src="js/app.js"></script>
 		<script>
 			(function($, doc) {
-				
+
 				$.init({
 					statusBarBackground: '#f7f7f7'
 				});
 				$.plusReady(function() {
-				    plus.runtime.getProperty(plus.runtime.appid,function(inf){
-				        wgtVer=inf.version;
-				      mui("#version")[0].innerHTML=wgtVer;
-				      if(localStorage.getItem("employee_key")==null){
-				      	return;
-				      }else{
-		   				doc.getElementById('account').value=localStorage.getItem("employee_key");
-				      }
-				      
-				    });
+					plus.runtime.getProperty(plus.runtime.appid, function(inf) {
+						wgtVer = inf.version;
+						mui("#version")[0].innerHTML = wgtVer;
+						if(localStorage.getItem("employee_key") == null) {
+							return;
+						} else {
+							doc.getElementById('account').value = localStorage.getItem("employee_key");
+						}
+
+					});
 					$.back = function() {
 						plus.runtime.quit();
 					}
 
-					if (plus.networkinfo.getCurrentType() != plus.networkinfo.CONNECTION_WIFI&&plus.networkinfo.getCurrentType() != plus.networkinfo.CONNECTION_CELL4G){
-							mui.toast('网络异常');
-						}
-//					autoUpdate();
-                    newMessagepdate();
-                    
+					if(plus.networkinfo.getCurrentType() != plus.networkinfo.CONNECTION_WIFI && plus.networkinfo.getCurrentType() != plus.networkinfo.CONNECTION_CELL4G) {
+						mui.toast('网络异常');
+					}
+					//					autoUpdate();
+					newMessagepdate();
+
 					plus.screen.lockOrientation("portrait-primary");
 					var state = app.getState();
-                  	
-					
-					
-					   // 获取本地应用资源版本号
 
-	    
-				
+					// 获取本地应用资源版本号
+
 					//检查 "登录状态/锁屏状态" 结束
 					var loginButton = doc.getElementById('login');
 					var accountBox = doc.getElementById('account');
 					var passwordBox = doc.getElementById('password');
 					loginButton.addEventListener('tap', function(event) {
-						if(document.getElementById("account").value==""||document.getElementById("account").value==null){
+						if(document.getElementById("account").value == "" || document.getElementById("account").value == null) {
 							mui.toast("请输入账号！");
 							return;
-						}else if(document.getElementById("password").value==""||document.getElementById("password").value==null){
+						} else if(document.getElementById("password").value == "" || document.getElementById("password").value == null) {
 							mui.toast("请输入密码！");
 							return;
 						}
-						if (plus.networkinfo.getCurrentType() != plus.networkinfo.CONNECTION_WIFI&&plus.networkinfo.getCurrentType() != plus.networkinfo.CONNECTION_CELL4G){
+						if(plus.networkinfo.getCurrentType() != plus.networkinfo.CONNECTION_WIFI && plus.networkinfo.getCurrentType() != plus.networkinfo.CONNECTION_CELL4G) {
 							mui.toast('网络异常');
 							return;
 						}
@@ -239,140 +263,141 @@
 							code: accountBox.value,
 							password: passwordBox.value,
 							os: plus.os.name,
-							client_id:plus.push.getClientInfo().clientid,
-							token:plus.push.getClientInfo().token,
-							citynames:returnCitySN.cname,
-							loginip:returnCitySN.cip
-							
+							client_id: plus.push.getClientInfo().clientid,
+							token: plus.push.getClientInfo().token,
+							citynames: returnCitySN.cname,
+							loginip: returnCitySN.cip
+
 						};
 						var mv = localStorage.getItem('message_version');
 						var message = localStorage.getItem('new_message');
 						localStorage.clear();
-						localStorage.setItem('message_version',mv);
-						localStorage.setItem('new_message',message);
+						localStorage.setItem('message_version', mv);
+						localStorage.setItem('new_message', message);
 						var employee_data = JSON.parse(localStorage.getItem("employee"));
-						if(employee_data != null && employee_data.code == employee.code
-							&& employee_data.password == employee.password){
+						if(employee_data != null && employee_data.code == employee.code &&
+							employee_data.password == employee.password) {
 							initExpressSelect();
 							getBannerlist();
-//							getDefaultConfig(employee_data.employeeId,employee_data.name);
+							//							getDefaultConfig(employee_data.employeeId,employee_data.name);
 							getDictList('relation_content_resource');
-    						getDictList('relation_content_option_resource');
-    						getAllAreaOfEmployee(employee_data.employeeId);
-    						getEmployeePicByEmployeeId(employee_data.employeeId);
+							getDictList('relation_content_option_resource');
+							getAllAreaOfEmployee(employee_data.employeeId);
+							getEmployeePicByEmployeeId(employee_data.employeeId);
 							mui.toast('登录成功');
 							if(employee_data.usergroup != null) {
-								if(employee_data.usergroup.code=='CSMDGLZ') {
-									setTimeout(function(){
-						             toCityMain()();		
-							        },200);
-								}else if(employee_data.usergroup.code=='DZ'){
-									setTimeout(function(){
-						             toDZMain();	
-							        },200);
-								}else {
-									setTimeout(function(){
-						             toMain();	
-							        },200);
+								if(employee_data.usergroup.code == 'CSMDGLZ') {
+									setTimeout(function() {
+										toCityMain()();
+									}, 200);
+								} else if(employee_data.usergroup.code == 'DZ') {
+									setTimeout(function() {
+										toDZMain();
+									}, 200);
+								} else if(employee_data.usergroup.code == 'JKZYCJJSZ') {
+									setTimeout(function() {
+										toOperatorMain();
+									}, 200);
+								} else {
+									setTimeout(function() {
+										toMain();
+									}, 200);
 								}
 							}
-							
-						}else{
+
+						} else {
 							//登录接口
-							doManager("UserManager","saveTokenAndLogin",employee,function(data){
+							doManager("UserManager", "saveTokenAndLogin", employee, function(data) {
 								var jsonData = JSON.parse(data.data);
-								if(jsonData==null){
+								if(jsonData == null) {
 									mui.toast("登录失败");
-								}else if(jsonData!=null&&jsonData.code == 200){
-									window.localStorage.setItem("employee",JSON.stringify(jsonData.user));
-									window.localStorage.setItem("employee_key",employee.code);
-									window.localStorage.setItem("usergroup",JSON.stringify(jsonData.user.usergroup));
-									window.localStorage.setItem("storelist",JSON.stringify(jsonData.storeList));
+								} else if(jsonData != null && jsonData.code == 200) {
+									window.localStorage.setItem("employee", JSON.stringify(jsonData.user));
+									window.localStorage.setItem("employee_key", employee.code);
+									window.localStorage.setItem("usergroup", JSON.stringify(jsonData.user.usergroup));
+									window.localStorage.setItem("storelist", JSON.stringify(jsonData.storeList));
 									getDictList('relation_content_resource');
-    								getDictList('relation_content_option_resource');
+									getDictList('relation_content_option_resource');
 									initExpressSelect();
 									getBannerlist();
-//									getDefaultConfig(jsonData.user.employeeId,jsonData.user.name);
+									//									getDefaultConfig(jsonData.user.employeeId,jsonData.user.name);
 									getAllAreaOfEmployee(jsonData.user.employeeId);
 									getEmployeePicByEmployeeId(jsonData.user.employeeId);
 									mui.toast('登录成功');
 									if(jsonData.user.usergroup != null) {
-										if(jsonData.user.usergroup.code=='CSMDGLZ' ) {
-											setTimeout(function(){
-								             toCityMain();		
-									        },200);
-										}else if(jsonData.user.usergroup.code=='DZ'){
-											setTimeout(function(){
-								             toDZMain();		
-									        },200);
-										}else {
-											setTimeout(function(){
-								             toMain();		
-									        },200);
+										if(jsonData.user.usergroup.code == 'CSMDGLZ') {
+											setTimeout(function() {
+												toCityMain();
+											}, 200);
+										} else if(jsonData.user.usergroup.code == 'DZ') {
+											setTimeout(function() {
+												toDZMain();
+											}, 200);
+										} else if(jsonData.user.usergroup.code == 'JKZYCJJSZ') {
+											setTimeout(function() {
+												toOperatorMain();
+											}, 200);
+										} else {
+											setTimeout(function() {
+												toMain();
+											}, 200);
 										}
 									}
-									
-								}else{
+
+								} else {
 									mui.toast(jsonData.message);
 								}
 							});
 						}
 					});
-					
-		
-				
 
 					$.enterfocus('#login-form input', function() {
 						$.trigger(loginButton, 'tap');
 					});
-					
-					
 
 				});
 			}(mui, document));
 			//门店所有快递公司信息
-		function initExpressSelect(){
-			doManager('ExpressCompanyManager','queryAllExpressName',null,function(data){
-				if(data.result == true){
-					var employeeData = new Array();
-					var jsonData = JSON.parse(data.data);
-					window.localStorage.setItem("express",JSON.stringify(jsonData.expressCompany));
+			function initExpressSelect() {
+				doManager('ExpressCompanyManager', 'queryAllExpressName', null, function(data) {
+					if(data.result == true) {
+						var employeeData = new Array();
+						var jsonData = JSON.parse(data.data);
+						window.localStorage.setItem("express", JSON.stringify(jsonData.expressCompany));
 
-				}
-			});
-			
-			
-		
-		}
-				
- //     拜访记录拜访内容数据字典
-		function getDictList(name){
-			doManager('dictManager','findDictByName',name,function(data){
-				if(data.result){
-					var dict = JSON.parse(data.data);
-					dict.sort(function(a,b){
-		                return a.dictCode-b.dictCode
-		           });
-		            localStorage.setItem(name,JSON.stringify(dict));
-				}
-			},true);
-		}
+					}
+				});
+
+			}
+
+			//     拜访记录拜访内容数据字典
+			function getDictList(name) {
+				doManager('dictManager', 'findDictByName', name, function(data) {
+					if(data.result) {
+						var dict = JSON.parse(data.data);
+						dict.sort(function(a, b) {
+							return a.dictCode - b.dictCode
+						});
+						localStorage.setItem(name, JSON.stringify(dict));
+					}
+				}, true);
+			}
 			//广告栏内容
-	    function getBannerlist() {
-			doManager("AppBannerManager", "getAppBannerList", null, function(data) {
-				if(data.result == true) {
-					var jsonData = JSON.parse(data.data);
-					window.localStorage.setItem("banner",JSON.stringify(jsonData));
-				} else {
-					//mui.toast("获取用户所在门店失败！");
-				}
-			});
+			function getBannerlist() {
+				doManager("AppBannerManager", "getAppBannerList", null, function(data) {
+					if(data.result == true) {
+						var jsonData = JSON.parse(data.data);
+						window.localStorage.setItem("banner", JSON.stringify(jsonData));
+					} else {
+						//mui.toast("获取用户所在门店失败！");
+					}
+				});
 
-		}
-	    //忘记密码
-	    function toforget_password(){
-			var webview = plus.webview.getWebviewById('findPassword');
-				if(webview != null){
+			}
+			//忘记密码
+			function toforget_password() {
+				var webview = plus.webview.getWebviewById('findPassword');
+				if(webview != null) {
 					webview.hide();
 					webview.close();
 				}
@@ -387,94 +412,113 @@
 						autoShow: false
 					}
 				});
-		}
+			}
 
-		//跳转到主页面
-		function toDZMain() {
-			var sh_webview = plus.webview.getWebviewById('dzgmv');
-					if(sh_webview != null){
-						sh_webview.close();
-					}
-			setTimeout(function() {
-				mui.openWindow({
-					url:'examples/dzgmv.html',
-					id: 'dzgmv',
-					createNew:true,
-					show: {
-						aniShow: 'slide-in-right'
-					},
-					waiting: {
-						autoShow: false
-					}
-				});
-			}, 50);
-		}
-		//跳转到国安侠主页面
-		function toMain() {
-			var sh_webview = plus.webview.getWebviewById('gmv');
-					if(sh_webview != null){
-						sh_webview.close();
-					}
-			setTimeout(function() {
-				mui.openWindow({
-					url:'examples/gmv.html',
-					id: 'gmv',
-					createNew:true,
-					show: {
-						aniShow: 'slide-in-right'
-					},
-					waiting: {
-						autoShow: false
-					}
-				});
-			}, 50);
-		}
-		//跳转到城市权限主页面
-		function toCityMain() {
-			var sh_webview = plus.webview.getWebviewById('web_city_ej');
-					if(sh_webview != null){
-						sh_webview.close();
-					}
-			setTimeout(function() {
-				mui.openWindow({
-					url:'examples/web_city_ej.html',
-					id: 'city_main',
-					createNew:true,
-					show: {
-						aniShow: 'slide-in-right'
-					},
-					waiting: {
-						autoShow: false
-					}
-				});
-			}, 50);
-		}
-		 //获取片区信息数据
-		function getAllAreaOfEmployee(employee_no) {
-			doManager('InterManager', 'getAllAreaOfEmployee',employee_no, function(data) {
-				var jsonData = JSON.parse(data.data);
-				if(data.result == true) {
-					if(jsonData.data !=null&&jsonData.data.length>0){
-					    localStorage.setItem("selectArea_list",JSON.stringify(jsonData.data));
-					    localStorage.setItem("selectArea_id", jsonData.data[0].id);
-										
-					}
-					
+			//跳转到主页面
+			function toDZMain() {
+				var sh_webview = plus.webview.getWebviewById('dzgmv');
+				if(sh_webview != null) {
+					sh_webview.close();
 				}
-			});
-		}
-		//获取国安侠头像
-			function getEmployeePicByEmployeeId(employee_id) {
-				doManager('InterManager','findEmployeePicByEmployeeId',employee_id, function(data) {
+				setTimeout(function() {
+					mui.openWindow({
+						url: 'examples/dzgmv.html',
+						id: 'dzgmv',
+						createNew: true,
+						show: {
+							aniShow: 'slide-in-right'
+						},
+						waiting: {
+							autoShow: false
+						}
+					});
+				}, 50);
+			}
+			//跳转到国安侠主页面
+			function toMain() {
+				var sh_webview = plus.webview.getWebviewById('gmv');
+				if(sh_webview != null) {
+					sh_webview.close();
+				}
+				setTimeout(function() {
+					mui.openWindow({
+						url: 'examples/gmv.html',
+						id: 'gmv',
+						createNew: true,
+						show: {
+							aniShow: 'slide-in-right'
+						},
+						waiting: {
+							autoShow: false
+						}
+					});
+				}, 50);
+			}
+			//跳转到城市权限主页面
+			function toCityMain() {
+				var sh_webview = plus.webview.getWebviewById('web_city_ej');
+				if(sh_webview != null) {
+					sh_webview.close();
+				}
+				setTimeout(function() {
+					mui.openWindow({
+						url: 'examples/web_city_ej.html',
+						id: 'city_main',
+						createNew: true,
+						show: {
+							aniShow: 'slide-in-right'
+						},
+						waiting: {
+							autoShow: false
+						}
+					});
+				}, 50);
+			}
+			//跳转到城市运营采集主页面
+			function toOperatorMain() {
+				var sh_webview = plus.webview.getWebviewById('OperatorMain');
+				if(sh_webview != null) {
+					sh_webview.close();
+				}
+				setTimeout(function() {
+					mui.openWindow({
+						url: 'examples/OperatorMain.html',
+						id: 'OperatorMain',
+						createNew: true,
+						show: {
+							aniShow: 'slide-in-right'
+						},
+						waiting: {
+							autoShow: false
+						}
+					});
+				}, 50);
+			}
+			//获取片区信息数据
+			function getAllAreaOfEmployee(employee_no) {
+				doManager('InterManager', 'getAllAreaOfEmployee', employee_no, function(data) {
+					var jsonData = JSON.parse(data.data);
 					if(data.result == true) {
-						var jsonData = JSON.parse(data.data);
-						if(jsonData.dataMap!=null&&jsonData.dataMap!=""){
-						    localStorage.setItem("employee_pic",JSON.stringify(jsonData.dataMap));
-					    }
+						if(jsonData.data != null && jsonData.data.length > 0) {
+							localStorage.setItem("selectArea_list", JSON.stringify(jsonData.data));
+							localStorage.setItem("selectArea_id", jsonData.data[0].id);
+
+						}
+
 					}
 				});
 			}
-
+			//获取国安侠头像
+			function getEmployeePicByEmployeeId(employee_id) {
+				doManager('InterManager', 'findEmployeePicByEmployeeId', employee_id, function(data) {
+					if(data.result == true) {
+						var jsonData = JSON.parse(data.data);
+						if(jsonData.dataMap != null && jsonData.dataMap != "") {
+							localStorage.setItem("employee_pic", JSON.stringify(jsonData.dataMap));
+						}
+					}
+				});
+			}
 		</script>
 	</body>
 

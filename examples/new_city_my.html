@@ -186,14 +186,15 @@
 				</div>
 
 				<div class="mui-off-canvas-backdrop"></div>
-				<footer id="footer_bottmo">
+				<footer id="footer_bottmo" style="display: none;">
 					<a class="col-xs-4" id="web_city_ej" path="web_city_ej.html" onclick="jump(this)">
 						<p><i class="fa fa-bar-chart-o"></i></p>动态</a>
+					<a class="col-xs-4" id="operate_input" path="OperatorMain.html" onclick="jump(this)">
+						<p><i class="fa fa-file-text-o"></i></p>录入</a>
 					<a class="col-xs-4" id="new_web_message" path="new_web_message.html" onclick="jump(this)">
 						<p><i class="fa fa-envelope-o"></i></p>消息
 						<div id="message_state_div"></div>
 					</a>
-
 					<a class="col-xs-4  mark-green" id="new_city_my" href="javascript:void(0)">
 						<p><i class="fa fa-user"></i></p>我</a>
 				</footer>
@@ -227,9 +228,28 @@
 				swipeBack: false
 			});
 			mui.plusReady(function() {
-				if(plus.device.model == "iPhone10,3"||plus.device.model == "iPhone10,6"|| plus.device.model == "iPhone11,8"||plus.device.model == "iPhone11,2"||plus.device.model == "iPhone11,6") {
-					document.getElementById("titlenav").style.marginTop= '-20px';
-					document.getElementById("footer_bottmo").style.paddingBottom= '67px';
+				if(plus.device.model == "iPhone10,3" || plus.device.model == "iPhone10,6" || plus.device.model == "iPhone11,8" || plus.device.model == "iPhone11,2" || plus.device.model == "iPhone11,6") {
+					document.getElementById("titlenav").style.marginTop = '-20px';
+					document.getElementById("footer_bottmo").style.paddingBottom = '67px';
+				}
+				if(employee.usergroup != null) {
+					if(employee.usergroup.code == 'CSMDGLZ') {
+						$("footer").css("display", "");
+						$("#operate_input").attr("style", "display:none;");
+					} else if(employee.usergroup.code == 'JKZYCJJSZ') {
+						$("footer").css("display", "");
+						$("#web_city_ej").attr("style", "display:none;");
+					} else {
+						$("footer").css("display", "");
+						$("#work").attr("style", "display:none;");
+						$("#web_city_ej").attr("style", "display:none;");
+						$("#new_city_my").attr("style", "display:none;");
+						$("#operate_input").attr("style", "display:none;");
+						$("#sel_operate").attr("class", "col-xs-4");
+						$("#areaState").attr("class", "col-xs-4");
+						$("#message").attr("class", "col-xs-4 mark-green");
+					}
+
 				}
 				initView();
 				if('Android' == plus.os.name) {

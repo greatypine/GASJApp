@@ -392,6 +392,8 @@
 				<footer style="display: none;" id="footer_bottmo">
 					<a class="col-xs-4" id="web_city_ej" path="web_city_ej.html" onclick="jump(this)">
 						<p><i class="fa fa-bar-chart-o"></i></p>动态</a>
+					<a class="col-xs-4" id="operate_input" path="OperatorMain.html" onclick="jump(this)">
+						<p><i class="fa fa-file-text-o"></i></p>录入</a>
 					<a class="col-xs-3" id="sel_operate" onclick="selectoperate()">
 						<p><i class="fa fa-globe"></i></p>绩效</a>
 					<a class="col-xs-3" id="areaState" onclick="selectherf()">
@@ -674,6 +676,7 @@
 					if(employee.usergroup.code == 'ZHGLY' || employee.usergroup.code == 'DZ' || employee.usergroup.code == 'GAX' || employee.usergroup.code == 'FDZJSZ') {
 						$("footer").css("display", "");
 						$("#web_city_ej").attr("style", "display:none;");
+						$("#operate_input").attr("style", "display:none;");
 						$("#new_city_my").attr("style", "display:none;");
 						$("#new_tabbar").css("display", "");
 						if(employee.usergroup.code == 'GAX') {
@@ -691,11 +694,20 @@
 						$("#sel_operate").attr("style", "display:none;");
 						$("#areaState").attr("style", "display:none;");
 						$("#message").attr("class", "col-xs-4 mark-green");
-					} else {
+						$("#operate_input").attr("style", "display:none;");
+					} else if(employee.usergroup.code == 'JKZYCJJSZ') {
+						$("footer").css("display", "");
+						$("#work").attr("style", "display:none;");
+						$("#sel_operate").attr("style", "display:none;");
+						$("#areaState").attr("style", "display:none;");
+						$("#message").attr("class", "col-xs-4 mark-green");
+						$("#web_city_ej").attr("style", "display:none;");
+					}else{
 						$("footer").css("display", "");
 						$("#work").attr("style", "display:none;");
 						$("#web_city_ej").attr("style", "display:none;");
 						$("#new_city_my").attr("style", "display:none;");
+						$("#operate_input").attr("style", "display:none;");
 						$("#sel_operate").attr("class", "col-xs-4");
 						$("#areaState").attr("class", "col-xs-4");
 						$("#message").attr("class", "col-xs-4 mark-green");
