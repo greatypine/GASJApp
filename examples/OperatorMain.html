@@ -830,7 +830,6 @@
 				};
 				doManager('CustomerManager', 'findCustomerorHhealthList', customer_params, function(data) {
 					if(data.result) {
-						alert(JSON.stringify(data))
 						var jsonData = JSON.parse(data.data);
 						if(jsonData.code == 200) {
 							var $div_clist = $('#customer_list');
