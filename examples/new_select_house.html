@@ -156,15 +156,21 @@
 				}else{
 					setFormSimpleData(address_customer);
 				}
-//				if(checkValue(default_city.town_name)){
-//					$('#town_name').val(default_city.town_name);
-//					$('#town_id').val(default_city.town_id);
-//					$('#city_id').val(default_city.city_id);
-//				}
+
                 if(address_customer.town_id==null||address_customer.town_id==""){
-					$('#town_name').val(default_city.town_name);
-					$('#town_id').val(default_city.town_id);
-					$('#city_id').val(default_city.city_id);
+                	if(default_city==null){
+                		$('#town_name').val("");
+						$('#town_id').val("");
+						$('#city_id').val("1");
+                		
+                	}else{
+                		$('#town_name').val(default_city.town_name);
+						$('#town_id').val(default_city.town_id);
+						$('#city_id').val(default_city.city_id);
+                		
+                	}
+                	
+					
 				}else{
 					$('#town_name').val(address_customer.town_name);
 					$('#town_id').val(address_customer.town_id);
@@ -587,5 +593,6 @@
 				}
 			});
 		}
+	
 	</script>
 </html>
