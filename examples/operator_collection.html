@@ -88,13 +88,6 @@
 	</head>
 
 	<body>
-		<!--<header class="mui-bar mui-bar-nav titleheader">
-			<div>用户画像</div>
-			<div class="back" id="user_information" path="user_information.html" onclick="jump(this)"><a></a></div>
-			<div class="save">
-				<a href="#" onclick="compressImg();">保存</a>
-			</div>
-		</header>-->
 		<header class="mui-bar mui-bar-nav titleheader">
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 			<h1 class="mui-title">用户健康信息</h1>
@@ -473,7 +466,7 @@
 								</div>
 								<div class="mui-input-row mui-checkbox">
 									<label>心脏疾病</label>
-									<input  nname="cardiovascular" value="4" type="checkbox" bidTableFlag='true'>
+									<input  name="cardiovascular" value="4" type="checkbox" bidTableFlag='true'>
 								</div>
 							</div>
 						</div>
@@ -1363,7 +1356,6 @@
 				mui.toast('填写户型信息后，请选择地址信息');
 				return;
 			}
-
 			doManager('CustomerManager', 'saveOrUpdateCustomerAndHouseAndHealth', customer, function(data) {
 				if(data.result) {
 					isSaving = false;

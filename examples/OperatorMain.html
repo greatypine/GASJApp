@@ -230,7 +230,7 @@
 			<div class="wrapper mui-inner-wrap">
 				<header class="main-header">
 					<nav class="navbar navbar-static-top text-center" id="titlenav">
-						<span>用户画像</span>
+						<span>用户健康画像</span>
 						<a href="#offCanvasSide" class="sidebar-toggle fa fa-navicon mui-icon-bars"></a>
 					</nav>
 				</header>
@@ -395,24 +395,28 @@
 			});
 
 			mui.plusReady(function() {
+				initStore();
 				if(plus.device.model == "iPhone10,3" || plus.device.model == "iPhone10,6" || plus.device.model == "iPhone11,8" || plus.device.model == "iPhone11,2" || plus.device.model == "iPhone11,6") {
 					document.getElementById("titlenav").style.marginTop = '-20px';
 					document.getElementById("content").style.marginTop = '15px';
 					document.getElementById("footer_bottmo").style.paddingBottom = '67px';
 				}
-				var employee = JSON.parse(localStorage.getItem('employee'));
-				var store = JSON.parse(localStorage.getItem("store"));
-				var usergroup = JSON.parse(localStorage.getItem("usergroup"));
-				default_store_id = JSON.parse(localStorage.getItem("store_id"));
-				employee_no = employee.employeeId;
-				if(store == null || store.store_id == null || store.store_id == "") {
-					store_id = null;
-				} else {
-					store_id = store.store_id;
-				}
-				if(store != null && (default_store_id == null || default_store_id == "" || default_store_id != store.store_id)) {
-					getStoreAddress(store);
-				}
+				setTimeout(function() {
+					var employee = JSON.parse(localStorage.getItem('employee'));
+					store = JSON.parse(localStorage.getItem("store"));
+					var usergroup = JSON.parse(localStorage.getItem("usergroup"));
+					default_store_id = JSON.parse(localStorage.getItem("store_id"));
+					employee_no = employee.employeeId;
+					if(store == null || store.store_id == null || store.store_id == "") {
+						store_id = null;
+					} else {
+						store_id = store.store_id;
+					}
+					if(store != null && (default_store_id == null || default_store_id == "" || default_store_id != store.store_id)) {
+						getStoreAddress(store);
+					}
+				}, 500);
+
 				mui('#btnAddUser')[0].addEventListener('tap', function(event) {
 					var webview = plus.webview.getWebviewById('operator_collection');
 					if(webview != null) {
@@ -453,7 +457,7 @@
 					}
 
 				}
-				initStore();
+
 				h = plus.screen.resolutionHeight;
 				message_isread();
 				//				getAllAreaOfEmployee(select_area_list);
@@ -510,8 +514,6 @@
 						$(this).parent().siblings().find('[data-toggle="popover"]').popover('hide');
 					});
 				});
-
-				
 
 			});
 
@@ -875,41 +877,25 @@
 					}
 				});
 
-				function getStoreAddress(store) {
-					doManager('StoreManager', 'getStoreInfoById', store, function(data) {
-						if(data.result) {
-							var jsonData = JSON.parse(data.data);
-							if(jsonData == 0 || jsonData == null) {
+			}
 
-							} else {
-								window.localStorage.setItem("default_city", JSON.stringify(jsonData));
-								window.localStorage.setItem("store_id", store.store_id);
-
-							}
+			function getStoreAddress(store) {
+				doManager('StoreManager', 'getStoreInfoById', store, function(data) {
+					if(data.result) {
+						var jsonData = JSON.parse(data.data);
+						if(jsonData == 0 || jsonData == null) {
 
 						} else {
-							mui.toast(data.message);
+							window.localStorage.setItem("default_city", JSON.stringify(jsonData));
+							window.localStorage.setItem("store_id", store.store_id);
+
 						}
-					});
-				}
-			}
-			function getStoreAddress(store) {
-			doManager('StoreManager', 'getStoreInfoById',store, function(data) {
-				if(data.result) {
-					var jsonData = JSON.parse(data.data);
-					if(jsonData == 0 || jsonData == null) {
 
 					} else {
-						window.localStorage.setItem("default_city",JSON.stringify(jsonData));
-						window.localStorage.setItem("store_id", store.store_id);
-						 
+						mui.toast(data.message);
 					}
-					  
-				} else {
-					mui.toast(data.message);
-				}
-			});
-	}
+				});
+			}
 		</script>
 	</body>
 
