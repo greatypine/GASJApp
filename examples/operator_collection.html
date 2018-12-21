@@ -829,7 +829,7 @@
 				text: '饮食控制'
 			}, {
 				text: '降糖药'
-			}, , {
+			}, {
 				text: '胰岛素'
 			},{
 				text: '降糖药+胰岛素'
@@ -1316,7 +1316,7 @@
 				house_type: $('input[name="house_type"]:checked').val()
 
 			}
-			if($('#nearStore').val()!=null&&$('#store_id').val()!=""){
+			if($('#nearStore').val()!=null&&$('#nearStore').val()!=""){
 				if($('#store_id').val()==null||$('#store_id').val()==""){
 					isSaving = false;
 					mui.toast("门店信息有误，请重新输入！");

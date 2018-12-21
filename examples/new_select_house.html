@@ -387,7 +387,7 @@
                  house_type:house_type,
                  update_user_id:employee.id,
                  update_user:employee.name,
-                 store_id:store.store_id
+                 store_id:store==null?null:store.store_id,
             };
 //			var address = getFormSimpleData();
 //			var store = JSON.parse(localStorage.getItem('store'));
