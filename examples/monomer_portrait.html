@@ -754,33 +754,33 @@
 				return;
 			}
 			isSaving = true;
-			if(query_customer != null && query_customer.employee_no != employee.employeeId) {
-				var btnArray = ['否', '是'];
-				mui.confirm('正在修改其他国安侠数据，需通知审核后才能保存入数据库！', '提示', btnArray, function(e) {
-					if (e.index == 1) {
-						var localUrl = $('.header_img').attr('src');
-						if(localUrl.indexOf('file:') == -1){
-							doSubmit(_type);
-							return;
-						}else{
-								plus.zip.compressImage({
-									src:localUrl,
-									dst:localUrl,
-									overwrite:true,
-									quality:20
-								},
-								function() {
-									uploadImg(localUrl,_type);
-								},function(error) {
-									uploadImg(localUrl,_type);
-							});
-						}
-					}else{
-						isSaving = false;
-					}
-				});	
-			
-			}else{
+//			if(query_customer != null && query_customer.employee_no != employee.employeeId) {
+//				var btnArray = ['否', '是'];
+//				mui.confirm('正在修改其他国安侠数据，需通知审核后才能保存入数据库！', '提示', btnArray, function(e) {
+//					if (e.index == 1) {
+//						var localUrl = $('.header_img').attr('src');
+//						if(localUrl.indexOf('file:') == -1){
+//							doSubmit(_type);
+//							return;
+//						}else{
+//								plus.zip.compressImage({
+//									src:localUrl,
+//									dst:localUrl,
+//									overwrite:true,
+//									quality:20
+//								},
+//								function() {
+//									uploadImg(localUrl,_type);
+//								},function(error) {
+//									uploadImg(localUrl,_type);
+//							});
+//						}
+//					}else{
+//						isSaving = false;
+//					}
+//				});	
+//			
+//			}else{
 		        var localUrl = $('.header_img').attr('src');
 				if(localUrl.indexOf('file:') == -1 || localUrl == '' || localUrl == null){
 					doSubmit(_type);
@@ -798,7 +798,7 @@
 							uploadImg(localUrl,_type);
 					});
 				}
-			}
+//			}
 			
 		}
 		
@@ -1143,24 +1143,24 @@
 				return;
 			}
 				
-			doManager('CustomerManager', 'saveOrUpdateCustomerAndHouse', customer, function(data) {
+			doManager('CustomerManager', 'saveOrUpdateCustomerAndHouseAndHealth', customer, function(data) {
 				if(data.result){
 					isSaving = false;
 					var jsonData = JSON.parse(data.data);
 					if(_type){
 						
-						if(jsonData == null){
-							mui.toast('已发送消息，审核后保存入数据库！');
-							setTimeout(function(){
-								closeMenu();
-							},500)
-						}else{
+//						if(jsonData == null){
+//							mui.toast('已发送消息，审核后保存入数据库！');
+//							setTimeout(function(){
+//								closeMenu();
+//							},500)
+//						}else{
 							$('#id').val(jsonData.id);
 							mui.toast('保存成功！');
 							setTimeout(function(){
 								closeMenu();
 							},500)
-						}
+//						}
 					}else{
 						    $('#id').val(jsonData.id);
 						    var cust_id=$('#id').val();
