@@ -79,14 +79,16 @@
 				padding: 0;
 				background-color: yellow;
 			}*/
-			.mui-table-view-cell{overflow: visible;}
-			.mui-table-view-li{padding: 5px 0; margin: 0 15px; border-bottom: 1px solid #c8c7cc;}
+			.mui-table-view-ss{overflow: visible;}
+			/*.mui-table-view-li{padding: 5px 0; margin: 0 15px; border-bottom: 1px solid #c8c7cc;}
 			.mui-table-view-li label{font-weight: bold;}
-			.mui-table-view-li input{border: 0;}
+			.mui-table-view-li input{border: 0;}*/
+			.mui-table-view-li{padding: 5px 0; border-bottom: 1px solid #c8c7cc; margin: 0 15px;height: 60px;line-height: 60px;}
+			.mui-table-view-li label{font-weight: bold;}
+			.mui-table-view-li input{border: 0; margin: 5px 0;padding-top:15px;text-align: center;}
 		</style>
-
 	</head>
-
+	
 	<body>
 		<header class="mui-bar mui-bar-nav titleheader">
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
@@ -340,13 +342,19 @@
 			</div>
 			<div id="item4" class="mui-control-content">
 				<ul class="mui-table-view mui-table-view-chevron ul_interval">
-					<li class="mui-table-view-li">
+					<!--<li class="mui-table-view-li">
 							<label>附近国安社区门店</label>
 							<input type="text" id="nearStore" name="nearStore" bidTableFlag='true' class="awesomplete" onkeyup="this.value=this.value.replace(/\s+/g,'')"/>
 							<input type="hidden" id="store_id" name="store_id" bidTableFlag='true' />
-						
+					</li>-->
+					<li class="mui-table-view-ss">
+						<div class="mui-table-view-li" style="display: flex;">
+							<label style="width: 50%;">附近国安社区门店</label>
+							<input  type="text" id="nearStore" name="nearStore"  class="awesomplete" />
+							<input type="hidden" id="store_id" name="store_id" bidTableFlag='true' />
+						</div>
 					</li>
-					<li class="mui-table-view-li">
+					<li class="mui-table-view-cell radio_li">
 						<div class="input-row-jiankang mui-radio">
 							<label>是否社员</label>
 							<div style="float: right;">
@@ -355,7 +363,7 @@
 							</div>
 						</div>
 					</li>
-					<li class="mui-table-view-li">
+					<li class="mui-table-view-cell radio_li">
 						<div class="input-row-jiankang mui-radio">
 							<label>每周有适当运动</label>
 							<div style="float: right;">
@@ -364,7 +372,7 @@
 							</div>
 						</div>
 					</li>
-					<li class="mui-table-view-li">
+					<li class="mui-table-view-cell radio_li">
 						<div class="input-row-jiankang mui-radio">
 							<label>本人有血糖类病症</label>
 							<div style="float: right;">
@@ -373,7 +381,7 @@
 							</div>
 						</div>
 					</li>
-					<li class="mui-table-view-li">
+					<li class="mui-table-view-cell radio_li">
 						<div class="input-row-jiankang mui-radio">
 							<label>家人有血糖类病症</label>
 							<div style="float: right;">
@@ -382,7 +390,7 @@
 							</div>
 						</div>
 					</li>
-					<li class="mui-table-view-li">
+					<li class="mui-table-view-cell radio_li">
 						<div class="input-row-jiankang mui-radio">
 							<label>目前有无视力受损</label>
 							<div style="float: right;">
@@ -391,7 +399,7 @@
 							</div>
 						</div>
 					</li>
-					<li class="mui-table-view-li">
+					<li class="mui-table-view-cell radio_li">
 						<div class="input-row-jiankang mui-radio">
 							<label>想获得糖尿病相关健康教育</label>
 							<div style="float: right;">
@@ -419,7 +427,7 @@
 						</a>
 					</li>
 					<li id="li_medicalQuota" class="mui-table-view-cell select_li">
-						<a class="mui-navigate-right">
+						<a class="mui-navigate-right testBG">
 							<label>医保报销额度</label>
 							<input type="text" id="medicalQuota" name="medicalQuota" placeholder="请选择" bidTableFlag='true' readonly />
 						</a>
@@ -1361,19 +1369,11 @@
 					isSaving = false;
 					var jsonData = JSON.parse(data.data);
 					if(_type) {
-
-						if(jsonData == null) {
-							mui.toast('已发送消息，审核后保存入数据库！');
-							setTimeout(function() {
-								closeMenu();
-							}, 500)
-						} else {
 							$('#id').val(jsonData.id);
 							mui.toast('保存成功！');
 							setTimeout(function() {
 								closeMenu();
 							}, 500)
-						}
 					} else {
 						$('#id').val(jsonData.id);
 						var cust_id = $('#id').val();

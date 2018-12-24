@@ -1,5 +1,5 @@
 .input-row-jiankang div{
-	width: 30%;
+	width: 35%;
 	/*margin-right: 10px;*/
 	/*height: 40px;*/
 	margin-bottom: 2px;
@@ -9,23 +9,26 @@
 	/*background-color: yellowgreen;*/
 }
 .input-row-jiankang label{
-	width: 68%;
+	width: 65%;
+	padding-right: 0;
 	/*background-color: yellow;*/
 }
 .multiple-content label{
 	color: gray;
 	width: 90%;
+	padding-right: 0;
 	/*background-color: yellow;*/
 }
 .multiple-content .mui-checkbox{
 	padding-right: 10px !important;
 }
 .testBG label{
-	width: 40%;
+	width: 50%;
+	padding-right: 0;
 	/*background-color: yellowgreen;*/
 }
 .testBG input{
-	width: 50%;
+	width: 40%;
 	/*background-color: beige;*/
 }
 .awesomplete {
@@ -42,11 +45,11 @@
 
 .awesomplete > ul {
 	position: absolute;
-	top: 35px;
-	left: 0;
+	top: 38px;
+	left: 60px;
 	z-index: 1;
-	min-width: 100%;
-	width: 100%;
+	/*min-width: 100%;*/
+	width: 140px;
 	max-height:200px;
 	overflow-y: scroll;
 	box-sizing: border-box;
