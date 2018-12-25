@@ -352,7 +352,7 @@
 					<li class="mui-table-view-ss">
 						<div class="mui-table-view-li" style="display: flex;">
 							<label style="width: 50%;">附近国安社区门店</label>
-							<input type="text" id="nearStore" name="nearStore" class="awesomplete" />
+							<input type="text" id="nearStore" name="nearStore" bidTableFlag='true' class="awesomplete" onkeyup="this.value=this.value.replace(/\s+/g,'')"/>
 							<input type="hidden" id="store_id" name="store_id" bidTableFlag='true' />
 						</div>
 					</li>
