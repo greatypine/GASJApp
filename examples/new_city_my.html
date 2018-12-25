@@ -296,13 +296,25 @@
 			});
 
 			function initView() {
+				var zw=null;
+				var employeeId=null;
 				if(employee != null) {
 					if(employee.name == null || employee.name == "") {
 						$("#employee_name").html("无数据");
 					} else {
 						$("#employee_name").html(employee.name);
 					}
-					$("#employee_zw").text(employee.zw + employee.employeeId);
+					if(employee.zw == null || employee.zw == "") {
+						zw="无数据";
+					} else{
+						zw=employee.zw;
+					}
+					if(employee.employeeId == null || employee.employeeId == "") {
+						employeeId="无数据";
+					} else{
+						employeeId=employee.employeeId;
+					}
+					$("#employee_zw").text(zw + employeeId);
 
 				}
 				message_isread();
