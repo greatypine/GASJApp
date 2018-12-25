@@ -916,9 +916,7 @@
 					
 					if(data.result == true) {
 						var jsonData = JSON.parse(data.data);
-						alert(jsonData.code);
 						if(jsonData.code == 200) {
-							alert(JSON.stringify(jsonData));
 							//国安侠本月毛利
 							$('#store_profit').html(jsonData.data.area_profit);
 							$('#lst_store_profit').html(jsonData.data.area_lst_profit);
