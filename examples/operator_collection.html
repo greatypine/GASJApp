@@ -65,30 +65,32 @@
 				margin-top: 0.4rem;
 				border-radius: 0.1rem;
 			}
-			/*div.awesomplete input {
-				margin-top: 1px;
-				margin-bottom:1px;
-				float:right; 
-				width:100%; 
-				margin-left:2%; 
-				height:0.8rem; 
-				border:0;
-				color:#777; 
-				font-size:0.32rem;
-				border-radius: 0!important;
-				padding: 0;
-				background-color: yellow;
-			}*/
-			.mui-table-view-ss{overflow: visible;}
-			/*.mui-table-view-li{padding: 5px 0; margin: 0 15px; border-bottom: 1px solid #c8c7cc;}
-			.mui-table-view-li label{font-weight: bold;}
-			.mui-table-view-li input{border: 0;}*/
-			.mui-table-view-li{padding: 5px 0; border-bottom: 1px solid #c8c7cc; margin: 0 15px;height: 60px;line-height: 60px;}
-			.mui-table-view-li label{font-weight: bold;}
-			.mui-table-view-li input{border: 0; margin: 5px 0;padding-top:15px;text-align: center;}
+			
+			.mui-table-view-ss {
+				overflow: visible;
+			}
+			
+			.mui-table-view-li {
+				padding: 5px 0;
+				border-bottom: 1px solid #c8c7cc;
+				margin: 0 15px;
+				height: 60px;
+				line-height: 60px;
+			}
+			
+			.mui-table-view-li label {
+				font-weight: bold;
+			}
+			
+			.mui-table-view-li input {
+				border: 0;
+				margin: 5px 0;
+				padding-top: 15px;
+				text-align: center;
+			}
 		</style>
 	</head>
-	
+
 	<body>
 		<header class="mui-bar mui-bar-nav titleheader">
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
@@ -350,7 +352,7 @@
 					<li class="mui-table-view-ss">
 						<div class="mui-table-view-li" style="display: flex;">
 							<label style="width: 50%;">附近国安社区门店</label>
-							<input  type="text" id="nearStore" name="nearStore"  class="awesomplete" />
+							<input type="text" id="nearStore" name="nearStore" class="awesomplete" />
 							<input type="hidden" id="store_id" name="store_id" bidTableFlag='true' />
 						</div>
 					</li>
@@ -415,7 +417,7 @@
 						</a>
 					</li>
 					<li id="li_diabetesYears" class="mui-table-view-cell select_li">
-						<a class="mui-navigate-right testBG">
+						<a class="mui-navigate-right">
 							<label>糖尿病病程</label>
 							<input type="text" id="diabetesYears" name="diabetesYears" placeholder="请选择" bidTableFlag='true' readonly />
 						</a>
@@ -457,24 +459,24 @@
 						</a>
 					</li>
 					<li class="mui-table-view-cell input_li">
-						<div>
+						<div class="dd">
 							<div class="multiple_title"><label>心血管疾病（多选）</label></div>
 							<div class="multiple-content ss">
 								<div class="mui-input-row mui-checkbox">
 									<label>高血压</label>
-									<input  name="cardiovascular" value="1" type="checkbox" bidTableFlag='true'>
+									<input name="cardiovascular" value="1" type="checkbox" bidTableFlag='true'>
 								</div>
 								<div class="mui-input-row mui-checkbox">
 									<label>高血脂</label>
-									<input  name="cardiovascular" value="2" type="checkbox" bidTableFlag='true'>
+									<input name="cardiovascular" value="2" type="checkbox" bidTableFlag='true'>
 								</div>
 								<div class="mui-input-row mui-checkbox">
 									<label>痛风</label>
-									<input  name="cardiovascular" value="3" type="checkbox" bidTableFlag='true'>
+									<input name="cardiovascular" value="3" type="checkbox" bidTableFlag='true'>
 								</div>
 								<div class="mui-input-row mui-checkbox">
 									<label>心脏疾病</label>
-									<input  name="cardiovascular" value="4" type="checkbox" bidTableFlag='true'>
+									<input name="cardiovascular" value="4" type="checkbox" bidTableFlag='true'>
 								</div>
 							</div>
 						</div>
@@ -486,7 +488,7 @@
 							<div class="multiple-content">
 								<div class="mui-input-row mui-checkbox">
 									<label>肥胖，患有高血压高血脂</label>
-									<input  name="diabetes_symptom" value="1" type="checkbox" bidTableFlag='true' >
+									<input name="diabetes_symptom" value="1" type="checkbox" bidTableFlag='true'>
 								</div>
 								<div class="mui-input-row mui-checkbox">
 									<label>易渴，喝水多，尿多，不明原因消瘦</label>
@@ -498,15 +500,15 @@
 								</div>
 								<div class="mui-input-row mui-checkbox">
 									<label>双手或双足对称性麻木疼痛</label>
-									<input  name="diabetes_symptom" value="4" type="checkbox" bidTableFlag='true'>
+									<input name="diabetes_symptom" value="4" type="checkbox" bidTableFlag='true'>
 								</div>
 								<div class="mui-input-row mui-checkbox">
 									<label>视力模糊</label>
-									<input  name="diabetes_symptom" value="5" type="checkbox" bidTableFlag='true'>
+									<input name="diabetes_symptom" value="5" type="checkbox" bidTableFlag='true'>
 								</div>
 								<div class="mui-input-row mui-checkbox">
 									<label>以上都没有</label>
-									<input  name="diabetes_symptom" value="6" type="checkbox" bidTableFlag='true'>
+									<input name="diabetes_symptom" value="6" type="checkbox" bidTableFlag='true'>
 								</div>
 							</div>
 						</div>
@@ -518,19 +520,19 @@
 							<div class="multiple-content">
 								<div class="mui-input-row mui-checkbox">
 									<label>医院治疗</label>
-									<input  name="interested_health_means" value="1" type="checkbox" bidTableFlag='true' >
+									<input name="interested_health_means" value="1" type="checkbox" bidTableFlag='true'>
 								</div>
 								<div class="mui-input-row mui-checkbox">
 									<label>膳食调理</label>
-									<input  name="interested_health_means" value="2" type="checkbox" bidTableFlag='true'>
+									<input name="interested_health_means" value="2" type="checkbox" bidTableFlag='true'>
 								</div>
 								<div class="mui-input-row mui-checkbox">
 									<label>保健品</label>
-									<input  name="interested_health_means" value="3" type="checkbox" bidTableFlag='true'>
+									<input name="interested_health_means" value="3" type="checkbox" bidTableFlag='true'>
 								</div>
 								<div class="mui-input-row mui-checkbox">
 									<label>运动保养</label>
-									<input  name="interested_health_means" value="4" type="checkbox" bidTableFlag='true'>
+									<input name="interested_health_means" value="4" type="checkbox" bidTableFlag='true'>
 								</div>
 								<div class="mui-input-row mui-checkbox">
 									<label>理疗保养</label>
@@ -538,7 +540,7 @@
 								</div>
 								<div class="mui-input-row mui-checkbox">
 									<label>以上都没有</label>
-									<input  name="interested_health_means" value="6" type="checkbox" bidTableFlag='true'>
+									<input name="interested_health_means" value="6" type="checkbox" bidTableFlag='true'>
 								</div>
 							</div>
 						</div>
@@ -549,19 +551,19 @@
 							<div class="multiple-content">
 								<div class="mui-input-row mui-checkbox">
 									<label>控制饮食</label>
-									<input  name="diabetes_control" value="1" type="checkbox" bidTableFlag='true'>
+									<input name="diabetes_control" value="1" type="checkbox" bidTableFlag='true'>
 								</div>
 								<div class="mui-input-row mui-checkbox">
 									<label>体育锻炼</label>
-									<input  name="diabetes_control" value="2" type="checkbox" bidTableFlag='true'>
+									<input name="diabetes_control" value="2" type="checkbox" bidTableFlag='true'>
 								</div>
 								<div class="mui-input-row mui-checkbox">
 									<label>口服药物</label>
-									<input  name="diabetes_control" value="3" type="checkbox" bidTableFlag='true'>
+									<input name="diabetes_control" value="3" type="checkbox" bidTableFlag='true'>
 								</div>
 								<div class="mui-input-row mui-checkbox">
 									<label>注射胰岛素</label>
-									<input  name="diabetes_control" value="4" type="checkbox" bidTableFlag='true'>
+									<input name="diabetes_control" value="4" type="checkbox" bidTableFlag='true'>
 								</div>
 							</div>
 						</div>
@@ -839,7 +841,7 @@
 				text: '降糖药'
 			}, {
 				text: '胰岛素'
-			},{
+			}, {
 				text: '降糖药+胰岛素'
 			}]);
 			getDictForOnlyText('li_diabetes_complications', 'diabetes_complications', [{
@@ -852,7 +854,7 @@
 				text: '心血管并发症'
 			}, {
 				text: '糖尿病性脑血管病'
-			},{
+			}, {
 				text: '糖尿病神经病变'
 			}]);
 			if(obj_addressCustomer == null) {
@@ -1005,26 +1007,28 @@
 			$(customer.childs).each(function(i, family) {
 				addFamily(family);
 			});
-			$('#nearStore').val(customer.customerHealth.store_name);
-			$('#store_id').val(customer.customerHealth.store_id);
-			$('input[name="is_member"][value="' + customer.customerHealth.is_member + '"]').attr('checked', 'checked');
-			$('#careerStatus').val(customer.customerHealth.work_status);
-			$('input[name="self_diabetes"][value="' + customer.customerHealth.me_is_diabetes + '"]').attr('checked', 'checked');
-			$('input[name="family_diabetes"][value="' + customer.customerHealth.family_is_diabetes + '"]').attr('checked', 'checked');
-			$('#cardiovascular').val(fillCheckbox("cardiovascular", customer.customerHealth.is_cardiovascular));
-			$('#medicalQuota').val(customer.customerHealth.medical_insurance);
-			$('#diabetes_complications').val(customer.customerHealth.diabetes_complications);
-			$('input[name="is_exercise"][value="' + customer.customerHealth.is_weekly_activity + '"]').attr('checked', 'checked');
-			$('#testBG').val(customer.customerHealth.weekly_measure_diabetes);
-			$('#diabetes_symptom').val(fillCheckbox("diabetes_symptom", customer.customerHealth.diabetes_symptom));
-			$('#doctorsGuidance').val(customer.customerHealth.diabetes_doctor_advice);
-			$('#treatDiabetes').val(customer.customerHealth.diabetes_treatment_quota);
-			$('#interested_health_means').val(fillCheckbox("interested_health_means", customer.customerHealth.interested_health_means))
-			$('#diabetesYears').val(customer.customerHealth.diabetes_history);
-			$('#treatDiabeteStyle').val(customer.customerHealth.diabetes_treatment_means);
-			$('input[name="is_shortSight"][value="' + customer.customerHealth.is_vision_damage + '"]').attr('checked', 'checked');
-			$('input[name="is_getEducation"][value="' + customer.customerHealth.diabetes_health_study + '"]').attr('checked', 'checked');
-			$('#diabetes_control').val(fillCheckbox("diabetes_control", customer.customerHealth.diabetes_control));
+			if(customer.customerHealth != null && customer.customerHealth != "") {
+				$('#nearStore').val(customer.customerHealth.store_name);
+				$('#store_id').val(customer.customerHealth.store_id);
+				$('input[name="is_member"][value="' + customer.customerHealth.is_member + '"]').attr('checked', 'checked');
+				$('#careerStatus').val(customer.customerHealth.work_status);
+				$('input[name="self_diabetes"][value="' + customer.customerHealth.me_is_diabetes + '"]').attr('checked', 'checked');
+				$('input[name="family_diabetes"][value="' + customer.customerHealth.family_is_diabetes + '"]').attr('checked', 'checked');
+				$('#cardiovascular').val(fillCheckbox("cardiovascular", customer.customerHealth.is_cardiovascular));
+				$('#medicalQuota').val(customer.customerHealth.medical_insurance);
+				$('#diabetes_complications').val(customer.customerHealth.diabetes_complications);
+				$('input[name="is_exercise"][value="' + customer.customerHealth.is_weekly_activity + '"]').attr('checked', 'checked');
+				$('#testBG').val(customer.customerHealth.weekly_measure_diabetes);
+				$('#diabetes_symptom').val(fillCheckbox("diabetes_symptom", customer.customerHealth.diabetes_symptom));
+				$('#doctorsGuidance').val(customer.customerHealth.diabetes_doctor_advice);
+				$('#treatDiabetes').val(customer.customerHealth.diabetes_treatment_quota);
+				$('#interested_health_means').val(fillCheckbox("interested_health_means", customer.customerHealth.interested_health_means))
+				$('#diabetesYears').val(customer.customerHealth.diabetes_history);
+				$('#treatDiabeteStyle').val(customer.customerHealth.diabetes_treatment_means);
+				$('input[name="is_shortSight"][value="' + customer.customerHealth.is_vision_damage + '"]').attr('checked', 'checked');
+				$('input[name="is_getEducation"][value="' + customer.customerHealth.diabetes_health_study + '"]').attr('checked', 'checked');
+				$('#diabetes_control').val(fillCheckbox("diabetes_control", customer.customerHealth.diabetes_control));
+			}
 
 		}
 
@@ -1324,8 +1328,8 @@
 				house_type: $('input[name="house_type"]:checked').val()
 
 			}
-			if($('#nearStore').val()!=null&&$('#nearStore').val()!=""){
-				if($('#store_id').val()==null||$('#store_id').val()==""){
+			if($('#nearStore').val() != null && $('#nearStore').val() != "") {
+				if($('#store_id').val() == null || $('#store_id').val() == "") {
 					isSaving = false;
 					mui.toast("门店信息有误，请重新输入！");
 					return;
@@ -1333,14 +1337,14 @@
 			}
 			customer.customerHealth = {
 				store_name: $('#nearStore').val(), //附近门店名称
-				store_id: $('#store_id').val(),//门店id
+				store_id: $('#store_id').val(), //门店id
 				is_member: $('input[name="is_member"]:checked').val(), //是否是社员
 				work_status: $('#careerStatus').val(), //职业状态
 				me_is_diabetes: $('input[name="self_diabetes"]:checked').val(), //本人有血糖类病症
 				family_is_diabetes: $('input[name="family_diabetes"]:checked').val(), //家人有血糖类病症
 				is_cardiovascular: getCheckBoxRes("cardiovascular").toString(), //心血管病
 				medical_insurance: $('#medicalQuota').val(), //医保报销额度
-				diabetes_complications:$('#diabetes_complications').val(),//糖尿病并发症
+				diabetes_complications: $('#diabetes_complications').val(), //糖尿病并发症
 				is_weekly_activity: $('input[name="is_exercise"]:checked').val(), //每周有适当运动
 				weekly_measure_diabetes: $('#testBG').val(), //每周有测血糖的习惯
 				diabetes_symptom: getCheckBoxRes("diabetes_symptom").toString(), //症状（可多选）
@@ -1369,11 +1373,11 @@
 					isSaving = false;
 					var jsonData = JSON.parse(data.data);
 					if(_type) {
-							$('#id').val(jsonData.id);
-							mui.toast('保存成功！');
-							setTimeout(function() {
-								closeMenu();
-							}, 500)
+						$('#id').val(jsonData.id);
+						mui.toast('保存成功！');
+						setTimeout(function() {
+							closeMenu();
+						}, 500)
 					} else {
 						$('#id').val(jsonData.id);
 						var cust_id = $('#id').val();
@@ -1520,7 +1524,7 @@
 			mui.back();
 
 		}
-//		获取复选框的值
+		//		获取复选框的值
 		function getCheckBoxRes(className) {      
 			var rdsObj  = document.getElementsByName(className);       
 			var checkVal = new Array();   
@@ -1544,11 +1548,10 @@
 				});
 			}
 		}
-		$('#nearStore').change(function(){
+		$('#nearStore').change(function() {
 			$('#store_id').val("");
-				findStore();
+			findStore();
 		});
-		
 
 		function findStore() {
 
