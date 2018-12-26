@@ -373,17 +373,17 @@
 			doManager('CustomerDataManager','saveCustomerData', CustomerData, function(data) {
 				if(data.result == true) {
 					var jsonData = JSON.parse(data.data);
-					if(jsonData == null){
-							mui.toast('已发送消息，审核后保存入数据库！');
-							setTimeout(function(){
-								closeMenu();
-							},500)
-						}else{
+//					if(jsonData == null){
+//							mui.toast('已发送消息，审核后保存入数据库！');
+//							setTimeout(function(){
+//								closeMenu();
+//							},500)
+//						}else{
 							mui.toast('保存成功！');
 							setTimeout(function(){
 								closeMenu();
 							},500)
-					}
+//					}
 //					if(cus_no != employee.employeeId) {
 //							var btnArray = ['否', '是'];
 //							mui.confirm('正在修改其他国安侠数据，需通知审核后才能保存入数据库！', '提示', btnArray, function(e) {
