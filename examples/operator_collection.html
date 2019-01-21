@@ -344,18 +344,59 @@
 			</div>
 			<div id="item4" class="mui-control-content">
 				<ul class="mui-table-view mui-table-view-chevron ul_interval">
-					<!--<li class="mui-table-view-li">
-							<label>附近国安社区门店</label>
-							<input type="text" id="nearStore" name="nearStore" bidTableFlag='true' class="awesomplete" onkeyup="this.value=this.value.replace(/\s+/g,'')"/>
-							<input type="hidden" id="store_id" name="store_id" bidTableFlag='true' />
+					<!--<li class="mui-table-view-ss">
+						<div class="mui-table-view-li" style="display: flex;">
+							<label style="width: 50%;">身高(CM)</label>
+							<input type="tel" id="height" name="height" maxlength="3" onkeyup="value=this.value.replace(/\D+/g,'')" bidTableFlag='true' style="text-align: right;">
+						</div>
 					</li>-->
 					<li class="mui-table-view-ss">
 						<div class="mui-table-view-li" style="display: flex;">
 							<label style="width: 50%;">附近国安社区门店</label>
-							<input type="text" id="nearStore" name="nearStore" bidTableFlag='true' class="awesomplete" onkeyup="this.value=this.value.replace(/\s+/g,'')"/>
+							<input type="text" id="nearStore" name="nearStore" bidTableFlag='true' class="awesomplete" onkeyup="this.value=this.value.replace(/\s+/g,'')" />
 							<input type="hidden" id="store_id" name="store_id" bidTableFlag='true' />
 						</div>
 					</li>
+					<li class="mui-table-view-cell input_li_suffix">
+						<div class="input-row-suffix">
+							<label>身高</label>
+							<label class="suffix">CM</label>
+							<input type="number" id="height" name="height" maxlength="5" oninput="if(value.length>5)value=value.slice(0,5)" onkeyup="value=value.replace(/[^\d{1,}\.\d{1,}|\d{1,}]/g,'')" bidTableFlag='true'>
+						</div>
+					</li>
+					<li class="mui-table-view-cell input_li_suffix">
+						<div class="input-row-suffix">
+							<label>体重</label>
+							<label class="suffix">KG</label>
+							<input type="number" id="weight" name="weight" maxlength="5" oninput="if(value.length>5)value=value.slice(0,5)" onkeyup="value=value.replace(/[^\d{1,}\.\d{1,}|\d{1,}]/g,'')" bidTableFlag='true'>
+						</div>
+					</li>
+					<li class="mui-table-view-cell input_li_suffix">
+						<div class="input-row-suffix" style="display: flex;">
+							<label style="width: 79%;padding-right: 0;">测量过的餐前血糖值是多少</label>
+							<input type="number" id="before_BloodSugar" name="before_BloodSugar" maxlength="5" oninput="if(value.length>5)value=value.slice(0,5)" bidTableFlag='true' style="width: 26%;padding-right: 0;" onkeyup="value=value.replace(/[^\d{1,}\.\d{1,}|\d{1,}]/g,'')">
+							<label class="suffix" style="width: 15%;">mmol/L</label>
+						</div>
+					</li>
+					<li class="mui-table-view-cell input_li_suffix">
+						<div class="input-row-suffix" style="display: flex;">
+							<label style="width: 79%;padding-right: 0;">测量过的餐后血糖值是多少</label>
+							<input type="number" id="after_BloodSugar" name="after_BloodSugar" maxlength="5" oninput="if(value.length>5)value=value.slice(0,5)" bidTableFlag='true' style="width: 26%;padding-right: 0;" onkeyup="value=value.replace(/[^\d{1,}\.\d{1,}|\d{1,}]/g,'')">
+							<label class="suffix" style="width: 15%;">mmol/L</label>
+						</div>
+					</li>
+					<!--<li class="mui-table-view-cell input_li">
+						<div class="longlongText">
+							<label>测量过的餐前血糖值是多少</label>
+							<input type="text" id="before_BloodSugar" name="before_BloodSugar" bidTableFlag="true">
+						</div>
+					</li>-->
+					<!--<li class="mui-table-view-cell input_li">
+						<div class="longlongText">
+							<label>测量过的餐后血糖值是多少</label>
+							<input type="text" id="after_BloodSugar" name="after_BloodSugar" bidTableFlag="true">
+						</div>
+					</li>-->
 					<li class="mui-table-view-cell radio_li">
 						<div class="input-row-jiankang mui-radio">
 							<label>是否社员</label>
@@ -374,7 +415,7 @@
 							</div>
 						</div>
 					</li>
-					<li class="mui-table-view-cell radio_li">
+					<!--<li class="mui-table-view-cell radio_li">
 						<div class="input-row-jiankang mui-radio">
 							<label>本人有血糖类病症</label>
 							<div style="float: right;">
@@ -391,7 +432,7 @@
 								<input id="family_diabetesno" name="family_diabetes" type="radio" style="float: initial;" value="1" bidTableFlag='true' checked> 无
 							</div>
 						</div>
-					</li>
+					</li>-->
 					<li class="mui-table-view-cell radio_li">
 						<div class="input-row-jiankang mui-radio">
 							<label>目前有无视力受损</label>
@@ -416,22 +457,34 @@
 							<input type="text" id="careerStatus" name="careerStatus" placeholder="请选择" bidTableFlag='true' />
 						</a>
 					</li>
+					<li id="li_DiabeteType" class="mui-table-view-cell select_li">
+						<a class="mui-navigate-right testBG">
+							<label>糖尿病类型</label>
+							<input type="text" id="diabeteType" name="diabeteType" placeholder="请选择" bidTableFlag='true' readonly />
+						</a>
+					</li>
 					<li id="li_diabetesYears" class="mui-table-view-cell select_li">
 						<a class="mui-navigate-right">
 							<label>糖尿病病程</label>
 							<input type="text" id="diabetesYears" name="diabetesYears" placeholder="请选择" bidTableFlag='true' readonly />
 						</a>
 					</li>
-					<li id="li_diabetes_complications" class="mui-table-view-cell select_li">
-						<a class="mui-navigate-right testBG">
-							<label>糖尿病并发症</label>
-							<input type="text" id="diabetes_complications" name="diabetes_complications" placeholder="请选择" bidTableFlag='true' readonly />
-						</a>
-					</li>
 					<li id="li_medicalQuota" class="mui-table-view-cell select_li">
 						<a class="mui-navigate-right testBG">
 							<label>医保报销额度</label>
 							<input type="text" id="medicalQuota" name="medicalQuota" placeholder="请选择" bidTableFlag='true' readonly />
+						</a>
+					</li>
+					<li id="li_bodyEvaluate" class="mui-table-view-cell select_li">
+						<a class="mui-navigate-right testBG">
+							<label>身体状况评估</label>
+							<input type="text" id="bodyEvaluate" name="bodyEvaluate" placeholder="请选择" bidTableFlag='true' readonly />
+						</a>
+					</li>
+					<li id="li_hypoglycemicDrugs" class="mui-table-view-cell select_li">
+						<a class="mui-navigate-right testBG">
+							<label>使用的降糖药品</label>
+							<input type="text" id="hypoglycemicDrugs" name="hypoglycemicDrugs" placeholder="请选择" bidTableFlag='true' readonly />
 						</a>
 					</li>
 					<li id="li_treatDiabeteStyle" class="mui-table-view-cell select_li">
@@ -452,10 +505,34 @@
 							<input type="text" id="treatDiabetes" name="treatDiabetes" placeholder="请选择" bidTableFlag='true' readonly />
 						</a>
 					</li>
+					<li id="li_payType" class="mui-table-view-cell select_li">
+						<a class="mui-navigate-right testBG">
+							<label>就医采取的付费方式</label>
+							<input type="text" id="payType" name="payType" placeholder="请选择" bidTableFlag='true' readonly />
+						</a>
+					</li>
+					<li id="li_diabetes_complications" class="mui-table-view-cell select_li">
+						<a class="mui-navigate-right testBG">
+							<label>是否出现糖尿病并发症</label>
+							<input type="text" id="diabetes_complications" name="diabetes_complications" placeholder="请选择" bidTableFlag='true' readonly />
+						</a>
+					</li>
 					<li id="li_doctorsGuidance" class="mui-table-view-cell select_li">
 						<a class="mui-navigate-right testBG">
 							<label>血糖类医生的专业指导</label>
 							<input type="text" id="doctorsGuidance" name="doctorsGuidance" placeholder="请选择" bidTableFlag='true' readonly />
+						</a>
+					</li>
+					<li id="li_lastTimeTestBloodSugar" class="mui-table-view-cell select_li">
+						<a class="mui-navigate-right bigLongText">
+							<label>最近测量血糖距离现在时长</label>
+							<input type="text" id="lastTimeTestBloodSugar" name="lastTimeTestBloodSugar" placeholder="请选择" bidTableFlag='true' readonly />
+						</a>
+					</li>
+					<li id="li_is_haveDiabetes" class="mui-table-view-cell select_li">
+						<a class="mui-navigate-right testBG">
+							<label>本人或家属是否患糖尿病</label>
+							<input type="text" id="is_haveDiabetes" name="is_haveDiabetes" placeholder="请选择" bidTableFlag='true' readonly />
 						</a>
 					</li>
 					<li class="mui-table-view-cell input_li">
@@ -465,6 +542,10 @@
 								<div class="mui-input-row mui-checkbox">
 									<label>高血压</label>
 									<input name="cardiovascular" value="1" type="checkbox" bidTableFlag='true'>
+								</div>
+								<div class="mui-input-row mui-checkbox">
+									<label>冠心病</label>
+									<input name="cardiovascular" value="5" type="checkbox" bidTableFlag='true'>
 								</div>
 								<div class="mui-input-row mui-checkbox">
 									<label>高血脂</label>
@@ -478,21 +559,29 @@
 									<label>心脏疾病</label>
 									<input name="cardiovascular" value="4" type="checkbox" bidTableFlag='true'>
 								</div>
+								<div class="mui-input-row mui-checkbox">
+									<label>脂肪肝</label>
+									<input name="cardiovascular" value="6" type="checkbox" bidTableFlag='true'>
+								</div>
 							</div>
 						</div>
 					</li>
 
 					<li class="mui-table-view-cell input_li">
 						<div>
-							<div class="multiple_title"><label>症状（可多选）</label></div>
+							<div class="multiple_title"><label>目前出现的症状（可多选）</label></div>
 							<div class="multiple-content">
 								<div class="mui-input-row mui-checkbox">
 									<label>肥胖，患有高血压高血脂</label>
 									<input name="diabetes_symptom" value="1" type="checkbox" bidTableFlag='true'>
 								</div>
 								<div class="mui-input-row mui-checkbox">
-									<label>易渴，喝水多，尿多，不明原因消瘦</label>
-									<input name="diabetes_symptom" value="2" type="checkbox" bidTableFlag='true'>
+									<label>多尿、多食、多饮 </label>
+									<input name="diabetes_symptom" value="8" type="checkbox" bidTableFlag='true'>
+								</div>
+								<div class="mui-input-row mui-checkbox">
+									<label>疲劳，体重减轻，虚弱</label>
+									<input name="diabetes_symptom" value="9" type="checkbox" bidTableFlag='true'>
 								</div>
 								<div class="mui-input-row mui-checkbox">
 									<label>反复皮肤感染，疮疡不易愈合</label>
@@ -509,6 +598,10 @@
 								<div class="mui-input-row mui-checkbox">
 									<label>以上都没有</label>
 									<input name="diabetes_symptom" value="6" type="checkbox" bidTableFlag='true'>
+								</div>
+								<div class="mui-input-row mui-checkbox">
+									<label>其他</label>
+									<input name="diabetes_symptom" value="7" type="checkbox" bidTableFlag='true'>
 								</div>
 							</div>
 						</div>
@@ -564,6 +657,14 @@
 								<div class="mui-input-row mui-checkbox">
 									<label>注射胰岛素</label>
 									<input name="diabetes_control" value="4" type="checkbox" bidTableFlag='true'>
+								</div>
+								<div class="mui-input-row mui-checkbox">
+									<label>胰岛素+药物降糖</label>
+									<input name="diabetes_control" value="5" type="checkbox" bidTableFlag='true'>
+								</div>
+								<div class="mui-input-row mui-checkbox">
+									<label>不进行干预</label>
+									<input name="diabetes_control" value="6" type="checkbox" bidTableFlag='true'>
 								</div>
 							</div>
 						</div>
@@ -832,31 +933,96 @@
 				text: '20年以上'
 			}]);
 			getDictForOnlyText('li_treatDiabeteStyle', 'treatDiabeteStyle', [{
-				text: '无'
-			}, {
 				text: '运动'
 			}, {
 				text: '饮食控制'
 			}, {
-				text: '降糖药'
+				text: '药物降糖'
 			}, {
 				text: '胰岛素'
 			}, {
 				text: '降糖药+胰岛素'
+			}, {
+				text: '不进行干预'
 			}]);
 			getDictForOnlyText('li_diabetes_complications', 'diabetes_complications', [{
-				text: '	糖尿病肾病'
+				text: '糖尿病肾病'
 			}, {
 				text: '糖尿病眼部并发症'
 			}, {
-				text: '糖尿病足'
+				text: '糖尿病足（疼痛、变形、局部溃烂）'
 			}, {
 				text: '心血管并发症'
 			}, {
 				text: '糖尿病性脑血管病'
 			}, {
 				text: '糖尿病神经病变'
+			}, {
+				text: '糖尿病视网膜病变'
+			}, {
+				text: '糖尿病心脏病'
 			}]);
+			//糖尿病类型
+			getDictForOnlyText('li_DiabeteType', 'diabeteType', [{
+				text: 'Ⅰ型糖尿病'
+			}, {
+				text: 'Ⅱ型糖尿病'
+			}, {
+				text: '其他特殊类型'
+			}, {
+				text: '孕期糖尿病'
+			}]);
+			//身体状况评估li_bodyEvaluate
+			getDictForOnlyText('li_bodyEvaluate', 'bodyEvaluate', [{
+				text: '健康'
+			}, {
+				text: '重病'
+			}, {
+				text: '亚健康'
+			}, {
+				text: '慢性病'
+			}]);
+			//付费方式
+			getDictForOnlyText('li_payType', 'payType', [{
+				text: '自付'
+			}, {
+				text: '公费医疗'
+			}, {
+				text: '社会保险'
+			}, {
+				text: '商业保险'
+			}, {
+				text: '其他'
+			}]);
+			//使用的降糖药品
+			getDictForOnlyText('li_hypoglycemicDrugs', 'hypoglycemicDrugs', [{
+				text: '双胍类（二甲双胍；二甲双胍缓释片）'
+			}, {
+				text: '降糖灵'
+			}, {
+				text: '胰岛素增敏剂（文迪雅；艾汀；卡司平）'
+			}, {
+				text: '葡萄糖苷酶抑制剂（拜唐平；卡博平；倍欣）'
+			}]);
+			//最近测量血糖距离现在时长
+			getDictForOnlyText('li_lastTimeTestBloodSugar', 'lastTimeTestBloodSugar', [{
+				text: '一周内'
+			}, {
+				text: '1-6个月'
+			}, {
+				text: '7-12个月'
+			}, {
+				text: '一年前'
+			}]);
+			//本人或家属是否患糖尿病
+			getDictForOnlyText('li_is_haveDiabetes', 'is_haveDiabetes', [{
+				text: '本人'
+			}, {
+				text: '家人'
+			}, {
+				text: '无'
+			}]);
+
 			if(obj_addressCustomer == null) {
 				obj_addressCustomer = {
 					house_type: 1
@@ -982,7 +1148,6 @@
 					$("#other_pet_type").hide();
 				}
 			}
-
 			$("#nationality_text").val(customer.nationality);
 			$('input[name="sex"][value="' + customer.sex + '"]').attr('checked', 'checked');
 			$('input[name="house_property"][value="' + customer.house_property + '"]').attr('checked', 'checked');
@@ -1012,8 +1177,6 @@
 				$('#store_id').val(customer.customerHealth.store_id);
 				$('input[name="is_member"][value="' + customer.customerHealth.is_member + '"]').attr('checked', 'checked');
 				$('#careerStatus').val(customer.customerHealth.work_status);
-				$('input[name="self_diabetes"][value="' + customer.customerHealth.me_is_diabetes + '"]').attr('checked', 'checked');
-				$('input[name="family_diabetes"][value="' + customer.customerHealth.family_is_diabetes + '"]').attr('checked', 'checked');
 				$('#cardiovascular').val(fillCheckbox("cardiovascular", customer.customerHealth.is_cardiovascular));
 				$('#medicalQuota').val(customer.customerHealth.medical_insurance);
 				$('#diabetes_complications').val(customer.customerHealth.diabetes_complications);
@@ -1028,6 +1191,16 @@
 				$('input[name="is_shortSight"][value="' + customer.customerHealth.is_vision_damage + '"]').attr('checked', 'checked');
 				$('input[name="is_getEducation"][value="' + customer.customerHealth.diabetes_health_study + '"]').attr('checked', 'checked');
 				$('#diabetes_control').val(fillCheckbox("diabetes_control", customer.customerHealth.diabetes_control));
+				$('#height').val(customer.customerHealth.height);
+				$('#weight').val(customer.customerHealth.weight);
+				$('#bodyEvaluate').val(customer.customerHealth.health_degree);
+				$('#diabeteType').val(customer.customerHealth.diabetes_type);
+				$('#before_BloodSugar').val(customer.customerHealth.blood_glucose_before_meal);
+				$('#after_BloodSugar').val(customer.customerHealth.blood_glucose_after_meal);
+				$('#lastTimeTestBloodSugar').val(customer.customerHealth.last_time_measuring_blood_sugar);
+				$('#is_haveDiabetes').val(customer.customerHealth.me_is_diabetes);
+				$('#payType').val(customer.customerHealth.treatment_pay_type);
+				$('#hypoglycemicDrugs').val(customer.customerHealth.antidiabetic);
 			}
 
 		}
@@ -1340,8 +1513,6 @@
 				store_id: $('#store_id').val(), //门店id
 				is_member: $('input[name="is_member"]:checked').val(), //是否是社员
 				work_status: $('#careerStatus').val(), //职业状态
-				me_is_diabetes: $('input[name="self_diabetes"]:checked').val(), //本人有血糖类病症
-				family_is_diabetes: $('input[name="family_diabetes"]:checked').val(), //家人有血糖类病症
 				is_cardiovascular: getCheckBoxRes("cardiovascular").toString(), //心血管病
 				medical_insurance: $('#medicalQuota').val(), //医保报销额度
 				diabetes_complications: $('#diabetes_complications').val(), //糖尿病并发症
@@ -1355,8 +1526,17 @@
 				diabetes_treatment_means: $('#treatDiabeteStyle').val(), //糖尿病的治疗方式
 				is_vision_damage: $('input[name="is_shortSight"]:checked').val(), //目前有无视力受损
 				diabetes_health_study: $('input[name="is_getEducation"]:checked').val(), //想获得糖尿病相关健康教育
-				diabetes_control: getCheckBoxRes('diabetes_control').toString() //如何控制血糖（多选)
-
+				diabetes_control: getCheckBoxRes('diabetes_control').toString(), //如何控制血糖（多选)
+				height: $('#height').val(), //身高
+				weight: $('#weight').val(), //体重
+				health_degree: $('#bodyEvaluate').val(), //身体状况评估
+				diabetes_type: $('#diabeteType').val(), //糖尿病类型
+				blood_glucose_before_meal: $('#before_BloodSugar').val(), //餐前血糖值是多少
+				blood_glucose_after_meal: $('#after_BloodSugar').val(), //测量过的餐后血糖值是多少
+				last_time_measuring_blood_sugar: $('#lastTimeTestBloodSugar').val(), //最近测量血糖距离现在时长
+				treatment_pay_type: $('#payType').val(), //就医采取的付费方式
+				antidiabetic: $('#hypoglycemicDrugs').val(), //使用的降糖药品
+				me_is_diabetes: $('#is_haveDiabetes').val() //本人或家属是否患糖尿病
 			}
 			if(customer.customer_address.house_type == 0) {
 				customer.customer_address.house_pic = null;
