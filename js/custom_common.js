@@ -1,6 +1,6 @@
-var projectpath = 'http://10.16.21.63/daqWeb/';
-//var projectpath = 'https://www.guoanshuju.com/daqWeb/';
-//var projectpath = 'http://10.16.31.242/daqWeb/';
+//var projectpath = 'http://10.16.21.63/daqWeb/';
+var projectpath = 'https://www.guoanshuju.com/daqWeb/';
+//var projectpath = 'http://10.16.21.179:8888/daqWeb/';
 //var gasmpath = 'http://10.16.31.242:8888/GASM/';
 var gasmpath = 'https://store.guoanshuju.com/GASM/';
 //var projectpath = 'https://daqweb.guoanshequ.top/daqWeb/';
@@ -31,6 +31,7 @@ function doManager(managerName, methodName, params, callback, isAsync, errormeth
 		isAsync = true;
 	}
 	var path = projectpath + "dispatcher.action";
+//	var path = projectpath + "wapDispatcher.action";
 	var data = null;
 	if(typeof(params) == "string" || typeof(params) == "number") { //单个字符串
 		data = new PMSRequestObject(managerName, methodName, [params], null);

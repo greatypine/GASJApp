@@ -7,7 +7,7 @@
 	"id": "H546CAEF8",/*应用的标识，创建应用时自动生成，勿手动修改*/
 	"name": "国安数据",/*应用名称，程序桌面图标名称*/
 	"version": {
-		"name": "V2.2.3",/*应用版本名称*/
+		"name": "V2.3.2",/*应用版本名称*/
 		"code": "83"
 	},
 	"description": "",/*应用描述信息*/
@@ -200,21 +200,21 @@
 			"splashscreen": {
 				"ios": {
 					"iphone": {
-						"retina40": "C:/Users/Administrator/Desktop/启动图片优化/ios/640-1136.png",
-						"retina55": "C:/Users/Administrator/Desktop/启动图片优化/ios/1242-2208.png",
-						"retina47": "C:/Users/Administrator/Desktop/启动图片优化/ios/750-1334.png"
+						"retina40": "C:/Users/Administrator/Desktop/APP打包文件/启动图片优化/ios/640-1136.png",
+						"retina55": "C:/Users/Administrator/Desktop/APP打包文件/启动图片优化/ios/1242-2208.png",
+						"retina47": "C:/Users/Administrator/Desktop/APP打包文件/启动图片优化/ios/750-1334.png"
 					},
 					"ipad": {
-						"portrait": "C:/Users/Administrator/Desktop/启动图片优化/ios/768-1004.png",
-						"portrait7": "C:/Users/Administrator/Desktop/启动图片优化/ios/768-1024.png",
-						"portrait-retina": "C:/Users/Administrator/Desktop/启动图片优化/ios/1536-2008.png",
-						"portrait-retina7": "C:/Users/Administrator/Desktop/启动图片优化/ios/1536-2048.png"
+						"portrait": "C:/Users/Administrator/Desktop/APP打包文件/启动图片优化/ios/768-1004.png",
+						"portrait7": "C:/Users/Administrator/Desktop/APP打包文件/启动图片优化/ios/768-1024.png",
+						"portrait-retina": "C:/Users/Administrator/Desktop/APP打包文件/启动图片优化/ios/1536-2008.png",
+						"portrait-retina7": "C:/Users/Administrator/Desktop/APP打包文件/启动图片优化/ios/1536-2048.png"
 					}
 				},
 				"android": {
-					"hdpi": "C:/Users/Administrator/Desktop/启动图片优化/android/480-762.png",
-					"xhdpi": "C:/Users/Administrator/Desktop/启动图片优化/android/720-1242.png",
-					"xxhdpi": "C:/Users/Administrator/Desktop/启动图片优化/android/1080-1882.png"
+					"hdpi": "C:/Users/Administrator/Desktop/APP打包文件/启动图片优化/android/480-762.png",
+					"xhdpi": "C:/Users/Administrator/Desktop/APP打包文件/启动图片优化/android/720-1242.png",
+					"xxhdpi": "C:/Users/Administrator/Desktop/APP打包文件/启动图片优化/android/1080-1882.png"
 				}
 			},
 			"debug": false
@@ -342,7 +342,10 @@
 					"examples/maps.html",
 					"examples/city_main.html",
 					"examples/web_city_ej.html",
-					"examples/findPassword.html"
+					"examples/findPassword.html",
+					"examples/gmv.html",
+					"examples/dzgmv.html",
+					"examples/OperatorMain.html"
 				],
 				"priority": 0
 			},
@@ -2089,7 +2092,12 @@
 					"js/custom_common.js",
 					"css/newmui.min.css"
 				],
-				"refer": [],
+				"refer": [
+					"examples/store_daily.html",
+					"examples/user_information.html",
+					"examples/matching_information.html",
+					"examples/visiting_information.html"
+				],
 				"priority": 0
 			},
 			"examples/setting_hand.html": {
@@ -2281,7 +2289,11 @@
 					"examples/notice_details.html",
 					"examples/work_list.html",
 					"examples/message_monomer_portrait.html",
-					"examples/web_shopkeeper_new.html"
+					"examples/web_shopkeeper_new.html",
+					"examples/gmv.html",
+					"examples/operate.html",
+					"examples/update_password.html",
+					"examples/storeoperate.html"
 				],
 				"priority": 0
 			},
@@ -2294,7 +2306,8 @@
 					"login.html",
 					"examples/work_details.html",
 					"examples/new_city_my.html",
-					"examples/web_index.html"
+					"examples/web_index.html",
+					"examples/gmv.html"
 				],
 				"priority": 0
 			},
@@ -2302,6 +2315,57 @@
 				"resources": [],
 				"refer": [
 					"examples/validation.html"
+				],
+				"priority": 0
+			},
+			"examples/gmv.html": {
+				"resources": [],
+				"refer": [
+					"examples/new_web_message.html",
+					"examples/myClients.html",
+					"examples/work_list.html",
+					"examples/dataCard.html",
+					"examples/new_tabbar.html",
+					"examples/update_password.html",
+					"examples/operate.html"
+				],
+				"priority": 0
+			},
+			"examples/operate.html": {
+				"resources": [],
+				"refer": [
+					"examples/web_order_detail.html",
+					"examples/new_web_message.html",
+					"examples/dataCard.html"
+				],
+				"priority": 0
+			},
+			"examples/dzgmv.html": {
+				"resources": [],
+				"refer": [
+					"examples/storeDataCard.html",
+					"examples/web_information.html",
+					"examples/update_password.html",
+					"examples/storeoperate.html",
+					"examples/new_tabbar.html",
+					"examples/new_web_message.html"
+				],
+				"priority": 0
+			},
+			"examples/storeoperate.html": {
+				"resources": [],
+				"refer": [
+					"examples/new_web_message.html",
+					"examples/dzgmv.html",
+					"examples/storeDataCard.html"
+				],
+				"priority": 0
+			},
+			"examples/OperatorMain.html": {
+				"resources": [],
+				"refer": [
+					"examples/operator_collection.html",
+					"examples/new_city_my.html"
 				],
 				"priority": 0
 			}
